@@ -6,7 +6,17 @@
   "author": "Ben Grant",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": ">= 10.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
+    "@google-cloud/datastore": "^6.3.1",
+    "bcrypt": "^5.0.1",
+    "dayjs": "^1.10.4",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   }
 }

@@ -1,6 +1,10 @@
-runtime: nodejs10
-entrypoint: node index.js
+runtime: nodejs
 service: api
+env: flex
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 4
 
 endpoints_api_service:
   name: api-dot-crabfit.appspot.com

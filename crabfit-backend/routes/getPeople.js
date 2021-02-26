@@ -1,27 +1,19 @@
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
 	const { eventId } = req.params;
 
-	if (eventId) {
+	try {
+		const query = req.datastore.createQuery('Person').filter('eventId', eventId);
+		let people = (await req.datastore.runQuery(query))[0];
+		people = people.map(person => ({
+			name: person.name,
+			availability: person.availability,
+		}));
+
 		res.send({
-			people: [
-				{
-					name: 'Laura',
-					password: null,
-					eventId: 'event-name-4701240',
-					availability: [
-						[
-							'START',
-							'END',
-						],
-						[
-							'START',
-							'END',
-						],
-					],
-				},
-			],
+			people,
 		});
-	} else {
+	} catch (e) {
+		console.error(e);
 		res.sendStatus(404);
 	}
 };

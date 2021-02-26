@@ -8,6 +8,35 @@ schemes:
   - "https"
 produces:
   - "application/json"
+definitions:
+  Event:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      created:
+        type: "integer"
+      timezone:
+        type: "string"
+      startTime:
+        type: "string"
+      endTime:
+        type: "string"
+      dates:
+        type: "array"
+        items:
+          type: "string"
+  Person:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      availability:
+        type: "array"
+        items:
+          type: "string"
 paths:
   "/stats":
     get:
@@ -16,6 +45,15 @@ paths:
       responses:
         200:
           description: "OK"
+          schema:
+            type: "object"
+            properties:
+              eventCount:
+                type: "integer"
+              personCount:
+                type: "integer"
+              version:
+                type: "string"
   "/event/{eventId}":
     get:
       summary: "Return an event details"
@@ -24,11 +62,13 @@ paths:
         - in: "path"
           name: "eventId"
           required: true
-          type: string
+          type: "string"
           description: "The ID of the event"
       responses:
         200:
           description: "OK"
+          schema:
+            $ref: '#/definitions/Event'
         404:
           description: "Not found"
   "/event":
@@ -39,11 +79,27 @@ paths:
         - in: "body"
           name: "event"
           required: true
-          type: object
+          schema:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              timezone:
+                type: "string"
+              startTime:
+                type: "integer"
+              endTime:
+                type: "integer"
+              dates:
+                type: "array"
+                items:
+                  type: "string"
           description: "New event details"
       responses:
         201:
           description: "Created"
+          schema:
+            $ref: '#/definitions/Event'
         400:
           description: "Invalid data"
   "/event/{eventId}/people":
@@ -54,11 +110,18 @@ paths:
         - in: "path"
           name: "eventId"
           required: true
-          type: string
+          type: "string"
           description: "The ID of the event"
       responses:
         200:
           description: "OK"
+          schema:
+            type: "object"
+            properties:
+              people:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Person"
         404:
           description: "Not found"
     post:
@@ -68,12 +131,18 @@ paths:
         - in: "path"
           name: "eventId"
           required: true
-          type: string
+          type: "string"
           description: "The ID of the event"
         - in: "body"
           name: "person"
           required: true
-          type: object
+          schema:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              password:
+                type: "string"
           description: "New person details"
       responses:
         201:
@@ -82,7 +151,39 @@ paths:
           description: "Not found"
         400:
           description: "Invalid data"
-  "/event/{eventId}/people/{personId}":
+  "/event/{eventId}/people/{personName}":
+    get:
+      summary: "Login as this person"
+      operationId: "getPerson"
+      parameters:
+        - in: "path"
+          name: "eventId"
+          required: true
+          type: "string"
+          description: "The ID of the event"
+        - in: "path"
+          name: "personName"
+          required: true
+          type: "string"
+          description: "The name of the person"
+        - in: "body"
+          name: "person"
+          required: false
+          schema:
+            type: "object"
+            properties:
+              password:
+                type: "string"
+          description: "Login details"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Person"
+        401:
+          description: "Incorrect password"
+        404:
+          description: "Not found"
     patch:
       summary: "Update this person's availabilities"
       operationId: "patchPerson"
@@ -90,21 +191,31 @@ paths:
         - in: "path"
           name: "eventId"
           required: true
-          type: string
+          type: "string"
           description: "The ID of the event"
         - in: "path"
-          name: "personId"
+          name: "personName"
           required: true
-          type: string
-          description: "The ID of the person"
+          type: "string"
+          description: "The name of the person"
         - in: "body"
           name: "person"
           required: true
-          type: object
+          schema:
+            type: "object"
+            properties:
+              password:
+                type: "string"
+              availability:
+                type: "array"
+                items:
+                  type: "string"
           description: "Updated person details"
       responses:
         200:
           description: "OK"
+        401:
+          description: "Incorrect password"
         404:
           description: "Not found"
         400:
