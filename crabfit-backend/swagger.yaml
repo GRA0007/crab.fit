@@ -1,0 +1,111 @@
+swagger: "2.0"
+info:
+  title: "Crab Fit"
+  description: "Compare and align schedules to find a time that works for everyone"
+  version: "1.0.0"
+host: "api-dot-crabfit.appspot.com"
+schemes:
+  - "https"
+produces:
+  - "application/json"
+paths:
+  "/stats":
+    get:
+      summary: "Return stats for crabfit"
+      operationId: "getStats"
+      responses:
+        200:
+          description: "OK"
+  "/event/{eventId}":
+    get:
+      summary: "Return an event details"
+      operationId: "getEvent"
+      parameters:
+        - in: "path"
+          name: "eventId"
+          required: true
+          type: string
+          description: "The ID of the event"
+      responses:
+        200:
+          description: "OK"
+        404:
+          description: "Not found"
+  "/event":
+    post:
+      summary: "Create a new event"
+      operationId: "postEvent"
+      parameters:
+        - in: "body"
+          name: "event"
+          required: true
+          type: object
+          description: "New event details"
+      responses:
+        201:
+          description: "Created"
+        400:
+          description: "Invalid data"
+  "/event/{eventId}/people":
+    get:
+      summary: "Get availabilities for an event"
+      operationId: "getPeople"
+      parameters:
+        - in: "path"
+          name: "eventId"
+          required: true
+          type: string
+          description: "The ID of the event"
+      responses:
+        200:
+          description: "OK"
+        404:
+          description: "Not found"
+    post:
+      summary: "Add a new person to the event"
+      operationId: "postPeople"
+      parameters:
+        - in: "path"
+          name: "eventId"
+          required: true
+          type: string
+          description: "The ID of the event"
+        - in: "body"
+          name: "person"
+          required: true
+          type: object
+          description: "New person details"
+      responses:
+        201:
+          description: "Created"
+        404:
+          description: "Not found"
+        400:
+          description: "Invalid data"
+  "/event/{eventId}/people/{personId}":
+    patch:
+      summary: "Update this person's availabilities"
+      operationId: "patchPerson"
+      parameters:
+        - in: "path"
+          name: "eventId"
+          required: true
+          type: string
+          description: "The ID of the event"
+        - in: "path"
+          name: "personId"
+          required: true
+          type: string
+          description: "The ID of the person"
+        - in: "body"
+          name: "person"
+          required: true
+          type: object
+          description: "Updated person details"
+      responses:
+        200:
+          description: "OK"
+        404:
+          description: "Not found"
+        400:
+          description: "Invalid data"

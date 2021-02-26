@@ -1,0 +1,12 @@
+{
+  "name": "crabfit-backend",
+  "version": "1.0.0",
+  "description": "API for Crabfit",
+  "main": "index.js",
+  "author": "Ben Grant",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

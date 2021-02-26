@@ -1,0 +1,7 @@
+runtime: nodejs10
+entrypoint: node index.js
+service: api
+
+endpoints_api_service:
+  name: api-dot-crabfit.appspot.com
+  rollout_strategy: managed
