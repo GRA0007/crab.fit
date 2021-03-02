@@ -4,7 +4,9 @@ import {
 	TextField,
 	CalendarField,
 	TimeRangeField,
+	SelectField,
 	Button,
+	Center,
 } from 'components';
 
 import {
@@ -12,15 +14,26 @@ import {
 	CreateForm,
 	TitleSmall,
 	TitleLarge,
+	Logo,
 } from './homeStyle';
 
+import logo from 'res/logo.svg';
+import timezones from 'res/timezones.json';
+
 const Home = () => {
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit } = useForm({
+		defaultValues: {
+			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+		},
+	});
 
 	const onSubmit = data => console.log('submit', data);
 
 	return (
 		<StyledMain>
+			<Center>
+				<Logo src={logo} alt="" />
+			</Center>
 			<TitleSmall>Create a</TitleSmall>
 			<TitleLarge>CRAB FIT</TitleLarge>
 
@@ -50,7 +63,18 @@ const Home = () => {
 					register={register}
 				/>
 
-				<Button type="submit">Create</Button>
+				<SelectField
+					label="And the timezone"
+					name="timezone"
+					id="timezone"
+					register={register}
+					options={timezones}
+					required
+				/>
+
+				<Center>
+					<Button type="submit">Create</Button>
+				</Center>
 			</CreateForm>
 		</StyledMain>
 	);

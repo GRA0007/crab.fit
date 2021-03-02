@@ -19,7 +19,7 @@ export const StyledSubLabel = styled.label`
 
 export const Range = styled.div`
 	user-select: none;
-	background-color: ${props => props.theme.primary}22;
+	background-color: ${props => props.theme.primaryBackground};
 	border: 1px solid ${props => props.theme.primaryLight};
 	border-radius: 3px;
 	height: 50px;
@@ -37,6 +37,7 @@ export const Handle = styled.div`
 	top: -10px;
 	left: calc(${props => props.value * 4.1666666666666666}% - 11px);
 	cursor: ew-resize;
+	touch-action: none;
 
 	&:after {
 		content: '|||';

@@ -17,7 +17,7 @@ export const StyledSubLabel = styled.label`
 	opacity: .6;
 `;
 
-export const StyledInput = styled.input`
+export const StyledSelect = styled.select`
 	width: 100%;
 	box-sizing: border-box;
 	font: inherit;
@@ -27,7 +27,6 @@ export const StyledInput = styled.input`
 	border: 1px solid ${props => props.theme.primaryLight};
 	box-shadow: inset 0 0 0 0 ${props => props.theme.primaryLight};
 	border-radius: 3px;
-	font-size: 18px;
 	outline: none;
 	transition: border-color .15s, box-shadow .15s;
 

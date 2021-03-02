@@ -27,21 +27,40 @@ export const CalendarHeader = styled.div`
 	font-weight: bold;
 `;
 
-export const CalendarBody = styled.div`
+export const CalendarDays = styled.div`
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
 	grid-gap: 2px;
 `;
 
+export const CalendarBody = styled.div`
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-gap: 2px;
+
+	& div:first-child {
+		border-top-left-radius: 3px;
+	}
+	& div:nth-child(7) {
+		border-top-right-radius: 3px;
+	}
+	& div:nth-last-child(7) {
+		border-bottom-left-radius: 3px;
+	}
+	& div:last-child {
+		border-bottom-right-radius: 3px;
+	}
+`;
+
 export const Date = styled.div`
-	background-color: ${props => props.theme.primary}22;
+	background-color: ${props => props.theme.primaryBackground};
 	border: 1px solid ${props => props.theme.primaryLight};
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 10px 0;
-	border-radius: 3px;
 	user-select: none;
+	touch-action: none;
 
 	${props => props.otherMonth && `
 		color: ${props.theme.primaryLight};
@@ -49,6 +68,7 @@ export const Date = styled.div`
 	${props => props.isToday && `
 		font-weight: 900;
 		color: ${props.theme.primaryDark};
+		text-decoration: underline;
 	`}
 	${props => (props.selected || (props.mode === 'add' && props.selecting)) && `
 		color: ${props.otherMonth ? 'rgba(255,255,255,.5)' : '#FFF'};
@@ -56,7 +76,7 @@ export const Date = styled.div`
 		border-color: ${props.theme.primary};
 	`}
 	${props => props.mode === 'remove' && props.selecting && `
-		background-color: ${props.theme.primary}22;
+		background-color: ${props.theme.primaryBackground};
 		border: 1px solid ${props.theme.primaryLight};
 		color: ${props.isToday ? props.theme.primaryDark : (props.otherMonth ? props.theme.primaryLight : 'inherit')};
 	`}

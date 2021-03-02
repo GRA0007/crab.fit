@@ -6,6 +6,7 @@ const theme = {
 		primary: '#F79E00',
 		primaryDark: '#F48600',
 		primaryLight: '#F4BB60',
+		primaryBackground: '#FEF2DD',
 	},
 	dark: {
 		mode: 'dark',
@@ -14,6 +15,7 @@ const theme = {
 		primary: '#F79E00',
 		primaryDark: '#F4BB60',
 		primaryLight: '#F48600',
+		primaryBackground: '#30240F',
 	},
 };
 

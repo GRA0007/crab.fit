@@ -8,6 +8,7 @@ import {
 	StyledLabel,
 	StyledSubLabel,
 	CalendarHeader,
+	CalendarDays,
 	CalendarBody,
 	Date,
 	Day,
@@ -141,10 +142,12 @@ const CalendarField = ({
 				>&gt;</Button>
 			</CalendarHeader>
 
-			<CalendarBody>
+			<CalendarDays>
 				{days.map((name, i) =>
 					<Day key={i}>{name}</Day>
 				)}
+			</CalendarDays>
+			<CalendarBody>
 				{dates.length > 0 && dates.map((dateRow, y) =>
 					dateRow.map((date, x) =>
 						<Date
@@ -155,12 +158,13 @@ const CalendarField = ({
 							selected={selectedDates.includes(date.format('DDMMYYYY'))}
 							selecting={selectingDates.includes(date)}
 							mode={mode}
-							onMouseDown={() => {
+							onPointerDown={(e) => {
 								startPos.current = {x, y};
 								setMode(selectedDates.includes(date.format('DDMMYYYY')) ? 'remove' : 'add');
 								setSelectingDates([date]);
+								e.currentTarget.releasePointerCapture(e.pointerId);
 
-								document.addEventListener('mouseup', () => {
+								document.addEventListener('pointerup', () => {
 									if (staticMode.current === 'add') {
 										setSelectedDates([...selectedDates, ...staticSelectingDates.current.map(d => d.format('DDMMYYYY'))]);
 									} else if (staticMode.current === 'remove') {
@@ -170,7 +174,7 @@ const CalendarField = ({
 									setMode(null);
 								}, { once: true });
 							}}
-							onMouseEnter={() => {
+							onPointerEnter={() => {
 								if (staticMode.current) {
 									let found = [];
 									for (let cy = Math.min(startPos.current.y, y); cy < Math.max(startPos.current.y, y)+1; cy++) {

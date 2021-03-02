@@ -1,0 +1,43 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f4bb60;
+      }
+
+      .cls-2 {
+        fill: #f79e00;
+      }
+
+      .cls-3 {
+        fill: #f47f00;
+        opacity: 0.5;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="cls-1" d="M183.85,311.62a123,123,0,0,1-123-123h0a123,123,0,0,1,123-123h64.32L214.4,99.33h32.46c0,79.47-108.36,32.47-136.43,50.75C76.39,172.24,183.85,311.62,183.85,311.62Z"/>
+    <g>
+      <rect class="cls-2" x="267.75" y="200.99" width="20.89" height="57.44" rx="10.44"/>
+      <rect class="cls-2" x="225.97" y="200.99" width="20.89" height="57.44" rx="10.44"/>
+    </g>
+    <g>
+      <rect class="cls-1" x="21" y="326.33" width="107.06" height="23.5" rx="11.75"/>
+      <rect class="cls-1" x="28.83" y="289.77" width="107.06" height="23.5" rx="11.75" transform="translate(91.34 -10.92) rotate(16.92)"/>
+      <rect class="cls-1" x="26.22" y="362.88" width="107.06" height="23.5" rx="11.75" transform="matrix(0.95, -0.31, 0.31, 0.95, -110.74, 42.33)"/>
+      <rect class="cls-1" x="45.81" y="394.21" width="107.06" height="23.5" rx="11.75" transform="translate(-215.65 131.26) rotate(-35.16)"/>
+    </g>
+    <g>
+      <rect class="cls-1" x="383.94" y="326.33" width="107.06" height="23.5" rx="11.75" transform="translate(874.94 676.15) rotate(-180)"/>
+      <rect class="cls-1" x="376.11" y="289.77" width="107.06" height="23.5" rx="11.75" transform="translate(928.45 464.91) rotate(163.08)"/>
+      <rect class="cls-1" x="378.72" y="362.88" width="107.06" height="23.5" rx="11.75" transform="translate(729.24 863.49) rotate(-162.19)"/>
+      <rect class="cls-1" x="359.14" y="394.21" width="107.06" height="23.5" rx="11.75" transform="translate(516.28 975.5) rotate(-144.84)"/>
+    </g>
+    <path class="cls-2" d="M214.4,99.33V65.56H183.85a123,123,0,0,0-123,123h0C74.53,116.13,113.69,99.33,214.4,99.33Z"/>
+    <path class="cls-1" d="M331.42,311.62a123,123,0,0,0,123-123h0a123,123,0,0,0-123-123H267.1l33.77,33.77H268.4c0,79.47,108.36,32.47,136.43,50.75C438.87,172.24,331.42,311.62,331.42,311.62Z"/>
+    <path class="cls-2" d="M300.87,99.33V65.56h30.55a123,123,0,0,1,123,123h0C440.74,116.13,401.57,99.33,300.87,99.33Z"/>
+    <rect class="cls-2" x="83.67" y="229.71" width="347.28" height="216.72" rx="108.36"/>
+    <circle class="cls-3" cx="219.44" cy="338.08" r="69.19"/>
+    <circle class="cls-3" cx="295.17" cy="338.08" r="69.19"/>
+  </g>
+</svg>

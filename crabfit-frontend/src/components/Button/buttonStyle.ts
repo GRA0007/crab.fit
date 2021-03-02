@@ -26,6 +26,7 @@ export const Top = styled.button`
 	width: var(--btn-width);
 	position: absolute;
 	top: -4px;
+	left: 0;
 	user-select: none;
 	transition: top .15s;
 	outline: none;
