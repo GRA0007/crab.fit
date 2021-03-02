@@ -25,6 +25,9 @@ const App = () => {
 				<button onClick={() => setIsDark(!isDark)} style={{ position: 'absolute', top: 0, left: 0 }}>{isDark ? 'dark' : 'light'}</button>
 				<Global
 					styles={theme => ({
+						html: {
+							scrollBehavior: 'smooth',
+						},
 						body: {
 							backgroundColor: theme.background,
 							color: theme.text,

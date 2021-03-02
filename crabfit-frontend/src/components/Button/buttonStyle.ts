@@ -20,7 +20,7 @@ export const Top = styled.button`
 	color: #FFF;
 	font-weight: 600;
 	text-shadow: 0 -1.5px .5px ${props => props.theme.primaryDark};
-	padding: ${props => props.padding || '10px 14px'};
+	padding: 0;
 	border-radius: 3px;
 	height: var(--btn-height);
 	width: var(--btn-width);

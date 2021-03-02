@@ -112,7 +112,6 @@ const CalendarField = ({
 				<Button
 					buttonHeight="30px"
 					buttonWidth="30px"
-					padding="0"
 					title="Previous month"
 					type="button"
 					onClick={() => {
@@ -128,7 +127,6 @@ const CalendarField = ({
 				<Button
 					buttonHeight="30px"
 					buttonWidth="30px"
-					padding="0"
 					title="Next month"
 					type="button"
 					onClick={() => {

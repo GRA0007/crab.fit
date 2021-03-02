@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const StyledMain = styled.main`
+export const StyledMain = styled.div`
 	width: 600px;
 	margin: 20px auto;
 	max-width: calc(100% - 60px);
@@ -21,7 +21,7 @@ export const TitleSmall = styled.span`
 `;
 
 export const TitleLarge = styled.h1`
-	margin: 0 0 40px;
+	margin: 0;
 	font-size: 4rem;
 	text-align: center;
 	color: ${props => props.theme.primary};
@@ -37,4 +37,29 @@ export const TitleLarge = styled.h1`
 
 export const Logo = styled.img`
 	width: 80px;
+`;
+
+export const Links = styled.nav`
+	text-align: center;
+	margin: 20px 0;
+`;
+
+export const AboutSection = styled.section`
+	margin: 60px 0 0;
+	background-color: ${props => props.theme.primaryBackground};
+	padding: 20px 0;
+`;
+
+export const Footer = styled.footer`
+	width: 600px;
+	margin: 20px auto;
+	max-width: calc(100% - 60px);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
+export const P = styled.p`
+	font-weight: 500;
+	line-height: 1.6em;
 `;
