@@ -3,3 +3,15 @@
 	src: url('fonts/karla-variable.ttf') format('truetype');
 	font-weight: 1 999;
 }
+
+@font-face {
+	font-family: 'Samurai Bob';
+	src: url('fonts/samuraibob.ttf') format('truetype');
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: 'Molot';
+	src: url('fonts/molot.otf') format('opentype');
+	font-weight: 400;
+}

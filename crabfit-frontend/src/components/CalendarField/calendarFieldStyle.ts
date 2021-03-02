@@ -33,21 +33,35 @@ export const CalendarDays = styled.div`
 	grid-gap: 2px;
 `;
 
+export const Day = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 3px 0;
+	font-weight: bold;
+	user-select: none;
+	opacity: .7;
+
+	@media (max-width: 350px) {
+		font-size: 12px;
+	}
+`;
+
 export const CalendarBody = styled.div`
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
 	grid-gap: 2px;
 
-	& div:first-child {
+	& div:first-of-type {
 		border-top-left-radius: 3px;
 	}
-	& div:nth-child(7) {
+	& div:nth-of-type(7) {
 		border-top-right-radius: 3px;
 	}
-	& div:nth-last-child(7) {
+	& div:nth-last-of-type(7) {
 		border-bottom-left-radius: 3px;
 	}
-	& div:last-child {
+	& div:last-of-type {
 		border-bottom-right-radius: 3px;
 	}
 `;
@@ -80,14 +94,4 @@ export const Date = styled.div`
 		border: 1px solid ${props.theme.primaryLight};
 		color: ${props.isToday ? props.theme.primaryDark : (props.otherMonth ? props.theme.primaryLight : 'inherit')};
 	`}
-`;
-
-export const Day = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 3px 10px;
-	font-weight: bold;
-	user-select: none;
-	opacity: .7;
 `;

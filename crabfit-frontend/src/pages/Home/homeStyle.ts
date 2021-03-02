@@ -14,7 +14,7 @@ export const TitleSmall = styled.span`
 	margin: 0;
 	font-size: 3rem;
 	text-align: center;
-	font-family: 'CF Samurai Bob';
+	font-family: 'Samurai Bob';
 	font-weight: 400;
 	color: ${props => props.theme.primaryDark};
 	line-height: 1em;
@@ -29,6 +29,10 @@ export const TitleLarge = styled.h1`
 	font-weight: 400;
 	text-shadow: 0 4px 0 ${props => props.theme.primaryDark};
 	line-height: 1em;
+
+	@media (max-width: 350px) {
+		font-size: 3.5rem;
+	}
 `;
 
 export const Logo = styled.img`
