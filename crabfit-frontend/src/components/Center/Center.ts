@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 
 const Center = styled.div`
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 export default Center;

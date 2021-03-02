@@ -10,11 +10,12 @@ const SelectField = ({
 	subLabel,
 	id,
 	options = [],
+	inline = false,
 	register,
 	...props
 }) => (
-	<Wrapper>
-		{label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
+	<Wrapper inline={inline}>
+		{label && <StyledLabel htmlFor={id} inline={inline}>{label}</StyledLabel>}
 		{subLabel && <StyledSubLabel htmlFor={id}>{subLabel}</StyledSubLabel>}
 
 		<StyledSelect

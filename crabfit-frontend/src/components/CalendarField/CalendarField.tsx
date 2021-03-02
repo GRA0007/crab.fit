@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
+import localeData from 'dayjs/plugin/localeData';
 
 import { Button } from 'components';
 import {
@@ -15,31 +16,7 @@ import {
 } from './calendarFieldStyle';
 
 dayjs.extend(isToday);
-
-const days = [
-	'Sun',
-	'Mon',
-	'Tue',
-	'Wed',
-	'Thu',
-	'Fri',
-	'Sat',
-];
-
-const months = [
-	'January',
-	'February',
-	'March',
-	'April',
-	'May',
-	'June',
-	'July',
-	'August',
-	'September',
-	'October',
-	'November',
-	'December',
-];
+dayjs.extend(localeData);
 
 const calculateMonth = (month, year) => {
 	const date = dayjs().month(month).year(year);
@@ -123,7 +100,7 @@ const CalendarField = ({
 						}
 					}}
 				>&lt;</Button>
-				<span>{months[month]} {year}</span>
+				<span>{dayjs.months()[month]} {year}</span>
 				<Button
 					buttonHeight="30px"
 					buttonWidth="30px"
@@ -141,7 +118,7 @@ const CalendarField = ({
 			</CalendarHeader>
 
 			<CalendarDays>
-				{days.map((name, i) =>
+				{dayjs.weekdaysShort().map((name, i) =>
 					<Day key={i}>{name}</Day>
 				)}
 			</CalendarDays>
@@ -152,7 +129,7 @@ const CalendarField = ({
 							key={y+x}
 							otherMonth={date.month() !== month}
 							isToday={date.isToday()}
-							title={`${date.date()} ${months[date.month()]}${date.isToday() ? ' (today)' : ''}`}
+							title={`${date.date()} ${dayjs.months()[date.month()]}${date.isToday() ? ' (today)' : ''}`}
 							selected={selectedDates.includes(date.format('DDMMYYYY'))}
 							selecting={selectingDates.includes(date)}
 							mode={mode}

@@ -61,6 +61,7 @@ const Home = () => {
 						subLabel="Click and drag to select"
 						name="dates"
 						id="dates"
+						required
 						register={register}
 					/>
 
@@ -69,6 +70,7 @@ const Home = () => {
 						subLabel="Click and drag to select a time range"
 						name="times"
 						id="times"
+						required
 						register={register}
 					/>
 

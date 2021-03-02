@@ -4,6 +4,8 @@ export { default as CalendarField } from './CalendarField/CalendarField';
 export { default as TimeRangeField } from './TimeRangeField/TimeRangeField';
 
 export { default as Button } from './Button/Button';
+export { default as Legend } from './Legend/Legend';
+export { default as AvailabilityViewer } from './AvailabilityViewer/AvailabilityViewer';
 
 export { default as Center } from './Center/Center';
 export { default as Donate } from './Donate/Donate';

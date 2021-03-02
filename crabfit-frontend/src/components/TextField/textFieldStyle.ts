@@ -2,12 +2,20 @@ import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
 	margin: 30px 0;
+
+	${props => props.inline && `
+		margin: 0;
+	`}
 `;
 
 export const StyledLabel = styled.label`
 	display: block;
 	padding-bottom: 4px;
 	font-size: 18px;
+
+	${props => props.inline && `
+		font-size: 16px;
+	`}
 `;
 
 export const StyledSubLabel = styled.label`

@@ -32,7 +32,7 @@ const App = () => {
 							backgroundColor: theme.background,
 							color: theme.text,
 							fontFamily: `'Karla', sans-serif`,
-							fontWeight: 600,
+							fontWeight: theme.mode === 'dark' ? 500 : 600,
 							margin: 0,
 						},
 						a: {
