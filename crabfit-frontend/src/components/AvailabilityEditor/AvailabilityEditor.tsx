@@ -45,7 +45,7 @@ const AvailabilityEditor = ({
 		<Wrapper>
 			<Container>
 				<TimeLabels>
-					{times.concat([`${parseInt(times[times.length-1].slice(0, 2))+1}00`]).map((time, i) =>
+					{!!times.length && times.concat([`${parseInt(times[times.length-1].slice(0, 2))+1}00`]).map((time, i) =>
 						<TimeSpace key={i} time={time}>
 							{time.slice(-2) === '00' && <TimeLabel>{dayjs().hour(time.slice(0, 2)).minute(time.slice(-2)).format('h A')}</TimeLabel>}
 						</TimeSpace>

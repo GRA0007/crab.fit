@@ -7,8 +7,8 @@ module.exports = async (req, res) => {
 	try {
 		const query = req.datastore.createQuery(['__Stat_Kind__']);
 
-		eventCount = (await req.datastore.runQuery(query.filter('kind_name', 'Event')))[0].count;
-		personCount = (await req.datastore.runQuery(query.filter('kind_name', 'Person')))[0].count;
+		eventCount = (await req.datastore.runQuery(query.filter('kind_name', 'Event')))[0][0].count;
+		personCount = (await req.datastore.runQuery(query.filter('kind_name', 'Person')))[0][0].count;
 	} catch (e) {
 		console.error(e);
 	}

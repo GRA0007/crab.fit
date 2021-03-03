@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -8,6 +10,7 @@ import {
 	Button,
 	Center,
 	Donate,
+	Error,
 } from 'components';
 
 import {
@@ -20,7 +23,13 @@ import {
 	AboutSection,
 	Footer,
 	P,
+	Stats,
+	Stat,
+	StatNumber,
+	StatLabel,
 } from './homeStyle';
+
+import api from 'services';
 
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
@@ -31,8 +40,55 @@ const Home = () => {
 			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 		},
 	});
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(null);
+	const [stats, setStats] = useState({
+		eventCount: null,
+		personCount: null,
+		version: 'loading...',
+	});
+	const { push } = useHistory();
 
-	const onSubmit = data => console.log('submit', data);
+	useEffect(() => {
+		const fetch = async () => {
+			const response = await api.get('/stats');
+			if (response.status === 200) {
+				setStats(response.data);
+			}
+		};
+
+		fetch();
+	}, []);
+
+	const onSubmit = async data => {
+		setIsLoading(true);
+		setError(null);
+		try {
+			const times = JSON.parse(data.times);
+			const response = await api.post('/event', {
+				event: {
+					name: data.name,
+					timezone: data.timezone,
+					startTime: times.start,
+					endTime: times.end,
+					dates: JSON.parse(data.dates),
+				},
+			});
+
+			if (response.status === 201) {
+				// Success
+				push(`/${response.data.id}`);
+			} else {
+				setError('An error ocurred while creating the event. Please try again later.');
+				console.error(response.status);
+			}
+		} catch (e) {
+			setError('An error ocurred while creating the event. Please try again later.');
+			console.error(e);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
 	return (
 		<>
@@ -83,8 +139,12 @@ const Home = () => {
 						required
 					/>
 
+					{error && (
+						<Error onClose={() => setError(null)}>{error}</Error>
+					)}
+
 					<Center>
-						<Button type="submit">Create</Button>
+						<Button type="submit" isLoading={isLoading} disabled={isLoading}>Create</Button>
 					</Center>
 				</CreateForm>
 			</StyledMain>
@@ -92,6 +152,16 @@ const Home = () => {
 			<AboutSection id="about">
 				<StyledMain>
 					<h2>About Crab Fit</h2>
+					<Stats>
+						<Stat>
+							<StatNumber>{stats.eventCount ?? '10+'}</StatNumber>
+							<StatLabel>Events created</StatLabel>
+						</Stat>
+						<Stat>
+							<StatNumber>{stats.peopleCount ?? '10+'}</StatNumber>
+							<StatLabel>Availabilities entered</StatLabel>
+						</Stat>
+					</Stats>
 					<P>Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.</P>
 					{/* eslint-disable-next-line */}
 					<P>Create by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</P>

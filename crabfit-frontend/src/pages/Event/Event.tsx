@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
 	Center,
@@ -27,18 +27,60 @@ import {
 	Tab,
 } from './eventStyle';
 
+import api from 'services';
+
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
 
 const Event = (props) => {
 	const { register, handleSubmit } = useForm();
-	const id = props.match.params.id;
+	const { id } = props.match.params;
 	const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
-	const [user, setUser] = useState({
-		name: 'Benji',
-		availability: [],
-	});
+	const [user, setUser] = useState(null);
+	const [password, setPassword] = useState(null);
 	const [tab, setTab] = useState(user ? 'you' : 'group');
+	const [isLoading, setIsLoading] = useState(true);
+	const [event, setEvent] = useState(null);
+	const [people, setPeople] = useState([]);
+
+	useEffect(() => {
+		const fetchEvent = async () => {
+			const response = await api.get(`/event/${id}`);
+			if (response.status === 200) {
+				let times = [];
+				for (let i = response.data.startTime; i < response.data.endTime; i++) {
+					let hour = `${i}`.padStart(2, '0');
+					times.push(
+						`${hour}00`,
+						`${hour}15`,
+						`${hour}30`,
+						`${hour}45`,
+					);
+				}
+
+				setEvent({
+					...response.data,
+					times,
+				});
+				setIsLoading(false);
+			} else {
+				console.error(response);
+				//TODO: 404
+			}
+		};
+
+		const fetchPeople = async () => {
+			const response = await api.get(`/event/${id}/people`);
+			if (response.status === 200) {
+				setPeople(response.data.people);
+			} else {
+				console.error(response);
+			}
+		};
+
+		fetchEvent();
+		fetchPeople();
+	}, [id]);
 
 	const onSubmit = data => console.log('submit', data);
 
@@ -52,9 +94,13 @@ const Event = (props) => {
 					</Center>
 				</Link>
 
-				<EventName>Event name ({id})</EventName>
-				<ShareInfo>https://page.url</ShareInfo>
-				<ShareInfo>Copy the link to this page, or share via <a href="#test">Email</a> or <a href="#test">Facebook</a>.</ShareInfo>
+				<EventName isLoading={isLoading}>{event?.name}</EventName>
+				<ShareInfo isLoading={isLoading}>{!!event?.name && `https://crab.fit/${id}`}</ShareInfo>
+				<ShareInfo isLoading={isLoading}>
+					{!!event?.name &&
+						<>Copy the link to this page, or share via <a href={`mailto:?subject=${encodeURIComponent(`Scheduling ${event?.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${id}`)}`}>Email</a>.</>
+					}
+				</ShareInfo>
 			</StyledMain>
 
 			<LoginSection id="login">
@@ -129,47 +175,13 @@ const Event = (props) => {
 			{tab === 'group' ? (
 				<section id="group">
 					<StyledMain>
-						<Legend min={0} max={3} />
+						<Legend min={0} max={people.length} />
 						<Center>Hover or tap the calendar below to see who is available</Center>
 					</StyledMain>
 					<AvailabilityViewer
-						dates={['03032021', '04032021', '05032021', '07032021', '08032021']}
-						times={['0900', '0915', '0930', '0945', '1000', '1015', '1030', '1045', '1100', '1115', '1130', '1145', '1200', '1215', '1230', '1245', '1300', '1315', '1330', '1345', '1400', '1415', '1430', '1445', '1500', '1515', '1530', '1545', '1600', '1615', '1630', '1645']}
-						people={[{
-							name: 'James',
-							availability: [
-								'0900-04032021',
-								'0915-04032021',
-								'0930-04032021',
-								'0945-04032021',
-								'1000-04032021',
-								'1500-04032021',
-								'1515-04032021',
-								'1230-07032021',
-								'1245-07032021',
-								'1300-07032021',
-								'1315-07032021',
-								'1400-08032021',
-								'1430-08032021',
-							],
-						},{
-							name: 'Phoebe',
-							availability: [
-								'1100-07032021',
-								'1115-07032021',
-								'1130-07032021',
-								'1145-07032021',
-								'1200-07032021',
-								'1215-07032021',
-								'1230-07032021',
-								'1245-07032021',
-								'1300-07032021',
-								'1315-07032021',
-								'1330-07032021',
-								'1345-07032021',
-								'1400-07032021',
-							],
-						},user]}
+						dates={event?.dates ?? []}
+						times={event?.times ?? []}
+						people={people}
 					/>
 				</section>
 			) : (
@@ -178,10 +190,23 @@ const Event = (props) => {
 						<Center>Click and drag the calendar below to set your availabilities</Center>
 					</StyledMain>
 					<AvailabilityEditor
-						dates={['03032021', '04032021', '05032021', '07032021', '08032021']}
-						times={['0900', '0915', '0930', '0945', '1000', '1015', '1030', '1045', '1100', '1115', '1130', '1145', '1200', '1215', '1230', '1245', '1300', '1315', '1330', '1345', '1400', '1415', '1430', '1445', '1500', '1515', '1530', '1545', '1600', '1615', '1630', '1645']}
+						dates={event?.dates ?? []}
+						times={event?.times ?? []}
 						value={user.availability}
-						onChange={availability => setUser({ ...user, availability })}
+						onChange={async availability => {
+							const oldAvailability = [...user.availability];
+							setUser({ ...user, availability });
+							const response = await api.patch(`/event/${id}/people/${user.name}`, {
+								person: {
+									password,
+									availability,
+								},
+							});
+							if (response.status !== 200) {
+								console.log(response);
+								setUser({ ...user, oldAvailability });
+							}
+						}}
 					/>
 				</section>
 			)}

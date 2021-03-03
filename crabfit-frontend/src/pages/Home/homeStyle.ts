@@ -63,3 +63,28 @@ export const P = styled.p`
 	font-weight: 500;
 	line-height: 1.6em;
 `;
+
+export const Stats = styled.div`
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-start;
+	flex-wrap: wrap;
+`;
+
+export const Stat = styled.div`
+	text-align: center;
+	padding: 0 6px;
+	min-width: 160px;
+	margin: 10px 0;
+`;
+
+export const StatNumber = styled.span`
+	display: block;
+	font-weight: 900;
+	color: ${props => props.theme.primaryDark};
+	font-size: 2em;
+`;
+
+export const StatLabel = styled.span`
+	display: block;
+`;

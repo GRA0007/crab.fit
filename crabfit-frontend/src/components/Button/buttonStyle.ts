@@ -37,6 +37,34 @@ export const Top = styled.button`
 	&:focus-visible {
 		filter: brightness(1.2);
 	}
+
+	${props => props.isLoading && `
+		text-shadow: none;
+		color: transparent;
+		cursor: wait;
+
+		@keyframes load {
+			from {
+				transform: rotate(0deg);
+			}
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: calc(50% - 12px);
+			left: calc(50% - 12px);
+			height: 18px;
+			width: 18px;
+			border: 3px solid #FFF;
+			border-left-color: transparent;
+			border-radius: 100px;
+			animation: load .5s linear infinite;
+		}
+	`}
 `;
 
 export const Bottom = styled.div`

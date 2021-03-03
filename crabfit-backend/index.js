@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const { Datastore } = require('@google-cloud/datastore');
 const express = require('express');
+const cors = require('cors');
 
 const package = require('./package.json');
 
@@ -20,6 +21,9 @@ const datastore = new Datastore({
 	keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 });
 
+app.use(cors({
+	origin: 'http://localhost:3000',
+}));
 app.use(express.json());
 app.use((req, res, next) => {
 	req.datastore = datastore;

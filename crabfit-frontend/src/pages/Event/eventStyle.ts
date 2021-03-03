@@ -34,6 +34,18 @@ export const EventName = styled.h1`
 	text-align: center;
 	font-weight: 800;
 	margin: 20px 0 14px;
+
+	${props => props.isLoading && `
+		&:after {
+			content: '';
+			display: inline-block;
+			height: 1em;
+			width: 300px;
+			max-width: 100%;
+			background-color: ${props.theme.loading};
+			border-radius: 3px;
+		}
+	`}
 `;
 
 export const LoginForm = styled.form`
@@ -65,6 +77,18 @@ export const ShareInfo = styled.p`
 	margin: 6px 0;
 	text-align: center;
 	font-size: 15px;
+
+	${props => props.isLoading && `
+		&:after {
+			content: '';
+			display: inline-block;
+			height: 1em;
+			width: 500px;
+			max-width: 100%;
+			background-color: ${props.theme.loading};
+			border-radius: 3px;
+		}
+	`}
 `;
 
 export const Tabs = styled.div`
