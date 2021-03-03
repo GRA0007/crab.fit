@@ -8,7 +8,7 @@ export const StyledMain = styled.div`
 
 export const Footer = styled.footer`
 	width: 600px;
-	margin: 20px auto;
+	margin: 50px auto 20px;
 	max-width: calc(100% - 60px);
 	display: flex;
 	align-items: center;

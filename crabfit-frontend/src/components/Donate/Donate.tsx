@@ -6,6 +6,7 @@ const Donate = () => (
 			<Button
 				buttonHeight="30px"
 				buttonWidth="90px"
+				type="button"
 			>Donate</Button>
 		</a>
 	</div>
