@@ -27,6 +27,8 @@ const AvailabilityViewer = ({
 	dates,
 	times,
 	people = [],
+	min = 0,
+	max = 0,
 	...props
 }) => {
 	const [tooltip, setTooltip] = useState(null);
@@ -52,14 +54,16 @@ const AvailabilityViewer = ({
 
 								{times.map((time, i) => {
 									const peopleHere = people.filter(person => person.availability.includes(`${time}-${date}`)).map(person => person.name);
+
 									return (
 										<Time
 											key={i}
 											time={time}
 											className="time"
-											people={peopleHere}
+											peopleCount={peopleHere.length}
 											aria-label={peopleHere.join(', ')}
-											totalPeople={people.length}
+											maxPeople={max}
+											minPeople={min}
 											onMouseEnter={(e) => {
 												const cellBox = e.currentTarget.getBoundingClientRect();
 												setTooltip({

@@ -12,13 +12,13 @@ const handleError = error => {
 	if (error.response && error.response.status) {
 		console.log('[Error handler] res:', error.response);
 	}
-	return Promise.reject(error);
+	return Promise.reject(error.response);
 };
 
 const api = {
-	get: async (endpoint, data = {}) => {
+	get: async (endpoint, data) => {
 		try {
-			const response = await instance.get(endpoint, { params: data });
+			const response = await instance.get(endpoint, data);
 			return Promise.resolve(response);
 		} catch (error) {
 			return handleError(error);

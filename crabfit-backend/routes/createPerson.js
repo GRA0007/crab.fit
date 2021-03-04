@@ -7,9 +7,13 @@ module.exports = async (req, res) => {
 
 	try {
 		const event = (await req.datastore.get(req.datastore.key(['Event', eventId])))[0];
+		const query = req.datastore.createQuery('Person')
+			.filter('eventId', eventId)
+			.filter('name', person.name);
+		let personResult = (await req.datastore.runQuery(query))[0][0];
 
 		if (event) {
-			if (person) {
+			if (person && personResult === undefined) {
 				const currentTime = dayjs().unix();
 
 				// If password

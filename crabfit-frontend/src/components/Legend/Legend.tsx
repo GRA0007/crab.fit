@@ -10,13 +10,14 @@ import {
 const Legend = ({
 	min,
 	max,
+	total,
 	...props
 }) => {
 	const theme = useTheme();
 
 	return (
 		<Wrapper>
-			<Label>{min}/{max} available</Label>
+			<Label>{min}/{total} available</Label>
 
 			<Bar>
 				{[...Array(max-min+1).keys()].map(i =>
@@ -24,7 +25,7 @@ const Legend = ({
 				)}
 			</Bar>
 
-			<Label>{max}/{max} available</Label>
+			<Label>{max}/{total} available</Label>
 		</Wrapper>
 	);
 };

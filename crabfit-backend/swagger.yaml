@@ -18,8 +18,6 @@ definitions:
         type: "string"
       created:
         type: "integer"
-      timezone:
-        type: "string"
       startTime:
         type: "string"
       endTime:
@@ -83,8 +81,6 @@ paths:
             type: "object"
             properties:
               name:
-                type: "string"
-              timezone:
                 type: "string"
               startTime:
                 type: "integer"
@@ -152,7 +148,7 @@ paths:
         400:
           description: "Invalid data"
   "/event/{eventId}/people/{personName}":
-    get:
+    post:
       summary: "Login as this person"
       operationId: "getPerson"
       parameters:

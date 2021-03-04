@@ -58,7 +58,9 @@ export const Time = styled.div`
 		border-top: 1px dotted ${props.theme.primaryDark};
 	`}
 
-	background-color: ${props => `${props.theme.primary}${Math.round((props.people.length/(props.totalPeople))*255).toString(16)}`};
+	background-color: ${props => `${props.theme.primary}${Math.round(((props.peopleCount-props.minPeople)/(props.maxPeople-props.minPeople))*255).toString(16)}`};
+	count: ${props => props.peopleCount};
+	max: ${props => props.maxPeople};
 `;
 
 export const Spacer = styled.div`

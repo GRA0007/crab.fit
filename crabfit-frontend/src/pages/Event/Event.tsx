@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import {
 	Center,
@@ -11,6 +11,7 @@ import {
 	Legend,
 	AvailabilityViewer,
 	AvailabilityEditor,
+	Error,
 } from 'components';
 
 import {
@@ -40,13 +41,27 @@ const Event = (props) => {
 	const [password, setPassword] = useState(null);
 	const [tab, setTab] = useState(user ? 'you' : 'group');
 	const [isLoading, setIsLoading] = useState(true);
+	const [isLoginLoading, setIsLoginLoading] = useState(false);
+	const [error, setError] = useState(null);
 	const [event, setEvent] = useState(null);
 	const [people, setPeople] = useState([]);
 
+	const [min, setMin] = useState(0);
+	const [max, setMax] = useState(0);
+
+	const fetchPeople = useCallback(async () => {
+		try {
+			const response = await api.get(`/event/${id}/people`);
+			setPeople(response.data.people);
+		} catch (e) {
+			console.error(e);
+		}
+	}, [id]);
+
 	useEffect(() => {
 		const fetchEvent = async () => {
-			const response = await api.get(`/event/${id}`);
-			if (response.status === 200) {
+			try {
+				const response = await api.get(`/event/${id}`);
 				let times = [];
 				for (let i = response.data.startTime; i < response.data.endTime; i++) {
 					let hour = `${i}`.padStart(2, '0');
@@ -63,26 +78,93 @@ const Event = (props) => {
 					times,
 				});
 				setIsLoading(false);
-			} else {
-				console.error(response);
+			} catch (e) {
+				console.error(e);
 				//TODO: 404
-			}
-		};
-
-		const fetchPeople = async () => {
-			const response = await api.get(`/event/${id}/people`);
-			if (response.status === 200) {
-				setPeople(response.data.people);
-			} else {
-				console.error(response);
 			}
 		};
 
 		fetchEvent();
 		fetchPeople();
-	}, [id]);
+	}, [fetchPeople, id]);
 
-	const onSubmit = data => console.log('submit', data);
+	useEffect(() => {
+		if (tab === 'group') {
+			fetchPeople();
+		}
+	}, [fetchPeople, tab]);
+
+	useEffect(() => {
+		if (event && !!people.length) {
+			const datetimes = event.dates.reduce(
+				(dates, date) => {
+					let times = [];
+					event.times.forEach(time => {
+						times.push(`${time}-${date}`);
+					});
+					return [...dates, ...times];
+				}
+				, []
+			);
+			setMin(datetimes.reduce((min, time) => {
+					let total = people.reduce(
+						(total, person) => person.availability.includes(time) ? total+1 : total,
+						0
+					);
+					return total < min ? total : min;
+				},
+				Infinity
+			));
+			setMax(datetimes.reduce((max, time) => {
+					let total = people.reduce(
+						(total, person) => person.availability.includes(time) ? total+1 : total,
+						0
+					);
+					return total > max ? total : max;
+				},
+				-Infinity
+			));
+		}
+	}, [event, people]);
+
+	const onSubmit = async data => {
+		setIsLoginLoading(true);
+		setError(null);
+		try {
+			const response = await api.post(`/event/${id}/people/${data.name}`, {
+				person: {
+					password: data.password,
+				},
+			});
+			setPassword(data.password);
+			setUser(response.data);
+			setTab('you');
+		} catch (e) {
+			if (e.status === 401) {
+				setError('Password is incorrect. Check your name is spelled right.');
+			} else if (e.status === 404) {
+				// Create user
+				try {
+					await api.post(`/event/${id}/people`, {
+						person: {
+							name: data.name,
+							password: data.password,
+						},
+					});
+					setPassword(data.password);
+					setUser({
+						name: data.name,
+						availability: [],
+					});
+					setTab('you');
+				} catch (e) {
+					setError('Failed to create user. Please try again.');
+				}
+			}
+		} finally {
+			setIsLoginLoading(false);
+		}
+	};
 
 	return (
 		<>
@@ -92,6 +174,7 @@ const Event = (props) => {
 						<Logo src={logo} alt="" />
 						<Title>CRAB FIT</Title>
 					</Center>
+					<Center style={{ textDecoration: 'underline', fontSize: 14, paddingTop: 6 }}>Create your own</Center>
 				</Link>
 
 				<EventName isLoading={isLoading}>{event?.name}</EventName>
@@ -105,7 +188,9 @@ const Event = (props) => {
 
 			<LoginSection id="login">
 				<StyledMain>
-					{!user && (
+					{user ? (
+						<h2>Signed in as {user.name}</h2>
+					) : (
 						<>
 							<h2>Sign in to add your availability</h2>
 							<LoginForm onSubmit={handleSubmit(onSubmit)}>
@@ -129,8 +214,12 @@ const Event = (props) => {
 								/>
 
 								<Button
+									type="submit"
+									isLoading={isLoginLoading}
+									disabled={isLoginLoading || isLoading}
 								>Login</Button>
 							</LoginForm>
+							{error && <Error onClose={() => setError(null)}>{error}</Error>}
 							<Info>These details are only for this event. Use a password to prevent others from changing your availability.</Info>
 						</>
 					)}
@@ -175,13 +264,19 @@ const Event = (props) => {
 			{tab === 'group' ? (
 				<section id="group">
 					<StyledMain>
-						<Legend min={0} max={people.length} />
+						<Legend
+							min={min}
+							max={max}
+							total={people.filter(p => p.availability.length > 0).length}
+						/>
 						<Center>Hover or tap the calendar below to see who is available</Center>
 					</StyledMain>
 					<AvailabilityViewer
 						dates={event?.dates ?? []}
 						times={event?.times ?? []}
-						people={people}
+						people={people.filter(p => p.availability.length > 0)}
+						min={min}
+						max={max}
 					/>
 				</section>
 			) : (

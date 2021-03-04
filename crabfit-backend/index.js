@@ -37,7 +37,7 @@ app.get('/event/:eventId', getEvent);
 app.post('/event', createEvent);
 app.get('/event/:eventId/people', getPeople);
 app.post('/event/:eventId/people', createPerson);
-app.get('/event/:eventId/people/:personName', login);
+app.post('/event/:eventId/people/:personName', login);
 app.patch('/event/:eventId/people/:personName', updatePerson);
 
 app.listen(port, () => {

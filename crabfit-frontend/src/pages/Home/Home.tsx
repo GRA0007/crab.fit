@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
 import {
 	TextField,
 	CalendarField,
@@ -34,6 +38,9 @@ import api from 'services';
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 const Home = () => {
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
@@ -51,9 +58,11 @@ const Home = () => {
 
 	useEffect(() => {
 		const fetch = async () => {
-			const response = await api.get('/stats');
-			if (response.status === 200) {
+			try {
+				const response = await api.get('/stats');
 				setStats(response.data);
+			} catch (e) {
+				console.error(e);
 			}
 		};
 
@@ -65,23 +74,20 @@ const Home = () => {
 		setError(null);
 		try {
 			const times = JSON.parse(data.times);
+			const dates = JSON.parse(data.dates);
+
+			const start = dayjs().tz(data.timezone).hour(times.start);
+			const end = dayjs().tz(data.timezone).hour(times.end);
+
 			const response = await api.post('/event', {
 				event: {
 					name: data.name,
-					timezone: data.timezone,
-					startTime: times.start,
-					endTime: times.end,
-					dates: JSON.parse(data.dates),
+					startTime: start.utc().hour(),
+					endTime: end.utc().hour(),
+					dates: dates,
 				},
 			});
-
-			if (response.status === 201) {
-				// Success
-				push(`/${response.data.id}`);
-			} else {
-				setError('An error ocurred while creating the event. Please try again later.');
-				console.error(response.status);
-			}
+			push(`/${response.data.id}`);
 		} catch (e) {
 			setError('An error ocurred while creating the event. Please try again later.');
 			console.error(e);
@@ -164,7 +170,7 @@ const Home = () => {
 					</Stats>
 					<P>Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.</P>
 					{/* eslint-disable-next-line */}
-					<P>Create by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</P>
+					<P>Created by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</P>
 					<P>The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer">repository</a>.</P>
 				</StyledMain>
 			</AboutSection>
