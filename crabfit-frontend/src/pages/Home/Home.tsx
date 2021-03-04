@@ -69,6 +69,7 @@ const Home = () => {
 		};
 
 		fetch();
+		document.title = 'Crab Fit';
 	}, []);
 
 	const onSubmit = async data => {
@@ -176,6 +177,7 @@ const Home = () => {
 						register={register}
 						options={timezones}
 						required
+						defaultOption="Select..."
 					/>
 
 					{error && (

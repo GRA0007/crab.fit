@@ -11,6 +11,7 @@ const SelectField = ({
 	id,
 	options = [],
 	inline = false,
+	defaultOption,
 	register,
 	...props
 }) => (
@@ -23,7 +24,7 @@ const SelectField = ({
 			ref={register}
 			{...props}
 		>
-			<option value="">Select...</option>
+			{defaultOption && <option value="">{defaultOption}</option>}
 			{options.map((value, i) =>
 				<option key={i} value={value}>{value}</option>
 			)}

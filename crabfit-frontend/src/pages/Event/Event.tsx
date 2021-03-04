@@ -68,10 +68,10 @@ const Event = (props) => {
 
 				setEvent(response.data);
 				document.title = `${response.data.name} | Crab Fit`;
-				setIsLoading(false);
 			} catch (e) {
 				console.error(e);
-				//TODO: 404
+			} finally {
+				setIsLoading(false);
 			}
 		};
 
@@ -249,137 +249,150 @@ const Event = (props) => {
 					<Center style={{ textDecoration: 'underline', fontSize: 14, paddingTop: 6 }}>Create your own</Center>
 				</Link>
 
-				<EventName isLoading={isLoading}>{event?.name}</EventName>
-				<ShareInfo>https://crab.fit/{id}</ShareInfo>
-				<ShareInfo isLoading={isLoading}>
-					{!!event?.name &&
-						<>Copy the link to this page, or share via <a href={`mailto:?subject=${encodeURIComponent(`Scheduling ${event?.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${id}`)}`}>email</a>.</>
-					}
-				</ShareInfo>
+				{(!!event || isLoading) ? (
+					<>
+						<EventName isLoading={isLoading}>{event?.name}</EventName>
+						<ShareInfo>https://crab.fit/{id}</ShareInfo>
+						<ShareInfo isLoading={isLoading}>
+							{!!event?.name &&
+								<>Copy the link to this page, or share via <a href={`mailto:?subject=${encodeURIComponent(`Scheduling ${event?.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${id}`)}`}>email</a>.</>
+							}
+						</ShareInfo>
+					</>
+				) : (
+					<div style={{ margin: '100px 0' }}>
+						<EventName>Event not found</EventName>
+						<ShareInfo>Check that the url you entered is correct.</ShareInfo>
+					</div>
+				)}
 			</StyledMain>
 
-			<LoginSection id="login">
-				<StyledMain>
-					{user ? (
-						<h2>Signed in as {user.name}</h2>
+			{(!!event || isLoading) && (
+				<>
+					<LoginSection id="login">
+						<StyledMain>
+							{user ? (
+								<h2>Signed in as {user.name}</h2>
+							) : (
+								<>
+									<h2>Sign in to add your availability</h2>
+									<LoginForm onSubmit={handleSubmit(onSubmit)}>
+										<TextField
+											label="Your name"
+											type="text"
+											name="name"
+											id="name"
+											inline
+											required
+											register={register}
+										/>
+
+										<TextField
+											label="Password (optional)"
+											type="password"
+											name="password"
+											id="password"
+											inline
+											register={register}
+										/>
+
+										<Button
+											type="submit"
+											isLoading={isLoginLoading}
+											disabled={isLoginLoading || isLoading}
+										>Login</Button>
+									</LoginForm>
+									{error && <Error onClose={() => setError(null)}>{error}</Error>}
+									<Info>These details are only for this event. Use a password to prevent others from changing your availability.</Info>
+								</>
+							)}
+
+							<SelectField
+								label="Your time zone"
+								name="timezone"
+								id="timezone"
+								inline
+								value={timezone}
+								onChange={event => setTimezone(event.currentTarget.value)}
+								options={timezones}
+							/>
+						</StyledMain>
+					</LoginSection>
+
+					<StyledMain>
+						<Tabs>
+							<Tab
+								href="#you"
+								onClick={e => {
+									e.preventDefault();
+									if (user) {
+										setTab('you');
+									}
+								}}
+								selected={tab === 'you'}
+								disabled={!user}
+								title={user ? '' : 'Login to set your availability'}
+							>Your availability</Tab>
+							<Tab
+								href="#group"
+								onClick={e => {
+									e.preventDefault();
+									setTab('group');
+								}}
+								selected={tab === 'group'}
+							>Group availability</Tab>
+						</Tabs>
+					</StyledMain>
+
+					{tab === 'group' ? (
+						<section id="group">
+							<StyledMain>
+								<Legend
+									min={min}
+									max={max}
+									total={people.filter(p => p.availability.length > 0).length}
+								/>
+								<Center>Hover or tap the calendar below to see who is available</Center>
+							</StyledMain>
+							<AvailabilityViewer
+								times={times}
+								timeLabels={timeLabels}
+								dates={dates}
+								people={people.filter(p => p.availability.length > 0)}
+								min={min}
+								max={max}
+							/>
+						</section>
 					) : (
-						<>
-							<h2>Sign in to add your availability</h2>
-							<LoginForm onSubmit={handleSubmit(onSubmit)}>
-								<TextField
-									label="Your name"
-									type="text"
-									name="name"
-									id="name"
-									inline
-									required
-									register={register}
-								/>
-
-								<TextField
-									label="Password (optional)"
-									type="password"
-									name="password"
-									id="password"
-									inline
-									register={register}
-								/>
-
-								<Button
-									type="submit"
-									isLoading={isLoginLoading}
-									disabled={isLoginLoading || isLoading}
-								>Login</Button>
-							</LoginForm>
-							{error && <Error onClose={() => setError(null)}>{error}</Error>}
-							<Info>These details are only for this event. Use a password to prevent others from changing your availability.</Info>
-						</>
+						<section id="you">
+							<StyledMain>
+								<Center>Click and drag the calendar below to set your availabilities</Center>
+							</StyledMain>
+							<AvailabilityEditor
+								times={times}
+								timeLabels={timeLabels}
+								dates={dates}
+								value={user.availability}
+								onChange={async availability => {
+									const oldAvailability = [...user.availability];
+									const utcAvailability = availability.map(date => dayjs.tz(date, 'HHmm-DDMMYYYY', timezone).utc().format('HHmm-DDMMYYYY'));
+									setUser({ ...user, availability });
+									try {
+										await api.patch(`/event/${id}/people/${user.name}`, {
+											person: {
+												password,
+												availability: utcAvailability,
+											},
+										});
+									} catch (e) {
+										console.log(e);
+										setUser({ ...user, oldAvailability });
+									}
+								}}
+							/>
+						</section>
 					)}
-
-					<SelectField
-						label="Your time zone"
-						name="timezone"
-						id="timezone"
-						inline
-						value={timezone}
-						onChange={event => setTimezone(event.currentTarget.value)}
-						options={timezones}
-					/>
-				</StyledMain>
-			</LoginSection>
-
-			<StyledMain>
-				<Tabs>
-					<Tab
-						href="#you"
-						onClick={e => {
-							e.preventDefault();
-							if (user) {
-								setTab('you');
-							}
-						}}
-						selected={tab === 'you'}
-						disabled={!user}
-						title={user ? '' : 'Login to set your availability'}
-					>Your availability</Tab>
-					<Tab
-						href="#group"
-						onClick={e => {
-							e.preventDefault();
-							setTab('group');
-						}}
-						selected={tab === 'group'}
-					>Group availability</Tab>
-				</Tabs>
-			</StyledMain>
-
-			{tab === 'group' ? (
-				<section id="group">
-					<StyledMain>
-						<Legend
-							min={min}
-							max={max}
-							total={people.filter(p => p.availability.length > 0).length}
-						/>
-						<Center>Hover or tap the calendar below to see who is available</Center>
-					</StyledMain>
-					<AvailabilityViewer
-						times={times}
-						timeLabels={timeLabels}
-						dates={dates}
-						people={people.filter(p => p.availability.length > 0)}
-						min={min}
-						max={max}
-					/>
-				</section>
-			) : (
-				<section id="you">
-					<StyledMain>
-						<Center>Click and drag the calendar below to set your availabilities</Center>
-					</StyledMain>
-					<AvailabilityEditor
-						times={times}
-						timeLabels={timeLabels}
-						dates={dates}
-						value={user.availability}
-						onChange={async availability => {
-							const oldAvailability = [...user.availability];
-							const utcAvailability = availability.map(date => dayjs.tz(date, 'HHmm-DDMMYYYY', timezone).utc().format('HHmm-DDMMYYYY'));
-							setUser({ ...user, availability });
-							try {
-								await api.patch(`/event/${id}/people/${user.name}`, {
-									person: {
-										password,
-										availability: utcAvailability,
-									},
-								});
-							} catch (e) {
-								console.log(e);
-								setUser({ ...user, oldAvailability });
-							}
-						}}
-					/>
-				</section>
+				</>
 			)}
 
 			<Footer id="donate">

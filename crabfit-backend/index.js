@@ -22,7 +22,7 @@ const datastore = new Datastore({
 });
 
 app.use(cors({
-	origin: 'http://localhost:3000',
+	origin: process.env.NODE_ENV === 'production' ? 'https://crab.fit' : 'http://localhost:3000',
 }));
 app.use(express.json());
 app.use((req, res, next) => {

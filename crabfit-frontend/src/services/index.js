@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-	baseURL: 'http://localhost:8080',
+	baseURL: process.env.NODE_ENV === 'production' ? 'https://api-dot-crabfit.uc.r.appspot.com' : 'http://localhost:8080',
 	timeout: 1000 * 300,
 	headers: {
 		'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ export const Title = styled.span`
 	display: block;
 	font-size: 2rem;
 	color: ${props => props.theme.primary};
-	font-family: 'Molot';
+	font-family: 'Molot', sans-serif;
 	font-weight: 400;
 	text-shadow: 0 2px 0 ${props => props.theme.primaryDark};
 	line-height: 1em;

@@ -22,7 +22,7 @@ const App = () => {
   return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme[isDark ? 'dark' : 'light']}>
-				<button onClick={() => setIsDark(!isDark)} style={{ position: 'absolute', top: 0, left: 0 }}>{isDark ? 'dark' : 'light'}</button>
+				{process.env.NODE_ENV !== 'production' && <button onClick={() => setIsDark(!isDark)} style={{ position: 'absolute', top: 0, left: 0 }}>{isDark ? 'dark' : 'light'}</button>}
 				<Global
 					styles={theme => ({
 						html: {
@@ -37,6 +37,25 @@ const App = () => {
 						},
 						a: {
 							color: theme.primary,
+						},
+						'*::-webkit-scrollbar': {
+							width: 16,
+							height: 16,
+						},
+						'*::-webkit-scrollbar-track': {
+							background: `${theme.primaryBackground}`,
+						},
+						'*::-webkit-scrollbar-thumb': {
+							borderRadius: 100,
+							border: `4px solid ${theme.primaryBackground}`,
+							width: 12,
+							background: `${theme.primaryLight}AA`,
+						},
+						'*::-webkit-scrollbar-thumb:hover': {
+							background: `${theme.primaryLight}CC`,
+						},
+						'*::-webkit-scrollbar-thumb:active': {
+							background: `${theme.primaryLight}`,
 						},
 					})}
 				/>
