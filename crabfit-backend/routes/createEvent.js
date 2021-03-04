@@ -3,7 +3,7 @@ const dayjs = require('dayjs');
 const adjectives = require('../res/adjectives.json');
 const crabs = require('../res/crabs.json');
 
-String.prototype.capitalize = () => this.charAt(0).toUpperCase() + this.slice(1);
+const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 const generateId = (name) => {
 	const id = name.trim().toLowerCase().replace(/[^A-Za-z0-9 ]/g, '').replace(/\s+/g, '-');
@@ -12,7 +12,7 @@ const generateId = (name) => {
 };
 
 const generateName = () => {
-	return `${adjectives[Math.floor(Math.random() * adjectives.length)].capitalize()} ${crabs[Math.floor(Math.random() * crabs.length)]} Crab`;
+	return `${capitalize(adjectives[Math.floor(Math.random() * adjectives.length)])} ${crabs[Math.floor(Math.random() * crabs.length)]} Crab`;
 };
 
 module.exports = async (req, res) => {
@@ -28,9 +28,7 @@ module.exports = async (req, res) => {
 			data: {
 				name: name,
 				created: currentTime,
-				startTime: event.startTime,
-				endTime: event.endTime,
-				dates: event.dates,
+				times: event.times,
 			},
 		};
 
@@ -40,9 +38,7 @@ module.exports = async (req, res) => {
 			id: eventId,
 			name: name,
 			created: currentTime,
-			startTime: event.startTime,
-			endTime: event.endTime,
-			dates: event.dates,
+			times: event.times,
 		});
 	} catch (e) {
 		console.error(e);

@@ -70,4 +70,5 @@ export const Selected = styled.div`
 	right: calc(100% - ${props => props.end * 4.1666666666666666}%);
 	top: 0;
 	background-color: ${props => props.theme.primary};
+	border-radius: 2px;
 `;

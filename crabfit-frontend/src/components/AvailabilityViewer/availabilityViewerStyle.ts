@@ -10,6 +10,7 @@ export const Container = styled.div`
 	box-sizing: border-box;
   min-width: 100%;
 	align-items: flex-end;
+	justify-content: center;
 	padding: 0 calc(calc(100% - 600px) / 2);
 
 	@media (max-width: 660px) {
@@ -24,13 +25,12 @@ export const Date = styled.div`
 	width: 60px;
 	min-width: 60px;
 	margin-bottom: 10px;
+`;
 
-	& .time:last-of-type {
-		border-bottom: 1px solid ${props => props.theme.primaryDark};
-	}
-	&.last > .time {
-		border-right: 1px solid ${props => props.theme.primaryDark};
-	}
+export const Times = styled.div`
+	display: flex;
+	flex-direction: column;
+	background-color: ${props => props.theme.text};
 `;
 
 export const DateLabel = styled.label`
@@ -49,18 +49,22 @@ export const DayLabel = styled.label`
 
 export const Time = styled.div`
 	height: 10px;
-	border-left: 1px solid ${props => props.theme.primaryDark};
+	margin: 1px;
+	background-color: ${props => props.theme.background};
 
-	${props => props.time.slice(-2) === '00' && `
-		border-top: 1px solid ${props.theme.primaryDark};
+	${props => props.time.slice(2, 4) !== '00' && `
+		margin-top: -1px;
+		border-top: 2px solid transparent;
 	`}
-	${props => props.time.slice(-2) === '30' && `
-		border-top: 1px dotted ${props.theme.primaryDark};
+	${props => props.time.slice(2, 4) === '30' && `
+		margin-top: -1px;
+		border-top: 2px dotted ${props.theme.text};
 	`}
 
-	background-color: ${props => `${props.theme.primary}${Math.round(((props.peopleCount-props.minPeople)/(props.maxPeople-props.minPeople))*255).toString(16)}`};
-	count: ${props => props.peopleCount};
-	max: ${props => props.maxPeople};
+	background-image: linear-gradient(
+		${props => `${props.theme.primary}${Math.round(((props.peopleCount-props.minPeople)/(props.maxPeople-props.minPeople))*255).toString(16)}`},
+		${props => `${props.theme.primary}${Math.round(((props.peopleCount-props.minPeople)/(props.maxPeople-props.minPeople))*255).toString(16)}`}
+	);
 `;
 
 export const Spacer = styled.div`
@@ -110,13 +114,8 @@ export const TimeLabels = styled.div`
 export const TimeSpace = styled.div`
 	height: 10px;
 	position: relative;
-
-	${props => props.time.slice(-2) === '00' && `
-		border-top: 1px solid transparent;
-	`}
-	${props => props.time.slice(-2) === '30' && `
-		border-top: 1px dotted transparent;
-	`}
+	border-top: 2px solid transparent;
+	background: ${props => props.theme.background};
 `;
 
 export const TimeLabel = styled.label`

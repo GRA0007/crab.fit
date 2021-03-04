@@ -40,7 +40,7 @@ export const EventName = styled.h1`
 			content: '';
 			display: inline-block;
 			height: 1em;
-			width: 300px;
+			width: 400px;
 			max-width: 100%;
 			background-color: ${props.theme.loading};
 			border-radius: 3px;
@@ -83,7 +83,7 @@ export const ShareInfo = styled.p`
 			content: '';
 			display: inline-block;
 			height: 1em;
-			width: 500px;
+			width: 300px;
 			max-width: 100%;
 			background-color: ${props.theme.loading};
 			border-radius: 3px;

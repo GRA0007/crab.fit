@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import {
 	TextField,
@@ -40,6 +41,7 @@ import timezones from 'res/timezones.json';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
+dayjs.extend(customParseFormat);
 
 const Home = () => {
 	const { register, handleSubmit } = useForm({
@@ -73,18 +75,49 @@ const Home = () => {
 		setIsLoading(true);
 		setError(null);
 		try {
-			const times = JSON.parse(data.times);
+			const { start, end } = JSON.parse(data.times);
 			const dates = JSON.parse(data.dates);
 
-			const start = dayjs().tz(data.timezone).hour(times.start);
-			const end = dayjs().tz(data.timezone).hour(times.end);
+			if (dates.length === 0) {
+				return setError(`You haven't selected any dates!`);
+			}
+			if (start === end) {
+				return setError(`The start and end times can't be the same`);
+			}
+
+			let times = dates.reduce((times, date) => {
+				let day = [];
+				for (let i = start; i < (start > end ? 24 : end); i++) {
+					day.push(
+						dayjs.tz(date, 'DDMMYYYY', data.timezone)
+						.hour(i)
+						.minute(0)
+						.utc()
+						.format('HHmm-DDMMYYYY')
+					);
+				}
+				if (start > end) {
+					for (let i = 0; i < end; i++) {
+						day.push(
+							dayjs.tz(date, 'DDMMYYYY', data.timezone)
+							.hour(i)
+							.minute(0)
+							.utc()
+							.format('HHmm-DDMMYYYY')
+						);
+					}
+				}
+				return [...times, ...day];
+			}, []);
+
+			if (times.length === 0) {
+				return setError(`You don't have any time selected`);
+			}
 
 			const response = await api.post('/event', {
 				event: {
 					name: data.name,
-					startTime: start.utc().hour(),
-					endTime: end.utc().hour(),
-					dates: dates,
+					times: times,
 				},
 			});
 			push(`/${response.data.id}`);
@@ -164,7 +197,7 @@ const Home = () => {
 							<StatLabel>Events created</StatLabel>
 						</Stat>
 						<Stat>
-							<StatNumber>{stats.peopleCount ?? '10+'}</StatNumber>
+							<StatNumber>{stats.personCount ?? '10+'}</StatNumber>
 							<StatLabel>Availabilities entered</StatLabel>
 						</Stat>
 					</Stats>

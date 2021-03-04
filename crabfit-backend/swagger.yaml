@@ -18,11 +18,7 @@ definitions:
         type: "string"
       created:
         type: "integer"
-      startTime:
-        type: "string"
-      endTime:
-        type: "string"
-      dates:
+      times:
         type: "array"
         items:
           type: "string"
@@ -82,11 +78,7 @@ paths:
             properties:
               name:
                 type: "string"
-              startTime:
-                type: "integer"
-              endTime:
-                type: "integer"
-              dates:
+              times:
                 type: "array"
                 items:
                   type: "string"

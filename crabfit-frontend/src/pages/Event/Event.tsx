@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
+
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import {
 	Center,
@@ -33,6 +38,10 @@ import api from 'services';
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(customParseFormat);
+
 const Event = (props) => {
 	const { register, handleSubmit } = useForm();
 	const { id } = props.match.params;
@@ -46,37 +55,19 @@ const Event = (props) => {
 	const [event, setEvent] = useState(null);
 	const [people, setPeople] = useState([]);
 
+	const [times, setTimes] = useState([]);
+	const [timeLabels, setTimeLabels] = useState([]);
+	const [dates, setDates] = useState([]);
 	const [min, setMin] = useState(0);
 	const [max, setMax] = useState(0);
-
-	const fetchPeople = useCallback(async () => {
-		try {
-			const response = await api.get(`/event/${id}/people`);
-			setPeople(response.data.people);
-		} catch (e) {
-			console.error(e);
-		}
-	}, [id]);
 
 	useEffect(() => {
 		const fetchEvent = async () => {
 			try {
 				const response = await api.get(`/event/${id}`);
-				let times = [];
-				for (let i = response.data.startTime; i < response.data.endTime; i++) {
-					let hour = `${i}`.padStart(2, '0');
-					times.push(
-						`${hour}00`,
-						`${hour}15`,
-						`${hour}30`,
-						`${hour}45`,
-					);
-				}
 
-				setEvent({
-					...response.data,
-					times,
-				});
+				setEvent(response.data);
+				document.title = `${response.data.name} | Crab Fit`;
 				setIsLoading(false);
 			} catch (e) {
 				console.error(e);
@@ -85,28 +76,49 @@ const Event = (props) => {
 		};
 
 		fetchEvent();
-		fetchPeople();
-	}, [fetchPeople, id]);
+	}, [id]);
 
 	useEffect(() => {
+		const fetchPeople = async () => {
+			try {
+				const response = await api.get(`/event/${id}/people`);
+				const adjustedPeople = response.data.people.map(person => ({
+					...person,
+					availability: person.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY')),
+				}));
+				setPeople(adjustedPeople);
+			} catch (e) {
+				console.error(e);
+			}
+		}
+
 		if (tab === 'group') {
 			fetchPeople();
 		}
-	}, [fetchPeople, tab]);
+	}, [tab, id, timezone]);
+
+	// Convert to timezone and expand minute segments
+	useEffect(() => {
+		if (event) {
+			setTimes(event.times.reduce(
+				(allTimes, time) => {
+					const date = dayjs(time, 'HHmm-DDMMYYYY').utc(true).tz(timezone);
+					return [
+						...allTimes,
+						date.minute(0).format('HHmm-DDMMYYYY'),
+						date.minute(15).format('HHmm-DDMMYYYY'),
+						date.minute(30).format('HHmm-DDMMYYYY'),
+						date.minute(45).format('HHmm-DDMMYYYY'),
+					];
+				},
+				[]
+			).sort((a, b) => dayjs(a, 'HHmm-DDMMYYYY').diff(dayjs(b, 'HHmm-DDMMYYYY'))));
+		}
+	}, [event, timezone]);
 
 	useEffect(() => {
-		if (event && !!people.length) {
-			const datetimes = event.dates.reduce(
-				(dates, date) => {
-					let times = [];
-					event.times.forEach(time => {
-						times.push(`${time}-${date}`);
-					});
-					return [...dates, ...times];
-				}
-				, []
-			);
-			setMin(datetimes.reduce((min, time) => {
+		if (!!times.length && !!people.length) {
+			setMin(times.reduce((min, time) => {
 					let total = people.reduce(
 						(total, person) => person.availability.includes(time) ? total+1 : total,
 						0
@@ -115,7 +127,7 @@ const Event = (props) => {
 				},
 				Infinity
 			));
-			setMax(datetimes.reduce((max, time) => {
+			setMax(times.reduce((max, time) => {
 					let total = people.reduce(
 						(total, person) => person.availability.includes(time) ? total+1 : total,
 						0
@@ -125,7 +137,63 @@ const Event = (props) => {
 				-Infinity
 			));
 		}
-	}, [event, people]);
+	}, [times, people]);
+
+	useEffect(() => {
+		if (!!times.length) {
+			setTimeLabels(times.reduce((labels, datetime) => {
+				const time = datetime.substring(0, 4);
+				if (labels.includes(time)) return labels;
+				return [...labels, time];
+			}, [])
+			.sort((a, b) => parseInt(a) - parseInt(b))
+			.reduce((labels, time, i, allTimes) => {
+				if (time.substring(2) === '30') return [...labels, { label: '', time }];
+				if (allTimes.length - 1 === i) return [
+					...labels,
+					{ label: '', time },
+					{ label: dayjs(time, 'HHmm').add(1, 'hour').format('h A'), time: null }
+				];
+				if (allTimes.length - 1 > i && parseInt(allTimes[i+1].substring(0, 2))-1 > parseInt(time.substring(0, 2))) return [
+					...labels,
+					{ label: '', time },
+					{ label: dayjs(time, 'HHmm').add(1, 'hour').format('h A'), time: 'space' },
+					{ label: '', time: 'space' },
+					{ label: '', time: 'space' },
+				];
+				if (time.substring(2) !== '00') return [...labels, { label: '', time }];
+				return [...labels, { label: dayjs(time, 'HHmm').format('h A'), time }];
+			}, []));
+
+			setDates(times.reduce((allDates, time) => {
+				if (time.substring(2, 4) !== '00') return allDates;
+				const date = time.substring(5);
+				if (allDates.includes(date)) return allDates;
+				return [...allDates, date];
+			}, []));
+		}
+	}, [times]);
+
+	useEffect(() => {
+		const fetchUser = async () => {
+			try {
+				const response = await api.post(`/event/${id}/people/${user.name}`, { person: { password } });
+				const adjustedUser = {
+					...response.data,
+					availability: response.data.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY')),
+				};
+				setUser(adjustedUser);
+			} catch (e) {
+				console.log(e);
+			}
+		};
+
+		if (user) {
+			console.log('FETCHING', timezone);
+			fetchUser();
+		}
+	// eslint-disable-next-line
+	}, [timezone]);
 
 	const onSubmit = async data => {
 		setIsLoginLoading(true);
@@ -137,7 +205,11 @@ const Event = (props) => {
 				},
 			});
 			setPassword(data.password);
-			setUser(response.data);
+			const adjustedUser = {
+				...response.data,
+				availability: response.data.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY')),
+			};
+			setUser(adjustedUser);
 			setTab('you');
 		} catch (e) {
 			if (e.status === 401) {
@@ -178,10 +250,10 @@ const Event = (props) => {
 				</Link>
 
 				<EventName isLoading={isLoading}>{event?.name}</EventName>
-				<ShareInfo isLoading={isLoading}>{!!event?.name && `https://crab.fit/${id}`}</ShareInfo>
+				<ShareInfo>https://crab.fit/{id}</ShareInfo>
 				<ShareInfo isLoading={isLoading}>
 					{!!event?.name &&
-						<>Copy the link to this page, or share via <a href={`mailto:?subject=${encodeURIComponent(`Scheduling ${event?.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${id}`)}`}>Email</a>.</>
+						<>Copy the link to this page, or share via <a href={`mailto:?subject=${encodeURIComponent(`Scheduling ${event?.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${id}`)}`}>email</a>.</>
 					}
 				</ShareInfo>
 			</StyledMain>
@@ -230,7 +302,7 @@ const Event = (props) => {
 						id="timezone"
 						inline
 						value={timezone}
-						onChange={value => setTimezone(value)}
+						onChange={event => setTimezone(event.currentTarget.value)}
 						options={timezones}
 					/>
 				</StyledMain>
@@ -272,8 +344,9 @@ const Event = (props) => {
 						<Center>Hover or tap the calendar below to see who is available</Center>
 					</StyledMain>
 					<AvailabilityViewer
-						dates={event?.dates ?? []}
-						times={event?.times ?? []}
+						times={times}
+						timeLabels={timeLabels}
+						dates={dates}
 						people={people.filter(p => p.availability.length > 0)}
 						min={min}
 						max={max}
@@ -285,20 +358,23 @@ const Event = (props) => {
 						<Center>Click and drag the calendar below to set your availabilities</Center>
 					</StyledMain>
 					<AvailabilityEditor
-						dates={event?.dates ?? []}
-						times={event?.times ?? []}
+						times={times}
+						timeLabels={timeLabels}
+						dates={dates}
 						value={user.availability}
 						onChange={async availability => {
 							const oldAvailability = [...user.availability];
+							const utcAvailability = availability.map(date => dayjs.tz(date, 'HHmm-DDMMYYYY', timezone).utc().format('HHmm-DDMMYYYY'));
 							setUser({ ...user, availability });
-							const response = await api.patch(`/event/${id}/people/${user.name}`, {
-								person: {
-									password,
-									availability,
-								},
-							});
-							if (response.status !== 200) {
-								console.log(response);
+							try {
+								await api.patch(`/event/${id}/people/${user.name}`, {
+									person: {
+										password,
+										availability: utcAvailability,
+									},
+								});
+							} catch (e) {
+								console.log(e);
 								setUser({ ...user, oldAvailability });
 							}
 						}}

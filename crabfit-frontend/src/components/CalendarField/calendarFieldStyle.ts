@@ -82,7 +82,6 @@ export const Date = styled.div`
 	${props => props.isToday && `
 		font-weight: 900;
 		color: ${props.theme.primaryDark};
-		text-decoration: underline;
 	`}
 	${props => (props.selected || (props.mode === 'add' && props.selecting)) && `
 		color: ${props.otherMonth ? 'rgba(255,255,255,.5)' : '#FFF'};

@@ -7,6 +7,7 @@ import {
 	Wrapper,
 	Container,
 	Date,
+	Times,
 	DateLabel,
 	DayLabel,
 	Time,
@@ -24,8 +25,9 @@ dayjs.extend(localeData);
 dayjs.extend(customParseFormat);
 
 const AvailabilityViewer = ({
-	dates,
 	times,
+	timeLabels,
+	dates,
 	people = [],
 	min = 0,
 	max = 0,
@@ -37,9 +39,9 @@ const AvailabilityViewer = ({
 		<Wrapper>
 			<Container>
 				<TimeLabels>
-					{!!times.length && times.concat([`${parseInt(times[times.length-1].slice(0, 2))+1}00`]).map((time, i) =>
-						<TimeSpace key={i} time={time}>
-							{time.slice(-2) === '00' && <TimeLabel>{dayjs().hour(time.slice(0, 2)).minute(time.slice(-2)).format('h A')}</TimeLabel>}
+					{!!timeLabels.length && timeLabels.map((label, i) =>
+						<TimeSpace key={i}>
+							{label.label?.length !== '' && <TimeLabel>{label.label}</TimeLabel>}
 						</TimeSpace>
 					)}
 				</TimeLabels>
@@ -48,38 +50,47 @@ const AvailabilityViewer = ({
 					const last = dates.length === i+1 || dayjs(dates[i+1], 'DDMMYYYY').diff(parsedDate, 'day') > 1;
 					return (
 						<Fragment key={i}>
-							<Date className={last ? 'last' : ''}>
+							<Date>
 								<DateLabel>{parsedDate.format('MMM D')}</DateLabel>
 								<DayLabel>{parsedDate.format('ddd')}</DayLabel>
 
-								{times.map((time, i) => {
-									const peopleHere = people.filter(person => person.availability.includes(`${time}-${date}`)).map(person => person.name);
+								<Times>
+									{timeLabels.map((timeLabel, i) => {
+										if (!timeLabel.time) return null;
+										if (!times.includes(`${timeLabel.time}-${date}`)) {
+											return (
+												<TimeSpace key={i} />
+											);
+										}
+										const time = `${timeLabel.time}-${date}`;
+										const peopleHere = people.filter(person => person.availability.includes(time)).map(person => person.name);
 
-									return (
-										<Time
-											key={i}
-											time={time}
-											className="time"
-											peopleCount={peopleHere.length}
-											aria-label={peopleHere.join(', ')}
-											maxPeople={max}
-											minPeople={min}
-											onMouseEnter={(e) => {
-												const cellBox = e.currentTarget.getBoundingClientRect();
-												setTooltip({
-													x: Math.round(cellBox.x + cellBox.width/2),
-													y: Math.round(cellBox.y + cellBox.height)+6,
-													available: `${peopleHere.length} / ${people.length} available`,
-													date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(-2)).format('h:mma ddd, D MMM YYYY'),
-													people: peopleHere.join(', '),
-												});
-											}}
-											onMouseLeave={() => {
-												setTooltip(null);
-											}}
-										/>
-									);
-								})}
+										return (
+											<Time
+												key={i}
+												time={time}
+												className="time"
+												peopleCount={peopleHere.length}
+												aria-label={peopleHere.join(', ')}
+												maxPeople={max}
+												minPeople={min}
+												onMouseEnter={(e) => {
+													const cellBox = e.currentTarget.getBoundingClientRect();
+													setTooltip({
+														x: Math.round(cellBox.x + cellBox.width/2),
+														y: Math.round(cellBox.y + cellBox.height)+6,
+														available: `${peopleHere.length} / ${people.length} available`,
+														date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format('h:mma ddd, D MMM YYYY'),
+														people: peopleHere.join(', '),
+													});
+												}}
+												onMouseLeave={() => {
+													setTooltip(null);
+												}}
+											/>
+										);
+									})}
+								</Times>
 							</Date>
 							{last && dates.length !== i+1 && (
 								<Spacer />

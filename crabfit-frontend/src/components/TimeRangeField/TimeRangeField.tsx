@@ -81,12 +81,13 @@ const TimeRangeField = ({
 				id={id}
 				type="hidden"
 				ref={register}
-				value={JSON.stringify(start > end ? {start: end, end: start} : {start, end})}
+				value={JSON.stringify({start, end})}
 				{...props}
 			/>
 
 			<Range ref={rangeRef}>
-				<Selected start={start > end ? end : start} end={start > end ? start : end} />
+				<Selected start={start} end={start > end ? 24 : end} />
+				{start > end && <Selected start={start > end ? 0 : start} end={end} />}
 				<Handle
 					value={start}
 					label={times[start]}
