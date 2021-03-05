@@ -16,19 +16,21 @@ const updatePerson = require('./routes/updatePerson');
 
 const app = express();
 const port = 8080;
+const corsOptions = {
+	origin: process.env.NODE_ENV === 'production' ? 'https://crab.fit' : 'http://localhost:3000',
+};
 
 const datastore = new Datastore({
 	keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 });
 
-app.use(cors({
-	origin: process.env.NODE_ENV === 'production' ? 'https://crab.fit' : 'http://localhost:3000',
-}));
 app.use(express.json());
 app.use((req, res, next) => {
 	req.datastore = datastore;
 	next();
 });
+app.options('*', cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.get('/', (req, res) => res.send(`Crabfit API v${package.version}`));
 

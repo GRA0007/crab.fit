@@ -4,6 +4,9 @@ info:
   description: "Compare and align schedules to find a time that works for everyone"
   version: "1.0.0"
 host: "api-dot-crabfit.appspot.com"
+x-google-endpoints:
+- name: "api-dot-crabfit.appspot.com"
+  allowCors: true
 schemes:
   - "https"
 produces:
