@@ -2,8 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
 import localeData from 'dayjs/plugin/localeData';
+import updateLocale from 'dayjs/plugin/updateLocale';
 
 import { Button } from 'components';
+import { useSettingsStore } from 'stores';
+
 import {
 	Wrapper,
 	StyledLabel,
@@ -17,12 +20,13 @@ import {
 
 dayjs.extend(isToday);
 dayjs.extend(localeData);
+dayjs.extend(updateLocale);
 
-const calculateMonth = (month, year) => {
+const calculateMonth = (month, year, weekStart) => {
 	const date = dayjs().month(month).year(year);
 	const daysInMonth = date.daysInMonth();
-	const daysBefore = date.date(1).day();
-	const daysAfter = 6 - date.date(daysInMonth).day();
+	const daysBefore = date.date(1).day() - weekStart;
+	const daysAfter = 6 - date.date(daysInMonth).day() + weekStart;
 
 	let dates = [];
 	let curDate = date.date(1).subtract(daysBefore, 'day');
@@ -49,7 +53,9 @@ const CalendarField = ({
 	register,
 	...props
 }) => {
-	const [dates, setDates] = useState(calculateMonth(dayjs().month(), dayjs().year()));
+  const weekStart = useSettingsStore(state => state.weekStart);
+
+	const [dates, setDates] = useState(calculateMonth(dayjs().month(), dayjs().year(), weekStart));
 	const [month, setMonth] = useState(dayjs().month());
 	const [year, setYear] = useState(dayjs().year());
 
@@ -70,8 +76,14 @@ const CalendarField = ({
 	};
 
 	useEffect(() => {
-		setDates(calculateMonth(month, year));
-	}, [month, year]);
+    if (weekStart !== dayjs.Ls.en.weekStart) {
+      dayjs.updateLocale('en', {
+        weekStart: weekStart,
+        weekdaysShort: weekStart ? 'Mon_Tue_Wed_Thu_Fri_Sat_Sun'.split('_') : 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+      });
+    }
+		setDates(calculateMonth(month, year, weekStart));
+	}, [weekStart, month, year]);
 
 	return (
 		<Wrapper>

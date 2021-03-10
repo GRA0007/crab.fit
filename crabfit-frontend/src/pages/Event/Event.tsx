@@ -34,6 +34,7 @@ import {
 } from './eventStyle';
 
 import api from 'services';
+import { useSettingsStore } from 'stores';
 
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
@@ -43,6 +44,8 @@ dayjs.extend(timezone);
 dayjs.extend(customParseFormat);
 
 const Event = (props) => {
+  const timeFormat = useSettingsStore(state => state.timeFormat);
+
 	const { register, handleSubmit } = useForm();
 	const { id } = props.match.params;
 	const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -152,17 +155,17 @@ const Event = (props) => {
 				if (allTimes.length - 1 === i) return [
 					...labels,
 					{ label: '', time },
-					{ label: dayjs(time, 'HHmm').add(1, 'hour').format('h A'), time: null }
+					{ label: dayjs(time, 'HHmm').add(1, 'hour').format(timeFormat === '12h' ? 'h A' : 'HH'), time: null }
 				];
 				if (allTimes.length - 1 > i && parseInt(allTimes[i+1].substring(0, 2))-1 > parseInt(time.substring(0, 2))) return [
 					...labels,
 					{ label: '', time },
-					{ label: dayjs(time, 'HHmm').add(1, 'hour').format('h A'), time: 'space' },
+					{ label: dayjs(time, 'HHmm').add(1, 'hour').format(timeFormat === '12h' ? 'h A' : 'HH'), time: 'space' },
 					{ label: '', time: 'space' },
 					{ label: '', time: 'space' },
 				];
 				if (time.substring(2) !== '00') return [...labels, { label: '', time }];
-				return [...labels, { label: dayjs(time, 'HHmm').format('h A'), time }];
+				return [...labels, { label: dayjs(time, 'HHmm').format(timeFormat === '12h' ? 'h A' : 'HH'), time }];
 			}, []));
 
 			setDates(times.reduce((allDates, time) => {
@@ -172,7 +175,7 @@ const Event = (props) => {
 				return [...allDates, date];
 			}, []));
 		}
-	}, [times]);
+	}, [times, timeFormat]);
 
 	useEffect(() => {
 		const fetchUser = async () => {
