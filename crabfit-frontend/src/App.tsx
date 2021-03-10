@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider, Global } from '@emotion/react';
 
+import { Settings } from 'components';
 import {
 	Home,
 	Event,
@@ -22,7 +23,7 @@ const App = () => {
   return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme[isDark ? 'dark' : 'light']}>
-				{process.env.NODE_ENV !== 'production' && <button onClick={() => setIsDark(!isDark)} style={{ position: 'absolute', top: 0, left: 0 }}>{isDark ? 'dark' : 'light'}</button>}
+				{process.env.NODE_ENV !== 'production' && <button onClick={() => setIsDark(!isDark)} style={{ position: 'absolute', top: 0, left: 0, zIndex: 1000 }}>{isDark ? 'dark' : 'light'}</button>}
 				<Global
 					styles={theme => ({
 						html: {
@@ -63,6 +64,8 @@ const App = () => {
 					<Route path="/" component={Home} exact />
 					<Route path="/:id" component={Event} exact />
 				</Switch>
+
+        <Settings />
 			</ThemeProvider>
 		</BrowserRouter>
   );

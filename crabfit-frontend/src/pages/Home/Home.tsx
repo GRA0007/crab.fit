@@ -136,7 +136,7 @@ const Home = () => {
 				<Center>
 					<Logo src={logo} alt="" />
 				</Center>
-				<TitleSmall>Create a</TitleSmall>
+				<TitleSmall>CREATE A</TitleSmall>
 				<TitleLarge>CRAB FIT</TitleLarge>
 				<Links>
 					<a href="#about">About</a> / <a href="#donate">Donate</a>
