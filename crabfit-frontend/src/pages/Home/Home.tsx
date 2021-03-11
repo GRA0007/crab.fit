@@ -82,6 +82,7 @@ const Home = () => {
 			if (dates.length === 0) {
 				return setError(`You haven't selected any dates!`);
 			}
+      const isSpecificDates = typeof dates[0] === 'string' && dates[0].length === 8;
 			if (start === end) {
 				return setError(`The start and end times can't be the same`);
 			}
@@ -89,27 +90,37 @@ const Home = () => {
 			let times = dates.reduce((times, date) => {
 				let day = [];
 				for (let i = start; i < (start > end ? 24 : end); i++) {
-					day.push(
-						dayjs.tz(date, 'DDMMYYYY', data.timezone)
-						.hour(i)
-						.minute(0)
-						.utc()
-						.format('HHmm-DDMMYYYY')
-					);
+          if (isSpecificDates) {
+  					day.push(
+  						dayjs.tz(date, 'DDMMYYYY', data.timezone)
+  						.hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
+  					);
+          } else {
+            day.push(
+              dayjs().tz(data.timezone)
+              .day(date).hour(i).minute(0).utc().format('HHmm-d')
+            );
+          }
 				}
 				if (start > end) {
 					for (let i = 0; i < end; i++) {
-						day.push(
-							dayjs.tz(date, 'DDMMYYYY', data.timezone)
-							.hour(i)
-							.minute(0)
-							.utc()
-							.format('HHmm-DDMMYYYY')
-						);
+            if (isSpecificDates) {
+    					day.push(
+    						dayjs.tz(date, 'DDMMYYYY', data.timezone)
+    						.hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
+    					);
+            } else {
+              day.push(
+                dayjs().tz(data.timezone)
+                .day(date).hour(i).minute(0).utc().format('HHmm-d')
+              );
+            }
 					}
 				}
 				return [...times, ...day];
 			}, []);
+
+      return console.log(times);
 
 			if (times.length === 0) {
 				return setError(`You don't have any time selected`);

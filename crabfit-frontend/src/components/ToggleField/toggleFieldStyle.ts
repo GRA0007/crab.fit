@@ -26,7 +26,6 @@ export const HiddenInput = styled.input`
   width: 0;
   position: absolute;
   right: -1000px;
-  top: 0;
 
   &:checked + label {
     color: ${props => props.theme.background};
@@ -36,8 +35,12 @@ export const HiddenInput = styled.input`
 
 export const LabelButton = styled.label`
   padding: 6px;
-  display: block;
+  display: flex;
   text-align: center;
   cursor: pointer;
   user-select: none;
+  height: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
 `;
