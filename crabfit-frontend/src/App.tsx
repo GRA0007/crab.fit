@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import {
 	BrowserRouter,
   Switch,
@@ -6,13 +6,12 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider, Global } from '@emotion/react';
 
-import { Settings } from 'components';
-import {
-	Home,
-	Event,
-} from 'pages';
+import { Settings, Loading } from 'components';
 
 import theme from 'theme';
+
+const Home = lazy(() => import('pages/Home/Home'));
+const Event = lazy(() => import('pages/Event/Event'));
 
 const App = () => {
 	const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -61,8 +60,16 @@ const App = () => {
 					})}
 				/>
 		    <Switch>
-					<Route path="/" component={Home} exact />
-					<Route path="/:id" component={Event} exact />
+					<Route path="/" exact render={props => (
+            <Suspense fallback={<Loading />}>
+              <Home {...props} />
+            </Suspense>
+          )} />
+					<Route path="/:id" exact render={props => (
+            <Suspense fallback={<Loading />}>
+              <Event {...props} />
+            </Suspense>
+          )} />
 				</Switch>
 
         <Settings />
