@@ -24,6 +24,7 @@ const AvailabilityEditor = ({
 	times,
 	timeLabels,
 	dates,
+  isSpecificDates,
 	value = [],
 	onChange,
 	...props
@@ -54,12 +55,12 @@ const AvailabilityEditor = ({
 					)}
 				</TimeLabels>
 				{dates.map((date, x) => {
-					const parsedDate = dayjs(date, 'DDMMYYYY');
-					const last = dates.length === x+1 || dayjs(dates[x+1], 'DDMMYYYY').diff(parsedDate, 'day') > 1;
+					const parsedDate = isSpecificDates ? dayjs(date, 'DDMMYYYY') : dayjs().day(date);
+					const last = dates.length === x+1 || (isSpecificDates ? dayjs(dates[x+1], 'DDMMYYYY') : dayjs().day(dates[x+1])).diff(parsedDate, 'day') > 1;
 					return (
 						<Fragment key={x}>
 							<Date>
-								<DateLabel>{parsedDate.format('MMM D')}</DateLabel>
+								{isSpecificDates && <DateLabel>{parsedDate.format('MMM D')}</DateLabel>}
 								<DayLabel>{parsedDate.format('ddd')}</DayLabel>
 
 								<Times>

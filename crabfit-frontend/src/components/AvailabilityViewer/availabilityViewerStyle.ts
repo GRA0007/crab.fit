@@ -80,7 +80,7 @@ export const Tooltip = styled.div`
 	border: 1px solid ${props => props.theme.text};
 	border-radius: 3px;
 	padding: 4px 8px;
-	background-color: ${props => props.theme.background}99;
+	background-color: ${props => props.theme.background}DD;
 	max-width: 200px;
 	pointer-events: none;
 `;

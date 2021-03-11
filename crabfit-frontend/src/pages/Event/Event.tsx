@@ -45,6 +45,7 @@ dayjs.extend(customParseFormat);
 
 const Event = (props) => {
   const timeFormat = useSettingsStore(state => state.timeFormat);
+  const weekStart = useSettingsStore(state => state.weekStart);
 
 	const { register, handleSubmit } = useForm();
 	const { id } = props.match.params;
@@ -87,7 +88,9 @@ const Event = (props) => {
 				const response = await api.get(`/event/${id}/people`);
 				const adjustedPeople = response.data.people.map(person => ({
 					...person,
-					availability: person.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY')),
+					availability: (!!person.availability.length && person.availability[0].length === 13)
+            ? person.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY'))
+            : person.availability.map(date => dayjs(date, 'HHmm').day(date.substring(5)).utc(true).tz(timezone).format('HHmm-d')),
 				}));
 				setPeople(adjustedPeople);
 			} catch (e) {
@@ -103,21 +106,32 @@ const Event = (props) => {
 	// Convert to timezone and expand minute segments
 	useEffect(() => {
 		if (event) {
+      const isSpecificDates = event.times[0].length === 13;
 			setTimes(event.times.reduce(
 				(allTimes, time) => {
-					const date = dayjs(time, 'HHmm-DDMMYYYY').utc(true).tz(timezone);
+          const date = isSpecificDates ?
+            dayjs(time, 'HHmm-DDMMYYYY').utc(true).tz(timezone)
+            : dayjs(time, 'HHmm').day(time.substring(5)).utc(true).tz(timezone);
+          const format = isSpecificDates ? 'HHmm-DDMMYYYY' : 'HHmm-d';
 					return [
 						...allTimes,
-						date.minute(0).format('HHmm-DDMMYYYY'),
-						date.minute(15).format('HHmm-DDMMYYYY'),
-						date.minute(30).format('HHmm-DDMMYYYY'),
-						date.minute(45).format('HHmm-DDMMYYYY'),
+						date.minute(0).format(format),
+						date.minute(15).format(format),
+						date.minute(30).format(format),
+						date.minute(45).format(format),
 					];
 				},
 				[]
-			).sort((a, b) => dayjs(a, 'HHmm-DDMMYYYY').diff(dayjs(b, 'HHmm-DDMMYYYY'))));
+			).sort((a, b) => {
+        if (isSpecificDates) {
+          return dayjs(a, 'HHmm-DDMMYYYY').diff(dayjs(b, 'HHmm-DDMMYYYY'));
+        } else {
+          return dayjs(a, 'HHmm').day((parseInt(a.substring(5))-weekStart % 7 + 7) % 7)
+            .diff(dayjs(b, 'HHmm').day((parseInt(b.substring(5))-weekStart % 7 + 7) % 7));
+        }
+      }));
 		}
-	}, [event, timezone]);
+	}, [event, timezone, weekStart]);
 
 	useEffect(() => {
 		if (!!times.length && !!people.length) {
@@ -183,7 +197,9 @@ const Event = (props) => {
 				const response = await api.post(`/event/${id}/people/${user.name}`, { person: { password } });
 				const adjustedUser = {
 					...response.data,
-					availability: response.data.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY')),
+					availability: (!!response.data.availability.length && response.data.availability[0].length === 13)
+            ? response.data.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY'))
+            : response.data.availability.map(date => dayjs(date, 'HHmm').day(date.substring(5)).utc(true).tz(timezone).format('HHmm-d')),
 				};
 				setUser(adjustedUser);
 			} catch (e) {
@@ -192,7 +208,6 @@ const Event = (props) => {
 		};
 
 		if (user) {
-			console.log('FETCHING', timezone);
 			fetchUser();
 		}
 	// eslint-disable-next-line
@@ -210,7 +225,9 @@ const Event = (props) => {
 			setPassword(data.password);
 			const adjustedUser = {
 				...response.data,
-				availability: response.data.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY')),
+				availability: (!!response.data.availability.length && response.data.availability[0].length === 13)
+          ? response.data.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY'))
+          : response.data.availability.map(date => dayjs(date, 'HHmm').day(date.substring(5)).utc(true).tz(timezone).format('HHmm-d')),
 			};
 			setUser(adjustedUser);
 			setTab('you');
@@ -361,6 +378,7 @@ const Event = (props) => {
 								times={times}
 								timeLabels={timeLabels}
 								dates={dates}
+                isSpecificDates={!!dates.length && dates[0].length === 8}
 								people={people.filter(p => p.availability.length > 0)}
 								min={min}
 								max={max}
@@ -375,10 +393,13 @@ const Event = (props) => {
 								times={times}
 								timeLabels={timeLabels}
 								dates={dates}
+                isSpecificDates={!!dates.length && dates[0].length === 8}
 								value={user.availability}
 								onChange={async availability => {
 									const oldAvailability = [...user.availability];
-									const utcAvailability = availability.map(date => dayjs.tz(date, 'HHmm-DDMMYYYY', timezone).utc().format('HHmm-DDMMYYYY'));
+									const utcAvailability = (!!availability.length && availability[0].length === 13)
+                    ? availability.map(date => dayjs.tz(date, 'HHmm-DDMMYYYY', timezone).utc().format('HHmm-DDMMYYYY'))
+                    : availability.map(date => dayjs.tz(date, 'HHmm', timezone).day(date.substring(5)).utc().format('HHmm-d'));
 									setUser({ ...user, availability });
 									try {
 										await api.patch(`/event/${id}/people/${user.name}`, {

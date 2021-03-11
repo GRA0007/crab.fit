@@ -12,7 +12,6 @@ export const StyledLabel = styled.label`
 
 export const StyledSubLabel = styled.label`
 	display: block;
-	padding-bottom: 6px;
 	font-size: 13px;
 	opacity: .6;
 `;
