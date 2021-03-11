@@ -3,6 +3,8 @@ import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
+import { useSettingsStore } from 'stores';
+
 import {
 	Wrapper,
 	Container,
@@ -35,6 +37,7 @@ const AvailabilityViewer = ({
 	...props
 }) => {
 	const [tooltip, setTooltip] = useState(null);
+  const timeFormat = useSettingsStore(state => state.timeFormat);
 
 	return (
 		<Wrapper>
@@ -77,11 +80,12 @@ const AvailabilityViewer = ({
 												minPeople={min}
 												onMouseEnter={(e) => {
 													const cellBox = e.currentTarget.getBoundingClientRect();
+                          const timeText = timeFormat === '12h' ? 'h:mma' : 'HH:mm';
 													setTooltip({
 														x: Math.round(cellBox.x + cellBox.width/2),
 														y: Math.round(cellBox.y + cellBox.height)+6,
 														available: `${peopleHere.length} / ${people.length} available`,
-														date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format(isSpecificDates ? 'h:mma ddd, D MMM YYYY' : 'h:mma ddd'),
+														date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format(isSpecificDates ? `${timeText} ddd, D MMM YYYY` : `${timeText} ddd`),
 														people: peopleHere.join(', '),
 													});
 												}}
