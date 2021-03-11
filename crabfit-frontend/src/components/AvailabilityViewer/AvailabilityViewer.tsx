@@ -28,6 +28,7 @@ const AvailabilityViewer = ({
 	times,
 	timeLabels,
 	dates,
+  isSpecificDates,
 	people = [],
 	min = 0,
 	max = 0,
@@ -46,12 +47,12 @@ const AvailabilityViewer = ({
 					)}
 				</TimeLabels>
 				{dates.map((date, i) => {
-					const parsedDate = dayjs(date, 'DDMMYYYY');
-					const last = dates.length === i+1 || dayjs(dates[i+1], 'DDMMYYYY').diff(parsedDate, 'day') > 1;
+					const parsedDate = isSpecificDates ? dayjs(date, 'DDMMYYYY') : dayjs().day(date);
+					const last = dates.length === i+1 || (isSpecificDates ? dayjs(dates[i+1], 'DDMMYYYY') : dayjs().day(dates[i+1])).diff(parsedDate, 'day') > 1;
 					return (
 						<Fragment key={i}>
 							<Date>
-								<DateLabel>{parsedDate.format('MMM D')}</DateLabel>
+								{isSpecificDates && <DateLabel>{parsedDate.format('MMM D')}</DateLabel>}
 								<DayLabel>{parsedDate.format('ddd')}</DayLabel>
 
 								<Times>
@@ -80,7 +81,7 @@ const AvailabilityViewer = ({
 														x: Math.round(cellBox.x + cellBox.width/2),
 														y: Math.round(cellBox.y + cellBox.height)+6,
 														available: `${peopleHere.length} / ${people.length} available`,
-														date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format('h:mma ddd, D MMM YYYY'),
+														date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format(isSpecificDates ? 'h:mma ddd, D MMM YYYY' : 'h:mma ddd'),
 														people: peopleHere.join(', '),
 													});
 												}}

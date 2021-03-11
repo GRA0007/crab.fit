@@ -120,8 +120,6 @@ const Home = () => {
 				return [...times, ...day];
 			}, []);
 
-      return console.log(times);
-
 			if (times.length === 0) {
 				return setError(`You don't have any time selected`);
 			}
