@@ -131,6 +131,9 @@ const Home = () => {
 				},
 			});
 			push(`/${response.data.id}`);
+      gtag('event', 'create_event', {
+        'event_category': 'home',
+      });
 		} catch (e) {
 			setError('An error ocurred while creating the event. Please try again later.');
 			console.error(e);

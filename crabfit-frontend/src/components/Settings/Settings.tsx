@@ -49,6 +49,15 @@ const Settings = () => {
           value={store.timeFormat}
           onChange={value => store.setTimeFormat(value)}
         />
+
+        <ToggleField
+          label="Theme"
+          name="theme"
+          id="theme"
+          options={['System', 'Light', 'Dark']}
+          value={store.theme}
+          onChange={value => store.setTheme(value)}
+        />
       </Modal>
     </>
   );

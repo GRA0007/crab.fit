@@ -6,8 +6,8 @@ module.exports = async (req, res) => {
 	const { person } = req.body;
 
 	try {
-		const event = (await req.datastore.get(req.datastore.key(['Event', eventId])))[0];
-		const query = req.datastore.createQuery('Person')
+		const event = (await req.datastore.get(req.datastore.key([req.types.event, eventId])))[0];
+		const query = req.datastore.createQuery(req.types.person)
 			.filter('eventId', eventId)
 			.filter('name', person.name);
 		let personResult = (await req.datastore.runQuery(query))[0][0];
@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
 				}
 
 				const entity = {
-					key: req.datastore.key('Person'),
+					key: req.datastore.key(req.types.person),
 					data: {
 						name: person.name.trim(),
 						password: hash,

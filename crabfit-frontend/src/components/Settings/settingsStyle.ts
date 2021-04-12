@@ -50,7 +50,9 @@ export const Modal = styled.div`
   top: 70px;
   right: 12px;
   background-color: ${props => props.theme.background};
-  border: 1px solid ${props => props.theme.primaryBackground};
+  ${props => props.theme.mode === 'dark' && `
+    border: 1px solid ${props.theme.primaryBackground};
+  `}
   z-index: 150;
   padding: 10px 18px;
   border-radius: 3px;

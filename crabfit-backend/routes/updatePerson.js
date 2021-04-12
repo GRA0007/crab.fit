@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
 	const { person } = req.body;
 
 	try {
-		const query = req.datastore.createQuery('Person')
+		const query = req.datastore.createQuery(req.types.person)
 			.filter('eventId', eventId)
 			.filter('name', personName);
 		let personResult = (await req.datastore.runQuery(query))[0][0];

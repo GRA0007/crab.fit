@@ -1,4 +1,4 @@
-import { useState, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import {
 	BrowserRouter,
   Switch,
@@ -8,16 +8,22 @@ import { ThemeProvider, Global } from '@emotion/react';
 
 import { Settings, Loading } from 'components';
 
+import { useSettingsStore } from 'stores';
 import theme from 'theme';
 
 const Home = lazy(() => import('pages/Home/Home'));
 const Event = lazy(() => import('pages/Event/Event'));
 
 const App = () => {
+  const colortheme = useSettingsStore(state => state.theme);
 	const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 	const [isDark, setIsDark] = useState(darkQuery.matches);
 
-	darkQuery.addListener(e => setIsDark(e.matches));
+	darkQuery.addListener(e => colortheme === 'System' && setIsDark(e.matches));
+
+  useEffect(() => {
+    setIsDark(colortheme === 'System' ? darkQuery.matches : colortheme === 'Dark');
+  }, [colortheme, darkQuery.matches]);
 
   return (
 		<BrowserRouter>

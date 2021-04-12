@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 		const currentTime = dayjs().unix();
 
 		const entity = {
-			key: req.datastore.key(['Event', eventId]),
+			key: req.datastore.key([req.types.event, eventId]),
 			data: {
 				name: name,
 				created: currentTime,
