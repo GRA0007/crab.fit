@@ -64,7 +64,7 @@ const times = {
   	'21',
   	'22',
   	'23',
-  	'0',
+  	'24',
   ],
 };
 
@@ -124,6 +124,7 @@ const TimeRangeField = ({
 				<Handle
 					value={start}
 					label={times[timeFormat][start]}
+          extraPadding={end - start === 1 ? 'padding-right: 20px;' : (start - end === 1 ? 'padding-left: 20px;' : '')}
 					onMouseDown={() => {
 						document.addEventListener('mousemove', handleMouseMove);
 						isStartMoving.current = true;
@@ -146,6 +147,7 @@ const TimeRangeField = ({
 				<Handle
 					value={end}
 					label={times[timeFormat][end]}
+          extraPadding={end - start === 1 ? 'padding-left: 20px;' : (start - end === 1 ? 'padding-right: 20px;' : '')}
 					onMouseDown={() => {
 						document.addEventListener('mousemove', handleMouseMove);
 						isEndMoving.current = true;
