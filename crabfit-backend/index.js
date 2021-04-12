@@ -27,6 +27,10 @@ const datastore = new Datastore({
 app.use(express.json());
 app.use((req, res, next) => {
 	req.datastore = datastore;
+  req.types = {
+    event: process.env.NODE_ENV === 'production' ? 'Event' : 'DevEvent',
+    person: process.env.NODE_ENV === 'production' ? 'Person' : 'DevPerson',
+  };
 	next();
 });
 app.options('*', cors(corsOptions));
@@ -43,5 +47,5 @@ app.post('/event/:eventId/people/:personName', login);
 app.patch('/event/:eventId/people/:personName', updatePerson);
 
 app.listen(port, () => {
-	console.log(`Crabfit API listening at http://localhost:${port}`)
+	console.log(`Crabfit API listening at http://localhost:${port} in ${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'} mode`)
 });
