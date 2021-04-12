@@ -89,6 +89,14 @@ export const ShareInfo = styled.p`
 			border-radius: 3px;
 		}
 	`}
+
+  ${props => props.onClick && `
+    cursor: pointer;
+
+    &:hover {
+      color: ${props.theme.primaryDark};
+    }
+  `}
 `;
 
 export const Tabs = styled.div`

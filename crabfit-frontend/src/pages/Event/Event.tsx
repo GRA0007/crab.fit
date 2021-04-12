@@ -65,6 +65,8 @@ const Event = (props) => {
 	const [min, setMin] = useState(0);
 	const [max, setMax] = useState(0);
 
+	const [copied, setCopied] = useState(null);
+
 	useEffect(() => {
 		const fetchEvent = async () => {
 			try {
@@ -272,7 +274,16 @@ const Event = (props) => {
 				{(!!event || isLoading) ? (
 					<>
 						<EventName isLoading={isLoading}>{event?.name}</EventName>
-						<ShareInfo>https://crab.fit/{id}</ShareInfo>
+						<ShareInfo
+              onClick={() => navigator.clipboard?.writeText(`https://crab.fit/${id}`)
+                  .then(() => {
+                    setCopied('Copied!');
+                    setTimeout(() => setCopied(null), 1000);
+                  })
+                  .catch((e) => console.error('Failed to copy', e))
+              }
+              title={!!navigator.clipboard ? 'Click to copy' : ''}
+            >{copied ?? `https://crab.fit/${id}`}</ShareInfo>
 						<ShareInfo isLoading={isLoading}>
 							{!!event?.name &&
 								<>Copy the link to this page, or share via <a href={`mailto:?subject=${encodeURIComponent(`Scheduling ${event?.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${id}`)}`}>email</a>.</>

@@ -23,7 +23,7 @@ const App = () => {
 
   useEffect(() => {
     setIsDark(colortheme === 'System' ? darkQuery.matches : colortheme === 'Dark');
-  }, [colortheme]);
+  }, [colortheme, darkQuery.matches]);
 
   return (
 		<BrowserRouter>
