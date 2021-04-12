@@ -257,6 +257,9 @@ const Event = (props) => {
 			}
 		} finally {
 			setIsLoginLoading(false);
+      gtag('event', 'login', {
+        'event_category': 'event',
+      });
 		}
 	};
 
@@ -279,6 +282,9 @@ const Event = (props) => {
                   .then(() => {
                     setCopied('Copied!');
                     setTimeout(() => setCopied(null), 1000);
+                    gtag('event', 'copy_link', {
+                      'event_category': 'event',
+                    });
                   })
                   .catch((e) => console.error('Failed to copy', e))
               }
@@ -286,7 +292,7 @@ const Event = (props) => {
             >{copied ?? `https://crab.fit/${id}`}</ShareInfo>
 						<ShareInfo isLoading={isLoading}>
 							{!!event?.name &&
-								<>Copy the link to this page, or share via <a href={`mailto:?subject=${encodeURIComponent(`Scheduling ${event?.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${id}`)}`}>email</a>.</>
+								<>Copy the link to this page, or share via <a onClick={() => gtag('event', 'send_email', { 'event_category': 'event' })} href={`mailto:?subject=${encodeURIComponent(`Scheduling ${event?.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${id}`)}`}>email</a>.</>
 							}
 						</ShareInfo>
 					</>
