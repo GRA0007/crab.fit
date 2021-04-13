@@ -14,3 +14,4 @@ export { default as Loading } from './Loading/Loading';
 export { default as Center } from './Center/Center';
 export { default as Donate } from './Donate/Donate';
 export { default as Settings } from './Settings/Settings';
+export { default as Egg } from './Egg/Egg';
