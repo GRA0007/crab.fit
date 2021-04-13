@@ -18,8 +18,14 @@ const App = () => {
   const colortheme = useSettingsStore(state => state.theme);
 	const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 	const [isDark, setIsDark] = useState(darkQuery.matches);
+  const [offline, setOffline] = useState(!window.navigator.onLine);
 
 	darkQuery.addListener(e => colortheme === 'System' && setIsDark(e.matches));
+
+  useEffect(() => {
+    window.addEventListener('offline', () => setOffline(true));
+    window.addEventListener('online', () => setOffline(false));
+  }, []);
 
   useEffect(() => {
     setIsDark(colortheme === 'System' ? darkQuery.matches : colortheme === 'Dark');
@@ -28,7 +34,6 @@ const App = () => {
   return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme[isDark ? 'dark' : 'light']}>
-				{process.env.NODE_ENV !== 'production' && <button onClick={() => setIsDark(!isDark)} style={{ position: 'absolute', top: 0, left: 0, zIndex: 1000 }}>{isDark ? 'dark' : 'light'}</button>}
 				<Global
 					styles={theme => ({
 						html: {
@@ -68,12 +73,12 @@ const App = () => {
 		    <Switch>
 					<Route path="/" exact render={props => (
             <Suspense fallback={<Loading />}>
-              <Home {...props} />
+              <Home offline={offline} {...props} />
             </Suspense>
           )} />
 					<Route path="/:id" exact render={props => (
             <Suspense fallback={<Loading />}>
-              <Event {...props} />
+              <Event offline={offline} {...props} />
             </Suspense>
           )} />
 				</Switch>

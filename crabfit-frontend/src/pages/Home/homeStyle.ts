@@ -88,3 +88,8 @@ export const StatNumber = styled.span`
 export const StatLabel = styled.span`
 	display: block;
 `;
+
+export const OfflineMessage = styled.div`
+	text-align: center;
+  margin: 50px 0 20px;
+`;

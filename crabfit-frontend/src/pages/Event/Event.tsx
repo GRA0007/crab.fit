@@ -49,6 +49,7 @@ const Event = (props) => {
 
 	const { register, handleSubmit } = useForm();
 	const { id } = props.match.params;
+  const { offline } = props;
 	const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
 	const [user, setUser] = useState(null);
 	const [password, setPassword] = useState(null);
@@ -297,10 +298,17 @@ const Event = (props) => {
 						</ShareInfo>
 					</>
 				) : (
-					<div style={{ margin: '100px 0' }}>
-						<EventName>Event not found</EventName>
-						<ShareInfo>Check that the url you entered is correct.</ShareInfo>
-					</div>
+          offline ? (
+            <div style={{ margin: '100px 0' }}>
+  						<EventName>You are offline</EventName>
+  						<ShareInfo>A Crab Fit doesn't work offline.<br />Make sure you're connected to the internet and try again.</ShareInfo>
+  					</div>
+          ) : (
+  					<div style={{ margin: '100px 0' }}>
+  						<EventName>Event not found</EventName>
+  						<ShareInfo>Check that the url you entered is correct.</ShareInfo>
+  					</div>
+          )
 				)}
 			</StyledMain>
 
