@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import {
 	BrowserRouter,
   Switch,
@@ -6,10 +6,12 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider, Global } from '@emotion/react';
 
-import { Settings, Loading } from 'components';
+import { Settings, Loading, Egg } from 'components';
 
 import { useSettingsStore } from 'stores';
 import theme from 'theme';
+
+const EGG_PATTERN = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
 const Home = lazy(() => import('pages/Home/Home'));
 const Event = lazy(() => import('pages/Event/Event'));
@@ -18,8 +20,50 @@ const App = () => {
   const colortheme = useSettingsStore(state => state.theme);
 	const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 	const [isDark, setIsDark] = useState(darkQuery.matches);
+  const [offline, setOffline] = useState(!window.navigator.onLine);
+
+  const [eggCount, setEggCount] = useState(0);
+  const [eggVisible, setEggVisible] = useState(false);
+  const [eggKey, setEggKey] = useState(0);
+
+  const eggHandler = useCallback(
+    event => {
+      if (EGG_PATTERN.indexOf(event.key) < 0 || event.key !== EGG_PATTERN[eggCount]) {
+        setEggCount(0);
+        return;
+      }
+      setEggCount(eggCount+1);
+      if (EGG_PATTERN.length === eggCount+1) {
+        setEggKey(eggKey+1);
+        setEggCount(0);
+        setEggVisible(true);
+      }
+    },
+    [eggCount, eggKey]
+  );
 
 	darkQuery.addListener(e => colortheme === 'System' && setIsDark(e.matches));
+
+  useEffect(() => {
+    const onOffline = () => setOffline(true);
+    const onOnline = () => setOffline(false);
+
+    window.addEventListener('offline', onOffline, false);
+    window.addEventListener('online', onOnline, false);
+
+    return () => {
+      window.removeEventListener('offline', onOffline, false);
+      window.removeEventListener('online', onOnline, false);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('keyup', eggHandler, false);
+
+    return () => {
+      document.removeEventListener('keyup', eggHandler, false);
+    };
+  }, [eggHandler]);
 
   useEffect(() => {
     setIsDark(colortheme === 'System' ? darkQuery.matches : colortheme === 'Dark');
@@ -28,7 +72,6 @@ const App = () => {
   return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme[isDark ? 'dark' : 'light']}>
-				{process.env.NODE_ENV !== 'production' && <button onClick={() => setIsDark(!isDark)} style={{ position: 'absolute', top: 0, left: 0, zIndex: 1000 }}>{isDark ? 'dark' : 'light'}</button>}
 				<Global
 					styles={theme => ({
 						html: {
@@ -68,17 +111,19 @@ const App = () => {
 		    <Switch>
 					<Route path="/" exact render={props => (
             <Suspense fallback={<Loading />}>
-              <Home {...props} />
+              <Home offline={offline} {...props} />
             </Suspense>
           )} />
 					<Route path="/:id" exact render={props => (
             <Suspense fallback={<Loading />}>
-              <Event {...props} />
+              <Event offline={offline} {...props} />
             </Suspense>
           )} />
 				</Switch>
 
         <Settings />
+
+        {eggVisible && <Egg eggKey={eggKey} onClose={() => setEggVisible(false)} />}
 			</ThemeProvider>
 		</BrowserRouter>
   );

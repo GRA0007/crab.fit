@@ -32,6 +32,7 @@ import {
 	Stat,
 	StatNumber,
 	StatLabel,
+  OfflineMessage,
 } from './homeStyle';
 
 import api from 'services';
@@ -43,7 +44,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(customParseFormat);
 
-const Home = () => {
+const Home = ({ offline }) => {
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
 			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -154,52 +155,59 @@ const Home = () => {
 					<a href="#about">About</a> / <a href="#donate">Donate</a>
 				</Links>
 
-				<CreateForm onSubmit={handleSubmit(onSubmit)} id="create">
-					<TextField
-						label="Give your event a name!"
-						subLabel="Or leave blank to generate one"
-						type="text"
-						name="name"
-						id="name"
-						register={register}
-					/>
+        {offline ? (
+          <OfflineMessage>
+            <h1>🦀📵</h1>
+            <P>You can't create a Crab Fit when you don't have an internet connection. Please make sure you're connected.</P>
+          </OfflineMessage>
+        ) : (
+  				<CreateForm onSubmit={handleSubmit(onSubmit)} id="create">
+  					<TextField
+  						label="Give your event a name!"
+  						subLabel="Or leave blank to generate one"
+  						type="text"
+  						name="name"
+  						id="name"
+  						register={register}
+  					/>
 
-					<CalendarField
-						label="What dates might work?"
-						subLabel="Click and drag to select"
-						name="dates"
-						id="dates"
-						required
-						register={register}
-					/>
+  					<CalendarField
+  						label="What dates might work?"
+  						subLabel="Click and drag to select"
+  						name="dates"
+  						id="dates"
+  						required
+  						register={register}
+  					/>
 
-					<TimeRangeField
-						label="What times might work?"
-						subLabel="Click and drag to select a time range"
-						name="times"
-						id="times"
-						required
-						register={register}
-					/>
+  					<TimeRangeField
+  						label="What times might work?"
+  						subLabel="Click and drag to select a time range"
+  						name="times"
+  						id="times"
+  						required
+  						register={register}
+  					/>
 
-					<SelectField
-						label="And the timezone"
-						name="timezone"
-						id="timezone"
-						register={register}
-						options={timezones}
-						required
-						defaultOption="Select..."
-					/>
+  					<SelectField
+  						label="And the timezone"
+  						name="timezone"
+  						id="timezone"
+  						register={register}
+  						options={timezones}
+  						required
+  						defaultOption="Select..."
+  					/>
 
-					{error && (
-						<Error onClose={() => setError(null)}>{error}</Error>
-					)}
+  					{error && (
+  						<Error onClose={() => setError(null)}>{error}</Error>
+  					)}
 
-					<Center>
-						<Button type="submit" isLoading={isLoading} disabled={isLoading}>Create</Button>
-					</Center>
-				</CreateForm>
+  					<Center>
+  						<Button type="submit" isLoading={isLoading} disabled={isLoading}>Create</Button>
+  					</Center>
+  				</CreateForm>
+        )}
 			</StyledMain>
 
 			<AboutSection id="about">
@@ -207,11 +215,11 @@ const Home = () => {
 					<h2>About Crab Fit</h2>
 					<Stats>
 						<Stat>
-							<StatNumber>{stats.eventCount ?? '10+'}</StatNumber>
+							<StatNumber>{stats.eventCount ?? '100+'}</StatNumber>
 							<StatLabel>Events created</StatLabel>
 						</Stat>
 						<Stat>
-							<StatNumber>{stats.personCount ?? '10+'}</StatNumber>
+							<StatNumber>{stats.personCount ?? '100+'}</StatNumber>
 							<StatLabel>Availabilities entered</StatLabel>
 						</Stat>
 					</Stats>
