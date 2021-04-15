@@ -28,7 +28,7 @@ export const TitleLarge = styled.h1`
 	color: ${props => props.theme.primary};
 	font-family: 'Molot', sans-serif;
 	font-weight: 400;
-	text-shadow: 0 4px 0 ${props => props.theme.primaryDark};
+	text-shadow: 0 3px 0 ${props => props.theme.primaryDark};
 	line-height: 1em;
 `;
 
