@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import dayjs from 'dayjs';
@@ -242,8 +242,10 @@ const Home = ({ offline }) => {
 							<StatLabel>Availabilities entered</StatLabel>
 						</Stat>
 					</Stats>
-					<P>Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.</P>
+					<P>Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<br /><Link to="/how-to">Learn more about how to Crab Fit</Link>.</P>
 					{/* eslint-disable-next-line */}
+					<P>Create a lot of Crab Fits? Get the <a href="https://chrome.google.com/webstore/detail/crab-fit/pnafiibmjbiljofcpjlbonpgdofjhhkj" target="_blank">Chrome extension</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/crab-fit/" target="_blank">Firefox extension</a> for your browser!</P>
+          {/* eslint-disable-next-line */}
 					<P>Created by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</P>
 					<P>The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer">repository</a>.</P>
 				</StyledMain>
