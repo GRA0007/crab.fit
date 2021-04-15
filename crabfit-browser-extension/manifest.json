@@ -1,0 +1,25 @@
+{
+  "name": "Crab Fit",
+  "description": "Enter your availability to find a time that works for everyone!",
+  "version": "1.0",
+  "manifest_version": 2,
+
+  "author": "Ben Grant",
+  "homepage_url": "https://crab.fit",
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "res/icon16.png",
+      "32": "res/icon32.png",
+      "48": "res/icon48.png",
+      "128": "res/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "res/icon16.png",
+    "32": "res/icon32.png",
+    "48": "res/icon48.png",
+    "128": "res/icon128.png"
+  }
+}

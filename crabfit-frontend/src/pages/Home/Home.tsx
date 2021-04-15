@@ -164,7 +164,7 @@ const Home = ({ offline }) => {
           <StyledMain>
             <h2>Recently visited</h2>
             {recentsStore.recents.map(event => (
-              <Recent href={`/${event.id}`}>
+              <Recent href={`/${event.id}`} key={event.id}>
                 <span className="name">{event.name}</span>
                 <span className="date">Created {dayjs.unix(event.created).format('D MMMM, YYYY')}</span>
               </Recent>
