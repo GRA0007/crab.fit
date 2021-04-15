@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "fit.crab.twa",
+                     "sha256_cert_fingerprints": ["FC:73:EE:22:0E:A4:98:5F:AE:64:7B:75:2E:2B:D9:4A:7E:5D:EB:B2:44:83:00:05:18:F2:65:6D:31:95:B7:8D"] }
+      }
+]
