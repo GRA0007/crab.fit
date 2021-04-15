@@ -25,7 +25,8 @@ export const HiddenInput = styled.input`
   height: 0;
   width: 0;
   position: absolute;
-  right: -1000px;
+  left: -1000px;
+  opacity: 0;
 
   &:checked + label {
     color: ${props => props.theme.background};

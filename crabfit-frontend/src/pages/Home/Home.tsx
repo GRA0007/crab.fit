@@ -33,9 +33,11 @@ import {
 	StatNumber,
 	StatLabel,
   OfflineMessage,
+  Recent,
 } from './homeStyle';
 
 import api from 'services';
+import { useRecentsStore } from 'stores';
 
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
@@ -58,6 +60,7 @@ const Home = ({ offline }) => {
 		version: 'loading...',
 	});
 	const { push } = useHistory();
+  const recentsStore = useRecentsStore();
 
 	useEffect(() => {
 		const fetch = async () => {
@@ -154,7 +157,23 @@ const Home = ({ offline }) => {
 				<Links>
 					<a href="#about">About</a> / <a href="#donate">Donate</a>
 				</Links>
+      </StyledMain>
 
+      {!!recentsStore.recents.length && (
+        <AboutSection id="recents">
+          <StyledMain>
+            <h2>Recently visited</h2>
+            {recentsStore.recents.map(event => (
+              <Recent href={`/${event.id}`} key={event.id}>
+                <span className="name">{event.name}</span>
+                <span className="date">Created {dayjs.unix(event.created).format('D MMMM, YYYY')}</span>
+              </Recent>
+            ))}
+          </StyledMain>
+        </AboutSection>
+      )}
+
+      <StyledMain>
         {offline ? (
           <OfflineMessage>
             <h1>🦀📵</h1>
