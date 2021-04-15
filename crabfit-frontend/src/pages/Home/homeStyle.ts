@@ -7,6 +7,7 @@ export const StyledMain = styled.div`
 `;
 
 export const CreateForm = styled.form`
+  margin: 0 0 60px;
 `;
 
 export const TitleSmall = styled.span`
@@ -45,7 +46,7 @@ export const Links = styled.nav`
 `;
 
 export const AboutSection = styled.section`
-	margin: 60px 0 0;
+	margin: 30px 0 0;
 	background-color: ${props => props.theme.primaryBackground};
 	padding: 20px 0;
 `;
@@ -92,4 +93,25 @@ export const StatLabel = styled.span`
 export const OfflineMessage = styled.div`
 	text-align: center;
   margin: 50px 0 20px;
+`;
+
+export const Recent = styled.a`
+	text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+
+  & .name {
+    font-weight: 800;
+    font-size: 1.1em;
+  }
+  & .date {
+    font-weight: 400;
+  }
+
+  &:hover .name {
+    text-decoration: underline;
+  }
 `;

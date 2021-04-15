@@ -34,7 +34,7 @@ import {
 } from './eventStyle';
 
 import api from 'services';
-import { useSettingsStore } from 'stores';
+import { useSettingsStore, useRecentsStore } from 'stores';
 
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
@@ -46,6 +46,8 @@ dayjs.extend(customParseFormat);
 const Event = (props) => {
   const timeFormat = useSettingsStore(state => state.timeFormat);
   const weekStart = useSettingsStore(state => state.weekStart);
+
+  const addRecent = useRecentsStore(state => state.addRecent);
 
 	const { register, handleSubmit } = useForm();
 	const { id } = props.match.params;
@@ -74,6 +76,11 @@ const Event = (props) => {
 				const response = await api.get(`/event/${id}`);
 
 				setEvent(response.data);
+        addRecent({
+          id: response.data.id,
+          created: response.data.created,
+          name: response.data.name,
+        });
 				document.title = `${response.data.name} | Crab Fit`;
 			} catch (e) {
 				console.error(e);
@@ -83,7 +90,7 @@ const Event = (props) => {
 		};
 
 		fetchEvent();
-	}, [id]);
+	}, [id, addRecent]);
 
 	useEffect(() => {
 		const fetchPeople = async () => {
