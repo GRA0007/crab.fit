@@ -11,6 +11,9 @@ Align your schedules to find the perfect time that works for everyone.
 3. Run `node index.js` in the backend folder to start the API.
 4. Run `yarn start` in the frontend folder to start the front end.
 
+### Browser extension
+The browser extension in `crabfit-browser-extension` can be tested by first running the frontend, and changing the iframe url in the extension's `popup.html` to match the local Crab Fit. Then it can be loaded as an unpacked extension in Chrome to test.
+
 ## Deploy
 
 ### Frontend
@@ -20,3 +23,6 @@ Align your schedules to find the perfect time that works for everyone.
 ### Backend
 1. Deploy the backend `cd crabfit-backend && gcloud app deploy --project=crabfit`
 2. Deploy the endpoints service `cd crabfit-backend && gcloud endpoints services deploy swagger.yaml`
+
+### Browser extension
+Compress everything inside the `crabfit-browser-extension` folder and use that zip to deploy using Chrome web store and Mozilla Add-on store.

@@ -16,6 +16,7 @@ const EGG_PATTERN = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft'
 const Home = lazy(() => import('pages/Home/Home'));
 const Event = lazy(() => import('pages/Event/Event'));
 const Create = lazy(() => import('pages/Create/Create'));
+const Help = lazy(() => import('pages/Help/Help'));
 
 const App = () => {
   const colortheme = useSettingsStore(state => state.theme);
@@ -113,6 +114,11 @@ const App = () => {
 					<Route path="/" exact render={props => (
             <Suspense fallback={<Loading />}>
               <Home offline={offline} {...props} />
+            </Suspense>
+          )} />
+					<Route path="/how-to" exact render={props => (
+            <Suspense fallback={<Loading />}>
+              <Help {...props} />
             </Suspense>
           )} />
 					<Route path="/create" exact render={props => (
