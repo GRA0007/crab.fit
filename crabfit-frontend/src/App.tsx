@@ -17,6 +17,7 @@ const Home = lazy(() => import('pages/Home/Home'));
 const Event = lazy(() => import('pages/Event/Event'));
 const Create = lazy(() => import('pages/Create/Create'));
 const Help = lazy(() => import('pages/Help/Help'));
+const Privacy = lazy(() => import('pages/Privacy/Privacy'));
 
 const App = () => {
   const colortheme = useSettingsStore(state => state.theme);
@@ -119,6 +120,11 @@ const App = () => {
 					<Route path="/how-to" exact render={props => (
             <Suspense fallback={<Loading />}>
               <Help {...props} />
+            </Suspense>
+          )} />
+          <Route path="/privacy" exact render={props => (
+            <Suspense fallback={<Loading />}>
+              <Privacy {...props} />
             </Suspense>
           )} />
 					<Route path="/create" exact render={props => (

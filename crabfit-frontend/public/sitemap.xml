@@ -9,4 +9,8 @@
     <loc>https://crab.fit/how-to</loc>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://crab.fit/privacy</loc>
+    <priority>0.2</priority>
+  </url>
 </urlset>
