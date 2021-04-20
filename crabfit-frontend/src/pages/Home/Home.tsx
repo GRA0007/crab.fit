@@ -248,6 +248,7 @@ const Home = ({ offline }) => {
           {/* eslint-disable-next-line */}
 					<P>Created by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</P>
 					<P>The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer">repository</a>.</P>
+          <P>Crab Fit costs more than <strong>$100 per month</strong> to run. Consider donating below if it helped you out so it can stay free for everyone. 🦀</P>
 				</StyledMain>
 			</AboutSection>
 

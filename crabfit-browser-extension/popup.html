@@ -9,6 +9,42 @@
         margin: 0;
       }
 
+      @keyframes load {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      #loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 360px;
+        height: 500px;
+        background-color: #FFFFFF;
+        z-index: -1;
+      }
+      #loader::after {
+        content: '';
+        position: absolute;
+        top: calc(50% - 15px);
+        left: calc(50% - 15px);
+        height: 24px;
+        width: 24px;
+        border: 3px solid #F79E00;
+        border-left-color: transparent;
+        border-radius: 100px;
+        animation: load .5s linear infinite;
+      }
+      @media (prefers-color-scheme: dark) {
+        #loader {
+          background-color: #111111;
+        }
+      }
+
       iframe {
         height: 100%;
         width: 100%;
@@ -17,6 +53,7 @@
     </style>
   </head>
   <body>
+    <div id="loader"></div>
     <iframe src="https://crab.fit/create" allow="clipboard-write"></iframe>
   </body>
 </html>
