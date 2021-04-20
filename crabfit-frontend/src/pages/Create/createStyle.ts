@@ -77,30 +77,3 @@ export const AboutSection = styled.section`
     font-size: 1.2rem;
   }
 `;
-
-export const Recent = styled.a`
-	text-decoration: none;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 0;
-  flex-wrap: wrap;
-
-  & .name {
-    font-weight: 700;
-    color: ${props => props.theme.primaryDark};
-  }
-  & .date {
-    font-weight: 400;
-    font-size: .9em;
-    opacity: .8;
-    text-align: right;
-    flex: 1;
-    white-space: nowrap;
-  }
-
-  &:hover .name {
-    text-decoration: underline;
-  }
-`;

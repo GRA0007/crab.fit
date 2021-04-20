@@ -27,8 +27,10 @@ import {
   ShareInfo,
   Footer,
   AboutSection,
-  Recent,
 } from './createStyle';
+import {
+  Recent,
+} from '../Home/homeStyle';
 
 import api from 'services';
 import { useRecentsStore } from 'stores';

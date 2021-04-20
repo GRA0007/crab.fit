@@ -108,16 +108,24 @@ export const Recent = styled.a`
     font-weight: 700;
     font-size: 1.1em;
     color: ${props => props.theme.primaryDark};
+    flex: 1;
+    display: block;
   }
   & .date {
     font-weight: 400;
     opacity: .8;
-    text-align: right;
-    flex: 1;
     white-space: nowrap;
   }
 
   &:hover .name {
     text-decoration: underline;
+  }
+
+  @media (max-width: 500px) {
+    display: block;
+
+    & .date {
+      white-space: normal;
+    }
   }
 `;
