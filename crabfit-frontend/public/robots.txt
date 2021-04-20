@@ -1,3 +1,7 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /$
+Allow: /how-to$
+Disallow: *
+
+sitemap: https://crab.fit/sitemap.xml
