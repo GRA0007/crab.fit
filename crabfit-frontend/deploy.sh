@@ -20,4 +20,4 @@ handlers:
   redirect_http_response_code: 301
 EOF
 
-gcloud app deploy --project=crabfit
+gcloud app deploy --project=crabfit --version=v1

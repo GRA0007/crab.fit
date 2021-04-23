@@ -21,7 +21,7 @@ The browser extension in `crabfit-browser-extension` can be tested by first runn
 2. Run `./deploy.sh` to compile and deploy.
 
 ### Backend
-1. Deploy the backend `cd crabfit-backend && gcloud app deploy --project=crabfit`
+1. Deploy the backend `cd crabfit-backend && gcloud app deploy --project=crabfit --version=v1`
 2. Deploy the endpoints service `cd crabfit-backend && gcloud endpoints services deploy swagger.yaml`
 
 ### Browser extension
