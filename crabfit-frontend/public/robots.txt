@@ -2,6 +2,7 @@
 User-agent: *
 Allow: /$
 Allow: /how-to$
+Allow: /privacy$
 Disallow: *
 
 sitemap: https://crab.fit/sitemap.xml
