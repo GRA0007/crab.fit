@@ -32,3 +32,8 @@ export const useRecentsStore = create(persist(
   }),
   { name: 'crabfit-recent' },
 ));
+
+export const useTWAStore = create(set => ({
+  TWA: undefined,
+  setTWA: TWA => set({ TWA }),
+}));
