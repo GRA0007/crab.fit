@@ -6,7 +6,6 @@ import {
 	Center,
 	Footer,
   AvailabilityViewer,
-  Legend,
 } from 'components';
 
 import {
