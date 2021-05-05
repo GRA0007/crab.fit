@@ -51,15 +51,6 @@ export const AboutSection = styled.section`
 	padding: 20px 0;
 `;
 
-export const Footer = styled.footer`
-	width: 600px;
-	margin: 20px auto;
-	max-width: calc(100% - 60px);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-`;
-
 export const P = styled.p`
 	font-weight: 500;
 	line-height: 1.6em;

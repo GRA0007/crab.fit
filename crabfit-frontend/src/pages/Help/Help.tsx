@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import {
 	Button,
 	Center,
-	Donate,
+	Footer,
   AvailabilityViewer,
   Legend,
 } from 'components';
@@ -14,7 +14,6 @@ import {
 	Logo,
   Title,
 	AboutSection,
-	Footer,
 	P,
   Step,
   FakeCalendar,
@@ -94,10 +93,7 @@ const Help = () => {
 				</StyledMain>
 			</AboutSection>
 
-			<Footer id="donate">
-				<span>Thank you for using Crab Fit. If you like it, consider donating.</span>
-				<Donate />
-			</Footer>
+			<Footer />
 		</>
 	);
 };

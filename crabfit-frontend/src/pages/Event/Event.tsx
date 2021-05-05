@@ -9,7 +9,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import {
 	Center,
-	Donate,
+	Footer,
 	TextField,
 	SelectField,
 	Button,
@@ -20,7 +20,6 @@ import {
 
 import {
 	StyledMain,
-	Footer,
 	Logo,
 	Title,
 	EventName,
@@ -442,10 +441,7 @@ const Event = (props) => {
 				</>
 			)}
 
-			<Footer id="donate">
-				<span>Thank you for using Crab Fit. If you like it, consider donating.</span>
-				<Donate />
-			</Footer>
+			<Footer />
 		</>
 	);
 };

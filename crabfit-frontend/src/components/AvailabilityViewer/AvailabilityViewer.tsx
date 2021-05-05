@@ -62,7 +62,7 @@ const AvailabilityViewer = ({
           onSegmentFocus={count => setFocusCount(count)}
         />
         <Center>Hover or tap the calendar below to see who is available</Center>
-        {!!people.length && (
+        {people.length > 1 && (
           <>
             <Center>Click the names below to view people individually</Center>
             <People>

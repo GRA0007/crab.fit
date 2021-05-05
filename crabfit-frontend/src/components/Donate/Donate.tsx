@@ -5,7 +5,7 @@ import { useTWAStore } from 'stores';
 const PAYMENT_METHOD = 'https://play.google.com/billing';
 const SKU = 'crab_donation';
 
-const Donate = () => {
+const Donate = ({ onDonate = null }) => {
   const store = useTWAStore();
 
   useEffect(() => {
@@ -80,9 +80,12 @@ const Donate = () => {
                 alert('Cannot make donation through Google. Please try donating through the website crab.fit 🦀');
               }
             }
+          } else if (onDonate !== null) {
+            event.preventDefault();
+            onDonate();
           }
         }}
-        href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD"
+        href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5"
         target="_blank"
         rel="noreferrer"
       >

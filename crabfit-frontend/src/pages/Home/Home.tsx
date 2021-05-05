@@ -14,8 +14,8 @@ import {
 	SelectField,
 	Button,
 	Center,
-	Donate,
 	Error,
+  Footer,
 } from 'components';
 
 import {
@@ -26,7 +26,6 @@ import {
 	Logo,
 	Links,
 	AboutSection,
-	Footer,
 	P,
 	Stats,
 	Stat,
@@ -245,18 +244,15 @@ const Home = ({ offline }) => {
 					</Stats>
 					<P>Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<br /><Link to="/how-to">Learn more about how to Crab Fit</Link>.</P>
 					{/* eslint-disable-next-line */}
-					<P>Create a lot of Crab Fits? Get the <a href="https://chrome.google.com/webstore/detail/crab-fit/pnafiibmjbiljofcpjlbonpgdofjhhkj" target="_blank">Chrome extension</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/crab-fit/" target="_blank">Firefox extension</a> for your browser!</P>
+					<P>Create a lot of Crab Fits? Get the <a href="https://chrome.google.com/webstore/detail/crab-fit/pnafiibmjbiljofcpjlbonpgdofjhhkj" target="_blank">Chrome extension</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/crab-fit/" target="_blank">Firefox extension</a> for your browser! You can also download the <a href="https://play.google.com/store/apps/details?id=fit.crab" target="_blank">Android app</a> to Crab Fit on the go.</P>
           {/* eslint-disable-next-line */}
 					<P>Created by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</P>
-					<P>The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer">repository</a>.</P>
+					<P>The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer">repository</a>. By using Crab Fit you agree to the <Link to="/privacy">privacy policy</Link>.</P>
           <P>Crab Fit costs more than <strong>$100 per month</strong> to run. Consider donating below if it helped you out so it can stay free for everyone. 🦀</P>
 				</StyledMain>
 			</AboutSection>
 
-			<Footer id="donate">
-				<span>Thank you for using Crab Fit. If you like it, consider donating.</span>
-				<Donate />
-			</Footer>
+			<Footer />
 		</>
 	);
 };

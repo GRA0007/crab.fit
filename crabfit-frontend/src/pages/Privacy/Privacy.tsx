@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import {
 	Button,
 	Center,
-	Donate,
+	Footer,
 } from 'components';
 
 import {
@@ -12,7 +12,6 @@ import {
 	Logo,
   Title,
 	AboutSection,
-	Footer,
 	P,
 } from '../Help/helpStyle';
 
@@ -95,10 +94,7 @@ const Privacy = () => {
 				</StyledMain>
 			</AboutSection>
 
-			<Footer id="donate">
-				<span>Thank you for using Crab Fit. If you like it, consider donating.</span>
-				<Donate />
-			</Footer>
+			<Footer />
 		</>
 	);
 };
