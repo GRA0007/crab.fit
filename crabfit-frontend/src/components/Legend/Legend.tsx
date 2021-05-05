@@ -11,6 +11,7 @@ const Legend = ({
 	min,
 	max,
 	total,
+  onSegmentFocus,
 	...props
 }) => {
 	const theme = useTheme();
@@ -19,9 +20,13 @@ const Legend = ({
 		<Wrapper>
 			<Label>{min}/{total} available</Label>
 
-			<Bar>
+			<Bar onMouseOut={() => onSegmentFocus(null)}>
 				{[...Array(max-min+1).keys()].map(i =>
-					<Grade key={i} color={`${theme.primary}${Math.round((i/(max-min))*255).toString(16)}`} />
+					<Grade
+            key={i}
+            color={`${theme.primary}${Math.round((i/(max-min))*255).toString(16)}`}
+            onMouseOver={() => onSegmentFocus(i+min)}
+          />
 				)}
 			</Bar>
 

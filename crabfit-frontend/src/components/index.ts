@@ -15,3 +15,4 @@ export { default as Center } from './Center/Center';
 export { default as Donate } from './Donate/Donate';
 export { default as Settings } from './Settings/Settings';
 export { default as Egg } from './Egg/Egg';
+export { default as Footer } from './Footer/Footer';

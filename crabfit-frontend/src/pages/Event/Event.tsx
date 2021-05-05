@@ -9,11 +9,10 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import {
 	Center,
-	Donate,
+	Footer,
 	TextField,
 	SelectField,
 	Button,
-	Legend,
 	AvailabilityViewer,
 	AvailabilityEditor,
 	Error,
@@ -21,7 +20,6 @@ import {
 
 import {
 	StyledMain,
-	Footer,
 	Logo,
 	Title,
 	EventName,
@@ -398,14 +396,6 @@ const Event = (props) => {
 
 					{tab === 'group' ? (
 						<section id="group">
-							<StyledMain>
-								<Legend
-									min={min}
-									max={max}
-									total={people.filter(p => p.availability.length > 0).length}
-								/>
-								<Center>Hover or tap the calendar below to see who is available</Center>
-							</StyledMain>
 							<AvailabilityViewer
 								times={times}
 								timeLabels={timeLabels}
@@ -451,10 +441,7 @@ const Event = (props) => {
 				</>
 			)}
 
-			<Footer id="donate">
-				<span>Thank you for using Crab Fit. If you like it, consider donating.</span>
-				<Donate />
-			</Footer>
+			<Footer />
 		</>
 	);
 };

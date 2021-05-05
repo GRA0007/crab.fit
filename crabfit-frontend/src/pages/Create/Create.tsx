@@ -119,6 +119,7 @@ const Create = ({ offline }) => {
 				event: {
 					name: data.name,
 					times: times,
+          timezone: data.timezone,
 				},
 			});
       setCreatedEvent(response.data);

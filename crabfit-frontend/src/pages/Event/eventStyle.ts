@@ -6,15 +6,6 @@ export const StyledMain = styled.div`
 	max-width: calc(100% - 60px);
 `;
 
-export const Footer = styled.footer`
-	width: 600px;
-	margin: 50px auto 20px;
-	max-width: calc(100% - 60px);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-`;
-
 export const Logo = styled.img`
 	width: 2.5rem;
 	margin-right: 16px;
