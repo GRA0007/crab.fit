@@ -132,6 +132,7 @@ const Home = ({ offline }) => {
 				event: {
 					name: data.name,
 					times: times,
+          timezone: data.timezone,
 				},
 			});
 			push(`/${response.data.id}`);

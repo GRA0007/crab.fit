@@ -29,6 +29,7 @@ module.exports = async (req, res) => {
 				name: name,
 				created: currentTime,
 				times: event.times,
+				timezone: event.timezone,
 			},
 		};
 
@@ -39,6 +40,7 @@ module.exports = async (req, res) => {
 			name: name,
 			created: currentTime,
 			times: event.times,
+      timezone: event.timezone,
 		});
 	} catch (e) {
 		console.error(e);

@@ -127,3 +127,35 @@ export const TimeLabel = styled.label`
 	user-select: none;
 	width: 100%;
 `;
+
+export const StyledMain = styled.div`
+  width: 600px;
+  margin: 20px auto;
+  max-width: calc(100% - 60px);
+`;
+
+export const People = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin: 14px auto;
+`;
+
+export const Person = styled.button`
+  font: inherit;
+  font-size: 15px;
+  border-radius: 3px;
+  border: 1px solid ${props => props.theme.text};
+  color: ${props => props.theme.text};
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  padding: 2px 8px;
+
+  ${props => props.filtered && `
+    background: ${props.theme.primary};
+    color: ${props.theme.background};
+    border-color: ${props.theme.primary};
+  `}
+`;

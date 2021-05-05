@@ -13,7 +13,6 @@ import {
 	TextField,
 	SelectField,
 	Button,
-	Legend,
 	AvailabilityViewer,
 	AvailabilityEditor,
 	Error,
@@ -398,14 +397,6 @@ const Event = (props) => {
 
 					{tab === 'group' ? (
 						<section id="group">
-							<StyledMain>
-								<Legend
-									min={min}
-									max={max}
-									total={people.filter(p => p.availability.length > 0).length}
-								/>
-								<Center>Hover or tap the calendar below to see who is available</Center>
-							</StyledMain>
 							<AvailabilityViewer
 								times={times}
 								timeLabels={timeLabels}

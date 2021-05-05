@@ -19,6 +19,8 @@ definitions:
         type: "string"
       name:
         type: "string"
+      timezone:
+        type: "string"
       created:
         type: "integer"
       times:
@@ -80,6 +82,8 @@ paths:
             type: "object"
             properties:
               name:
+                type: "string"
+              timezone:
                 type: "string"
               times:
                 type: "array"
