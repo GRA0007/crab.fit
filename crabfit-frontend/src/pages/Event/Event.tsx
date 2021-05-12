@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 import {
 	Center,
@@ -23,6 +24,7 @@ import {
 	Logo,
 	Title,
 	EventName,
+  EventDate,
 	LoginForm,
 	LoginSection,
 	Info,
@@ -40,6 +42,7 @@ import timezones from 'res/timezones.json';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(customParseFormat);
+dayjs.extend(relativeTime);
 
 const Event = (props) => {
   const timeFormat = useSettingsStore(state => state.timeFormat);
@@ -283,6 +286,7 @@ const Event = (props) => {
 				{(!!event || isLoading) ? (
 					<>
 						<EventName isLoading={isLoading}>{event?.name}</EventName>
+            <EventDate isLoading={isLoading} title={event?.created && dayjs.unix(event?.created).format('h:mma D MMMM, YYYY')}>{event?.created && `Created ${dayjs.unix(event?.created).fromNow()}`}</EventDate>
 						<ShareInfo
               onClick={() => navigator.clipboard?.writeText(`https://crab.fit/${id}`)
                   .then(() => {
@@ -366,6 +370,22 @@ const Event = (props) => {
 								onChange={event => setTimezone(event.currentTarget.value)}
 								options={timezones}
 							/>
+              {event?.timezone && event.timezone !== timezone && <p>This event was created in the timezone <strong>{event.timezone}</strong>. <a href="#" onClick={e => {
+                e.preventDefault();
+                setTimezone(event.timezone);
+              }}>Click here</a> to use it.</p>}
+              {((
+                Intl.DateTimeFormat().resolvedOptions().timeZone !== timezone
+                && (event?.timezone && event.timezone !== Intl.DateTimeFormat().resolvedOptions().timeZone)
+              ) || (
+                event?.timezone === undefined
+                && Intl.DateTimeFormat().resolvedOptions().timeZone !== timezone
+              )) && (
+                <p>Your local timezone is detected to be <strong>{Intl.DateTimeFormat().resolvedOptions().timeZone}</strong>. <a href="#" onClick={e => {
+                  e.preventDefault();
+                  setTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+                }}>Click here</a> to use it.</p>
+              )}
 						</StyledMain>
 					</LoginSection>
 
