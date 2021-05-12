@@ -24,7 +24,7 @@ export const Title = styled.span`
 export const EventName = styled.h1`
 	text-align: center;
 	font-weight: 800;
-	margin: 20px 0 14px;
+	margin: 20px 0 5px;
 
 	${props => props.isLoading && `
 		&:after {
@@ -32,6 +32,28 @@ export const EventName = styled.h1`
 			display: inline-block;
 			height: 1em;
 			width: 400px;
+			max-width: 100%;
+			background-color: ${props.theme.loading};
+			border-radius: 3px;
+		}
+	`}
+`;
+
+export const EventDate = styled.span`
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  opacity: .8;
+  margin: 0 0 10px;
+  font-weight: 500;
+  letter-spacing: .01em;
+
+  ${props => props.isLoading && `
+		&:after {
+			content: '';
+			display: inline-block;
+			height: 1em;
+			width: 200px;
 			max-width: 100%;
 			background-color: ${props.theme.loading};
 			border-radius: 3px;
