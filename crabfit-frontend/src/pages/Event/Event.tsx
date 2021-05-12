@@ -366,6 +366,22 @@ const Event = (props) => {
 								onChange={event => setTimezone(event.currentTarget.value)}
 								options={timezones}
 							/>
+              {event?.timezone && event.timezone !== timezone && <p>This event was created in the timezone <strong>{event.timezone}</strong>. <a href="#" onClick={e => {
+                e.preventDefault();
+                setTimezone(event.timezone);
+              }}>Click here</a> to use it.</p>}
+              {((
+                Intl.DateTimeFormat().resolvedOptions().timeZone !== timezone
+                && (event?.timezone && event.timezone !== Intl.DateTimeFormat().resolvedOptions().timeZone)
+              ) || (
+                event?.timezone === undefined
+                && Intl.DateTimeFormat().resolvedOptions().timeZone !== timezone
+              )) && (
+                <p>Your local timezone is detected to be <strong>{Intl.DateTimeFormat().resolvedOptions().timeZone}</strong>. <a href="#" onClick={e => {
+                  e.preventDefault();
+                  setTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+                }}>Click here</a> to use it.</p>
+              )}
 						</StyledMain>
 					</LoginSection>
 
