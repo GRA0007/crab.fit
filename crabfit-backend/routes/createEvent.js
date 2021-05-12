@@ -20,10 +20,23 @@ module.exports = async (req, res) => {
 
 	try {
 		const name = event.name.trim() === '' ? generateName() : event.name.trim();
-		const eventId = generateId(name);
+		let eventId = generateId(name);
 		const currentTime = dayjs().unix();
 
-		const entity = {
+    let eventResult;
+    do {
+      const query = req.datastore.createQuery(req.types.event)
+        .select('__key__')
+        .filter('__key__', req.datastore.key([req.types.event, eventId]));
+
+      eventResult = (await req.datastore.runQuery(query))[0][0];
+
+      if (eventResult !== undefined) {
+        eventId = generateId(name);
+      }
+    } while (eventResult !== undefined);
+
+    const entity = {
 			key: req.datastore.key([req.types.event, eventId]),
 			data: {
 				name: name,
