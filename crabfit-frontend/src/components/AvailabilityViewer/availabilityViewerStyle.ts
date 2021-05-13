@@ -62,8 +62,8 @@ export const Time = styled.div`
 	`}
 
 	background-image: linear-gradient(
-		${props => `${props.theme.primary}${Math.round(((props.peopleCount-props.minPeople)/(props.maxPeople-props.minPeople))*255).toString(16)}`},
-		${props => `${props.theme.primary}${Math.round(((props.peopleCount-props.minPeople)/(props.maxPeople-props.minPeople))*255).toString(16)}`}
+		${props => `${props.theme.primary}${Math.round(((props.peopleCount)/(props.maxPeople))*255).toString(16)}`},
+		${props => `${props.theme.primary}${Math.round(((props.peopleCount)/(props.maxPeople))*255).toString(16)}`}
 	);
 `;
 
