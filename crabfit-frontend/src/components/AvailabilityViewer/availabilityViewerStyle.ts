@@ -1,8 +1,13 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-	overflow-x: auto;
+	overflow-y: visible;
 	margin: 20px 0;
+  position: relative;
+`;
+
+export const ScrollWrapper = styled.div`
+  overflow-x: auto;
 `;
 
 export const Container = styled.div`
@@ -62,8 +67,8 @@ export const Time = styled.div`
 	`}
 
 	background-image: linear-gradient(
-		${props => `${props.theme.primary}${Math.round(((props.peopleCount)/(props.maxPeople))*255).toString(16)}`},
-		${props => `${props.theme.primary}${Math.round(((props.peopleCount)/(props.maxPeople))*255).toString(16)}`}
+		${props => `${props.theme.primary}${Math.round((props.peopleCount/props.maxPeople)*255).toString(16)}`},
+		${props => `${props.theme.primary}${Math.round((props.peopleCount/props.maxPeople)*255).toString(16)}`}
 	);
 `;
 
@@ -73,7 +78,7 @@ export const Spacer = styled.div`
 `;
 
 export const Tooltip = styled.div`
-	position: fixed;
+	position: absolute;
 	top: ${props => props.y}px;
 	left: ${props => props.x}px;
 	transform: translateX(-50%);
@@ -83,6 +88,7 @@ export const Tooltip = styled.div`
 	background-color: ${props => props.theme.background}DD;
 	max-width: 200px;
 	pointer-events: none;
+  z-index: 100;
 `;
 
 export const TooltipTitle = styled.span`
@@ -94,13 +100,26 @@ export const TooltipTitle = styled.span`
 export const TooltipDate = styled.span`
 	font-size: 13px;
 	display: block;
-	opacity: .7;
-	font-weight: 700;
+	opacity: .8;
+	font-weight: 600;
 `;
 
-export const TooltipContent = styled.span`
+export const TooltipContent = styled.div`
 	font-size: 13px;
-	display: block;
+  padding: 4px 0;
+`;
+
+export const TooltipPerson = styled.span`
+  display: inline-block;
+  margin: 2px;
+  padding: 1px 4px;
+  border: 1px solid ${props => props.theme.primary};
+  border-radius: 3px;
+
+  ${props => props.disabled && `
+    opacity: .5;
+    border-color: ${props.theme.text}
+  `}
 `;
 
 export const TimeLabels = styled.div`
