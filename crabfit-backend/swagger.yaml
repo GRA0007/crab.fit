@@ -36,6 +36,8 @@ definitions:
         type: "array"
         items:
           type: "string"
+      created:
+        type: "integer"
 paths:
   "/stats":
     get:

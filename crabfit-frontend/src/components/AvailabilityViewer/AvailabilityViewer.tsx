@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, Fragment } from 'react';
 import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { useSettingsStore } from 'stores';
 
@@ -31,6 +32,7 @@ import {
 
 dayjs.extend(localeData);
 dayjs.extend(customParseFormat);
+dayjs.extend(relativeTime);
 
 const AvailabilityViewer = ({
 	times,
@@ -89,6 +91,7 @@ const AvailabilityViewer = ({
                   }}
                   onMouseOver={() => setTempFocus(person.name)}
                   onMouseOut={() => setTempFocus(null)}
+                  title={person.created && dayjs.unix(person.created).fromNow()}
                 >{person.name}</Person>
               )}
             </People>
