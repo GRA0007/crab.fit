@@ -7,6 +7,7 @@ module.exports = async (req, res) => {
 		people = people.map(person => ({
 			name: person.name,
 			availability: person.availability,
+			created: person.created,
 		}));
 
 		res.send({

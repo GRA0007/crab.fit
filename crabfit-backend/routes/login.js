@@ -21,6 +21,7 @@ module.exports = async (req, res) => {
 			res.send({
 				name: personName,
 				availability: personResult.availability,
+				created: personResult.created,
 			});
 		} else {
 			res.sendStatus(404);

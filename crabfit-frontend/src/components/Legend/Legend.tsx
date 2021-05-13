@@ -21,11 +21,11 @@ const Legend = ({
 			<Label>{min}/{total} available</Label>
 
 			<Bar onMouseOut={() => onSegmentFocus(null)}>
-				{[...Array(max-min+1).keys()].map(i =>
+				{[...Array(max+1-min).keys()].map(i => i+min).map(i =>
 					<Grade
             key={i}
-            color={`${theme.primary}${Math.round((i/(max-min))*255).toString(16)}`}
-            onMouseOver={() => onSegmentFocus(i+min)}
+            color={`${theme.primary}${Math.round((i/(max))*255).toString(16)}`}
+            onMouseOver={() => onSegmentFocus(i)}
           />
 				)}
 			</Bar>
