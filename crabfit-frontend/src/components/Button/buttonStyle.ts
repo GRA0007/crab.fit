@@ -16,10 +16,10 @@ export const Top = styled.button`
 	cursor: pointer;
 	font: inherit;
 	box-sizing: border-box;
-	background: ${props => props.theme.primary};
+	background: ${props => props.primaryColor || props.theme.primary};
 	color: #FFF;
 	font-weight: 600;
-	text-shadow: 0 -1.5px .5px ${props => props.theme.primaryDark};
+	text-shadow: 0 -1.5px .5px ${props => props.secondaryColor || props.theme.primaryDark};
 	padding: 0;
 	border-radius: 3px;
 	height: var(--btn-height);
@@ -42,6 +42,10 @@ export const Top = styled.button`
 		text-shadow: none;
 		color: transparent;
 		cursor: wait;
+
+    & img {
+      opacity: 0;
+    }
 
 		@keyframes load {
 			from {
@@ -69,7 +73,7 @@ export const Top = styled.button`
 
 export const Bottom = styled.div`
 	box-sizing: border-box;
-	background: ${props => props.theme.primaryDark};
+	background: ${props => props.secondaryColor || props.theme.primaryDark};
 	border-radius: 3px;
 	height: var(--btn-height);
 	width: var(--btn-width);

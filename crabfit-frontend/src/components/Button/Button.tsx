@@ -3,11 +3,13 @@ import { Wrapper, Top, Bottom } from './buttonStyle';
 const Button = ({
 	buttonHeight,
 	buttonWidth,
+  primaryColor,
+  secondaryColor,
 	...props
 }) => (
 	<Wrapper buttonHeight={buttonHeight} buttonWidth={buttonWidth}>
-		<Top {...props} />
-		<Bottom />
+		<Top primaryColor={primaryColor} secondaryColor={secondaryColor} {...props} />
+		<Bottom secondaryColor={secondaryColor} />
 	</Wrapper>
 );
 

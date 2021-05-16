@@ -370,6 +370,7 @@ const Event = (props) => {
 								onChange={event => setTimezone(event.currentTarget.value)}
 								options={timezones}
 							/>
+              {/* eslint-disable-next-line */}
               {event?.timezone && event.timezone !== timezone && <p>This event was created in the timezone <strong>{event.timezone}</strong>. <a href="#" onClick={e => {
                 e.preventDefault();
                 setTimezone(event.timezone);
@@ -381,6 +382,7 @@ const Event = (props) => {
                 event?.timezone === undefined
                 && Intl.DateTimeFormat().resolvedOptions().timeZone !== timezone
               )) && (
+                /* eslint-disable-next-line */
                 <p>Your local timezone is detected to be <strong>{Intl.DateTimeFormat().resolvedOptions().timeZone}</strong>. <a href="#" onClick={e => {
                   e.preventDefault();
                   setTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -435,6 +437,7 @@ const Event = (props) => {
 								times={times}
 								timeLabels={timeLabels}
 								dates={dates}
+								timezone={timezone}
                 isSpecificDates={!!dates.length && dates[0].length === 8}
 								value={user.availability}
 								onChange={async availability => {
