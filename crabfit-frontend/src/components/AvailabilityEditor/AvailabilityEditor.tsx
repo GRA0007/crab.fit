@@ -87,7 +87,10 @@ const AvailabilityEditor = ({
     								{isSpecificDates && <DateLabel>{parsedDate.format('MMM D')}</DateLabel>}
     								<DayLabel>{parsedDate.format('ddd')}</DayLabel>
 
-    								<Times>
+                    <Times
+                      borderRight={last}
+                      borderLeft={x === 0 || (parsedDate).diff(isSpecificDates ? dayjs(dates[x-1], 'DDMMYYYY') : dayjs().day(dates[x-1]), 'day') > 1}
+                    >
     									{timeLabels.map((timeLabel, y) => {
     										if (!timeLabel.time) return null;
     										if (!times.includes(`${timeLabel.time}-${date}`)) {

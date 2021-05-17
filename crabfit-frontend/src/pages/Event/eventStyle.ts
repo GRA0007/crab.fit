@@ -72,6 +72,10 @@ export const LoginForm = styled.form`
 	}
 	@media (max-width: 400px) {
 		grid-template-columns: 1fr;
+
+    & div:last-child {
+      --btn-width: 100%;
+    }
 	}
 `;
 

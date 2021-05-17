@@ -39,4 +39,14 @@ export const Bar = styled.div`
 export const Grade = styled.div`
 	flex: 1;
 	background-color: ${props => props.color};
+
+  ${props => props.highlight && `
+    background-image: repeating-linear-gradient(
+      45deg,
+  	  ${props.theme.primary},
+  	  ${props.theme.primary} 4.5px,
+  	  ${props.theme.primaryDark} 4.5px,
+  	  ${props.theme.primaryDark} 9px
+  	);
+  `}
 `;

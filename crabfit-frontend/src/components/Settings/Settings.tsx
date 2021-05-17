@@ -58,6 +58,16 @@ const Settings = () => {
           value={store.theme}
           onChange={value => store.setTheme(value)}
         />
+
+        <ToggleField
+          label="Highlight highest availability"
+          name="highlight"
+          id="highlight"
+          title="Make the highest availability on the heatmap stand out"
+          options={['Off', 'On']}
+          value={store.highlight ? 'On' : 'Off'}
+          onChange={value => store.setHighlight(value === 'On')}
+        />
       </Modal>
     </>
   );

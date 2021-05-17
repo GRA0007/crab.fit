@@ -46,6 +46,7 @@ const AvailabilityViewer = ({
 }) => {
 	const [tooltip, setTooltip] = useState(null);
   const timeFormat = useSettingsStore(state => state.timeFormat);
+  const highlight = useSettingsStore(state => state.highlight);
   const [filteredPeople, setFilteredPeople] = useState([]);
   const [touched, setTouched] = useState(false);
   const [tempFocus, setTempFocus] = useState(null);
@@ -118,7 +119,10 @@ const AvailabilityViewer = ({
     								{isSpecificDates && <DateLabel>{parsedDate.format('MMM D')}</DateLabel>}
     								<DayLabel>{parsedDate.format('ddd')}</DayLabel>
 
-    								<Times>
+    								<Times
+                      borderRight={last}
+                      borderLeft={i === 0 || (parsedDate).diff(isSpecificDates ? dayjs(dates[i-1], 'DDMMYYYY') : dayjs().day(dates[i-1]), 'day') > 1}
+                    >
     									{timeLabels.map((timeLabel, i) => {
     										if (!timeLabel.time) return null;
     										if (!times.includes(`${timeLabel.time}-${date}`)) {
@@ -140,6 +144,7 @@ const AvailabilityViewer = ({
     												aria-label={peopleHere.join(', ')}
     												maxPeople={tempFocus !== null ? 1 : Math.min(max, filteredPeople.length)}
     												minPeople={tempFocus !== null ? 0 : Math.min(min, filteredPeople.length)}
+                            highlight={highlight}
     												onMouseEnter={(e) => {
     													const cellBox = e.currentTarget.getBoundingClientRect();
     													const wrapperBox = wrapper?.current?.getBoundingClientRect() ?? { x: 0, y: 0 };
