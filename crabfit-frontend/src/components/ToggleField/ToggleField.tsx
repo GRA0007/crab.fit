@@ -11,13 +11,14 @@ const ToggleField = ({
 	label,
 	id,
   name,
+  title = '',
 	options = [],
   value,
   onChange,
 	...props
 }) => (
 	<Wrapper>
-		{label && <StyledLabel>{label}</StyledLabel>}
+		{label && <StyledLabel title={title}>{label}</StyledLabel>}
 
     <ToggleContainer>
       {options.map(option =>

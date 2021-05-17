@@ -48,6 +48,9 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
 
   const importAvailability = () => {
     setFreeBusyLoading(true);
+    gtag('event', 'google_cal_sync', {
+      'event_category': 'event',
+    });
     window.gapi.client.calendar.freebusy.query({
       timeMin,
       timeMax,
@@ -145,11 +148,12 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
           )}
           {calendars !== undefined && (
             <>
-              <Info>Importing will overwrite your currently inputted availability</Info>
+              <Info>Importing will overwrite your current availability</Info>
               <Button
                 buttonWidth="170px"
                 buttonHeight="35px"
                 isLoading={freeBusyLoading}
+                disabled={freeBusyLoading}
                 onClick={() => importAvailability()}
               >Import availability</Button>
             </>
