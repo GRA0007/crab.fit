@@ -5,6 +5,7 @@
     "title": "Click to copy",
     "copied": "Copied!",
     "shareinfo": "Copy the link to this page, or share via <1>email</1>.",
+    "shareinfo_alt": "Click the link above to copy it to your clipboard, or share via <1>email</1>.",
     "email_subject": "Scheduling {{event_name}}",
     "email_body": "Visit this link to enter your availabilities:"
   },

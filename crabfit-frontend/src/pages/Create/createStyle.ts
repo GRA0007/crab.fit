@@ -19,6 +19,7 @@ export const TitleSmall = styled.span`
 	font-weight: 400;
 	color: ${props => props.theme.primaryDark};
 	line-height: 1em;
+  text-transform: uppercase;
 `;
 
 export const TitleLarge = styled.h1`
@@ -30,21 +31,12 @@ export const TitleLarge = styled.h1`
 	font-weight: 400;
 	text-shadow: 0 3px 0 ${props => props.theme.primaryDark};
 	line-height: 1em;
+  text-transform: uppercase;
 `;
 
 export const P = styled.p`
 	font-weight: 500;
 	line-height: 1.6em;
-`;
-
-export const Footer = styled.footer`
-	margin: 60px auto 0;
-  width: 250px;
-
-  & span {
-    display: block;
-    margin-bottom: 20px;
-  }
 `;
 
 export const OfflineMessage = styled.div`

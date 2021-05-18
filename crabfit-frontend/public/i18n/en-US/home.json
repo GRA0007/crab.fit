@@ -34,10 +34,10 @@
 
     "button": "Create",
     "errors": {
-      "no_dates": "You haven't selected any dates!",
+      "no_dates": "There aren't any dates selected",
       "same_times": "The start and end times can't be the same",
-      "no_time": "You don't have any time selected",
-      "unknown": "An error ocurred while creating the event. Please try again later."
+      "no_time": "There isn't any time selected",
+      "unknown": "Something went wrong. Please try again later."
     }
   },
   "offline": "You can't create a Crab Fit when you don't have an internet connection. Please make sure you're connected.",

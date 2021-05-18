@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { Donate } from 'components';
 import { Wrapper, Link } from './footerStyle';
 
-const Footer = () => {
+const Footer = (props) => {
   const [donateMode, setDonateMode] = useState(false);
   const { t } = useTranslation('common');
 
   return (
-    <Wrapper id="donate" donateMode={donateMode}>
+    <Wrapper id="donate" donateMode={donateMode} {...props}>
       {donateMode ? (
         <>
           <Link href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=2" target="_blank">{t('donate.options.$2')}</Link>
