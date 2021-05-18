@@ -9,19 +9,12 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en-US',
-    debug: true,
-    load: 'currentOnly',
+    debug: process.env.NODE_ENV !== 'production',
     interpolation: {
       escapeValue: false,
     },
     backend: {
       loadPath: '/i18n/{{lng}}/{{ns}}.json',
-      requestOptions: {
-        cache: 'no-cache'
-      },
-      customHeaders: {
-        pragma: 'no-cache',
-      },
     },
   });
 
