@@ -28,7 +28,7 @@ const Help = () => {
 
 	useEffect(() => {
 		document.title = t('help:name');
-	}, []);
+	}, [t]);
 
 	return (
 		<>

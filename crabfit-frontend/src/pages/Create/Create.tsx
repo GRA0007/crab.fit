@@ -27,7 +27,6 @@ import {
   OfflineMessage,
   ShareInfo,
   Footer,
-  AboutSection,
 } from './createStyle';
 
 import api from 'services';

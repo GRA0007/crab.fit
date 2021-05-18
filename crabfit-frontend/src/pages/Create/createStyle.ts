@@ -66,14 +66,3 @@ export const ShareInfo = styled.p`
     }
   `}
 `;
-
-export const AboutSection = styled.section`
-	margin: 30px 0 0;
-	background-color: ${props => props.theme.primaryBackground};
-	padding: 10px 0;
-
-  & h2 {
-    margin: 0 0 10px;
-    font-size: 1.2rem;
-  }
-`;

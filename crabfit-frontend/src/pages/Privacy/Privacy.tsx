@@ -24,7 +24,7 @@ const Privacy = () => {
 
 	useEffect(() => {
 		document.title = `${t('privacy:name')} - Crab Fit`;
-	}, []);
+	}, [t]);
 
 	return (
 		<>
