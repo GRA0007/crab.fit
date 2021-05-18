@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -51,6 +52,7 @@ const AvailabilityViewer = ({
   const [touched, setTouched] = useState(false);
   const [tempFocus, setTempFocus] = useState(null);
   const [focusCount, setFocusCount] = useState(null);
+  const { t } = useTranslation('event');
 
   const wrapper = useRef();
 
@@ -68,10 +70,10 @@ const AvailabilityViewer = ({
           total={people.filter(p => p.availability.length > 0).length}
           onSegmentFocus={count => setFocusCount(count)}
         />
-        <Center>Hover or tap the calendar below to see who is available</Center>
+        <Center>{t('event:group.info1')}</Center>
         {people.length > 1 && (
           <>
-            <Center>Click the names below to view people individually</Center>
+            <Center>{t('event:group.info2')}</Center>
             <People>
               {people.map((person, i) =>
                 <Person
@@ -152,7 +154,7 @@ const AvailabilityViewer = ({
     													setTooltip({
     														x: Math.round(cellBox.x-wrapperBox.x + cellBox.width/2),
     														y: Math.round(cellBox.y-wrapperBox.y + cellBox.height)+6,
-    														available: `${peopleHere.length} / ${people.length} available`,
+    														available: `${peopleHere.length} / ${people.length} ${t('event:available')}`,
     														date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format(isSpecificDates ? `${timeText} ddd, D MMM YYYY` : `${timeText} ddd`),
     														people: peopleHere,
     													});

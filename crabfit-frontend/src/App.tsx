@@ -139,7 +139,9 @@ const App = () => {
           )} />
 				</Switch>
 
-        <Settings />
+        <Suspense fallback={<Loading />}>
+          <Settings />
+        </Suspense>
 
         {eggVisible && <Egg eggKey={eggKey} onClose={() => setEggVisible(false)} />}
 			</ThemeProvider>

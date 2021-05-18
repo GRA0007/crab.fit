@@ -1,0 +1,57 @@
+{
+  "create": "CREATE A",
+  "recently_visited": "Recently visited",
+  "nav": {
+    "about": "About",
+    "donate": "Donate"
+  },
+  "form": {
+    "name": {
+      "label": "Give your event a name!",
+      "sublabel": "Or leave blank to generate one"
+    },
+    "dates": {
+      "label": "What dates might work?",
+      "sublabel": "Click and drag to select",
+      "options": {
+        "specific": "Specific dates",
+        "week": "Days of the week"
+      },
+      "tooltips": {
+        "previous": "Previous month",
+        "next": "Next month",
+        "today": "today"
+      }
+    },
+    "times": {
+      "label": "What times might work?",
+      "sublabel": "Click and drag to select a time range"
+    },
+    "timezone": {
+      "label": "And the timezone",
+      "defaultOption": "Select..."
+    },
+
+    "button": "Create",
+    "errors": {
+      "no_dates": "You haven't selected any dates!",
+      "same_times": "The start and end times can't be the same",
+      "no_time": "You don't have any time selected",
+      "unknown": "An error ocurred while creating the event. Please try again later."
+    }
+  },
+  "offline": "You can't create a Crab Fit when you don't have an internet connection. Please make sure you're connected.",
+
+  "about": {
+    "name": "About Crab Fit",
+    "events": "Events created",
+    "availabilities": "Availabilities entered",
+    "content": {
+      "p1": "Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<1/><2>Learn more about how to Crab Fit</2>.",
+      "p2": "Create a lot of Crab Fits? Get the <1>Chrome extension</1> or <3>Firefox extension</3> for your browser! You can also download the <5>Android app</5> to Crab Fit on the go.",
+      "p3": "Created by <1>Ben Grant</1>, Crab Fit is the modern-day solution to your group event planning debates.",
+      "p4": "The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <1>repository</1>. By using Crab Fit you agree to the <3>privacy policy</3>.",
+      "p5": "Crab Fit costs more than <strong>$100 per month</strong> to run. Consider donating below if it helped you out so it can stay free for everyone. 🦀"
+    }
+  }
+}

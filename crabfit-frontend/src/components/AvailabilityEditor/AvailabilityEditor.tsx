@@ -1,4 +1,5 @@
 import { useState, useRef, Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -20,7 +21,7 @@ import {
 } from 'components/AvailabilityViewer/availabilityViewerStyle';
 import { Time } from './availabilityEditorStyle';
 
-import { GoogleCalendar } from 'components';
+import { GoogleCalendar, Center } from 'components';
 
 dayjs.extend(localeData);
 dayjs.extend(customParseFormat);
@@ -36,6 +37,7 @@ const AvailabilityEditor = ({
 	onChange,
 	...props
 }) => {
+  const { t } = useTranslation('event');
 	const [selectingTimes, _setSelectingTimes] = useState([]);
 	const staticSelectingTimes = useRef([]);
 	const setSelectingTimes = newTimes => {
@@ -53,6 +55,9 @@ const AvailabilityEditor = ({
 
 	return (
     <>
+      <StyledMain>
+        <Center>{t('event:you.info')}</Center>
+      </StyledMain>
       {isSpecificDates && (
         <StyledMain>
           <GoogleCalendar

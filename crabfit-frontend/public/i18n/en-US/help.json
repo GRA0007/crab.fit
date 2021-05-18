@@ -1,0 +1,23 @@
+{
+  "name": "How to Crab Fit",
+
+  "p1": "Crab Fit is a tool that helps you when planning events with friends or coworkers. You just create an event, enter your availability, send it out, and see when everyone is free!",
+  "p2": "See below for detailed steps of how to Crab Fit your event.",
+
+  "s1": "Step 1",
+
+  "p3": "Use the form at <1>crab.fit</1> to make a new event. You only need to put in the rough time period for when your event occurs here, not your availability.",
+  "p4": "For example, we'll use \"Jenny's Birthday Lunch\". Jenny wants her birthday lunch to happen on the same week as her birthday, the 15th of April, but she knows that not all of her friends are available on the 15th. She also doesn't want to do it on the weekend.",
+  "p5": "Jenny also knows that since it's a lunch event, it can't start before 11am or go any later than 5pm.",
+
+  "s2": "Step 2",
+
+  "p6": "Enter your availability for the event you just created.",
+  "p7": "In our example, Jenny now puts in her availability for her birthday lunch. She is free all week, except after 3pm on Tuesday and Wednesday, and before 1pm on Friday.",
+
+  "s3": "Step 3",
+
+  "p8": "Send the link to everyone you want to come.",
+  "p9": "After Jenny has sent the link to her friends and waited for them to also fill out their availabilities, she can now easily see them all on the heatmap below and choose the darkest area for a time that suits everyone!",
+  "p10": "In this example, 1pm to 3pm on Friday the 16th works for all Jenny's friends."
+}

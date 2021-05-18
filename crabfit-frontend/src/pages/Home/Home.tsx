@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useTranslation, Trans } from 'react-i18next';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -60,6 +61,7 @@ const Home = ({ offline }) => {
 	});
 	const { push } = useHistory();
   const recentsStore = useRecentsStore();
+  const { t } = useTranslation(['common', 'home']);
 
 	useEffect(() => {
 		const fetch = async () => {
@@ -152,17 +154,17 @@ const Home = ({ offline }) => {
 				<Center>
 					<Logo src={logo} alt="" />
 				</Center>
-				<TitleSmall>CREATE A</TitleSmall>
+				<TitleSmall>{t('home:create')}</TitleSmall>
 				<TitleLarge>CRAB FIT</TitleLarge>
 				<Links>
-					<a href="#about">About</a> / <a href="#donate">Donate</a>
+					<a href="#about">{t('home:nav.about')}</a> / <a href="#donate">{t('home:nav.donate')}</a>
 				</Links>
       </StyledMain>
 
       {!!recentsStore.recents.length && (
         <AboutSection id="recents">
           <StyledMain>
-            <h2>Recently visited</h2>
+            <h2>{t('home:recently_visited')}</h2>
             {recentsStore.recents.map(event => (
               <Recent href={`/${event.id}`} key={event.id}>
                 <span className="name">{event.name}</span>
@@ -177,13 +179,13 @@ const Home = ({ offline }) => {
         {offline ? (
           <OfflineMessage>
             <h1>🦀📵</h1>
-            <P>You can't create a Crab Fit when you don't have an internet connection. Please make sure you're connected.</P>
+            <P>{t('home:offline')}</P>
           </OfflineMessage>
         ) : (
   				<CreateForm onSubmit={handleSubmit(onSubmit)} id="create">
   					<TextField
-  						label="Give your event a name!"
-  						subLabel="Or leave blank to generate one"
+  						label={t('home:form.name.label')}
+  						subLabel={t('home:form.name.sublabel')}
   						type="text"
   						name="name"
   						id="name"
@@ -191,8 +193,8 @@ const Home = ({ offline }) => {
   					/>
 
   					<CalendarField
-  						label="What dates might work?"
-  						subLabel="Click and drag to select"
+  						label={t('home:form.dates.label')}
+  						subLabel={t('home:form.dates.sublabel')}
   						name="dates"
   						id="dates"
   						required
@@ -200,8 +202,8 @@ const Home = ({ offline }) => {
   					/>
 
   					<TimeRangeField
-  						label="What times might work?"
-  						subLabel="Click and drag to select a time range"
+  						label={t('home:form.times.label')}
+  						subLabel={t('home:form.times.sublabel')}
   						name="times"
   						id="times"
   						required
@@ -209,13 +211,13 @@ const Home = ({ offline }) => {
   					/>
 
   					<SelectField
-  						label="And the timezone"
+  						label={t('home:form.timezone.label')}
   						name="timezone"
   						id="timezone"
   						register={register}
   						options={timezones}
   						required
-  						defaultOption="Select..."
+  						defaultOption={t('home:form.timezone.defaultOption')}
   					/>
 
   					{error && (
@@ -223,7 +225,7 @@ const Home = ({ offline }) => {
   					)}
 
   					<Center>
-  						<Button type="submit" isLoading={isLoading} disabled={isLoading}>Create</Button>
+  						<Button type="submit" isLoading={isLoading} disabled={isLoading}>{t('home:form.button')}</Button>
   					</Center>
   				</CreateForm>
         )}
@@ -231,24 +233,24 @@ const Home = ({ offline }) => {
 
 			<AboutSection id="about">
 				<StyledMain>
-					<h2>About Crab Fit</h2>
+					<h2>{t('home:about.name')}</h2>
 					<Stats>
 						<Stat>
-							<StatNumber>{stats.eventCount ?? '100+'}</StatNumber>
-							<StatLabel>Events created</StatLabel>
+							<StatNumber>{stats.eventCount ?? '300+'}</StatNumber>
+							<StatLabel>{t('home:about.events')}</StatLabel>
 						</Stat>
 						<Stat>
-							<StatNumber>{stats.personCount ?? '100+'}</StatNumber>
-							<StatLabel>Availabilities entered</StatLabel>
+							<StatNumber>{stats.personCount ?? '400+'}</StatNumber>
+							<StatLabel>{t('home:about.availabilities')}</StatLabel>
 						</Stat>
 					</Stats>
-					<P>Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<br /><Link to="/how-to">Learn more about how to Crab Fit</Link>.</P>
+					<P><Trans i18nKey="home:about.content.p1">Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<br /><Link to="/how-to">Learn more about how to Crab Fit</Link>.</Trans></P>
 					{/* eslint-disable-next-line */}
-					<P>Create a lot of Crab Fits? Get the <a href="https://chrome.google.com/webstore/detail/crab-fit/pnafiibmjbiljofcpjlbonpgdofjhhkj" target="_blank">Chrome extension</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/crab-fit/" target="_blank">Firefox extension</a> for your browser! You can also download the <a href="https://play.google.com/store/apps/details?id=fit.crab" target="_blank">Android app</a> to Crab Fit on the go.</P>
+					<P><Trans i18nKey="home:about.content.p2">Create a lot of Crab Fits? Get the <a href="https://chrome.google.com/webstore/detail/crab-fit/pnafiibmjbiljofcpjlbonpgdofjhhkj" target="_blank">Chrome extension</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/crab-fit/" target="_blank">Firefox extension</a> for your browser! You can also download the <a href="https://play.google.com/store/apps/details?id=fit.crab" target="_blank">Android app</a> to Crab Fit on the go.</Trans></P>
           {/* eslint-disable-next-line */}
-					<P>Created by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</P>
-					<P>The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer">repository</a>. By using Crab Fit you agree to the <Link to="/privacy">privacy policy</Link>.</P>
-          <P>Crab Fit costs more than <strong>$100 per month</strong> to run. Consider donating below if it helped you out so it can stay free for everyone. 🦀</P>
+					<P><Trans i18nKey="home:about.content.p3">Created by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</Trans></P>
+					<P><Trans i18nKey="home:about.content.p4">The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer">repository</a>. By using Crab Fit you agree to the <Link to="/privacy">privacy policy</Link>.</Trans></P>
+          <P><Trans i18nKey="home:about.content.p5">Crab Fit costs more than <strong>$100 per month</strong> to run. Consider donating below if it helped you out so it can stay free for everyone. 🦀</Trans></P>
 				</StyledMain>
 			</AboutSection>
 

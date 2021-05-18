@@ -19,6 +19,7 @@ export const TitleSmall = styled.span`
 	font-weight: 400;
 	color: ${props => props.theme.primaryDark};
 	line-height: 1em;
+  text-transform: uppercase;
 `;
 
 export const TitleLarge = styled.h1`
@@ -30,6 +31,7 @@ export const TitleLarge = styled.h1`
 	font-weight: 400;
 	text-shadow: 0 4px 0 ${props => props.theme.primaryDark};
 	line-height: 1em;
+  text-transform: uppercase;
 
 	@media (max-width: 350px) {
 		font-size: 3.5rem;
