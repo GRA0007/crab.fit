@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { Button } from 'components';
 import { useTWAStore } from 'stores';
+import { useTranslation } from 'react-i18next';
 
 const PAYMENT_METHOD = 'https://play.google.com/billing';
 const SKU = 'crab_donation';
 
 const Donate = ({ onDonate = null }) => {
   const store = useTWAStore();
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     if (store.TWA === undefined) {
@@ -53,18 +55,18 @@ const Donate = ({ onDonate = null }) => {
             if (response.details && response.details.token) {
               const token = response.details.token;
               console.log(`Read Token: ${token.substring(0, 6)}...`);
-              alert('Thank you for your donation! Without you, Crab Fit wouldn\'t be free, so thank you and keep being super awesome!');
+              alert(t('donate.messages.success'));
               acknowledge(token);
             }
           })
           .catch(e => {
             console.error(e.message);
-            alert('Cannot make donation through Google. Please try donating through the website crab.fit 🦀');
+            alert(t('donate.messages.error'));
           });
       })
       .catch(e => {
         console.error(e);
-        alert('Cannot make donation through Google. Please try donating through the website crab.fit 🦀');
+        alert(t('donate.messages.error'));
       });
   };
 
@@ -75,9 +77,9 @@ const Donate = ({ onDonate = null }) => {
           gtag('event', 'donate', { 'event_category': 'donate' });
           if (store.TWA) {
             event.preventDefault();
-            if (window.confirm('Did you know that Crab Fit costs more that $100 per month? If it\'s helped you out at all, consider donating to help keep it running. 🦀')) {
+            if (window.confirm(t('donate.messages.about'))) {
               if (purchase() === false) {
-                alert('Cannot make donation through Google. Please try donating through the website crab.fit 🦀');
+                alert(t('donate.messages.error'));
               }
             }
           } else if (onDonate !== null) {
@@ -94,8 +96,8 @@ const Donate = ({ onDonate = null }) => {
   				buttonWidth="90px"
   				type="button"
   				tabIndex="-1"
-          title="Every amount counts :)"
-  			>Donate</Button>
+          title={t('donate.title')}
+  			>{t('donate.button')}</Button>
   		</a>
   	</div>
   );

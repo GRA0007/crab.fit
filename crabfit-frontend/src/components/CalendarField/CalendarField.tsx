@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
 import localeData from 'dayjs/plugin/localeData';
@@ -54,6 +55,7 @@ const CalendarField = ({
 	...props
 }) => {
   const weekStart = useSettingsStore(state => state.weekStart);
+  const { t } = useTranslation('home');
 
 	const [type, setType] = useState(0);
 
@@ -110,9 +112,12 @@ const CalendarField = ({
       <ToggleField
         id="calendarMode"
         name="calendarMode"
-        options={['Specific dates', 'Days of the week']}
-        value={type ? 'Days of the week' : 'Specific dates'}
-        onChange={value => setType(value === 'Specific dates' ? 0 : 1)}
+        options={{
+          'specific': t('form.dates.options.specific'),
+          'week': t('form.dates.options.week'),
+        }}
+        value={type === 0 ? 'specific' : 'week'}
+        onChange={value => setType(value === 'specific' ? 0 : 1)}
       />
 
       {type === 0 ? (
@@ -121,7 +126,7 @@ const CalendarField = ({
     				<Button
     					buttonHeight="30px"
     					buttonWidth="30px"
-    					title="Previous month"
+    					title={t('form.dates.tooltips.previous')}
     					type="button"
     					onClick={() => {
     						if (month-1 < 0) {
@@ -136,7 +141,7 @@ const CalendarField = ({
     				<Button
     					buttonHeight="30px"
     					buttonWidth="30px"
-    					title="Next month"
+    					title={t('form.dates.tooltips.next')}
     					type="button"
     					onClick={() => {
     						if (month+1 > 11) {
@@ -161,7 +166,7 @@ const CalendarField = ({
     							key={y+x}
     							otherMonth={date.month() !== month}
     							isToday={date.isToday()}
-    							title={`${date.date()} ${dayjs.months()[date.month()]}${date.isToday() ? ' (today)' : ''}`}
+    							title={`${date.date()} ${dayjs.months()[date.month()]}${date.isToday() ? ` (${t('form.dates.tooltips.today')})` : ''}`}
     							selected={selectedDates.includes(date.format('DDMMYYYY'))}
     							selecting={selectingDates.includes(date)}
     							mode={mode}
@@ -203,7 +208,7 @@ const CalendarField = ({
             <Date
               key={name}
               isToday={dayjs.weekdaysShort()[dayjs().day()-weekStart] === name}
-              title={dayjs.weekdaysShort()[dayjs().day()-weekStart] === name ? 'Today' : ''}
+              title={dayjs.weekdaysShort()[dayjs().day()-weekStart] === name ? t('form.dates.tooltips.today') : ''}
               selected={selectedDays.includes(((i + weekStart) % 7 + 7) % 7)}
               selecting={selectingDays.includes(((i + weekStart) % 7 + 7) % 7)}
               mode={mode}

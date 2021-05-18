@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { loadGapiInsideDOM } from 'gapi-script';
+import { useTranslation } from 'react-i18next';
 
 import { Button, Center } from 'components';
 import { Loader } from '../Loading/loadingStyle';
@@ -23,6 +24,7 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
   const [signedIn, setSignedIn] = useState(undefined);
   const [calendars, setCalendars] = useState(undefined);
   const [freeBusyLoading, setFreeBusyLoading] = useState(false);
+  const { t } = useTranslation('event');
 
   const calendarLogin = async () => {
     const gapi = await loadGapiInsideDOM();
@@ -101,7 +103,7 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
             secondaryColor="#3367BD">
             <LoginButton>
               <img src={googleLogo} alt="" />
-              <span>Sync with Google Calendar</span>
+              <span>{t('event:you.google_cal.login')}</span>
             </LoginButton>
           </Button>
         </Center>
@@ -109,10 +111,10 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
         <CalendarList>
           <p>
             {/* eslint-disable-next-line */}
-            <strong>Sync with Google Calendar</strong> (<a href="#" onClick={e => {
+            <strong>{t('event:you.google_cal.login')}</strong> (<a href="#" onClick={e => {
               e.preventDefault();
               signOut();
-            }}>log out</a>)
+            }}>{t('event:you.google_cal.logout')}</a>)
           </p>
           <Options>
             {calendars !== undefined && !calendars.every(c => c.checked) && (
@@ -120,14 +122,14 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
               <a href="#" onClick={e => {
                 e.preventDefault();
                 setCalendars(calendars.map(c => ({...c, checked: true})));
-              }}>Select all</a>
+              }}>{t('event:you.google_cal.select_all')}</a>
             )}
             {calendars !== undefined && calendars.every(c => c.checked) && (
               /* eslint-disable-next-line */
               <a href="#" onClick={e => {
                 e.preventDefault();
                 setCalendars(calendars.map(c => ({...c, checked: false})));
-              }}>Select none</a>
+              }}>{t('event:you.google_cal.select_none')}</a>
             )}
           </Options>
           {calendars !== undefined ? calendars.map(calendar => (
@@ -148,14 +150,14 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
           )}
           {calendars !== undefined && (
             <>
-              <Info>Importing will overwrite your current availability</Info>
+              <Info>{t('event:you.google_cal.info')}</Info>
               <Button
                 buttonWidth="170px"
                 buttonHeight="35px"
                 isLoading={freeBusyLoading}
                 disabled={freeBusyLoading}
                 onClick={() => importAvailability()}
-              >Import availability</Button>
+              >{t('event:you.google_cal.button')}</Button>
             </>
           )}
         </CalendarList>

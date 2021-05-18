@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useTranslation, Trans } from 'react-i18next';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -13,8 +14,9 @@ import {
 	TimeRangeField,
 	SelectField,
 	Button,
-	Donate,
 	Error,
+  Recents,
+  Footer,
 } from 'components';
 
 import {
@@ -25,12 +27,7 @@ import {
   P,
   OfflineMessage,
   ShareInfo,
-  Footer,
-  AboutSection,
 } from './createStyle';
-import {
-  Recent,
-} from '../Home/homeStyle';
 
 import api from 'services';
 import { useRecentsStore } from 'stores';
@@ -53,8 +50,9 @@ const Create = ({ offline }) => {
   const [copied, setCopied] = useState(null);
 
   const { push } = useHistory();
+  const { t } = useTranslation(['common', 'home', 'event']);
 
-  const recentsStore = useRecentsStore();
+  const addRecent = useRecentsStore(state => state.addRecent);
 
 	useEffect(() => {
     if (window.self === window.top) {
@@ -71,11 +69,11 @@ const Create = ({ offline }) => {
 			const dates = JSON.parse(data.dates);
 
 			if (dates.length === 0) {
-				return setError(`You haven't selected any dates!`);
+				return setError(t('home:form.errors.no_dates'));
 			}
       const isSpecificDates = typeof dates[0] === 'string' && dates[0].length === 8;
 			if (start === end) {
-				return setError(`The start and end times can't be the same`);
+				return setError(t('home:form.errors.same_times'));
 			}
 
 			let times = dates.reduce((times, date) => {
@@ -112,7 +110,7 @@ const Create = ({ offline }) => {
 			}, []);
 
 			if (times.length === 0) {
-				return setError(`You don't have any time selected`);
+				return setError(t('home:form.errors.no_time'));
 			}
 
 			const response = await api.post('/event', {
@@ -123,16 +121,16 @@ const Create = ({ offline }) => {
 				},
 			});
       setCreatedEvent(response.data);
-      recentsStore.addRecent({
+      addRecent({
         id: response.data.id,
         created: response.data.created,
         name: response.data.name,
       });
       gtag('event', 'create_event', {
-        'event_category': 'home',
+        'event_category': 'create',
       });
 		} catch (e) {
-			setError('An error ocurred while creating the event. Please try again later.');
+			setError(t('home:form.errors.unknown'));
 			console.error(e);
 		} finally {
 			setIsLoading(false);
@@ -142,18 +140,18 @@ const Create = ({ offline }) => {
 	return (
 		<>
 			<StyledMain>
-				<TitleSmall>CREATE A</TitleSmall>
+				<TitleSmall>{t('home:create')}</TitleSmall>
 				<TitleLarge>CRAB FIT</TitleLarge>
       </StyledMain>
 
       {createdEvent ? (
         <StyledMain>
           <OfflineMessage>
-            <h2>Created {createdEvent.name}</h2>
+            <h2>{t('common:created', { date: createdEvent?.name })}</h2>
             <ShareInfo
               onClick={() => navigator.clipboard?.writeText(`https://crab.fit/${createdEvent.id}`)
                   .then(() => {
-                    setCopied('Copied!');
+                    setCopied(t('event:nav.copied'));
                     setTimeout(() => setCopied(null), 1000);
                     gtag('event', 'copy_link', {
                       'event_category': 'event',
@@ -161,45 +159,30 @@ const Create = ({ offline }) => {
                   })
                   .catch((e) => console.error('Failed to copy', e))
               }
-              title={!!navigator.clipboard ? 'Click to copy' : ''}
-            >{copied ?? `https://crab.fit/${createdEvent.id}`}</ShareInfo>
+              title={!!navigator.clipboard ? t('event:nav.title') : ''}
+            >{copied ?? `https://crab.fit/${createdEvent?.id}`}</ShareInfo>
 						<ShareInfo>
               {/* eslint-disable-next-line */}
-							Click the link above to copy it to your clipboard, or share via <a onClick={() => gtag('event', 'send_email', { 'event_category': 'event' })} href={`mailto:?subject=${encodeURIComponent(`Scheduling ${createdEvent.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${createdEvent.id}`)}`} target="_blank">email</a>.
+							<Trans i18nKey="event:nav.shareinfo_alt">Click the link above to copy it to your clipboard, or share via <a onClick={() => gtag('event', 'send_email', { 'event_category': 'event' })} href={`mailto:?subject=${encodeURIComponent(t('event:nav.email_subject', { event_name: createdEvent?.name }))}&body=${encodeURIComponent(`${t('event:nav.email_body')} https://crab.fit/${createdEvent?.id}`)}`} target="_blank">email</a>.</Trans>
 						</ShareInfo>
-            <Footer>
-              <span>Thank you for using Crab Fit. If you like it, consider donating.</span>
-				      <Donate />
-            </Footer>
+            <Footer small />
           </OfflineMessage>
         </StyledMain>
       ) : (
         <>
-          {!!recentsStore.recents.length && (
-            <AboutSection id="recents">
-              <StyledMain>
-                <h2>Recently visited</h2>
-                {recentsStore.recents.map(event => (
-                  <Recent href={`/${event.id}`} target="_blank" key={event.id}>
-                    <span className="name">{event.name}</span>
-                    <span className="date">Created {dayjs.unix(event.created).format('D MMMM, YYYY')}</span>
-                  </Recent>
-                ))}
-              </StyledMain>
-            </AboutSection>
-          )}
+          <Recents />
 
           <StyledMain>
             {offline ? (
               <OfflineMessage>
                 <h1>🦀📵</h1>
-                <P>You can't create a Crab Fit when you don't have an internet connection. Please make sure you're connected.</P>
+                <P>{t('home:offline')}</P>
               </OfflineMessage>
             ) : (
       				<CreateForm onSubmit={handleSubmit(onSubmit)} id="create">
       					<TextField
-      						label="Give your event a name!"
-      						subLabel="Or leave blank to generate one"
+      						label={t('home:form.name.label')}
+      						subLabel={t('home:form.name.sublabel')}
       						type="text"
       						name="name"
       						id="name"
@@ -207,8 +190,8 @@ const Create = ({ offline }) => {
       					/>
 
       					<CalendarField
-      						label="What dates might work?"
-      						subLabel="Click and drag to select"
+      						label={t('home:form.dates.label')}
+      						subLabel={t('home:form.dates.sublabel')}
       						name="dates"
       						id="dates"
       						required
@@ -216,8 +199,8 @@ const Create = ({ offline }) => {
       					/>
 
       					<TimeRangeField
-      						label="What times might work?"
-      						subLabel="Click and drag to select a time range"
+      						label={t('home:form.times.label')}
+      						subLabel={t('home:form.times.sublabel')}
       						name="times"
       						id="times"
       						required
@@ -225,20 +208,20 @@ const Create = ({ offline }) => {
       					/>
 
       					<SelectField
-      						label="And the timezone"
+      						label={t('home:form.timezone.label')}
       						name="timezone"
       						id="timezone"
       						register={register}
       						options={timezones}
       						required
-      						defaultOption="Select..."
+      						defaultOption={t('home:form.timezone.defaultOption')}
       					/>
 
       					{error && (
       						<Error onClose={() => setError(null)}>{error}</Error>
       					)}
 
-      					<Button type="submit" isLoading={isLoading} disabled={isLoading} buttonWidth="100%">Create</Button>
+      					<Button type="submit" isLoading={isLoading} disabled={isLoading} buttonWidth="100%">{t('home:form.button')}</Button>
       				</CreateForm>
             )}
     			</StyledMain>

@@ -1,5 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { useSettingsStore } from 'stores';
+import { useTranslation } from 'react-i18next';
 
 import {
 	Wrapper,
@@ -16,17 +17,18 @@ const Legend = ({
 	...props
 }) => {
 	const theme = useTheme();
+  const { t } = useTranslation('event');
   const highlight = useSettingsStore(state => state.highlight);
   const setHighlight = useSettingsStore(state => state.setHighlight);
 
 	return (
 		<Wrapper>
-			<Label>{min}/{total} available</Label>
+			<Label>{min}/{total} {t('event:available')}</Label>
 
 			<Bar
         onMouseOut={() => onSegmentFocus(null)}
         onClick={() => setHighlight(!highlight)}
-        title="Click to highlight highest availability"
+        title={t('event:group.legend_tooltip')}
       >
 				{[...Array(max+1-min).keys()].map(i => i+min).map(i =>
 					<Grade
@@ -38,7 +40,7 @@ const Legend = ({
 				)}
 			</Bar>
 
-			<Label>{max}/{total} available</Label>
+			<Label>{max}/{total} {t('event:available')}</Label>
 		</Wrapper>
 	);
 };

@@ -19,6 +19,7 @@ export const TitleSmall = styled.span`
 	font-weight: 400;
 	color: ${props => props.theme.primaryDark};
 	line-height: 1em;
+  text-transform: uppercase;
 `;
 
 export const TitleLarge = styled.h1`
@@ -30,6 +31,7 @@ export const TitleLarge = styled.h1`
 	font-weight: 400;
 	text-shadow: 0 4px 0 ${props => props.theme.primaryDark};
 	line-height: 1em;
+  text-transform: uppercase;
 
 	@media (max-width: 350px) {
 		font-size: 3.5rem;
@@ -84,39 +86,4 @@ export const StatLabel = styled.span`
 export const OfflineMessage = styled.div`
 	text-align: center;
   margin: 50px 0 20px;
-`;
-
-export const Recent = styled.a`
-	text-decoration: none;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 0;
-  flex-wrap: wrap;
-
-  & .name {
-    font-weight: 700;
-    font-size: 1.1em;
-    color: ${props => props.theme.primaryDark};
-    flex: 1;
-    display: block;
-  }
-  & .date {
-    font-weight: 400;
-    opacity: .8;
-    white-space: nowrap;
-  }
-
-  &:hover .name {
-    text-decoration: underline;
-  }
-
-  @media (max-width: 500px) {
-    display: block;
-
-    & .date {
-      white-space: normal;
-    }
-  }
 `;

@@ -11,23 +11,31 @@ const SelectField = ({
 	id,
 	options = [],
 	inline = false,
+	small = false,
 	defaultOption,
 	register,
 	...props
 }) => (
-	<Wrapper inline={inline}>
-		{label && <StyledLabel htmlFor={id} inline={inline}>{label}</StyledLabel>}
+	<Wrapper inline={inline} small={small}>
+		{label && <StyledLabel htmlFor={id} inline={inline} small={small}>{label}</StyledLabel>}
 		{subLabel && <StyledSubLabel htmlFor={id}>{subLabel}</StyledSubLabel>}
 
 		<StyledSelect
 			id={id}
 			ref={register}
+      small={small}
 			{...props}
 		>
 			{defaultOption && <option value="">{defaultOption}</option>}
-			{options.map((value, i) =>
-				<option key={i} value={value}>{value}</option>
-			)}
+			{Array.isArray(options) ? (
+        options.map(value =>
+  				<option key={value} value={value}>{value}</option>
+  			)
+      ) : (
+        Object.entries(options).map(([key, value]) =>
+  				<option key={key} value={key}>{value}</option>
+  			)
+      )}
 		</StyledSelect>
 	</Wrapper>
 );
