@@ -2,7 +2,7 @@
   "name": "Crab Fit",
   "tagline": "Create your own",
   "cta": "Create your own Crab Fit!",
-  "created": "Created",
+  "created": "Created {{date}}",
   "donate": {
     "info": "Thank you for using Crab Fit. If you like it, consider donating.",
     "button": "Donate",
@@ -55,8 +55,7 @@
       "label": "Language",
       "options": {
         "en-US": "English (US)",
-        "de": "German",
-        "cimode": "Dev (keys)"
+        "ko": "Korean"
       }
     }
   }
