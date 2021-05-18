@@ -15,6 +15,7 @@ import {
 	Button,
 	Donate,
 	Error,
+  Recents,
 } from 'components';
 
 import {
@@ -28,9 +29,6 @@ import {
   Footer,
   AboutSection,
 } from './createStyle';
-import {
-  Recent,
-} from '../Home/homeStyle';
 
 import api from 'services';
 import { useRecentsStore } from 'stores';
@@ -54,7 +52,7 @@ const Create = ({ offline }) => {
 
   const { push } = useHistory();
 
-  const recentsStore = useRecentsStore();
+  const addRecent = useRecentsStore(state => state.addRecent);
 
 	useEffect(() => {
     if (window.self === window.top) {
@@ -123,7 +121,7 @@ const Create = ({ offline }) => {
 				},
 			});
       setCreatedEvent(response.data);
-      recentsStore.addRecent({
+      addRecent({
         id: response.data.id,
         created: response.data.created,
         name: response.data.name,
@@ -175,19 +173,7 @@ const Create = ({ offline }) => {
         </StyledMain>
       ) : (
         <>
-          {!!recentsStore.recents.length && (
-            <AboutSection id="recents">
-              <StyledMain>
-                <h2>Recently visited</h2>
-                {recentsStore.recents.map(event => (
-                  <Recent href={`/${event.id}`} target="_blank" key={event.id}>
-                    <span className="name">{event.name}</span>
-                    <span className="date">Created {dayjs.unix(event.created).format('D MMMM, YYYY')}</span>
-                  </Recent>
-                ))}
-              </StyledMain>
-            </AboutSection>
-          )}
+          <Recents />
 
           <StyledMain>
             {offline ? (

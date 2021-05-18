@@ -17,6 +17,7 @@ import {
 	Center,
 	Error,
   Footer,
+  Recents,
 } from 'components';
 
 import {
@@ -33,11 +34,9 @@ import {
 	StatNumber,
 	StatLabel,
   OfflineMessage,
-  Recent,
 } from './homeStyle';
 
 import api from 'services';
-import { useRecentsStore } from 'stores';
 
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
@@ -60,7 +59,6 @@ const Home = ({ offline }) => {
 		version: 'loading...',
 	});
 	const { push } = useHistory();
-  const recentsStore = useRecentsStore();
   const { t } = useTranslation(['common', 'home']);
 
 	useEffect(() => {
@@ -161,19 +159,7 @@ const Home = ({ offline }) => {
 				</Links>
       </StyledMain>
 
-      {!!recentsStore.recents.length && (
-        <AboutSection id="recents">
-          <StyledMain>
-            <h2>{t('home:recently_visited')}</h2>
-            {recentsStore.recents.map(event => (
-              <Recent href={`/${event.id}`} key={event.id}>
-                <span className="name">{event.name}</span>
-                <span className="date">Created {dayjs.unix(event.created).format('D MMMM, YYYY')}</span>
-              </Recent>
-            ))}
-          </StyledMain>
-        </AboutSection>
-      )}
+      <Recents />
 
       <StyledMain>
         {offline ? (
