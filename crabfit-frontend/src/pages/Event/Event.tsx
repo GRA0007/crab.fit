@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -49,6 +50,8 @@ const Event = (props) => {
   const weekStart = useSettingsStore(state => state.weekStart);
 
   const addRecent = useRecentsStore(state => state.addRecent);
+
+  const { t } = useTranslation(['common', 'event']);
 
 	const { register, handleSubmit } = useForm();
 	const { id } = props.match.params;
@@ -244,7 +247,7 @@ const Event = (props) => {
 			setTab('you');
 		} catch (e) {
 			if (e.status === 401) {
-				setError('Password is incorrect. Check your name is spelled right.');
+				setError(t('event:form.errors.password_incorrect'));
 			} else if (e.status === 404) {
 				// Create user
 				try {
@@ -261,7 +264,7 @@ const Event = (props) => {
 					});
 					setTab('you');
 				} catch (e) {
-					setError('Failed to create user. Please try again.');
+					setError(t('event:form.errors.unknown'));
 				}
 			}
 		} finally {
@@ -280,17 +283,17 @@ const Event = (props) => {
 						<Logo src={logo} alt="" />
 						<Title>CRAB FIT</Title>
 					</Center>
-					<Center style={{ textDecoration: 'underline', fontSize: 14, paddingTop: 6 }}>Create your own</Center>
+					<Center style={{ textDecoration: 'underline', fontSize: 14, paddingTop: 6 }}>{t('common:tagline')}</Center>
 				</Link>
 
 				{(!!event || isLoading) ? (
 					<>
 						<EventName isLoading={isLoading}>{event?.name}</EventName>
-            <EventDate isLoading={isLoading} title={event?.created && dayjs.unix(event?.created).format('D MMMM, YYYY')}>{event?.created && `Created ${dayjs.unix(event?.created).fromNow()}`}</EventDate>
+            <EventDate isLoading={isLoading} title={event?.created && dayjs.unix(event?.created).format('D MMMM, YYYY')}>{event?.created && t('common:created', { date: dayjs.unix(event?.created).fromNow() })}</EventDate>
 						<ShareInfo
               onClick={() => navigator.clipboard?.writeText(`https://crab.fit/${id}`)
                   .then(() => {
-                    setCopied('Copied!');
+                    setCopied(t('event:nav.copied'));
                     setTimeout(() => setCopied(null), 1000);
                     gtag('event', 'copy_link', {
                       'event_category': 'event',
@@ -298,24 +301,24 @@ const Event = (props) => {
                   })
                   .catch((e) => console.error('Failed to copy', e))
               }
-              title={!!navigator.clipboard ? 'Click to copy' : ''}
+              title={!!navigator.clipboard ? t('event:nav.title') : ''}
             >{copied ?? `https://crab.fit/${id}`}</ShareInfo>
 						<ShareInfo isLoading={isLoading}>
 							{!!event?.name &&
-								<>Copy the link to this page, or share via <a onClick={() => gtag('event', 'send_email', { 'event_category': 'event' })} href={`mailto:?subject=${encodeURIComponent(`Scheduling ${event?.name}`)}&body=${encodeURIComponent(`Visit this link to enter your availabilities: https://crab.fit/${id}`)}`}>email</a>.</>
+								<Trans i18nKey="event:nav.shareinfo">Copy the link to this page, or share via <a onClick={() => gtag('event', 'send_email', { 'event_category': 'event' })} href={`mailto:?subject=${encodeURIComponent(t('event:nav.email_subject', { event_name: event?.name }))}&body=${encodeURIComponent(`${t('event:nav.email_body')} https://crab.fit/${id}`)}`}>email</a>.</Trans>
 							}
 						</ShareInfo>
 					</>
 				) : (
           offline ? (
             <div style={{ margin: '100px 0' }}>
-  						<EventName>You are offline</EventName>
-  						<ShareInfo>A Crab Fit doesn't work offline.<br />Make sure you're connected to the internet and try again.</ShareInfo>
+  						<EventName>{t('event:offline.title')}</EventName>
+  						<ShareInfo><Trans i18nKey="event:offline.body" /></ShareInfo>
   					</div>
           ) : (
   					<div style={{ margin: '100px 0' }}>
-  						<EventName>Event not found</EventName>
-  						<ShareInfo>Check that the url you entered is correct.</ShareInfo>
+  						<EventName>{t('event:error.title')}</EventName>
+  						<ShareInfo>{t('event:error.body')}</ShareInfo>
   					</div>
           )
 				)}
@@ -326,13 +329,13 @@ const Event = (props) => {
 					<LoginSection id="login">
 						<StyledMain>
 							{user ? (
-								<h2>Signed in as {user.name}</h2>
+								<h2>{t('event:form.signed_in', { name: user.name })}</h2>
 							) : (
 								<>
-									<h2>Sign in to add your availability</h2>
+									<h2>{t('event:form.signed_out')}</h2>
 									<LoginForm onSubmit={handleSubmit(onSubmit)}>
 										<TextField
-											label="Your name"
+											label={t('event:form.name')}
 											type="text"
 											name="name"
 											id="name"
@@ -342,7 +345,7 @@ const Event = (props) => {
 										/>
 
 										<TextField
-											label="Password (optional)"
+											label={t('event:form.password')}
 											type="password"
 											name="password"
 											id="password"
@@ -354,15 +357,15 @@ const Event = (props) => {
 											type="submit"
 											isLoading={isLoginLoading}
 											disabled={isLoginLoading || isLoading}
-										>Login</Button>
+										>{t('event:form.button')}</Button>
 									</LoginForm>
 									{error && <Error onClose={() => setError(null)}>{error}</Error>}
-									<Info>These details are only for this event. Use a password to prevent others from changing your availability.</Info>
+									<Info>{t('event:form.info')}</Info>
 								</>
 							)}
 
 							<SelectField
-								label="Your time zone"
+								label={t('event:form.timezone')}
 								name="timezone"
 								id="timezone"
 								inline
@@ -371,10 +374,10 @@ const Event = (props) => {
 								options={timezones}
 							/>
               {/* eslint-disable-next-line */}
-              {event?.timezone && event.timezone !== timezone && <p>This event was created in the timezone <strong>{event.timezone}</strong>. <a href="#" onClick={e => {
+              {event?.timezone && event.timezone !== timezone && <p><Trans i18nKey="event:form.created_in_timezone">This event was created in the timezone <strong>{{timezone: event.timezone}}</strong>. <a href="#" onClick={e => {
                 e.preventDefault();
                 setTimezone(event.timezone);
-              }}>Click here</a> to use it.</p>}
+              }}>Click here</a> to use it.</Trans></p>}
               {((
                 Intl.DateTimeFormat().resolvedOptions().timeZone !== timezone
                 && (event?.timezone && event.timezone !== Intl.DateTimeFormat().resolvedOptions().timeZone)
@@ -383,10 +386,10 @@ const Event = (props) => {
                 && Intl.DateTimeFormat().resolvedOptions().timeZone !== timezone
               )) && (
                 /* eslint-disable-next-line */
-                <p>Your local timezone is detected to be <strong>{Intl.DateTimeFormat().resolvedOptions().timeZone}</strong>. <a href="#" onClick={e => {
+                <p><Trans i18nKey="event:form.local_timezone">Your local timezone is detected to be <strong>{{timezone: Intl.DateTimeFormat().resolvedOptions().timeZone}}</strong>. <a href="#" onClick={e => {
                   e.preventDefault();
                   setTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
-                }}>Click here</a> to use it.</p>
+                }}>Click here</a> to use it.</Trans></p>
               )}
 						</StyledMain>
 					</LoginSection>
@@ -403,8 +406,8 @@ const Event = (props) => {
 								}}
 								selected={tab === 'you'}
 								disabled={!user}
-								title={user ? '' : 'Login to set your availability'}
-							>Your availability</Tab>
+								title={user ? '' : t('event:tabs.you_tooltip')}
+							>{t('event:tabs.you')}</Tab>
 							<Tab
 								href="#group"
 								onClick={e => {
@@ -412,7 +415,7 @@ const Event = (props) => {
 									setTab('group');
 								}}
 								selected={tab === 'group'}
-							>Group availability</Tab>
+							>{t('event:tabs.group')}</Tab>
 						</Tabs>
 					</StyledMain>
 
@@ -430,9 +433,6 @@ const Event = (props) => {
 						</section>
 					) : (
 						<section id="you">
-							<StyledMain>
-								<Center>Click and drag the calendar below to set your availabilities</Center>
-							</StyledMain>
 							<AvailabilityEditor
 								times={times}
 								timeLabels={timeLabels}

@@ -6,6 +6,9 @@ export const Wrapper = styled.div`
 	${props => props.inline && `
 		margin: 0;
 	`}
+	${props => props.small && `
+		margin: 10px 0;
+	`}
 `;
 
 export const StyledLabel = styled.label`
@@ -15,6 +18,9 @@ export const StyledLabel = styled.label`
 
 	${props => props.inline && `
 		font-size: 16px;
+	`}
+	${props => props.small && `
+  	font-size: .9rem;
 	`}
 `;
 
@@ -42,4 +48,8 @@ export const StyledSelect = styled.select`
 		border: 1px solid ${props => props.theme.primary};
 		box-shadow: inset 0 -3px 0 0 ${props => props.theme.primary};
 	}
+
+  ${props => props.small && `
+    padding: 6px 8px;
+	`}
 `;

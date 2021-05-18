@@ -1,23 +1,25 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Donate } from 'components';
 import { Wrapper, Link } from './footerStyle';
 
-const Footer = () => {
+const Footer = (props) => {
   const [donateMode, setDonateMode] = useState(false);
+  const { t } = useTranslation('common');
 
   return (
-    <Wrapper id="donate" donateMode={donateMode}>
+    <Wrapper id="donate" donateMode={donateMode} {...props}>
       {donateMode ? (
         <>
-          <Link href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=2" target="_blank">Donate $2</Link>
-          <Link href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5" target="_blank"><strong>Donate $5</strong></Link>
-          <Link href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=10" target="_blank">Donate $10</Link>
-          <Link href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD" target="_blank">Choose an amount</Link>
+          <Link href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=2" target="_blank">{t('donate.options.$2')}</Link>
+          <Link href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5" target="_blank"><strong>{t('donate.options.$5')}</strong></Link>
+          <Link href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=10" target="_blank">{t('donate.options.$10')}</Link>
+          <Link href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD" target="_blank">{t('donate.options.choose')}</Link>
         </>
       ) : (
         <>
-          <span>Thank you for using Crab Fit. If you like it, consider donating.</span>
+          <span>{t('donate.info')}</span>
           <Donate onDonate={() => setDonateMode(true)} />
         </>
       )}
