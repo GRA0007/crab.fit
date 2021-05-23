@@ -7,7 +7,7 @@ Align your schedules to find the perfect time that works for everyone.
 ## Setup
 
 1. Clone the repo.
-2. Run `yarn` in both folders.
+2. Run `yarn` in both backend and frontend folders.
 3. Run `node index.js` in the backend folder to start the API.
 4. Run `yarn start` in the frontend folder to start the front end.
 
@@ -21,8 +21,8 @@ The browser extension in `crabfit-browser-extension` can be tested by first runn
 2. Run `./deploy.sh` to compile and deploy.
 
 ### Backend
-1. Deploy the backend `cd crabfit-backend && gcloud app deploy --project=crabfit --version=v1`
-2. Deploy the endpoints service `cd crabfit-backend && gcloud endpoints services deploy swagger.yaml`
+1. In the backend folder `cd crabfit-backend`
+2. Deploy the backend `gcloud app deploy --project=crabfit --version=v1`
 
 ### Browser extension
 Compress everything inside the `crabfit-browser-extension` folder and use that zip to deploy using Chrome web store and Mozilla Add-on store.

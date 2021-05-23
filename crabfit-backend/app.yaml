@@ -1,11 +1,2 @@
-runtime: nodejs
+runtime: nodejs10
 service: api
-env: flex
-
-automatic_scaling:
-  min_num_instances: 1
-  max_num_instances: 2
-
-endpoints_api_service:
-  name: api-dot-crabfit.appspot.com
-  rollout_strategy: managed
