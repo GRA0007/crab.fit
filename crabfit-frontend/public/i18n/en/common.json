@@ -52,11 +52,7 @@
       }
     },
     "language": {
-      "label": "Language",
-      "options": {
-        "en-US": "English (US)",
-        "ko": "Korean"
-      }
+      "label": "Language"
     }
   }
 }

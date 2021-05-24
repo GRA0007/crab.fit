@@ -39,6 +39,7 @@ import { useSettingsStore, useRecentsStore } from 'stores';
 
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
+import supportedLocales from 'res/dayjs_locales.json';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -51,7 +52,7 @@ const Event = (props) => {
 
   const addRecent = useRecentsStore(state => state.addRecent);
 
-  const { t } = useTranslation(['common', 'event']);
+  const { t, i18n } = useTranslation(['common', 'event']);
 
 	const { register, handleSubmit } = useForm();
 	const { id } = props.match.params;
@@ -73,6 +74,13 @@ const Event = (props) => {
 	const [max, setMax] = useState(0);
 
 	const [copied, setCopied] = useState(null);
+
+  useEffect(() => {
+    if (Array.from(supportedLocales).includes(i18n.language)) {
+      require(`dayjs/locale/${i18n.language}`);
+      dayjs.locale(i18n.language);
+    }
+  }, [i18n.language]);
 
 	useEffect(() => {
 		const fetchEvent = async () => {

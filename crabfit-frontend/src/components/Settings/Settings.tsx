@@ -88,10 +88,12 @@ const Settings = () => {
           label={t('options.language.label')}
           name="language"
           id="language"
-          options={i18n.language === 'cimode' ? {
-            cimode: 'DEV',
-            english: 'en-US'
-          } : t('options.language.options', { returnObjects: true })}
+          options={{
+            'en': 'English (US)',
+            'de': 'Deutsch',
+            'ko': '한국어',
+            ...process.env.NODE_ENV !== 'production' && { 'cimode': 'DEV' },
+          }}
           small
           value={i18n.language}
           onChange={event => i18n.changeLanguage(event.target.value)}
