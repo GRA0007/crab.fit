@@ -90,19 +90,18 @@ const CalendarField = ({
 	};
 
 	useEffect(() => {
-    let lang = i18n.language;
     if (Array.from(supportedLocales).includes(i18n.language)) {
-      require(`dayjs/locale/${i18n.language}`);
-      dayjs.locale(i18n.language);
-      lang = i18n.language;
+      import(`dayjs/locale/${i18n.language}.js`).then(() => {
+        dayjs.locale(i18n.language);
+        if (weekStart !== dayjs.Ls[i18n.language].weekStart) {
+          dayjs.updateLocale(i18n.language, { weekStart });
+        }
+      });
     } else {
       // Fallback
-      lang = 'en';
-    }
-    if (weekStart !== dayjs.Ls[lang].weekStart) {
-      dayjs.updateLocale(lang, {
-        weekStart,
-      });
+      if (weekStart !== dayjs.Ls.en.weekStart) {
+        dayjs.updateLocale('en', { weekStart });
+      }
     }
 		setDates(calculateMonth(month, year, weekStart));
 	}, [weekStart, month, year, i18n.language]);

@@ -77,8 +77,7 @@ const Event = (props) => {
 
   useEffect(() => {
     if (Array.from(supportedLocales).includes(i18n.language)) {
-      require(`dayjs/locale/${i18n.language}`);
-      dayjs.locale(i18n.language);
+      import(`dayjs/locale/${i18n.language}.js`).then(() => dayjs.locale(i18n.language));
     }
   }, [i18n.language]);
 
