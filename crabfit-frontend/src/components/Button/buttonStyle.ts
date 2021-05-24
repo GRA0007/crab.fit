@@ -29,13 +29,9 @@ export const Top = styled.button`
 	left: 0;
 	user-select: none;
 	transition: top .15s;
-	outline: none;
 
 	&:active {
 		top: 0;
-	}
-	&:focus-visible {
-		filter: brightness(1.2);
 	}
 
 	${props => props.isLoading && `

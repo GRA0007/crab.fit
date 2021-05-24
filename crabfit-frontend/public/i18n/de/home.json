@@ -1,0 +1,57 @@
+{
+  "create": "ERSTELLEN SIE EIN",
+  "recently_visited": "Kürzlich besucht",
+  "nav": {
+    "about": "Info",
+    "donate": "Spenden"
+  },
+  "form": {
+    "name": {
+      "label": "Geben Sie Ihrer veranstaltung einen namen!",
+      "sublabel": "Oder lassen Sie das feld leer, um eine zu generieren"
+    },
+    "dates": {
+      "label": "Welche saten könnten funktionieren?",
+      "sublabel": "Klicken und ziehen Sie zur auswahl",
+      "options": {
+        "specific": "Bestimmte daten",
+        "week": "Tage der woche"
+      },
+      "tooltips": {
+        "previous": "Vorheriger monat",
+        "next": "Nächsten monat",
+        "today": "heute"
+      }
+    },
+    "times": {
+      "label": "Welche zeiten könnten funktionieren?",
+      "sublabel": "Klicken und ziehen Sie, um einen zeitbereich auszuwählen"
+    },
+    "timezone": {
+      "label": "Und die zeitzone",
+      "defaultOption": "Wählen..."
+    },
+
+    "button": "Erstellen",
+    "errors": {
+      "no_dates": "Es sind keine daten ausgewählt",
+      "same_times": "Die startzeiten und endzeiten können nicht gleich sein",
+      "no_time": "Es ist keine zeit ausgewählt",
+      "unknown": "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal."
+    }
+  },
+  "offline": "Sie können keine Crab Fit erstellen, wenn Sie keine internetverbindung haben. Bitte stellen Sie sicher, dass Sie verbunden sind.",
+
+  "about": {
+    "name": "Über Crab Fit",
+    "events": "Events erstellt",
+    "availabilities": "Verfügbarkeit eingegeben",
+    "content": {
+      "p1": "Crab Fit hilft Ihnen dabei, Ihre veranstaltung an die zeitpläne aller anzupassen. Erstellen Sie einfach oben eine veranstaltung und senden Sie den link an alle teilnehmer. Die ergebnisse werden live aktualisiert und Sie können eine Heatmap sehen, wann alle frei sind.<1/><2>Erfahren Sie mehr über Crab Fit</2>.",
+      "p2": "Viele Crab Fits erstellen? Holen Sie sich die <1>Chrome-Erweiterung</1> oder <3>Firefox-Erweiterung</3> für Ihren browser! Sie können die <5>Android-App</5> auch unterwegs auf Crab Fit herunterladen.",
+      "p3": "Crab Fit wurde von <1>Ben Grant</1> entwickelt und ist die moderne lösung für Ihre debatten zur planung von gruppenveranstaltungen.",
+      "p4": "Der code für Crab Fit ist open source. Wenn sie probleme finden oder einen beitrag leisten möchten, können Sie das <1>repository</1> besuchen. Durch die verwendung von Crab Fit stimmen sie den <3>datenschutzbestimmungen</3>.",
+      "p5": "Crab Fit kostet mehr als <strong>$100 pro monat</strong>. Erwägen sie unten zu spenden, wenn es Ihnen geholfen hat, damit es für alle kostenlos bleibt. 🦀"
+    }
+  }
+}

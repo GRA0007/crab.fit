@@ -3,6 +3,16 @@ User-agent: *
 Allow: /$
 Allow: /how-to$
 Allow: /privacy$
+Allow: /*.xml$
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.json$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Allow: /*.png$
+Allow: /*.ico$
+Allow: /*.svg$
 Disallow: *
 
-sitemap: https://crab.fit/sitemap.xml
+Sitemap: https://crab.fit/sitemap.xml

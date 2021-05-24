@@ -9,6 +9,10 @@ export const ToggleContainer = styled.div`
   border: 1px solid ${props => props.theme.primary};
   border-radius: 3px;
   overflow: hidden;
+  &:focus-within {
+    outline: Highlight auto 1px;
+    outline: -webkit-focus-ring-color auto 1px;
+  }
 `;
 
 export const StyledLabel = styled.label`

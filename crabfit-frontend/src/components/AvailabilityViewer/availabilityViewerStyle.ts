@@ -113,6 +113,7 @@ export const Tooltip = styled.div`
 	max-width: 200px;
 	pointer-events: none;
   z-index: 100;
+  user-select: none;
 `;
 
 export const TooltipTitle = styled.span`
@@ -195,6 +196,7 @@ export const Person = styled.button`
   background: transparent;
   cursor: pointer;
   padding: 2px 8px;
+  user-select: none;
 
   ${props => props.filtered && `
     background: ${props.theme.primary};

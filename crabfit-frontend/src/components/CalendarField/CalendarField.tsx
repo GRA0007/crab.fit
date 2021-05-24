@@ -19,6 +19,8 @@ import {
 	Day,
 } from './calendarFieldStyle';
 
+import supportedLocales from 'res/dayjs_locales.json';
+
 dayjs.extend(isToday);
 dayjs.extend(localeData);
 dayjs.extend(updateLocale);
@@ -55,7 +57,7 @@ const CalendarField = ({
 	...props
 }) => {
   const weekStart = useSettingsStore(state => state.weekStart);
-  const { t } = useTranslation('home');
+  const { t, i18n } = useTranslation('home');
 
 	const [type, setType] = useState(0);
 
@@ -88,14 +90,21 @@ const CalendarField = ({
 	};
 
 	useEffect(() => {
-    if (weekStart !== dayjs.Ls.en.weekStart) {
-      dayjs.updateLocale('en', {
-        weekStart: weekStart,
-        weekdaysShort: weekStart ? 'Mon_Tue_Wed_Thu_Fri_Sat_Sun'.split('_') : 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+    if (Array.from(supportedLocales).includes(i18n.language)) {
+      import(`dayjs/locale/${i18n.language}.js`).then(() => {
+        dayjs.locale(i18n.language);
+        if (weekStart !== dayjs.Ls[i18n.language].weekStart) {
+          dayjs.updateLocale(i18n.language, { weekStart });
+        }
       });
+    } else {
+      // Fallback
+      if (weekStart !== dayjs.Ls.en.weekStart) {
+        dayjs.updateLocale('en', { weekStart });
+      }
     }
 		setDates(calculateMonth(month, year, weekStart));
-	}, [weekStart, month, year]);
+	}, [weekStart, month, year, i18n.language]);
 
 	return (
 		<Wrapper>
@@ -155,7 +164,7 @@ const CalendarField = ({
     			</CalendarHeader>
 
     			<CalendarDays>
-    				{dayjs.weekdaysShort().map(name =>
+    				{(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort()).map(name =>
     					<Day key={name}>{name}</Day>
     				)}
     			</CalendarDays>

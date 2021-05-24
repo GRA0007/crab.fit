@@ -70,10 +70,10 @@ const AvailabilityViewer = ({
           total={people.filter(p => p.availability.length > 0).length}
           onSegmentFocus={count => setFocusCount(count)}
         />
-        <Center>{t('event:group.info1')}</Center>
+        <Center style={{textAlign: 'center'}}>{t('event:group.info1')}</Center>
         {people.length > 1 && (
           <>
-            <Center>{t('event:group.info2')}</Center>
+            <Center style={{textAlign: 'center'}}>{t('event:group.info2')}</Center>
             <People>
               {people.map((person, i) =>
                 <Person
