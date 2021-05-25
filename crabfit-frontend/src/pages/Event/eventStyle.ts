@@ -63,7 +63,7 @@ export const EventDate = styled.span`
 
 export const LoginForm = styled.form`
 	display: grid;
-	grid-template-columns: 1fr 1fr 100px;
+	grid-template-columns: 1fr 1fr auto;
 	align-items: flex-end;
 	grid-gap: 18px;
 

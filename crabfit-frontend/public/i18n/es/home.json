@@ -1,0 +1,57 @@
+{
+  "create": "CREA UN",
+  "recently_visited": "Recientemente visitado",
+  "nav": {
+    "about": "Info",
+    "donate": "Donar"
+  },
+  "form": {
+    "name": {
+      "label": "¡Dale un nombre a tu evento!",
+      "sublabel": "O dejar en blanco para generar uno"
+    },
+    "dates": {
+      "label": "¿Qué fechas podrían funcionar?",
+      "sublabel": "Haga clic y arrastre para seleccionar",
+      "options": {
+        "specific": "Fechas específicas",
+        "week": "Días de la semana"
+      },
+      "tooltips": {
+        "previous": "Mes anterior",
+        "next": "Próximo mes",
+        "today": "hoy"
+      }
+    },
+    "times": {
+      "label": "¿A qué horas podría funcionar?",
+      "sublabel": "Haga clic y arrastre para seleccionar un rango de tiempo"
+    },
+    "timezone": {
+      "label": "Y la zona horaria",
+      "defaultOption": "Seleccione..."
+    },
+
+    "button": "Crear",
+    "errors": {
+      "no_dates": "No hay fechas seleccionadas",
+      "same_times": "Las horas de inicio y finalización no pueden ser las mismas",
+      "no_time": "No hay ningún tiempo seleccionado",
+      "unknown": "Algo salió mal. Por favor, inténtelo de nuevo más tarde."
+    }
+  },
+  "offline": "No puede crear un Crab Fit si no tiene conexión a Internet. Asegúrate de estar conectado.",
+
+  "about": {
+    "name": "Acerca de Crab Fit",
+    "events": "Eventos creados",
+    "availabilities": "Disponibilidades ingresadas",
+    "content": {
+      "p1": "Crab Fit te ayuda a adaptar tu evento a los horarios de todos. Simplemente cree un evento arriba y envíe el enlace a todos los participantes. Los resultados se actualizan en vivo y podrá ver un mapa de calor de cuándo todos están libres.<1/><2>Obtenga más información sobre cómo Crab Fit.</2>",
+      "p2": "¿Cree muchos Crab Fits? Obtenga la <1>extensión de Chrome</1> o la <3>extensión de Firefox</3> para su navegador. También puede descargar la <5>aplicación de Android</5> en Crab Fit sobre la marcha.",
+      "p3": "Creado por <1>Ben Grant</1>, Crab Fit es la solución moderna para sus debates de planificación de eventos grupales.",
+      "p4": "El código de Crab Fit es de código abierto, si encuentra algún problema o desea contribuir, puede visitar el <1>repositorio</1>. Al utilizar Crab Fit, acepta la <3>política de privacidad</3>.",
+      "p5": "Considere hacer una donación a continuación si lo ayudó para que pueda ser gratuito para todos. 🦀"
+    }
+  }
+}

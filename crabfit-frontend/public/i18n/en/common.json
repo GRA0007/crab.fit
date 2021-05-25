@@ -14,7 +14,7 @@
       "choose": "Choose an amount"
     },
     "messages": {
-      "about": "Did you know that Crab Fit costs more that $100 per month? If it's helped you out at all, consider donating to help keep it running. 🦀",
+      "about": "If it's helped you out at all, consider donating to help keep it running. 🦀",
       "success": "Thank you for your donation! Without you, Crab Fit wouldn't be free, so thank you and keep being super awesome!",
       "error": "Cannot make donation through Google. Please try donating through the website crab.fit 🦀"
     }

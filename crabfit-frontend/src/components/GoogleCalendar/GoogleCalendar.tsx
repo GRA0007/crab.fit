@@ -98,7 +98,7 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
     		  <Button
             onClick={() => signIn()}
             isLoading={signedIn === undefined}
-            buttonWidth="270px"
+            buttonWidth={`${Math.max(t('event:you.google_cal.login').length*10, 270)}px`}
             primaryColor="#4286F5"
             secondaryColor="#3367BD">
             <LoginButton>

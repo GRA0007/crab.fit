@@ -1,0 +1,63 @@
+{
+  "available": "disponible",
+
+  "nav": {
+    "title": "Haga clic para copiar",
+    "copied": "¡Copiado!",
+    "shareinfo": "Copie el enlace a esta página o compártalo por <1>correo electrónico</1>.",
+    "shareinfo_alt": "Haga clic en el enlace de arriba para copiarlo en su portapapeles o compartirlo por <1>correo electrónico</1>.",
+    "email_subject": "Programación de {{event_name}}",
+    "email_body": "Visite este enlace para ingresar sus disponibilidades:"
+  },
+  "form": {
+    "signed_out": "Inicia sesión para añadir su disponibilidad",
+    "signed_in": "Has iniciado sesión como {{name}}",
+
+    "name": "Tu nombre",
+    "password": "Contraseña (opcional)",
+    "button": "Iniciar sesión",
+    "info": "Estos detalles son solo para este evento. Utilice una contraseña para evitar que otros cambien su disponibilidad.",
+
+    "timezone": "Tu zona horaria",
+
+    "errors": {
+      "password_incorrect": "La contraseña es incorrecta. Compruebe que su nombre esté bien escrito.",
+      "unknown": "Error al iniciar sesión. Inténtalo de nuevo."
+    },
+
+    "created_in_timezone": "Este evento se creó en la zona horaria <strong>{{timezone}}</strong>. <3>Haga clic aquí</3> para usarlo.",
+    "local_timezone": "Se detecta que su zona horaria local es <strong>{{timezone}}</strong>. <3>Haga clic aquí</3> para usarlo."
+  },
+  "offline": {
+    "title": "Estas desconectado",
+    "body": "Un Crab Fit no funciona sin conexión.<br />Asegúrate de estar conectado a Internet y vuelve a intentarlo."
+  },
+  "error": {
+    "title": "Evento no encontrado",
+    "body": "Verifique que la URL que ingresó sea correcta."
+  },
+
+  "tabs": {
+    "you": "Tu disponibilidad",
+    "you_tooltip": "Inicie sesión para establecer su disponibilidad",
+    "group": "Disponibilidad grupal"
+  },
+
+  "group": {
+    "legend_tooltip": "Haga clic para resaltar la disponibilidad más alta",
+    "info1": "Pase el ratón o toque el calendario de abajo para ver quién está disponible",
+    "info2": "Haga clic en los nombres a continuación para ver a las personas individualmente"
+  },
+
+  "you": {
+    "info": "Haga clic y arrastre el calendario a continuación para configurar sus disponibilidades",
+    "google_cal": {
+      "login": "Sincronizar con Google Calendar",
+      "logout": "cerrar sesión",
+      "select_all": "Seleccionar todo",
+      "select_none": "Seleccionar ninguno",
+      "info": "La importación sobrescribirá su disponibilidad actual",
+      "button": "Disponibilidad de importación"
+    }
+  }
+}

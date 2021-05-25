@@ -56,7 +56,7 @@ const AvailabilityEditor = ({
 	return (
     <>
       <StyledMain>
-        <Center>{t('event:you.info')}</Center>
+        <Center style={{textAlign: 'center'}}>{t('event:you.info')}</Center>
       </StyledMain>
       {isSpecificDates && (
         <StyledMain>

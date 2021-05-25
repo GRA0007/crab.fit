@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import dayjs from 'dayjs';
 
 import { useSettingsStore } from 'stores';
 
@@ -11,62 +12,7 @@ import {
 	Selected,
 } from './timeRangeFieldStyle';
 
-const times = {
-  '12h': [
-  	'12am',
-  	'1am',
-  	'2am',
-  	'3am',
-  	'4am',
-  	'5am',
-  	'6am',
-  	'7am',
-  	'8am',
-  	'9am',
-  	'10am',
-  	'11am',
-  	'12pm',
-  	'1pm',
-  	'2pm',
-  	'3pm',
-  	'4pm',
-  	'5pm',
-  	'6pm',
-  	'7pm',
-  	'8pm',
-  	'9pm',
-  	'10pm',
-  	'11pm',
-  	'12am',
-  ],
-  '24h': [
-    '00',
-  	'01',
-  	'02',
-  	'03',
-  	'04',
-  	'05',
-  	'06',
-  	'07',
-  	'08',
-  	'09',
-  	'10',
-  	'11',
-  	'12',
-  	'13',
-  	'14',
-  	'15',
-  	'16',
-  	'17',
-  	'18',
-  	'19',
-  	'20',
-  	'21',
-  	'22',
-  	'23',
-  	'24',
-  ],
-};
+const times = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'];
 
 const TimeRangeField = ({
 	label,
@@ -123,7 +69,7 @@ const TimeRangeField = ({
 				{start > end && <Selected start={start > end ? 0 : start} end={end} />}
 				<Handle
 					value={start}
-					label={times[timeFormat][start]}
+					label={timeFormat === '24h' ? times[start] : dayjs().hour(times[start]).format('ha')}
           extraPadding={end - start === 1 ? 'padding-right: 20px;' : (start - end === 1 ? 'padding-left: 20px;' : '')}
 					onMouseDown={() => {
 						document.addEventListener('mousemove', handleMouseMove);
@@ -146,7 +92,7 @@ const TimeRangeField = ({
 				/>
 				<Handle
 					value={end}
-					label={times[timeFormat][end]}
+					label={timeFormat === '24h' ? times[end] : dayjs().hour(times[end]).format('ha')}
           extraPadding={end - start === 1 ? 'padding-left: 20px;' : (start - end === 1 ? 'padding-right: 20px;' : '')}
 					onMouseDown={() => {
 						document.addEventListener('mousemove', handleMouseMove);

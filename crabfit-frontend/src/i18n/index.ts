@@ -9,6 +9,9 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
+    supportedLngs: ['en', 'de', 'es', 'ko'],
+    ns: 'common',
+    defaultNS: 'common',
     debug: process.env.NODE_ENV !== 'production',
     interpolation: {
       escapeValue: false,
