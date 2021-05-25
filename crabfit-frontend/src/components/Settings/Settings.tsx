@@ -93,6 +93,7 @@ const Settings = () => {
             'de': 'Deutsch',
             'es': 'Español',
             'fr': 'Français',
+            'id': 'Indonesia',
             'ko': '한국어',
             ...process.env.NODE_ENV !== 'production' && { 'cimode': 'DEV' },
           }}

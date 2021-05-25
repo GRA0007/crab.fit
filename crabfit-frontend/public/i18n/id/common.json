@@ -1,0 +1,58 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Buat milik Anda sendiri",
+  "cta": "Buat Crab Fit Anda sendiri!",
+  "created": "Dibuat {{date}}",
+  "donate": {
+    "info": "Terima kasih telah menggunakan Crab Fit. Jika Anda menyukainya, pertimbangkan untuk berdonasi.",
+    "button": "Menyumbangkan",
+    "title": "Setiap jumlah berarti :)",
+    "options": {
+      "$2": "Menyumbangkan $2",
+      "$5": "Menyumbangkan $5",
+      "$10": "Menyumbangkan $10",
+      "choose": "Pilih jumlahnya"
+    },
+    "messages": {
+      "about": "Jika Crab Fit telah membantu Anda sama sekali, pertimbangkan untuk berdonasi agar tetap berjalan. 🦀",
+      "success": "Terima kasih atas donasi Anda! Tanpa Anda, Crab Fit tidak akan gratis, jadi terima kasih dan tetaplah hebat!",
+      "error": "Gagal memberikan donasi melalui Google. Silahkan coba berdonasi melalui website crab.fit 🦀"
+    }
+  },
+  "options": {
+    "name": "Pengaturan",
+    "weekStart": {
+      "label": "Minggu dimulai",
+      "options": {
+        "Sunday": "Minggu",
+        "Monday": "Senin"
+      }
+    },
+    "timeFormat": {
+      "label": "Format waktu",
+      "options": {
+        "12h": "12 jam",
+        "24h": "24 jam"
+      }
+    },
+    "theme": {
+      "label": "Tema",
+      "options": {
+        "System": "Sistem",
+        "Light": "Terang",
+        "Dark": "Petang"
+      }
+    },
+    "highlight": {
+      "label": "Sorot ketersediaan tertinggi",
+      "title": "Tonjolkan ketersediaan tertinggi pada peta panas",
+      "options": {
+        "Off": "Mati",
+        "On": "Diaktifkan"
+      }
+    },
+    "language": {
+      "label": "Bahasa"
+    }
+  }
+}

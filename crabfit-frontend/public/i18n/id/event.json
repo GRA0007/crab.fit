@@ -1,0 +1,63 @@
+{
+  "available": "tersedia",
+
+  "nav": {
+    "title": "Klik untuk menyalin",
+    "copied": "Disalin!",
+    "shareinfo": "Salin link ke halaman ini, atau bagikan melalui <1>email</1>.",
+    "shareinfo_alt": "Klik link di atas untuk menyalinnya ke clipboard Anda, atau bagikan melalui <1>email</1>.",
+    "email_subject": "Penjadwalan {{event_name}}",
+    "email_body": "Kunjungi tautan ini untuk memasukkan ketersediaan Anda:"
+  },
+  "form": {
+    "signed_out": "Masuk untuk menambahkan ketersediaan Anda",
+    "signed_in": "Masuk sebagai {{name}}",
+
+    "name": "Namamu",
+    "password": "Kata sandi (opsional)",
+    "button": "Masuk",
+    "info": "Rincian ini hanya untuk acara ini. Gunakan kata sandi untuk mencegah orang lain mengubah ketersediaan Anda.",
+
+    "timezone": "Zona waktu Anda",
+
+    "errors": {
+      "password_incorrect": "Kata sandi salah. Periksa nama Anda dieja dengan benar.",
+      "unknown": "Gagal untuk masuk. Silakan coba lagi."
+    },
+
+    "created_in_timezone": "Acara ini dibuat di zona waktu <strong>{{timezone}}</strong>. <3>Klik di sini</3> untuk menggunakannya.",
+    "local_timezone": "Zona waktu lokal Anda terdeteksi sebagai <strong>{{timezone}}</strong>. <3>Klik di sini</3> untuk menggunakannya."
+  },
+  "offline": {
+    "title": "Anda sedang offline",
+    "body": "Crab Fit tidak berfungsi saat offline.<br />Pastikan Anda terhubung ke internet dan coba lagi."
+  },
+  "error": {
+    "title": "Acara tidak ditemukan",
+    "body": "Periksa apakah url yang Anda masukkan benar."
+  },
+
+  "tabs": {
+    "you": "Ketersediaan Anda",
+    "you_tooltip": "Masuk untuk mengatur ketersediaan Anda",
+    "group": "Ketersediaan grup"
+  },
+
+  "group": {
+    "legend_tooltip": "Klik untuk menyoroti ketersediaan tertinggi",
+    "info1": "Arahkan atau ketuk kalender di bawah untuk melihat siapa yang tersedia",
+    "info2": "Klik nama di bawah untuk melihat orang satu per satu"
+  },
+
+  "you": {
+    "info": "Klik dan seret kalender di bawah ini untuk mengatur ketersediaan Anda",
+    "google_cal": {
+      "login": "Sinkronkan dengan Google Kalender",
+      "logout": "keluar",
+      "select_all": "Pilih semua",
+      "select_none": "Hapus semua",
+      "info": "Mengimpor akan menimpa ketersediaan Anda saat ini",
+      "button": "Impor ketersediaan Anda"
+    }
+  }
+}

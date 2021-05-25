@@ -1,0 +1,57 @@
+{
+  "create": "BUAT",
+  "recently_visited": "Baru-baru ini dikunjungi",
+  "nav": {
+    "about": "Info",
+    "donate": "Menyumbangkan"
+  },
+  "form": {
+    "name": {
+      "label": "Beri nama acara Anda!",
+      "sublabel": "Atau biarkan kosong untuk membuat nama"
+    },
+    "dates": {
+      "label": "Tanggal berapa mungkin berhasil?",
+      "sublabel": "Klik dan seret untuk memilih",
+      "options": {
+        "specific": "Tanggal tertentu",
+        "week": "Hari dalam seminggu"
+      },
+      "tooltips": {
+        "previous": "Bulan sebelumnya",
+        "next": "Bulan depan",
+        "today": "hari ini"
+      }
+    },
+    "times": {
+      "label": "Kali apa yang mungkin bekerja?",
+      "sublabel": "Klik dan seret untuk memilih rentang waktu"
+    },
+    "timezone": {
+      "label": "Dan zona waktu",
+      "defaultOption": "Pilih..."
+    },
+
+    "button": "Membuat",
+    "errors": {
+      "no_dates": "Tidak ada tanggal yang dipilih",
+      "same_times": "Waktu mulai dan akhir tidak boleh sama",
+      "no_time": "Tidak ada waktu yang dipilih",
+      "unknown": "Ada yang salah. Silakan coba lagi nanti."
+    }
+  },
+  "offline": "Anda tidak dapat membuat Crab Fit saat Anda tidak memiliki koneksi internet. Harap pastikan Anda terhubung.",
+
+  "about": {
+    "name": "Tentang Crab Fit",
+    "events": "Acara dibuat",
+    "availabilities": "Ketersediaan dibuat",
+    "content": {
+      "p1": "Crab Fit membantu Anda menyesuaikan acara dengan jadwal semua orang. Cukup buat acara di atas dan kirim tautan ke semua orang yang berpartisipasi. Hasil diperbarui secara langsung dan Anda akan dapat melihat peta panas saat semua orang bebas.<1 /><2>Pelajari lebih lanjut tentang cara Crab Fit</2>.",
+      "p2": "Apakah Anda membuat banyak? Dapatkan <1>ekstensi Chrome</1> atau <3>ekstensi Firefox</3> untuk browser Anda! Anda juga dapat mengunduh <5>aplikasi Android</5> untuk merencanakan saat dalam perjalanan.",
+      "p3": "Dibuat oleh <1>Ben Grant</1>, Crab Fit adalah solusi modern untuk debat perencanaan acara grup Anda.",
+      "p4": "Kode Crab Fit adalah open source, jika Anda menemukan masalah atau ingin berkontribusi, Anda dapat mengunjungi <1>repositori</1>. Dengan menggunakan Crab Fit, Anda menyetujui <3>kebijakan privasi</3>.",
+      "p5": "Pertimbangkan untuk berdonasi di bawah jika itu membantu Anda sehingga dapat tetap gratis untuk semua orang. 🦀"
+    }
+  }
+}
