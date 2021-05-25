@@ -39,7 +39,7 @@ import { useSettingsStore, useRecentsStore } from 'stores';
 
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
-import supportedLocales from 'res/dayjs_locales.json';
+import localeImports from 'res/dayjs_locales';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -76,8 +76,8 @@ const Event = (props) => {
 	const [copied, setCopied] = useState(null);
 
   useEffect(() => {
-    if (Array.from(supportedLocales).includes(i18n.language)) {
-      import(`dayjs/locale/${i18n.language}.js`).then(() => dayjs.locale(i18n.language));
+    if (Object.keys(localeImports).includes(i18n.language)) {
+      localeImports[i18n.language]().then(() => dayjs.locale(i18n.language));
     }
   }, [i18n.language]);
 

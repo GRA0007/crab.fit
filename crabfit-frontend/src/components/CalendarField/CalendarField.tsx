@@ -19,7 +19,7 @@ import {
 	Day,
 } from './calendarFieldStyle';
 
-import supportedLocales from 'res/dayjs_locales.json';
+import localeImports from 'res/dayjs_locales';
 
 dayjs.extend(isToday);
 dayjs.extend(localeData);
@@ -90,8 +90,8 @@ const CalendarField = ({
 	};
 
 	useEffect(() => {
-    if (Array.from(supportedLocales).includes(i18n.language)) {
-      import(`dayjs/locale/${i18n.language}.js`).then(() => {
+    if (Object.keys(localeImports).includes(i18n.language)) {
+      localeImports[i18n.language]().then(() => {
         dayjs.locale(i18n.language);
         if (weekStart !== dayjs.Ls[i18n.language].weekStart) {
           dayjs.updateLocale(i18n.language, { weekStart });
