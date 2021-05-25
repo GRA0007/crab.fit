@@ -5,7 +5,7 @@ import localeData from 'dayjs/plugin/localeData';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-import { useSettingsStore } from 'stores';
+import { useSettingsStore, useLocaleUpdateStore } from 'stores';
 
 import { Legend, Center } from 'components';
 import {
@@ -52,7 +52,9 @@ const AvailabilityViewer = ({
   const [touched, setTouched] = useState(false);
   const [tempFocus, setTempFocus] = useState(null);
   const [focusCount, setFocusCount] = useState(null);
+
   const { t } = useTranslation('event');
+  const locale = useLocaleUpdateStore(state => state.locale);
 
   const wrapper = useRef();
 
@@ -118,7 +120,7 @@ const AvailabilityViewer = ({
     					return (
     						<Fragment key={i}>
     							<Date>
-    								{isSpecificDates && <DateLabel>{parsedDate.format('MMM D')}</DateLabel>}
+    								{isSpecificDates && <DateLabel locale={locale}>{parsedDate.format('MMM D')}</DateLabel>}
     								<DayLabel>{parsedDate.format('ddd')}</DayLabel>
 
     								<Times

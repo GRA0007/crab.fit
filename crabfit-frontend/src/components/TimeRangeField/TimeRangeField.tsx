@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 
-import { useSettingsStore } from 'stores';
+import { useSettingsStore, useLocaleUpdateStore } from 'stores';
 
 import {
 	Wrapper,
@@ -22,6 +22,7 @@ const TimeRangeField = ({
 	...props
 }) => {
   const timeFormat = useSettingsStore(state => state.timeFormat);
+  const locale = useLocaleUpdateStore(state => state.locale);
 
 	const [start, setStart] = useState(9);
 	const [end, setEnd] = useState(17);
@@ -53,7 +54,7 @@ const TimeRangeField = ({
 	};
 
 	return (
-		<Wrapper>
+		<Wrapper locale={locale}>
 			{label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
 			{subLabel && <StyledSubLabel htmlFor={id}>{subLabel}</StyledSubLabel>}
 			<input

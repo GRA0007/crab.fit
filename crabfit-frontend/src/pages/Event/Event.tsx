@@ -35,7 +35,7 @@ import {
 } from './eventStyle';
 
 import api from 'services';
-import { useSettingsStore, useRecentsStore } from 'stores';
+import { useSettingsStore, useRecentsStore, useLocaleUpdateStore } from 'stores';
 
 import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
@@ -51,6 +51,8 @@ const Event = (props) => {
   const weekStart = useSettingsStore(state => state.weekStart);
 
   const addRecent = useRecentsStore(state => state.addRecent);
+  const setLocale = useLocaleUpdateStore(state => state.setLocale);
+  const locale = useLocaleUpdateStore(state => state.locale);
 
   const { t, i18n } = useTranslation(['common', 'event']);
 
@@ -77,9 +79,12 @@ const Event = (props) => {
 
   useEffect(() => {
     if (Object.keys(localeImports).includes(i18n.language)) {
-      localeImports[i18n.language]().then(() => dayjs.locale(i18n.language));
+      localeImports[i18n.language]().then(() => {
+        dayjs.locale(i18n.language);
+        setLocale(dayjs.locale());
+      });
     }
-  }, [i18n.language]);
+  }, [i18n.language, setLocale]);
 
 	useEffect(() => {
 		const fetchEvent = async () => {
@@ -210,7 +215,7 @@ const Event = (props) => {
 				return [...allDates, date];
 			}, []));
 		}
-	}, [times, timeFormat]);
+	}, [times, timeFormat, locale]);
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -296,7 +301,7 @@ const Event = (props) => {
 				{(!!event || isLoading) ? (
 					<>
 						<EventName isLoading={isLoading}>{event?.name}</EventName>
-            <EventDate isLoading={isLoading} title={event?.created && dayjs.unix(event?.created).format('D MMMM, YYYY')}>{event?.created && t('common:created', { date: dayjs.unix(event?.created).fromNow() })}</EventDate>
+            <EventDate isLoading={isLoading} locale={locale} title={event?.created && dayjs.unix(event?.created).format('D MMMM, YYYY')}>{event?.created && t('common:created', { date: dayjs.unix(event?.created).fromNow() })}</EventDate>
 						<ShareInfo
               onClick={() => navigator.clipboard?.writeText(`https://crab.fit/${id}`)
                   .then(() => {

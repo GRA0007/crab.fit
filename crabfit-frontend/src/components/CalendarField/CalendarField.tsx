@@ -6,7 +6,7 @@ import localeData from 'dayjs/plugin/localeData';
 import updateLocale from 'dayjs/plugin/updateLocale';
 
 import { Button, ToggleField } from 'components';
-import { useSettingsStore } from 'stores';
+import { useSettingsStore, useLocaleUpdateStore } from 'stores';
 
 import {
 	Wrapper,
@@ -57,6 +57,8 @@ const CalendarField = ({
 	...props
 }) => {
   const weekStart = useSettingsStore(state => state.weekStart);
+  const locale = useLocaleUpdateStore(state => state.locale);
+  const setLocale = useLocaleUpdateStore(state => state.setLocale);
   const { t, i18n } = useTranslation('home');
 
 	const [type, setType] = useState(0);
@@ -93,6 +95,7 @@ const CalendarField = ({
     if (Object.keys(localeImports).includes(i18n.language)) {
       localeImports[i18n.language]().then(() => {
         dayjs.locale(i18n.language);
+        setLocale(dayjs.locale());
         if (weekStart !== dayjs.Ls[i18n.language].weekStart) {
           dayjs.updateLocale(i18n.language, { weekStart });
         }
@@ -104,10 +107,10 @@ const CalendarField = ({
       }
     }
 		setDates(calculateMonth(month, year, weekStart));
-	}, [weekStart, month, year, i18n.language]);
+	}, [weekStart, month, year, i18n.language, setLocale]);
 
 	return (
-		<Wrapper>
+		<Wrapper locale={locale}>
 			{label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
 			{subLabel && <StyledSubLabel htmlFor={id}>{subLabel}</StyledSubLabel>}
 			<input

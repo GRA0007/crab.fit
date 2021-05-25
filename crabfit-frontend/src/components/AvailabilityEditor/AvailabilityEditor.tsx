@@ -1,5 +1,6 @@
 import { useState, useRef, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocaleUpdateStore } from 'stores';
 import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -38,6 +39,8 @@ const AvailabilityEditor = ({
 	...props
 }) => {
   const { t } = useTranslation('event');
+  const locale = useLocaleUpdateStore(state => state.locale);
+
 	const [selectingTimes, _setSelectingTimes] = useState([]);
 	const staticSelectingTimes = useRef([]);
 	const setSelectingTimes = newTimes => {
@@ -73,7 +76,7 @@ const AvailabilityEditor = ({
         </StyledMain>
       )}
 
-  		<Wrapper>
+  		<Wrapper locale={locale}>
         <ScrollWrapper>
     			<Container>
     				<TimeLabels>
