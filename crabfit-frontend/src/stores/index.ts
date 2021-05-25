@@ -39,3 +39,8 @@ export const useTWAStore = create(set => ({
   TWA: undefined,
   setTWA: TWA => set({ TWA }),
 }));
+
+export const useLocaleUpdateStore = create(set => ({
+  locale: undefined,
+  setLocale: locale => set({ locale }),
+}));

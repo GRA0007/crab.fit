@@ -89,8 +89,12 @@ const Settings = () => {
           name="language"
           id="language"
           options={{
-            'en': 'English (US)',
             'de': 'Deutsch',
+            'en': 'English',
+            'es': 'Español',
+            'fr': 'Français',
+            'hi': 'हिंदी',
+            'id': 'Indonesia',
             'ko': '한국어',
             ...process.env.NODE_ENV !== 'production' && { 'cimode': 'DEV' },
           }}

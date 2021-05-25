@@ -60,6 +60,7 @@ export const Handle = styled.div`
 		text-align: center;
 		left: 50%;
 		transform: translateX(-50%);
+    white-space: nowrap;
     ${props => props.extraPadding}
 	}
 `;

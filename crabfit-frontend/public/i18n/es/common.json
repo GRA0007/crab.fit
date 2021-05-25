@@ -1,0 +1,58 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Crea tu propio",
+  "cta": "¡Crea tu propio Crab Fit!",
+  "created": "Creado {{date}}",
+  "donate": {
+    "info": "Gracias por usar Crab Fit. Si te gusta, considera hacer una donación.",
+    "button": "Donar",
+    "title": "Cada cantidad cuenta :)",
+    "options": {
+      "$2": "Donar $2",
+      "$5": "Donar $5",
+      "$10": "Donar $10",
+      "choose": "Elige una cantidad"
+    },
+    "messages": {
+      "about": "Si es que le ayudó en absoluto, considere donar para ayudar a mantenerlo en funcionamiento. 🦀",
+      "success": "¡Gracias por tu donación! Sin ti, cangrejo Fit no sería libre, así que gracias y seguir siendo muy impresionante!",
+      "error": "No se pudo realizar la donación a través de Google. Intente donar a través del sitio web crab.fit 🦀"
+    }
+  },
+  "options": {
+    "name": "Opciones",
+    "weekStart": {
+      "label": "La semana empieza el",
+      "options": {
+        "Sunday": "domingo",
+        "Monday": "lunes"
+      }
+    },
+    "timeFormat": {
+      "label": "Formato de tiempo",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Tema",
+      "options": {
+        "System": "Sistema",
+        "Light": "Claro",
+        "Dark": "Oscuro"
+      }
+    },
+    "highlight": {
+      "label": "Resalte la mayor disponibilidad",
+      "title": "Destaque la mayor disponibilidad en el mapa de calor",
+      "options": {
+        "Off": "Apagado",
+        "On": "Encendido"
+      }
+    },
+    "language": {
+      "label": "Idioma"
+    }
+  }
+}

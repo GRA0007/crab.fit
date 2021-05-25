@@ -83,11 +83,11 @@ const Home = ({ offline }) => {
 			const dates = JSON.parse(data.dates);
 
 			if (dates.length === 0) {
-				return setError(`You haven't selected any dates!`);
+				return setError(t('home:form.errors.no_dates'));
 			}
       const isSpecificDates = typeof dates[0] === 'string' && dates[0].length === 8;
 			if (start === end) {
-				return setError(`The start and end times can't be the same`);
+				return setError(t('home:form.errors.same_times'));
 			}
 
 			let times = dates.reduce((times, date) => {
@@ -124,7 +124,7 @@ const Home = ({ offline }) => {
 			}, []);
 
 			if (times.length === 0) {
-				return setError(`You don't have any time selected`);
+				return setError(t('home:form.errors.no_time'));
 			}
 
 			const response = await api.post('/event', {
@@ -139,7 +139,7 @@ const Home = ({ offline }) => {
         'event_category': 'home',
       });
 		} catch (e) {
-			setError('An error ocurred while creating the event. Please try again later.');
+			setError(t('home:form.errors.unknown'));
 			console.error(e);
 		} finally {
 			setIsLoading(false);
@@ -236,7 +236,7 @@ const Home = ({ offline }) => {
           {/* eslint-disable-next-line */}
 					<P><Trans i18nKey="home:about.content.p3">Created by <a href="https://bengrant.dev" target="_blank">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</Trans></P>
 					<P><Trans i18nKey="home:about.content.p4">The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer">repository</a>. By using Crab Fit you agree to the <Link to="/privacy">privacy policy</Link>.</Trans></P>
-          <P><Trans i18nKey="home:about.content.p5">Crab Fit costs more than <strong>$100 per month</strong> to run. Consider donating below if it helped you out so it can stay free for everyone. 🦀</Trans></P>
+          <P><Trans i18nKey="home:about.content.p5">Consider donating below if it helped you out so it can stay free for everyone. 🦀</Trans></P>
 				</StyledMain>
 			</AboutSection>
 

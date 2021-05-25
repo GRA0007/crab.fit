@@ -6,7 +6,7 @@ import localeData from 'dayjs/plugin/localeData';
 import updateLocale from 'dayjs/plugin/updateLocale';
 
 import { Button, ToggleField } from 'components';
-import { useSettingsStore } from 'stores';
+import { useSettingsStore, useLocaleUpdateStore } from 'stores';
 
 import {
 	Wrapper,
@@ -19,7 +19,7 @@ import {
 	Day,
 } from './calendarFieldStyle';
 
-import supportedLocales from 'res/dayjs_locales.json';
+import localeImports from 'res/dayjs_locales';
 
 dayjs.extend(isToday);
 dayjs.extend(localeData);
@@ -57,6 +57,8 @@ const CalendarField = ({
 	...props
 }) => {
   const weekStart = useSettingsStore(state => state.weekStart);
+  const locale = useLocaleUpdateStore(state => state.locale);
+  const setLocale = useLocaleUpdateStore(state => state.setLocale);
   const { t, i18n } = useTranslation('home');
 
 	const [type, setType] = useState(0);
@@ -90,9 +92,10 @@ const CalendarField = ({
 	};
 
 	useEffect(() => {
-    if (Array.from(supportedLocales).includes(i18n.language)) {
-      import(`dayjs/locale/${i18n.language}.js`).then(() => {
+    if (Object.keys(localeImports).includes(i18n.language)) {
+      localeImports[i18n.language]().then(() => {
         dayjs.locale(i18n.language);
+        setLocale(dayjs.locale());
         if (weekStart !== dayjs.Ls[i18n.language].weekStart) {
           dayjs.updateLocale(i18n.language, { weekStart });
         }
@@ -104,10 +107,10 @@ const CalendarField = ({
       }
     }
 		setDates(calculateMonth(month, year, weekStart));
-	}, [weekStart, month, year, i18n.language]);
+	}, [weekStart, month, year, i18n.language, setLocale]);
 
 	return (
-		<Wrapper>
+		<Wrapper locale={locale}>
 			{label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
 			{subLabel && <StyledSubLabel htmlFor={id}>{subLabel}</StyledSubLabel>}
 			<input
@@ -213,11 +216,11 @@ const CalendarField = ({
         </>
       ) : (
         <CalendarBody>
-          {dayjs.weekdaysShort().map((name, i) =>
+          {(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort()).map((name, i) =>
             <Date
               key={name}
-              isToday={dayjs.weekdaysShort()[dayjs().day()-weekStart] === name}
-              title={dayjs.weekdaysShort()[dayjs().day()-weekStart] === name ? t('form.dates.tooltips.today') : ''}
+              isToday={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart] === name}
+              title={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart] === name ? t('form.dates.tooltips.today') : ''}
               selected={selectedDays.includes(((i + weekStart) % 7 + 7) % 7)}
               selecting={selectingDays.includes(((i + weekStart) % 7 + 7) % 7)}
               mode={mode}
