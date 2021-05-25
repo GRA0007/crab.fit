@@ -93,7 +93,7 @@ const Donate = ({ onDonate = null }) => {
       >
   			<Button
   				buttonHeight="30px"
-  				buttonWidth="90px"
+  				buttonWidth={`${Math.max(t('donate.button').length*10, 90)}px`}
   				type="button"
   				tabIndex="-1"
           title={t('donate.title')}

@@ -3,6 +3,7 @@ const locales = {
   de: () => import('dayjs/locale/de'),
   es: () => import('dayjs/locale/es'),
   ko: () => import('dayjs/locale/ko'),
+  fr: () => import('dayjs/locale/fr'),
 };
 
 export default locales;

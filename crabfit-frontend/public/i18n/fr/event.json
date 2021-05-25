@@ -1,0 +1,63 @@
+{
+  "available": "disponible",
+
+  "nav": {
+    "title": "Cliquez pour copier",
+    "copied": "Copié!",
+    "shareinfo": "Copiez le lien vers cette page ou partagez-le par <1>e-mail</1>.",
+    "shareinfo_alt": "Cliquez sur le lien ci-dessus pour le copier dans votre presse-papiers ou le partager par <1>e-mail</1>.",
+    "email_subject": "Planification {{event_name}}",
+    "email_body": "Visitez ce lien pour saisir vos disponibilités:"
+  },
+  "form": {
+    "signed_out": "Connectez-vous pour ajouter votre disponibilité",
+    "signed_in": "Connecté en tant que {{name}}",
+
+    "name": "Votre nom",
+    "password": "Mot de passe (facultatif)",
+    "button": "Connexion",
+    "info": "Ces détails ne concernent que cet événement. Utilisez un mot de passe pour empêcher les autres de modifier votre disponibilité.",
+
+    "timezone": "Votre fuseau horaire",
+
+    "errors": {
+      "password_incorrect": "Le mot de passe est incorrect. Vérifiez que votre nom est correctement orthographié.",
+      "unknown": "Échec de la connexion. Veuillez réessayer."
+    },
+
+    "created_in_timezone": "Cet événement a été créé dans le fuseau horaire <strong>{{timezone}}</strong>. <3>Cliquez ici</3> pour l'utiliser.",
+    "local_timezone": "Votre fuseau horaire local est détecté comme <strong>{{timezone}}</strong>. <3>Cliquez ici</3> pour l'utiliser."
+  },
+  "offline": {
+    "title": "Tu es hors ligne",
+    "body": "Un Crab Fit ne fonctionne pas hors ligne.<br />Assurez-vous que vous êtes connecté à Internet et réessayez."
+  },
+  "error": {
+    "title": "Événement introuvable",
+    "body": "Vérifiez que l'URL que vous avez saisie est correcte."
+  },
+
+  "tabs": {
+    "you": "Votre disponibilité",
+    "you_tooltip": "Connectez-vous pour définir votre disponibilité",
+    "group": "Disponibilité de groupe"
+  },
+
+  "group": {
+    "legend_tooltip": "Cliquez pour mettre en évidence la plus haute disponibilité",
+    "info1": "Survolez ou appuyez sur le calendrier ci-dessous pour voir qui est disponible",
+    "info2": "Cliquez sur les noms ci-dessous pour afficher les personnes individuellement"
+  },
+
+  "you": {
+    "info": "Cliquez et faites glisser le calendrier ci-dessous pour définir vos disponibilités",
+    "google_cal": {
+      "login": "Synchroniser avec Google Agenda",
+      "logout": "déconnexion",
+      "select_all": "Tout sélectionner",
+      "select_none": "Tout déselectionner",
+      "info": "L'importation écrasera votre disponibilité actuelle",
+      "button": "Importer la disponibilité"
+    }
+  }
+}

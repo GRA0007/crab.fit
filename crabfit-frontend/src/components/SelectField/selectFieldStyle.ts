@@ -43,6 +43,11 @@ export const StyledSelect = styled.select`
 	border-radius: 3px;
 	outline: none;
 	transition: border-color .15s, box-shadow .15s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><foreignObject width=%22100px%22 height=%22100px%22><div xmlns=%22http://www.w3.org/1999/xhtml%22 style=%22color:${props => encodeURIComponent(props.theme.primary)};font-size:60px;display:flex;align-items:center;justify-content:center;height:100%25;width:100%25%22>▼</div></foreignObject></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 1em;
 
 	&:focus {
 		border: 1px solid ${props => props.theme.primary};
