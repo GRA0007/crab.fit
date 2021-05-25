@@ -213,11 +213,11 @@ const CalendarField = ({
         </>
       ) : (
         <CalendarBody>
-          {dayjs.weekdaysShort().map((name, i) =>
+          {(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort()).map((name, i) =>
             <Date
               key={name}
-              isToday={dayjs.weekdaysShort()[dayjs().day()-weekStart] === name}
-              title={dayjs.weekdaysShort()[dayjs().day()-weekStart] === name ? t('form.dates.tooltips.today') : ''}
+              isToday={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart] === name}
+              title={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart] === name ? t('form.dates.tooltips.today') : ''}
               selected={selectedDays.includes(((i + weekStart) % 7 + 7) % 7)}
               selecting={selectingDays.includes(((i + weekStart) % 7 + 7) % 7)}
               mode={mode}
