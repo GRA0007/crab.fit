@@ -6,6 +6,7 @@ const locales = {
   hi: () => import('dayjs/locale/hi'), // Hindi
   id: () => import('dayjs/locale/id'), // Indonesian
   ko: () => import('dayjs/locale/ko'), // Korean
+  ru: () => import('dayjs/locale/ru'), // Russian
 };
 
 export default locales;
