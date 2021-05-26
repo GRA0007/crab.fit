@@ -1,11 +1,11 @@
 const locales = {
-  en: () => import('dayjs/locale/en'),
-  de: () => import('dayjs/locale/de'),
-  es: () => import('dayjs/locale/es'),
-  ko: () => import('dayjs/locale/ko'),
-  fr: () => import('dayjs/locale/fr'),
-  id: () => import('dayjs/locale/id'),
-  hi: () => import('dayjs/locale/hi'),
+  de: () => import('dayjs/locale/de'), // German
+  en: () => import('dayjs/locale/en'), // English
+  es: () => import('dayjs/locale/es'), // Spanish
+  fr: () => import('dayjs/locale/fr'), // French
+  hi: () => import('dayjs/locale/hi'), // Hindi
+  id: () => import('dayjs/locale/id'), // Indonesian
+  ko: () => import('dayjs/locale/ko'), // Korean
 };
 
 export default locales;
