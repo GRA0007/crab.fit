@@ -1,6 +1,7 @@
 # Crabfit <img width="100" align="right" src="crabfit-frontend/src/res/logo.svg" alt="avatar">
 
 Align your schedules to find the perfect time that works for everyone.
+Licensed under the GNU GPLv3.
 
 <a href="https://www.producthunt.com/posts/crab-fit?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-crab-fit" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=291656&theme=light" alt="Crab Fit - Use your availability to find a time that works for everyone | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 

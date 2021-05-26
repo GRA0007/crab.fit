@@ -56,7 +56,7 @@ export const Modal = styled.div`
   z-index: 150;
   padding: 10px 18px;
   border-radius: 3px;
-  width: 250px;
+  width: 270px;
   box-sizing: border-box;
   max-width: calc(100% - 20px);
   box-shadow: 0 3px 6px 0 rgba(0,0,0,.3);

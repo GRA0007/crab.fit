@@ -20,6 +20,13 @@ export const TitleSmall = styled.span`
 	color: ${props => props.theme.primaryDark};
 	line-height: 1em;
   text-transform: uppercase;
+
+  ${props => !props.altChars && `
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.2em;
+    padding-top: .3em;
+  `}
 `;
 
 export const TitleLarge = styled.h1`

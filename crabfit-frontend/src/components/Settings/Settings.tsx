@@ -96,6 +96,7 @@ const Settings = () => {
             'hi': 'हिंदी',
             'id': 'Indonesia',
             'ko': '한국어',
+            'ru': 'Pусский',
             ...process.env.NODE_ENV !== 'production' && { 'cimode': 'DEV' },
           }}
           small
