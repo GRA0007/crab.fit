@@ -19,20 +19,4 @@ export const Wrapper = styled.footer`
       margin-bottom: 20px;
     }
   `}
-
-  ${props => props.donateMode && `
-    display: flex;
-  	align-items: center;
-  	justify-content: space-between;
-    flex-wrap: wrap;
-  `}
-`;
-
-export const Link = styled.a`
-	padding: 11px 10px;
-  white-space: nowrap;
-
-  & strong {
-    font-weight: 800;
-  }
 `;

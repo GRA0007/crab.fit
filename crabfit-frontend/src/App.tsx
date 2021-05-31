@@ -107,6 +107,11 @@ const App = () => {
 						},
 					})}
 				/>
+        
+        <Suspense fallback={<Loading />}>
+          <Settings />
+        </Suspense>
+
 		    <Switch>
 					<Route path="/" exact render={props => (
             <Suspense fallback={<Loading />}>
@@ -134,10 +139,6 @@ const App = () => {
             </Suspense>
           )} />
 				</Switch>
-
-        <Suspense fallback={<Loading />}>
-          <Settings />
-        </Suspense>
 
         {eggVisible && <Egg eggKey={eggKey} onClose={() => setEggVisible(false)} />}
 			</ThemeProvider>

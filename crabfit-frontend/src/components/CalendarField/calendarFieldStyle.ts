@@ -51,21 +51,27 @@ export const CalendarBody = styled.div`
 	grid-template-columns: repeat(7, 1fr);
 	grid-gap: 2px;
 
-	& div:first-of-type {
+	& button:first-of-type {
 		border-top-left-radius: 3px;
 	}
-	& div:nth-of-type(7) {
+	& button:nth-of-type(7) {
 		border-top-right-radius: 3px;
 	}
-	& div:nth-last-of-type(7) {
+	& button:nth-last-of-type(7) {
 		border-bottom-left-radius: 3px;
 	}
-	& div:last-of-type {
+	& button:last-of-type {
 		border-bottom-right-radius: 3px;
 	}
 `;
 
-export const Date = styled.div`
+export const Date = styled.button`
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  appearance: none;
+
 	background-color: ${props => props.theme.primaryBackground};
 	border: 1px solid ${props => props.theme.primaryLight};
 	display: flex;

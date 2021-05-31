@@ -15,6 +15,7 @@ const ToggleField = ({
 	options = [],
   value,
   onChange,
+  inputRef,
 	...props
 }) => (
 	<Wrapper>
@@ -30,6 +31,7 @@ const ToggleField = ({
             id={`${name}-${label}`}
             checked={value === key}
             onChange={() => onChange(key)}
+            ref={inputRef}
           />
           <LabelButton htmlFor={`${name}-${label}`}>{label}</LabelButton>
         </Option>

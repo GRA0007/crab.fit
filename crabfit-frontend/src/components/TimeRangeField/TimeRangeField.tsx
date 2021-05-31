@@ -90,6 +90,17 @@ const TimeRangeField = ({
 						step = Math.abs(step);
 						setStart(step);
 					}}
+          tabIndex="0"
+          onKeyDown={e => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+              e.preventDefault();
+              setStart(Math.max(start-1, 0));
+            }
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+              e.preventDefault();
+              setStart(Math.min(start+1, 24));
+            }
+          }}
 				/>
 				<Handle
 					value={end}
@@ -113,6 +124,17 @@ const TimeRangeField = ({
 						step = Math.abs(step);
 						setEnd(step);
 					}}
+          tabIndex="0"
+          onKeyDown={e => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+              e.preventDefault();
+              setEnd(Math.max(end-1, 0));
+            }
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+              e.preventDefault();
+              setEnd(Math.min(end+1, 24));
+            }
+          }}
 				/>
 			</Range>
 		</Wrapper>
