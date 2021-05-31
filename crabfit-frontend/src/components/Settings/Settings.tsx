@@ -32,11 +32,20 @@ const Settings = () => {
   const setLocale = useLocaleUpdateStore(state => state.setLocale);
   const firstControlRef = useRef();
 
+  const onEsc = e => {
+    if (e.key === 'Escape') {
+      setIsOpen(false);
+    }
+  };
+
   const setIsOpen = open => {
     _setIsOpen(open);
 
     if (open) {
       window.setTimeout(() => firstControlRef.current.focus(), 150);
+      document.addEventListener('keyup', onEsc, true);
+    } else {
+      document.removeEventListener('keyup', onEsc);
     }
   };
 
