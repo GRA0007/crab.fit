@@ -19,8 +19,6 @@ import {
 	Day,
 } from './calendarFieldStyle';
 
-import localeImports from 'res/dayjs_locales';
-
 dayjs.extend(isToday);
 dayjs.extend(localeData);
 dayjs.extend(updateLocale);
@@ -58,8 +56,7 @@ const CalendarField = ({
 }) => {
   const weekStart = useSettingsStore(state => state.weekStart);
   const locale = useLocaleUpdateStore(state => state.locale);
-  const setLocale = useLocaleUpdateStore(state => state.setLocale);
-  const { t, i18n } = useTranslation('home');
+  const { t } = useTranslation('home');
 
 	const [type, setType] = useState(0);
 
@@ -92,22 +89,11 @@ const CalendarField = ({
 	};
 
 	useEffect(() => {
-    if (Object.keys(localeImports).includes(i18n.language)) {
-      localeImports[i18n.language]().then(() => {
-        dayjs.locale(i18n.language);
-        setLocale(dayjs.locale());
-        if (weekStart !== dayjs.Ls[i18n.language].weekStart) {
-          dayjs.updateLocale(i18n.language, { weekStart });
-        }
-      });
-    } else {
-      // Fallback
-      if (weekStart !== dayjs.Ls.en.weekStart) {
-        dayjs.updateLocale('en', { weekStart });
-      }
+    if (dayjs.Ls.hasOwnProperty(locale) && weekStart !== dayjs.Ls[locale].weekStart) {
+      dayjs.updateLocale(locale, { weekStart });
     }
 		setDates(calculateMonth(month, year, weekStart));
-	}, [weekStart, month, year, i18n.language, setLocale]);
+	}, [weekStart, month, year, locale]);
 
 	return (
 		<Wrapper locale={locale}>

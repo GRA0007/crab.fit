@@ -5,6 +5,8 @@ import Backend from 'i18next-http-backend';
 
 import locales from 'res/dayjs_locales';
 
+const storedLang = localStorage.getItem('i18nextLng');
+
 i18n
   .use(LanguageDetector)
   .use(Backend)
@@ -21,6 +23,7 @@ i18n
     backend: {
       loadPath: '/i18n/{{lng}}/{{ns}}.json',
     },
-  });
+    storedLang,
+  }).then(() => document.documentElement.setAttribute('lang', i18n.language));
 
 export default i18n;

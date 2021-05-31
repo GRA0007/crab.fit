@@ -31,6 +31,8 @@ import {
   StyledMain,
 } from './availabilityViewerStyle';
 
+import locales from 'res/dayjs_locales';
+
 dayjs.extend(localeData);
 dayjs.extend(customParseFormat);
 dayjs.extend(relativeTime);
@@ -152,7 +154,7 @@ const AvailabilityViewer = ({
     												onMouseEnter={(e) => {
     													const cellBox = e.currentTarget.getBoundingClientRect();
     													const wrapperBox = wrapper?.current?.getBoundingClientRect() ?? { x: 0, y: 0 };
-                              const timeText = timeFormat === '12h' ? 'h:mma' : 'HH:mm';
+                              const timeText = timeFormat === '12h' ? `h${locales[locale].separator}mma` : `HH${locales[locale].separator}mm`;
     													setTooltip({
     														x: Math.round(cellBox.x-wrapperBox.x + cellBox.width/2),
     														y: Math.round(cellBox.y-wrapperBox.y + cellBox.height)+6,

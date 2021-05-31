@@ -1,37 +1,5 @@
 import styled from '@emotion/styled';
 
-export const StyledMain = styled.div`
-	width: 600px;
-	margin: 20px auto;
-	max-width: calc(100% - 60px);
-`;
-
-export const Logo = styled.img`
-	width: 2.5rem;
-	margin-right: 16px;
-`;
-
-export const Title = styled.span`
-	display: block;
-	font-size: 2rem;
-	color: ${props => props.theme.primary};
-	font-family: 'Molot', sans-serif;
-	font-weight: 400;
-	text-shadow: 0 2px 0 ${props => props.theme.primaryDark};
-	line-height: 1em;
-`;
-
-export const AboutSection = styled.section`
-	margin: 30px 0 0;
-	background-color: ${props => props.theme.primaryBackground};
-	padding: 20px 0;
-`;
-
-export const P = styled.p`
-	font-weight: 500;
-	line-height: 1.6em;
-`;
-
 export const Step = styled.h2`
 	text-decoration-color: ${props => props.theme.primary};
   text-decoration-style: solid;

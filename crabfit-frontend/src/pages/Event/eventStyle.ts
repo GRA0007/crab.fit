@@ -1,26 +1,5 @@
 import styled from '@emotion/styled';
 
-export const StyledMain = styled.div`
-	width: 600px;
-	margin: 20px auto;
-	max-width: calc(100% - 60px);
-`;
-
-export const Logo = styled.img`
-	width: 2.5rem;
-	margin-right: 16px;
-`;
-
-export const Title = styled.span`
-	display: block;
-	font-size: 2rem;
-	color: ${props => props.theme.primary};
-	font-family: 'Molot', sans-serif;
-	font-weight: 400;
-	text-shadow: 0 2px 0 ${props => props.theme.primaryDark};
-	line-height: 1em;
-`;
-
 export const EventName = styled.h1`
 	text-align: center;
 	font-weight: 800;
