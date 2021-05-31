@@ -14,10 +14,10 @@ export const ToggleContainer = styled.div`
     box-shadow: inset 0 -3px 0 0 var(--focus-color);
   }
 
-  & > div:first-child label {
+  & > div:first-of-type label {
     border-end-start-radius: 2px;
   }
-  & > div:last-child label {
+  & > div:last-of-type label {
     border-end-end-radius: 2px;
   }
 `;
