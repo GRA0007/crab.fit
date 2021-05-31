@@ -16,6 +16,14 @@ import {
 
 import locales from 'res/dayjs_locales';
 
+// Language specific options
+const setDefaults = (lang, store) => {
+  if (locales.hasOwnProperty(lang)) {
+    store.setWeekStart(locales[lang].weekStart);
+    store.setTimeFormat(locales[lang].timeFormat);
+  }
+};
+
 const Settings = () => {
   const theme = useTheme();
   const store = useSettingsStore();
@@ -36,12 +44,13 @@ const Settings = () => {
     }
   }, [i18n.language, setLocale]);
 
+  if (!i18n.options.storedLang) {
+    setDefaults(i18n.language, store);
+    i18n.options.storedLang = i18n.language;
+  }
+
   i18n.on('languageChanged', lang => {
-    // Language specific options
-    if (locales.hasOwnProperty(lang)) {
-      store.setWeekStart(locales[lang].weekStart);
-      store.setTimeFormat(locales[lang].timeFormat);
-    }
+    setDefaults(lang, store);
   });
 
   return (
