@@ -1,14 +1,32 @@
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from 'components';
 import { useTWAStore } from 'stores';
 import { useTranslation } from 'react-i18next';
 
+import {
+  Wrapper,
+  Options,
+} from './donateStyle';
+
 const PAYMENT_METHOD = 'https://play.google.com/billing';
 const SKU = 'crab_donation';
 
-const Donate = ({ onDonate = null }) => {
+const Donate = () => {
   const store = useTWAStore();
   const { t } = useTranslation('common');
+
+  const firstLinkRef = useRef();
+  const buttonRef = useRef();
+  const modalRef = useRef();
+  const [isOpen, _setIsOpen] = useState(false);
+
+  const setIsOpen = open => {
+    _setIsOpen(open);
+
+    if (open) {
+      window.setTimeout(() => firstLinkRef.current.focus(), 150);
+    }
+  };
 
   useEffect(() => {
     if (store.TWA === undefined) {
@@ -71,7 +89,7 @@ const Donate = ({ onDonate = null }) => {
   };
 
   return (
-  	<div style={{ marginTop: 6, marginLeft: 12 }}>
+  	<Wrapper>
   		<a
         onClick={event => {
           gtag('event', 'donate', { 'event_category': 'donate' });
@@ -82,14 +100,15 @@ const Donate = ({ onDonate = null }) => {
                 alert(t('donate.messages.error'));
               }
             }
-          } else if (onDonate !== null) {
+          } else {
             event.preventDefault();
-            onDonate();
+            setIsOpen(true);
           }
         }}
         href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5"
         target="_blank"
         rel="noreferrer"
+        ref={buttonRef}
       >
   			<Button
   				buttonHeight="30px"
@@ -99,7 +118,21 @@ const Donate = ({ onDonate = null }) => {
           title={t('donate.title')}
   			>{t('donate.button')}</Button>
   		</a>
-  	</div>
+
+      <Options
+        isOpen={isOpen}
+        ref={modalRef}
+        onBlur={e => {
+          if (modalRef.current.contains(e.relatedTarget)) return;
+          setIsOpen(false);
+        }}
+      >
+        <a onClick={() => setIsOpen(false)} ref={firstLinkRef} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=2" target="_blank" rel="noreferrer">{t('donate.options.$2')}</a>
+        <a onClick={() => setIsOpen(false)} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5" target="_blank" rel="noreferrer"><strong>{t('donate.options.$5')}</strong></a>
+        <a onClick={() => setIsOpen(false)} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=10" target="_blank" rel="noreferrer">{t('donate.options.$10')}</a>
+        <a onClick={() => setIsOpen(false)} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD" target="_blank" rel="noreferrer">{t('donate.options.choose')}</a>
+      </Options>
+  	</Wrapper>
   );
 }
 

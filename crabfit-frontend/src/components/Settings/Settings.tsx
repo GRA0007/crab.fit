@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTheme } from '@emotion/react';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
@@ -27,9 +27,18 @@ const setDefaults = (lang, store) => {
 const Settings = () => {
   const theme = useTheme();
   const store = useSettingsStore();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, _setIsOpen] = useState(false);
   const { t, i18n } = useTranslation('common');
   const setLocale = useLocaleUpdateStore(state => state.setLocale);
+  const firstControlRef = useRef();
+
+  const setIsOpen = open => {
+    _setIsOpen(open);
+
+    if (open) {
+      window.setTimeout(() => firstControlRef.current.focus(), 150);
+    }
+  };
 
   useEffect(() => {
     if (Object.keys(locales).includes(i18n.language)) {
@@ -57,7 +66,6 @@ const Settings = () => {
     <>
       <OpenButton
         isOpen={isOpen}
-        tabIndex="1"
         type="button"
         onClick={() => setIsOpen(!isOpen)} title={t('options.name')}
       >
@@ -78,6 +86,7 @@ const Settings = () => {
           }}
           value={store.weekStart === 0 ? 'Sunday' : 'Monday'}
           onChange={value => store.setWeekStart(value === 'Sunday' ? 0 : 1)}
+          inputRef={firstControlRef}
         />
 
         <ToggleField

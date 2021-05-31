@@ -64,12 +64,14 @@ export const Modal = styled.div`
   pointer-events: none;
   opacity: 0;
   transform: translateY(-10px);
-  transition: opacity .15s, transform .15s;
+  visibility: hidden;
+  transition: opacity .15s, transform .15s, visibility .15s;
 
   ${props => props.isOpen && `
     pointer-events: all;
     opacity: 1;
     transform: translateY(0);
+    visibility: visible;
   `}
 `;
 
