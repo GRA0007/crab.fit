@@ -14,7 +14,7 @@ import {
   Cover,
 } from './settingsStyle';
 
-import localeImports from 'res/dayjs_locales';
+import locales from 'res/dayjs_locales';
 
 const Settings = () => {
   const theme = useTheme();
@@ -24,8 +24,8 @@ const Settings = () => {
   const setLocale = useLocaleUpdateStore(state => state.setLocale);
 
   useEffect(() => {
-    if (Object.keys(localeImports).includes(i18n.language)) {
-      localeImports[i18n.language]().then(() => {
+    if (Object.keys(locales).includes(i18n.language)) {
+      locales[i18n.language].import().then(() => {
         dayjs.locale(i18n.language);
         setLocale(dayjs.locale());
         document.documentElement.setAttribute('lang', i18n.language);
@@ -35,6 +35,14 @@ const Settings = () => {
       document.documentElement.setAttribute('lang', 'en')
     }
   }, [i18n.language, setLocale]);
+
+  i18n.on('languageChanged', lang => {
+    // Language specific options
+    if (locales.hasOwnProperty(lang)) {
+      store.setWeekStart(locales[lang].weekStart);
+      store.setTimeFormat(locales[lang].timeFormat);
+    }
+  });
 
   return (
     <>
@@ -106,14 +114,10 @@ const Settings = () => {
           name="language"
           id="language"
           options={{
-            'de': 'Deutsch',
-            'en': 'English',
-            'es': 'Español',
-            'fr': 'Français',
-            'hi': 'हिंदी',
-            'id': 'Indonesia',
-            'ko': '한국어',
-            'ru': 'Pусский',
+            ...Object.keys(locales).reduce((ls, l) => {
+              ls[l] = locales[l].name;
+              return ls;
+            }, {}),
             ...process.env.NODE_ENV !== 'production' && { 'cimode': 'DEV' },
           }}
           small
