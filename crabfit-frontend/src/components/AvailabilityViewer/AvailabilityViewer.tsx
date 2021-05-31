@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, Fragment } from 'react';
+import { useState, useEffect, useRef, useMemo, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
@@ -65,6 +65,94 @@ const AvailabilityViewer = ({
     setTouched(people.length <= 1);
   }, [people]);
 
+  const heatmap = useMemo(() => (
+    <Container>
+      <TimeLabels>
+        {!!timeLabels.length && timeLabels.map((label, i) =>
+          <TimeSpace key={i}>
+            {label.label?.length !== '' && <TimeLabel>{label.label}</TimeLabel>}
+          </TimeSpace>
+        )}
+      </TimeLabels>
+      {dates.map((date, i) => {
+        const parsedDate = isSpecificDates ? dayjs(date, 'DDMMYYYY') : dayjs().day(date);
+        const last = dates.length === i+1 || (isSpecificDates ? dayjs(dates[i+1], 'DDMMYYYY') : dayjs().day(dates[i+1])).diff(parsedDate, 'day') > 1;
+        return (
+          <Fragment key={i}>
+            <Date>
+              {isSpecificDates && <DateLabel locale={locale}>{parsedDate.format('MMM D')}</DateLabel>}
+              <DayLabel>{parsedDate.format('ddd')}</DayLabel>
+
+              <Times
+                borderRight={last}
+                borderLeft={i === 0 || (parsedDate).diff(isSpecificDates ? dayjs(dates[i-1], 'DDMMYYYY') : dayjs().day(dates[i-1]), 'day') > 1}
+              >
+                {timeLabels.map((timeLabel, i) => {
+                  if (!timeLabel.time) return null;
+                  if (!times.includes(`${timeLabel.time}-${date}`)) {
+                    return (
+                      <TimeSpace key={i} />
+                    );
+                  }
+                  const time = `${timeLabel.time}-${date}`;
+                  const peopleHere = tempFocus !== null
+                    ? people.filter(person => person.availability.includes(time) && tempFocus === person.name).map(person => person.name)
+                    : people.filter(person => person.availability.includes(time) && filteredPeople.includes(person.name)).map(person => person.name);
+
+                  return (
+                    <Time
+                      key={i}
+                      time={time}
+                      className="time"
+                      peopleCount={focusCount !== null && focusCount !== peopleHere.length ? 0 : peopleHere.length}
+                      aria-label={peopleHere.join(', ')}
+                      maxPeople={tempFocus !== null ? 1 : Math.min(max, filteredPeople.length)}
+                      minPeople={tempFocus !== null ? 0 : Math.min(min, filteredPeople.length)}
+                      highlight={highlight}
+                      onMouseEnter={(e) => {
+                        const cellBox = e.currentTarget.getBoundingClientRect();
+                        const wrapperBox = wrapper?.current?.getBoundingClientRect() ?? { x: 0, y: 0 };
+                        const timeText = timeFormat === '12h' ? `h${locales[locale].separator}mma` : `HH${locales[locale].separator}mm`;
+                        setTooltip({
+                          x: Math.round(cellBox.x-wrapperBox.x + cellBox.width/2),
+                          y: Math.round(cellBox.y-wrapperBox.y + cellBox.height)+6,
+                          available: `${peopleHere.length} / ${people.length} ${t('event:available')}`,
+                          date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format(isSpecificDates ? `${timeText} ddd, D MMM YYYY` : `${timeText} ddd`),
+                          people: peopleHere,
+                        });
+                      }}
+                      onMouseLeave={() => {
+                        setTooltip(null);
+                      }}
+                    />
+                  );
+                })}
+              </Times>
+            </Date>
+            {last && dates.length !== i+1 && (
+              <Spacer />
+            )}
+          </Fragment>
+        );
+      })}
+    </Container>
+  ), [
+    people,
+    filteredPeople,
+    tempFocus,
+    focusCount,
+    highlight,
+    locale,
+    dates,
+    isSpecificDates,
+    max,
+    min,
+    t,
+    timeFormat,
+    timeLabels,
+    times,
+  ]);
+
 	return (
     <>
       <StyledMain>
@@ -108,76 +196,8 @@ const AvailabilityViewer = ({
 
   		<Wrapper ref={wrapper}>
     		<ScrollWrapper>
-    			<Container>
-    				<TimeLabels>
-    					{!!timeLabels.length && timeLabels.map((label, i) =>
-    						<TimeSpace key={i}>
-    							{label.label?.length !== '' && <TimeLabel>{label.label}</TimeLabel>}
-    						</TimeSpace>
-    					)}
-    				</TimeLabels>
-    				{dates.map((date, i) => {
-    					const parsedDate = isSpecificDates ? dayjs(date, 'DDMMYYYY') : dayjs().day(date);
-    					const last = dates.length === i+1 || (isSpecificDates ? dayjs(dates[i+1], 'DDMMYYYY') : dayjs().day(dates[i+1])).diff(parsedDate, 'day') > 1;
-    					return (
-    						<Fragment key={i}>
-    							<Date>
-    								{isSpecificDates && <DateLabel locale={locale}>{parsedDate.format('MMM D')}</DateLabel>}
-    								<DayLabel>{parsedDate.format('ddd')}</DayLabel>
+    			{heatmap}
 
-    								<Times
-                      borderRight={last}
-                      borderLeft={i === 0 || (parsedDate).diff(isSpecificDates ? dayjs(dates[i-1], 'DDMMYYYY') : dayjs().day(dates[i-1]), 'day') > 1}
-                    >
-    									{timeLabels.map((timeLabel, i) => {
-    										if (!timeLabel.time) return null;
-    										if (!times.includes(`${timeLabel.time}-${date}`)) {
-    											return (
-    												<TimeSpace key={i} />
-    											);
-    										}
-    										const time = `${timeLabel.time}-${date}`;
-    										const peopleHere = tempFocus !== null
-                          ? people.filter(person => person.availability.includes(time) && tempFocus === person.name).map(person => person.name)
-                          : people.filter(person => person.availability.includes(time) && filteredPeople.includes(person.name)).map(person => person.name);
-
-    										return (
-    											<Time
-    												key={i}
-    												time={time}
-    												className="time"
-    												peopleCount={focusCount !== null && focusCount !== peopleHere.length ? 0 : peopleHere.length}
-    												aria-label={peopleHere.join(', ')}
-    												maxPeople={tempFocus !== null ? 1 : Math.min(max, filteredPeople.length)}
-    												minPeople={tempFocus !== null ? 0 : Math.min(min, filteredPeople.length)}
-                            highlight={highlight}
-    												onMouseEnter={(e) => {
-    													const cellBox = e.currentTarget.getBoundingClientRect();
-    													const wrapperBox = wrapper?.current?.getBoundingClientRect() ?? { x: 0, y: 0 };
-                              const timeText = timeFormat === '12h' ? `h${locales[locale].separator}mma` : `HH${locales[locale].separator}mm`;
-    													setTooltip({
-    														x: Math.round(cellBox.x-wrapperBox.x + cellBox.width/2),
-    														y: Math.round(cellBox.y-wrapperBox.y + cellBox.height)+6,
-    														available: `${peopleHere.length} / ${people.length} ${t('event:available')}`,
-    														date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format(isSpecificDates ? `${timeText} ddd, D MMM YYYY` : `${timeText} ddd`),
-    														people: peopleHere,
-    													});
-    												}}
-    												onMouseLeave={() => {
-    													setTooltip(null);
-    												}}
-    											/>
-    										);
-    									})}
-    								</Times>
-    							</Date>
-    							{last && dates.length !== i+1 && (
-    								<Spacer />
-    							)}
-    						</Fragment>
-    					);
-    				})}
-    			</Container>
     			{tooltip && (
     				<Tooltip
     					x={tooltip.x}

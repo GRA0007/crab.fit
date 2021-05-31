@@ -80,7 +80,7 @@ export const Time = styled.div`
 		border-top: 2px dotted ${props.theme.text};
 	`}
 
-  ${props => props.highlight && props.peopleCount === props.maxPeople ? `
+  ${props => props.highlight && props.peopleCount === props.maxPeople && props.peopleCount > 0 ? `
     background-image: repeating-linear-gradient(
       45deg,
   	  ${props.theme.primary},

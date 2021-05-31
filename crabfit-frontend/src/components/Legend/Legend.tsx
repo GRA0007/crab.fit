@@ -34,7 +34,7 @@ const Legend = ({
 					<Grade
             key={i}
             color={`${theme.primary}${Math.round((i/(max))*255).toString(16)}`}
-            highlight={highlight && i === max}
+            highlight={highlight && i === max && max > 0}
             onMouseOver={() => onSegmentFocus(i)}
           />
 				)}
