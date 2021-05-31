@@ -168,7 +168,17 @@ const CalendarField = ({
     							selected={selectedDates.includes(date.format('DDMMYYYY'))}
     							selecting={selectingDates.includes(date)}
     							mode={mode}
-    							onPointerDown={(e) => {
+                  type="button"
+                  onKeyPress={e => {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                      if (selectedDates.includes(date.format('DDMMYYYY'))) {
+                        setSelectedDates(selectedDates.filter(d => d !== date.format('DDMMYYYY')));
+                      } else {
+                        setSelectedDates([...selectedDates, date.format('DDMMYYYY')]);
+                      }
+                    }
+                  }}
+    							onPointerDown={e => {
     								startPos.current = {x, y};
     								setMode(selectedDates.includes(date.format('DDMMYYYY')) ? 'remove' : 'add');
     								setSelectingDates([date]);

@@ -9,10 +9,16 @@ export const ToggleContainer = styled.div`
   border: 1px solid ${props => props.theme.primary};
   border-radius: 3px;
   overflow: hidden;
-  
-  &:focus-within {
-    outline: Highlight auto 1px;
-    outline: -webkit-focus-ring-color auto 1px;
+
+  &:focus-within label {
+    box-shadow: inset 0 -3px 0 0 var(--focus-color);
+  }
+
+  & > div:first-child label {
+    border-end-start-radius: 2px;
+  }
+  & > div:last-child label {
+    border-end-end-radius: 2px;
   }
 `;
 
@@ -36,6 +42,7 @@ export const HiddenInput = styled.input`
   &:checked + label {
     color: ${props => props.theme.background};
     background-color: ${props => props.theme.primary};
+    --focus-color: ${props => props.theme.primaryDark};
   }
 `;
 
@@ -49,4 +56,6 @@ export const LabelButton = styled.label`
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
+  transition: box-shadow .15s;
+  --focus-color: ${props => props.theme.primary};
 `;
