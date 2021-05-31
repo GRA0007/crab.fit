@@ -1,9 +1,5 @@
 import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import {
-	BrowserRouter,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, Global } from '@emotion/react';
 
 import { Settings, Loading, Egg } from 'components';

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
@@ -10,7 +9,6 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import {
-	Center,
 	Footer,
 	TextField,
 	SelectField,
@@ -18,12 +16,12 @@ import {
 	AvailabilityViewer,
 	AvailabilityEditor,
 	Error,
+  Logo,
 } from 'components';
 
+import { StyledMain } from '../Home/homeStyle';
+
 import {
-	StyledMain,
-	Logo,
-	Title,
 	EventName,
   EventDate,
 	LoginForm,
@@ -37,9 +35,7 @@ import {
 import api from 'services';
 import { useSettingsStore, useRecentsStore, useLocaleUpdateStore } from 'stores';
 
-import logo from 'res/logo.svg';
 import timezones from 'res/timezones.json';
-import localeImports from 'res/dayjs_locales';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -51,10 +47,9 @@ const Event = (props) => {
   const weekStart = useSettingsStore(state => state.weekStart);
 
   const addRecent = useRecentsStore(state => state.addRecent);
-  const setLocale = useLocaleUpdateStore(state => state.setLocale);
   const locale = useLocaleUpdateStore(state => state.locale);
 
-  const { t, i18n } = useTranslation(['common', 'event']);
+  const { t } = useTranslation(['common', 'event']);
 
 	const { register, handleSubmit } = useForm();
 	const { id } = props.match.params;
@@ -76,15 +71,6 @@ const Event = (props) => {
 	const [max, setMax] = useState(0);
 
 	const [copied, setCopied] = useState(null);
-
-  useEffect(() => {
-    if (Object.keys(localeImports).includes(i18n.language)) {
-      localeImports[i18n.language]().then(() => {
-        dayjs.locale(i18n.language);
-        setLocale(dayjs.locale());
-      });
-    }
-  }, [i18n.language, setLocale]);
 
 	useEffect(() => {
 		const fetchEvent = async () => {
@@ -290,13 +276,7 @@ const Event = (props) => {
 	return (
 		<>
 			<StyledMain>
-				<Link to="/" style={{ textDecoration: 'none' }}>
-					<Center>
-						<Logo src={logo} alt="" />
-						<Title>CRAB FIT</Title>
-					</Center>
-					<Center style={{ textDecoration: 'underline', fontSize: 14, paddingTop: 6 }}>{t('common:tagline')}</Center>
-				</Link>
+				<Logo />
 
 				{(!!event || isLoading) ? (
 					<>

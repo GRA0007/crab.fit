@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from '@emotion/react';
 import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
 
 import { ToggleField, SelectField } from 'components';
 
-import { useSettingsStore } from 'stores';
+import { useSettingsStore, useLocaleUpdateStore } from 'stores';
 
 import {
   OpenButton,
@@ -13,11 +14,27 @@ import {
   Cover,
 } from './settingsStyle';
 
+import localeImports from 'res/dayjs_locales';
+
 const Settings = () => {
   const theme = useTheme();
   const store = useSettingsStore();
   const [isOpen, setIsOpen] = useState(false);
   const { t, i18n } = useTranslation('common');
+  const setLocale = useLocaleUpdateStore(state => state.setLocale);
+
+  useEffect(() => {
+    if (Object.keys(localeImports).includes(i18n.language)) {
+      localeImports[i18n.language]().then(() => {
+        dayjs.locale(i18n.language);
+        setLocale(dayjs.locale());
+        document.documentElement.setAttribute('lang', i18n.language);
+      });
+    } else {
+      setLocale('en');
+      document.documentElement.setAttribute('lang', 'en')
+    }
+  }, [i18n.language, setLocale]);
 
   return (
     <>

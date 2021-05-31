@@ -21,6 +21,6 @@ i18n
     backend: {
       loadPath: '/i18n/{{lng}}/{{ns}}.json',
     },
-  });
+  }).then(() => document.documentElement.setAttribute('lang', i18n.language));
 
 export default i18n;

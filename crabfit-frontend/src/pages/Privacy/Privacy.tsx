@@ -1,22 +1,19 @@
 import { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 
 import {
 	Button,
 	Center,
 	Footer,
+  Logo,
 } from 'components';
 
 import {
 	StyledMain,
-	Logo,
-  Title,
 	AboutSection,
 	P,
-} from '../Help/helpStyle';
-
-import logo from 'res/logo.svg';
+} from '../Home/homeStyle';
 
 const Privacy = () => {
   const { push } = useHistory();
@@ -29,13 +26,7 @@ const Privacy = () => {
 	return (
 		<>
 			<StyledMain>
-        <Link to="/" style={{ textDecoration: 'none' }}>
-					<Center>
-						<Logo src={logo} alt="" />
-						<Title>CRAB FIT</Title>
-					</Center>
-					<Center style={{ textDecoration: 'underline', fontSize: 14, paddingTop: 6 }}>{t('common:tagline')}</Center>
-				</Link>
+        <Logo />
       </StyledMain>
 
       <StyledMain>

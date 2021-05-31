@@ -7,20 +7,20 @@ import {
 	Center,
 	Footer,
   AvailabilityViewer,
+  Logo,
 } from 'components';
 
 import {
-	StyledMain,
-	Logo,
-  Title,
+  StyledMain,
 	AboutSection,
 	P,
+} from '../Home/homeStyle';
+
+import {
   Step,
   FakeCalendar,
   FakeTimeRange,
 } from './helpStyle';
-
-import logo from 'res/logo.svg';
 
 const Help = () => {
   const { push } = useHistory();
@@ -33,13 +33,7 @@ const Help = () => {
 	return (
 		<>
 			<StyledMain>
-        <Link to="/" style={{ textDecoration: 'none' }}>
-					<Center>
-						<Logo src={logo} alt="" />
-						<Title>CRAB FIT</Title>
-					</Center>
-					<Center style={{ textDecoration: 'underline', fontSize: 14, paddingTop: 6 }}>{t('common:tagline')}</Center>
-				</Link>
+        <Logo />
       </StyledMain>
 
       <StyledMain>
