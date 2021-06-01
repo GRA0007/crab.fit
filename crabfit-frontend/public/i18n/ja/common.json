@@ -36,19 +36,19 @@
       }
     },
     "theme": {
-      "label": "Theme",
+      "label": "色のテーマ",
       "options": {
-        "System": "System",
-        "Light": "Light",
-        "Dark": "Dark"
+        "System": "システム",
+        "Light": "明色",
+        "Dark": "暗色"
       }
     },
     "highlight": {
       "label": "Highlight highest availability",
       "title": "Make the highest availability on the heatmap stand out",
       "options": {
-        "Off": "Off",
-        "On": "On"
+        "Off": "オフ",
+        "On": "オン"
       }
     },
     "language": {
