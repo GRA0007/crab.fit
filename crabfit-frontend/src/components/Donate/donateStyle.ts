@@ -34,6 +34,12 @@ export const Options = styled.div`
     visibility: visible;
   `}
 
+  & img {
+    width: 80px;
+    margin: 10px auto 0;
+    display: block;
+  }
+
   & a {
     display: block;
     white-space: nowrap;
@@ -47,6 +53,9 @@ export const Options = styled.div`
 
     &:hover {
       text-decoration: underline;
+    }
+    & strong {
+      font-weight: 800;
     }
   }
 `;

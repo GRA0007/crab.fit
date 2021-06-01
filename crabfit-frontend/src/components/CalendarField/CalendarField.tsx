@@ -220,6 +220,16 @@ const CalendarField = ({
               selected={selectedDays.includes(((i + weekStart) % 7 + 7) % 7)}
               selecting={selectingDays.includes(((i + weekStart) % 7 + 7) % 7)}
               mode={mode}
+              type="button"
+              onKeyPress={e => {
+                if (e.key === ' ' || e.key === 'Enter') {
+                  if (selectedDays.includes(((i + weekStart) % 7 + 7) % 7)) {
+                    setSelectedDays(selectedDays.filter(d => d !== ((i + weekStart) % 7 + 7) % 7));
+                  } else {
+                    setSelectedDays([...selectedDays, ((i + weekStart) % 7 + 7) % 7]);
+                  }
+                }
+              }}
               onPointerDown={(e) => {
                 startPos.current = i;
                 setMode(selectedDays.includes(((i + weekStart) % 7 + 7) % 7) ? 'remove' : 'add');
