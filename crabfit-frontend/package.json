@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@azure/msal-browser": "^2.14.2",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "@microsoft/microsoft-graph-client": "^2.2.1",
