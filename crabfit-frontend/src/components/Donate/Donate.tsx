@@ -8,6 +8,8 @@ import {
   Options,
 } from './donateStyle';
 
+import paypal_logo from 'res/paypal.svg';
+
 const PAYMENT_METHOD = 'https://play.google.com/billing';
 const SKU = 'crab_donation';
 
@@ -127,6 +129,7 @@ const Donate = () => {
           setIsOpen(false);
         }}
       >
+        <img src={paypal_logo} alt="Donate with PayPal" />
         <a onClick={() => setIsOpen(false)} ref={firstLinkRef} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=2" target="_blank" rel="noreferrer">{t('donate.options.$2')}</a>
         <a onClick={() => setIsOpen(false)} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5" target="_blank" rel="noreferrer"><strong>{t('donate.options.$5')}</strong></a>
         <a onClick={() => setIsOpen(false)} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=10" target="_blank" rel="noreferrer">{t('donate.options.$10')}</a>
