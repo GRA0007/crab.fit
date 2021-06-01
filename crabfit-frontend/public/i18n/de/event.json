@@ -1,62 +1,54 @@
 {
-  "available": "können",
-
+  "available": "Verfügbar",
   "nav": {
-    "title": "Klicken sie zum kopieren",
+    "title": "Zum kopieren klicken",
     "copied": "Kopiert!",
-    "shareinfo": "Kopieren Sie den link zu dieser seite oder teilen sie ihn per <1>E-Mail</1>.",
-    "shareinfo_alt": "Klicken Sie auf den link oben, um ihn in Ihre zwischenablage zu kopieren oder per <1>E-Mail</1> zu teilen.",
+    "shareinfo": "Kopiere den Link zu dieser Seite oder teile ihn per <1>E-Mail</1>.",
+    "shareinfo_alt": "Klicke auf den obenstehenden Link, um ihn in die Zwischenablage zu kopieren oder per <1>E-Mail</1> zu teilen.",
     "email_subject": "Ablaufplanung {{event_name}}",
-    "email_body": "Besuchen Sie diesen link, um Ihre Verfügbarkeiten einzugeben:"
+    "email_body": "Rufe diesen Link auf, um deine Verfügbarkeiten einzugeben:"
   },
   "form": {
-    "signed_out": "Melden Sie sich an, um Ihre Verfügbarkeit hinzuzufügen",
+    "signed_out": "Melde dich an, um deine Verfügbarkeit hinzuzufügen",
     "signed_in": "Als {{name}} angemeldet",
-
     "name": "Dein Name",
     "password": "Passwort (optional)",
-    "button": "Anmeldung",
-    "info": "Diese angaben gelten nur für diese veranstaltung. Verwenden Sie ein Passwort, um zu verhindern, dass andere Ihre Verfügbarkeit ändern.",
-
+    "button": "Anmelden",
+    "info": "Diese Angaben gelten nur für diese Veranstaltung. Verwende ein Passwort, um zu verhindern, dass andere deine Verfügbarkeit ändern.",
     "timezone": "Deine Zeitzone",
-
     "errors": {
-      "password_incorrect": "Passwort ist inkorrekt. Überprüfen Sie, ob Ihr name richtig geschrieben ist.",
+      "password_incorrect": "Das Passwort ist inkorrekt. Überprüfe, ob deine Angaben richtig geschrieben sind.",
       "unknown": "Einloggen fehlgeschlagen. Bitte versuche es erneut."
     },
-
-    "created_in_timezone": "Diese veranstaltung wurde in der zeitzone <strong>{{timezone}}</strong> erstellt. <3>Klicken Sie hier</3> um es zu verwenden.",
-    "local_timezone": "Ihre lokale zeitzone wird als <strong>{{timezone}}</strong> erkannt. <3>Klicken Sie hier</3> um es zu verwenden."
+    "created_in_timezone": "Diese Veranstaltung wurde in der Zeitzone <strong>{{timezone}}</strong> erstellt. <3>Klicke hier</3> um sie zu übernehmen.",
+    "local_timezone": "Deine lokale Zeitzone wird als <strong>{{timezone}}</strong> erkannt. <3>Klicke hier</3> um sie zu übernehmen."
   },
   "offline": {
     "title": "Du bist offline",
-    "body": "Ein Crab Fit funktioniert nicht offline.<br />Stellen Sie sicher, dass Sie mit dem internet verbunden sind, und versuchen Sie es erneut."
+    "body": "Ein Crab Fit funktioniert nicht offline.<br />Stelle sicher, dass du mit dem Internet verbunden bist und versuche es erneut."
   },
   "error": {
     "title": "Event nicht gefunden",
-    "body": "Überprüfen Sie, ob die von Ihnen eingegebene URL korrekt ist."
+    "body": "Überprüfe, ob die URL korrekt ist."
   },
-
   "tabs": {
-    "you": "Ihre Verfügbarkeit",
-    "you_tooltip": "Melden Sie sich an, um Ihre Verfügbarkeit festzulegen",
+    "you": "Deine Verfügbarkeit",
+    "you_tooltip": "Melde dich an, um deine Verfügbarkeit festzulegen",
     "group": "Gruppenverfügbarkeit"
   },
-
   "group": {
-    "legend_tooltip": "Klicken Sie hier, um die höchste Verfügbarkeit hervorzuheben",
-    "info1": "Bewegen Sie den Mauszeiger oder tippen Sie auf den Kalender unten, um zu sehen, wer verfügbar ist",
-    "info2": "Klicken Sie auf die Namen unten, um die Personen einzeln anzuzeigen"
+    "legend_tooltip": "Klicke hier, um die grösste Verfügbarkeit hervorzuheben",
+    "info1": "Bewege den Mauszeiger oder tippe auf den Kalender unten, um zu sehen, wer verfügbar ist",
+    "info2": "Klicke auf die Namen unten, um einzelne Personen anzuzeigen"
   },
-
   "you": {
-    "info": "Klicken und ziehen Sie den Kalender unten, um Ihre Verfügbarkeit festzulegen",
+    "info": "Klicke und ziehe im Kalender unten, um deine Verfügbarkeit festzulegen",
     "google_cal": {
       "login": "Mit Google Kalender synchronisieren",
-      "logout": "ausloggen",
-      "select_all": "Wählen Sie Alle",
-      "select_none": "Wählen Sie keine",
-      "info": "Durch den Import wird Ihre aktuelle Verfügbarkeit überschrieben",
+      "logout": "Ausloggen",
+      "select_all": "Alle wählen",
+      "select_none": "Keine wählen",
+      "info": "Durch den Import wird deine aktuelle Verfügbarkeit überschrieben",
       "button": "Verfügbarkeit importieren"
     }
   }

@@ -1,57 +1,55 @@
 {
-  "create": "ERSTELLEN SIE EIN",
+  "create": "ERSTELLE EIN",
   "recently_visited": "Kürzlich besucht",
   "nav": {
-    "about": "Info",
+    "about": "Über Crab Fit",
     "donate": "Spenden"
   },
   "form": {
     "name": {
-      "label": "Geben Sie Ihrer veranstaltung einen namen!",
-      "sublabel": "Oder lassen Sie das feld leer, um eine zu generieren"
+      "label": "Gib deiner Veranstaltung einen Namen!",
+      "sublabel": "Oder lass das Feld leer, um einen zu generieren"
     },
     "dates": {
-      "label": "Welche saten könnten funktionieren?",
-      "sublabel": "Klicken und ziehen Sie zur auswahl",
+      "label": "Welche Daten passen?",
+      "sublabel": "Klicken und ziehen zum auswählen",
       "options": {
-        "specific": "Bestimmte daten",
-        "week": "Tage der woche"
+        "specific": "Kalender",
+        "week": "Wochentage"
       },
       "tooltips": {
-        "previous": "Vorheriger monat",
-        "next": "Nächsten monat",
-        "today": "heute"
+        "previous": "Vorheriger Monat",
+        "next": "Nächster Monat",
+        "today": "Heute"
       }
     },
     "times": {
-      "label": "Welche zeiten könnten funktionieren?",
-      "sublabel": "Klicken und ziehen Sie, um einen zeitbereich auszuwählen"
+      "label": "Welche Zeiten passen?",
+      "sublabel": "Klicken und ziehen zum auswählen"
     },
     "timezone": {
-      "label": "Und die zeitzone",
+      "label": "Und die Zeitzone",
       "defaultOption": "Wählen..."
     },
-
     "button": "Erstellen",
     "errors": {
-      "no_dates": "Es sind keine daten ausgewählt",
-      "same_times": "Die startzeiten und endzeiten können nicht gleich sein",
-      "no_time": "Es ist keine zeit ausgewählt",
-      "unknown": "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal."
+      "no_dates": "Bitte gib die Tage an.",
+      "same_times": "Bitte gib verschiedene Start- und Endzeiten an.",
+      "no_time": "Bitte gib eine Start- und Endzeit an.",
+      "unknown": "Es ist ein Fehler aufgetaucht. Bitte versuche es später noch einmal."
     }
   },
-  "offline": "Sie können keine Crab Fit erstellen, wenn Sie keine internetverbindung haben. Bitte stellen Sie sicher, dass Sie verbunden sind.",
-
+  "offline": "Du kannst kein Crab Fit erstellen, wenn du keine Internetverbindung hast. Bitte stelle sicher, dass du verbunden bist.",
   "about": {
     "name": "Über Crab Fit",
     "events": "Events erstellt",
-    "availabilities": "Verfügbarkeit eingegeben",
+    "availabilities": "Verfügbarkeiten eingegeben",
     "content": {
-      "p1": "Crab Fit hilft Ihnen dabei, Ihre veranstaltung an die zeitpläne aller anzupassen. Erstellen Sie einfach oben eine veranstaltung und senden Sie den link an alle teilnehmer. Die ergebnisse werden live aktualisiert und Sie können eine Heatmap sehen, wann alle frei sind.<1/><2>Erfahren Sie mehr über Crab Fit</2>.",
-      "p2": "Viele Crab Fits erstellen? Holen Sie sich die <1>Chrome-Erweiterung</1> oder <3>Firefox-Erweiterung</3> für Ihren browser! Sie können die <5>Android-App</5> auch unterwegs auf Crab Fit herunterladen.",
-      "p3": "Crab Fit wurde von <1>Ben Grant</1> entwickelt und ist die moderne lösung für Ihre debatten zur planung von gruppenveranstaltungen.",
-      "p4": "Der code für Crab Fit ist open source. Wenn sie probleme finden oder einen beitrag leisten möchten, können Sie das <1>repository</1> besuchen. Durch die verwendung von Crab Fit stimmen sie den <3>datenschutzbestimmungen</3>.",
-      "p5": "Erwägen sie unten zu spenden, wenn es Ihnen geholfen hat, damit es für alle kostenlos bleibt. 🦀"
+      "p1": "Crab Fit hilft dir dabei, deine Veranstaltung an die Zeitpläne aller anzupassen. Erstelle einfach oben eine Veranstaltung und sende den Link an alle Teilnehmer. Die Ergebnisse werden live aktualisiert und du kannst einsehen, wann alle frei sind.<1/><2>Erfahre mehr über Crab Fit</2>.",
+      "p2": "Mehrere Crab Fits erstellen? Hol dir die <1>Chrome-Extension</1> oder die <3>Firefox-Extension</3> für den Browser! Du kannst auch die <5>Android-App</5> herunterladen und Crab Fit unterwegs nutzen.",
+      "p3": "Crab Fit wurde von <1>Ben Grant</1> entwickelt und ist die moderne Lösung für deine Gruppenplanungen.",
+      "p4": "Der Quellcode für Crab Fit ist open source. Wenn du Probleme findest oder mithelfen willst, kannst du das im <1>Repository</1> am einfachsten tun. Durch die Nutzung von Crab Fit stimmst du den <3>Datenschutzbestimmungen</3> zu.",
+      "p5": "Wenn dir Crab Fit helfen konnte, unterstütze uns unten, damit es für alle kostenlos bleibt. 🦀"
     }
   }
 }
