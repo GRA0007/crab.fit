@@ -47,6 +47,28 @@ export const TitleLarge = styled.h1`
 
 export const Logo = styled.img`
 	width: 80px;
+  transition: transform .2s;
+  animation: jelly .5s 1 .1s;
+
+  @keyframes jelly {
+    from,to {
+      transform: scale(1,1)
+    }
+    25% {
+      transform: scale(.9,1.1)
+    }
+    50% {
+      transform: scale(1.1,.9)
+    }
+    75% {
+      transform: scale(.95,1.05)
+    }
+  }
+
+  &:active {
+    animation: none;
+    transform: scale(.85);
+  }
 `;
 
 export const Links = styled.nav`

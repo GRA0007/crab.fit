@@ -11,19 +11,15 @@ export const A = styled.a`
 
   @keyframes jelly {
     from,to {
-      -webkit-transform: scale(1,1);
       transform: scale(1,1)
     }
     25% {
-      -webkit-transform: scale(.9,1.1);
       transform: scale(.9,1.1)
     }
     50% {
-      -webkit-transform: scale(1.1,.9);
       transform: scale(1.1,.9)
     }
     75% {
-      -webkit-transform: scale(.95,1.05);
       transform: scale(.95,1.05)
     }
   }
