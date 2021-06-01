@@ -1,0 +1,63 @@
+{
+  "available": "available",
+
+  "nav": {
+    "title": "Click to copy",
+    "copied": "Copied!",
+    "shareinfo": "Copy the link to this page, or share via <1>email</1>.",
+    "shareinfo_alt": "Click the link above to copy it to your clipboard, or share via <1>email</1>.",
+    "email_subject": "Scheduling {{event_name}}",
+    "email_body": "Visit this link to enter your availabilities:"
+  },
+  "form": {
+    "signed_out": "Sign in to add your availability",
+    "signed_in": "Signed in as {{name}}",
+
+    "name": "Your name",
+    "password": "Password (optional)",
+    "button": "Login",
+    "info": "These details are only for this event. Use a password to prevent others from changing your availability.",
+
+    "timezone": "Your time zone",
+
+    "errors": {
+      "password_incorrect": "Password is incorrect. Check your name is spelled right.",
+      "unknown": "Failed to login. Please try again."
+    },
+
+    "created_in_timezone": "This event was created in the timezone <strong>{{timezone}}</strong>. <3>Click here</3> to use it.",
+    "local_timezone": "Your local timezone is detected to be <strong>{{timezone}}</strong>. <3>Click here</3> to use it."
+  },
+  "offline": {
+    "title": "You are offline",
+    "body": "A Crab Fit doesn't work offline.<br />Make sure you're connected to the internet and try again."
+  },
+  "error": {
+    "title": "Event not found",
+    "body": "Check that the url you entered is correct."
+  },
+
+  "tabs": {
+    "you": "Your availability",
+    "you_tooltip": "Login to set your availability",
+    "group": "Group availability"
+  },
+
+  "group": {
+    "legend_tooltip": "Click to highlight highest availability",
+    "info1": "Hover or tap the calendar below to see who is available",
+    "info2": "Click the names below to view people individually"
+  },
+
+  "you": {
+    "info": "Click and drag the calendar below to set your availabilities",
+    "google_cal": {
+      "login": "Sync with Google Calendar",
+      "logout": "log out",
+      "select_all": "Select all",
+      "select_none": "Select none",
+      "info": "Importing will overwrite your current availability",
+      "button": "Import availability"
+    }
+  }
+}
