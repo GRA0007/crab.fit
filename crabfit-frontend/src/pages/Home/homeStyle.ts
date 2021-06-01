@@ -47,8 +47,9 @@ export const TitleLarge = styled.h1`
 
 export const Logo = styled.img`
 	width: 80px;
-  transition: transform .2s;
-  animation: jelly .5s 1 .1s;
+  transition: transform .15s;
+  animation: jelly .5s 1 .05s;
+  user-select: none;
 
   @keyframes jelly {
     from,to {

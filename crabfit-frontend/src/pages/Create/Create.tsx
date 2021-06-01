@@ -170,7 +170,7 @@ const Create = ({ offline }) => {
         </StyledMain>
       ) : (
         <>
-          <Recents />
+          <Recents target="_blank" />
 
           <StyledMain>
             {offline ? (

@@ -8,7 +8,7 @@ import { Recent } from './recentsStyle';
 
 dayjs.extend(relativeTime);
 
-const Recents = () => {
+const Recents = ({ target }) => {
   const recents = useRecentsStore(state => state.recents);
   const locale = useLocaleUpdateStore(state => state.locale);
   const { t } = useTranslation(['home', 'common']);
@@ -18,7 +18,7 @@ const Recents = () => {
       <StyledMain>
         <h2>{t('home:recently_visited')}</h2>
         {recents.map(event => (
-          <Recent href={`/${event.id}`} key={event.id}>
+          <Recent href={`/${event.id}`} target={target} key={event.id}>
             <span className="name">{event.name}</span>
             <span locale={locale} className="date" title={dayjs.unix(event.created).format('D MMMM, YYYY')}>{t('common:created', { date: dayjs.unix(event.created).fromNow() })}</span>
           </Recent>
