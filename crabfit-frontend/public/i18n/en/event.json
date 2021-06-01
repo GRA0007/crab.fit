@@ -58,6 +58,7 @@
       "select_none": "Select none",
       "info": "Importing will overwrite your current availability",
       "button": "Import availability"
-    }
+    },
+    "outlook_cal": "Sync with Outlook Calendar"
   }
 }

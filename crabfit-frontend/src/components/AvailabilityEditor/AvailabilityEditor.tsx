@@ -5,6 +5,8 @@ import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import isBetween from 'dayjs/plugin/isBetween';
+import dayjs_timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 
 import {
 	Wrapper,
@@ -22,11 +24,13 @@ import {
 } from 'components/AvailabilityViewer/availabilityViewerStyle';
 import { Time } from './availabilityEditorStyle';
 
-import { GoogleCalendar, Center } from 'components';
+import { GoogleCalendar, OutlookCalendar, Center } from 'components';
 
 dayjs.extend(localeData);
 dayjs.extend(customParseFormat);
 dayjs.extend(isBetween);
+dayjs.extend(utc);
+dayjs.extend(dayjs_timezone);
 
 const AvailabilityEditor = ({
 	times,
@@ -63,16 +67,28 @@ const AvailabilityEditor = ({
       </StyledMain>
       {isSpecificDates && (
         <StyledMain>
-          <GoogleCalendar
-            timeMin={dayjs(times[0], 'HHmm-DDMMYYYY').toISOString()}
-            timeMax={dayjs(times[times.length-1], 'HHmm-DDMMYYYY').add(15, 'm').toISOString()}
-            timeZone={timezone}
-            onImport={busyArray => onChange(
-              times.filter(time => !busyArray.some(busy =>
-                dayjs(time, 'HHmm-DDMMYYYY').isBetween(busy.start, busy.end, null, '[)')
-              ))
-            )}
-          />
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+            <GoogleCalendar
+              timeMin={dayjs(times[0], 'HHmm-DDMMYYYY').toISOString()}
+              timeMax={dayjs(times[times.length-1], 'HHmm-DDMMYYYY').add(15, 'm').toISOString()}
+              timeZone={timezone}
+              onImport={busyArray => onChange(
+                times.filter(time => !busyArray.some(busy =>
+                  dayjs(time, 'HHmm-DDMMYYYY').isBetween(busy.start, busy.end, null, '[)')
+                ))
+              )}
+            />
+            <OutlookCalendar
+              timeMin={dayjs(times[0], 'HHmm-DDMMYYYY').toISOString()}
+              timeMax={dayjs(times[times.length-1], 'HHmm-DDMMYYYY').add(15, 'm').toISOString()}
+              timeZone={timezone}
+              onImport={busyArray => onChange(
+                times.filter(time => !busyArray.some(busy =>
+                  dayjs(time, 'HHmm-DDMMYYYY').isBetween(dayjs.tz(busy.start.dateTime, busy.start.timeZone), dayjs.tz(busy.end.dateTime, busy.end.timeZone), null, '[)')
+                ))
+              )}
+            />
+          </div>
         </StyledMain>
       )}
 

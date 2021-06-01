@@ -70,6 +70,7 @@ export const Date = styled.button`
   color: inherit;
   background: none;
   border: 0;
+  margin: 0;
   appearance: none;
 
 	background-color: ${props => props.theme.primaryBackground};

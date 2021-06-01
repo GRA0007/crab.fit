@@ -12,6 +12,8 @@ import {
   CalendarLabel,
   Info,
   Options,
+  Title,
+  Icon,
 } from './googleCalendarStyle';
 
 import googleLogo from 'res/google.svg';
@@ -109,13 +111,15 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
         </Center>
       ) : (
         <CalendarList>
-          <p>
+          <Title>
+            <Icon src={googleLogo} alt="" />
             {/* eslint-disable-next-line */}
-            <strong>{t('event:you.google_cal.login')}</strong> (<a href="#" onClick={e => {
+            <strong>{t('event:you.google_cal.login')}</strong>
+            (<a href="#" onClick={e => {
               e.preventDefault();
               signOut();
             }}>{t('event:you.google_cal.logout')}</a>)
-          </p>
+          </Title>
           <Options>
             {calendars !== undefined && !calendars.every(c => c.checked) && (
               /* eslint-disable-next-line */

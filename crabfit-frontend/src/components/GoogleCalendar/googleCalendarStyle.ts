@@ -12,6 +12,7 @@ export const LoginButton = styled.div`
 `;
 
 export const CalendarList = styled.div`
+  width: 100%;
   & > div {
     display: flex;
     margin: 2px 0;
@@ -109,4 +110,19 @@ export const Info = styled.div`
 export const Options = styled.div`
   font-size: 14px;
   padding: 0 0 5px;
+`;
+
+export const Title = styled.p`
+  display: flex;
+  align-items: center;
+
+  & strong {
+    margin-right: 1ex;
+  }
+`;
+
+export const Icon = styled.img`
+  height: 24px;
+  width: 24px;
+  margin-right: 12px;
 `;

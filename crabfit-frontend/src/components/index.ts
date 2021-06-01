@@ -11,6 +11,7 @@ export { default as AvailabilityEditor } from './AvailabilityEditor/Availability
 export { default as Error } from './Error/Error';
 export { default as Loading } from './Loading/Loading';
 export { default as GoogleCalendar } from './GoogleCalendar/GoogleCalendar';
+export { default as OutlookCalendar } from './OutlookCalendar/OutlookCalendar';
 
 export { default as Center } from './Center/Center';
 export { default as Donate } from './Donate/Donate';
