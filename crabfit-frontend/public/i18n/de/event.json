@@ -45,7 +45,7 @@
     "info": "Klicke und ziehe im Kalender unten, um deine Verfügbarkeit festzulegen",
     "google_cal": {
       "login": "Mit Google Kalender synchronisieren",
-      "logout": "Ausloggen",
+      "logout": "ausloggen",
       "select_all": "Alle wählen",
       "select_none": "Keine wählen",
       "info": "Durch den Import wird deine aktuelle Verfügbarkeit überschrieben",
