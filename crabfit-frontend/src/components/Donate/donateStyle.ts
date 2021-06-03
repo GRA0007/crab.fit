@@ -58,4 +58,8 @@ export const Options = styled.div`
       font-weight: 800;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;

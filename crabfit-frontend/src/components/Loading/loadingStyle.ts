@@ -23,4 +23,13 @@ export const Loader = styled.div`
   border-left-color: transparent;
   border-radius: 100px;
   animation: load .5s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    border: 0;
+
+    &::before {
+      content: 'loading...';
+    }
+  }
 `;

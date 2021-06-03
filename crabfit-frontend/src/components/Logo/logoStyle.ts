@@ -27,6 +27,11 @@ export const A = styled.a`
   &:hover img {
     animation: jelly .5s 1;
   }
+  @media (prefers-reduced-motion: reduce) {
+    &:hover img {
+      animation: none;
+    }
+  }
 `;
 
 export const Top = styled.div`

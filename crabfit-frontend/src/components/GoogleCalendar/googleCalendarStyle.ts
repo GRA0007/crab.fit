@@ -125,4 +125,8 @@ export const Icon = styled.img`
   height: 24px;
   width: 24px;
   margin-right: 12px;
+
+  ${props => props.theme.mode === 'light' && `
+    filter: invert(1);
+  `}
 `;

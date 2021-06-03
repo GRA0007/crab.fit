@@ -29,6 +29,10 @@ export const OpenButton = styled.button`
   ${props => props.isOpen && `
     transform: rotate(-45deg);
   `}
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;
 
 export const Cover = styled.div`
@@ -73,6 +77,10 @@ export const Modal = styled.div`
     transform: translateY(0);
     visibility: visible;
   `}
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;
 
 export const Heading = styled.span`
