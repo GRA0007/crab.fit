@@ -113,8 +113,8 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
         <CalendarList>
           <Title>
             <Icon src={googleLogo} alt="" />
-            {/* eslint-disable-next-line */}
             <strong>{t('event:you.google_cal.login')}</strong>
+            {/* eslint-disable-next-line */}
             (<a href="#" onClick={e => {
               e.preventDefault();
               signOut();

@@ -137,6 +137,7 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
       .finally(() => setFreeBusyLoading(false));
   };
 
+  // eslint-disable-next-line
   useEffect(() => checkLogin(), []);
 
   useEffect(() => {
@@ -156,6 +157,7 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
           signOut();
         });
     }
+  // eslint-disable-next-line
   }, [client]);
 
 	return (
@@ -178,8 +180,8 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
         <CalendarList>
           <Title>
             <Icon src={outlookLogo} alt="" />
-            {/* eslint-disable-next-line */}
             <strong>{t('event:you.outlook_cal')}</strong>
+            {/* eslint-disable-next-line */}
             (<a href="#" onClick={e => {
               e.preventDefault();
               signOut();
