@@ -30,6 +30,11 @@ const Donate = () => {
     }
   };
 
+  const linkPressed = () => {
+    setIsOpen(false);
+    gtag('event', 'donate', { 'event_category': 'donate' });
+  };
+
   useEffect(() => {
     if (store.TWA === undefined) {
       store.setTWA(document.referrer.includes('android-app://fit.crab'));
@@ -94,8 +99,8 @@ const Donate = () => {
   	<Wrapper>
   		<a
         onClick={event => {
-          gtag('event', 'donate', { 'event_category': 'donate' });
           if (store.TWA) {
+            gtag('event', 'donate', { 'event_category': 'donate' });
             event.preventDefault();
             if (window.confirm(t('donate.messages.about'))) {
               if (purchase() === false) {
@@ -130,10 +135,10 @@ const Donate = () => {
         }}
       >
         <img src={paypal_logo} alt="Donate with PayPal" />
-        <a onClick={() => setIsOpen(false)} ref={firstLinkRef} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=2" target="_blank" rel="noreferrer">{t('donate.options.$2')}</a>
-        <a onClick={() => setIsOpen(false)} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5" target="_blank" rel="noreferrer"><strong>{t('donate.options.$5')}</strong></a>
-        <a onClick={() => setIsOpen(false)} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=10" target="_blank" rel="noreferrer">{t('donate.options.$10')}</a>
-        <a onClick={() => setIsOpen(false)} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD" target="_blank" rel="noreferrer">{t('donate.options.choose')}</a>
+        <a onClick={linkPressed} ref={firstLinkRef} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=2" target="_blank" rel="noreferrer">{t('donate.options.$2')}</a>
+        <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5" target="_blank" rel="noreferrer"><strong>{t('donate.options.$5')}</strong></a>
+        <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=10" target="_blank" rel="noreferrer">{t('donate.options.$10')}</a>
+        <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD" target="_blank" rel="noreferrer">{t('donate.options.choose')}</a>
       </Options>
   	</Wrapper>
   );

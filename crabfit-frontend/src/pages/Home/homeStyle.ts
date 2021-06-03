@@ -70,6 +70,14 @@ export const Logo = styled.img`
     animation: none;
     transform: scale(.85);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    transition: none;
+    &:active {
+      transform: none;
+    }
+  }
 `;
 
 export const Links = styled.nav`

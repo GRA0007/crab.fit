@@ -64,6 +64,24 @@ export const Top = styled.button`
 			border-radius: 100px;
 			animation: load .5s linear infinite;
 		}
+
+    @media (prefers-reduced-motion: reduce) {
+      &:after {
+        content: 'loading...';
+        color: #FFF;
+        animation: none;
+        width: initial;
+        height: initial;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
 	`}
 `;
 
