@@ -19,10 +19,12 @@ import {
 
 import outlookLogo from 'res/outlook.svg';
 
+const scopes = ['Calendars.Read', 'Calendars.Read.Shared'];
+
 // Initialise the MSAL object
 const publicClientApplication = new PublicClientApplication({
   auth: {
-    clientId: '78739601-9834-4d41-a281-74ca2a50b2e6',
+    clientId: '5d1ab8af-1ba3-4b79-b033-b0ee509c2be6',
     redirectUri: process.env.NODE_ENV === 'production' ? 'https://crab.fit' : 'http://localhost:3000',
   },
   cache: {
@@ -61,9 +63,7 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
 
   const signIn = async () => {
     try {
-      await publicClientApplication.loginPopup({
-        scopes: ['Calendars.Read', 'Calendars.Read.Shared'],
-      });
+      await publicClientApplication.loginPopup({ scopes });
     } catch (e) {
       console.error(e);
     } finally {
@@ -90,7 +90,7 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
 
       // Try to get silently
       const result = await publicClientApplication.acquireTokenSilent({
-        scopes: ['Calendars.Read', 'Calendars.Read.Shared'],
+        scopes,
         account: accounts[0],
       });
       return result.accessToken;
@@ -102,9 +102,7 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
         'no_account_in_silent_request'
       ].includes(e.message)) {
         // Try to get with popup
-        const result = await publicClientApplication.acquireTokenPopup({
-          scopes: ['Calendars.Read', 'Calendars.Read.Shared'],
-        });
+        const result = await publicClientApplication.acquireTokenPopup({ scopes });
         return result.accessToken;
       } else {
         throw e;
