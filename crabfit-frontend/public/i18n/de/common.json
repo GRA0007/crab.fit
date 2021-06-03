@@ -1,26 +1,26 @@
 {
   "name": "Crab Fit",
   "tagline": "Erstelle dein eigenes",
-  "cta": "Erstellen Sie Ihren eigenen Crab Fit!",
-  "created": "Erstellt {{date}}",
+  "cta": "Erstelle deinen Crab Fit!",
+  "created": "Erstellt am {{date}}",
   "donate": {
-    "info": "Vielen dank, dass Sie Crab Fit verwenden. Wenn es Ihnen gefällt, können Sie spenden.",
+    "info": "Danke, dass du Crab Fit verwendest. Wenn es dir gefällt, unterstütze uns doch!",
     "button": "Spenden",
-    "title": "Jeder betrag zählt :)",
+    "title": "Jeder Beitrag zählt :)",
     "options": {
-      "$2": "Spenden $2",
-      "$5": "Spenden $5",
-      "$10": "Spenden $10",
-      "choose": "Wählen Sie einen spendenbetrag"
+      "$2": "$2 spenden",
+      "$5": "$5 spenden",
+      "$10": "$10 spenden",
+      "choose": "Wähle einen Betrag"
     },
     "messages": {
-      "about": "Wenn es Ihnen heraus überhaupt geholfen hat, zu prüfen, um hilfe zu spenden hält es läuft. 🦀",
-      "success": "Vielen dank für Ihre spende! Ohne dich wäre Crab Fit nicht kostenlos, also danke und sei weiterhin super toll!",
-      "error": "Kann nicht spende durch Google machen. Bitte versuchen Sie über die website crab.fit zu spenden 🦀"
+      "about": "Wenn dir Crab Fit helfen konnte, hilf uns, Crab Fit für dich am Laufen zu halten. 🦀",
+      "success": "Vielen Dank für deine Spende! Ohne dich wäre Crab Fit nicht kostenlos.",
+      "error": "Deine Spende konnte durch Google nicht verarbeitet werden. Bitte versuche, direkt auf der Website crab.fit zu spenden 🦀"
     }
   },
   "options": {
-    "name": "Optionen",
+    "name": "Einstellungen",
     "weekStart": {
       "label": "Woche beginnt am",
       "options": {
@@ -36,7 +36,7 @@
       }
     },
     "theme": {
-      "label": "Thema",
+      "label": "Theme",
       "options": {
         "System": "System",
         "Light": "Hell",
@@ -44,11 +44,11 @@
       }
     },
     "highlight": {
-      "label": "Markieren Sie höchste Verfügbarkeit",
-      "title": "Stellen Sie die höchste Verfügbarkeit auf dem heatmap abheben",
+      "label": "Beste Verfügbarkeit hervorheben",
+      "title": "Lass die beste Verfügbarkeit auf der Heatmap hervorstechen",
       "options": {
         "Off": "Aus",
-        "On": "Auf"
+        "On": "An"
       }
     },
     "language": {
