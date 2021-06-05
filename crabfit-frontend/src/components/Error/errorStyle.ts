@@ -22,6 +22,10 @@ export const Wrapper = styled.div`
     max-height: 60px;
     transition: opacity .15s .2s, max-height .2s, margin .2s, visibility .2s;
   `}
+  
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;
 
 export const CloseButton = styled.button`
