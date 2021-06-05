@@ -72,6 +72,10 @@ export const Date = styled.button`
   border: 0;
   margin: 0;
   appearance: none;
+  transition: background-color .1s;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 
 	background-color: ${props => props.theme.primaryBackground};
 	border: 1px solid ${props => props.theme.primaryLight};

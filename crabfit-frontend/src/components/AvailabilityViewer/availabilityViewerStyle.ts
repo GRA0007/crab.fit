@@ -96,6 +96,10 @@ export const Time = styled.div`
   	  ${props.theme.primaryDark} 8.6px
   	);
   `}
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;
 
 export const Spacer = styled.div`
