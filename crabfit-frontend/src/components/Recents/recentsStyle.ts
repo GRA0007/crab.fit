@@ -12,7 +12,7 @@ export const Recent = styled.a`
   & .name {
     font-weight: 700;
     font-size: 1.1em;
-    color: ${props => props.theme.primaryDark};
+    color: ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
     flex: 1;
     display: block;
   }

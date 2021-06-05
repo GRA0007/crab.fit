@@ -9,9 +9,14 @@ export const ToggleContainer = styled.div`
   border: 1px solid ${props => props.theme.primary};
   border-radius: 3px;
   overflow: hidden;
+  --focus-color: ${props => props.theme.primary};
 
-  &:focus-within label {
-    box-shadow: inset 0 -3px 0 0 var(--focus-color);
+  &:focus-within {
+    --focus-color: ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
+    border: 1px solid var(--focus-color);
+    & label {
+      box-shadow: inset 0 -3px 0 0 var(--focus-color);
+    }
   }
 
   & > div:first-of-type label {
@@ -41,8 +46,7 @@ export const HiddenInput = styled.input`
 
   &:checked + label {
     color: ${props => props.theme.background};
-    background-color: ${props => props.theme.primary};
-    --focus-color: ${props => props.theme.primaryDark};
+    background-color: var(--focus-color);
   }
 `;
 
@@ -57,5 +61,4 @@ export const LabelButton = styled.label`
   align-items: center;
   justify-content: center;
   transition: box-shadow .15s;
-  --focus-color: ${props => props.theme.primary};
 `;

@@ -12,10 +12,9 @@ export const Pressable = styled.button`
   font: inherit;
   box-sizing: border-box;
   background: ${props => props.primaryColor || props.theme.primary};
-  color: #FFF;
+  color: ${props => props.primaryColor ? '#FFF' : props.theme.background};
   font-weight: 600;
-	text-shadow: 0 -1px .5px ${props => props.secondaryColor || props.theme.primaryDark};
-  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
   border-radius: 3px;
   padding: ${props => props.small ? '.4em 1.3em' : '.6em 1.5em'};
   transform-style: preserve-3d;
@@ -55,7 +54,6 @@ export const Pressable = styled.button`
   }
 
   ${props => props.isLoading && `
-		text-shadow: none;
 		color: transparent;
 		cursor: wait;
 
@@ -103,4 +101,18 @@ export const Pressable = styled.button`
       }
     }
 	`}
+
+  ${props => props.alt && `
+    background: transparent;
+    border: 1px solid ${props.primaryColor || props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
+    color: ${props.primaryColor || props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
+    margin-bottom: 0;
+
+    &::before {
+      content: none;
+    }
+    &:hover, &:active {
+      transform: none;
+    }
+  `}
 `;

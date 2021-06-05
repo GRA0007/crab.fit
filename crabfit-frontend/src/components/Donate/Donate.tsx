@@ -118,6 +118,7 @@ const Donate = () => {
         target="_blank"
         rel="noreferrer"
         ref={buttonRef}
+        style={{ whiteSpace: 'nowrap' }}
 			>{t('donate.button')}</Button>
 
       <Options

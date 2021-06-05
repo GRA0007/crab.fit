@@ -17,7 +17,7 @@ export const TitleSmall = styled.span`
 	text-align: center;
 	font-family: 'Samurai Bob', sans-serif;
 	font-weight: 400;
-	color: ${props => props.theme.primaryDark};
+	color: ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
 	line-height: 1em;
   text-transform: uppercase;
 
@@ -113,7 +113,7 @@ export const Stat = styled.div`
 export const StatNumber = styled.span`
 	display: block;
 	font-weight: 900;
-	color: ${props => props.theme.primaryDark};
+	color: ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
 	font-size: 2em;
 `;
 
