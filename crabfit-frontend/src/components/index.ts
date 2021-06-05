@@ -10,8 +10,6 @@ export { default as AvailabilityViewer } from './AvailabilityViewer/Availability
 export { default as AvailabilityEditor } from './AvailabilityEditor/AvailabilityEditor';
 export { default as Error } from './Error/Error';
 export { default as Loading } from './Loading/Loading';
-export { default as GoogleCalendar } from './GoogleCalendar/GoogleCalendar';
-export { default as OutlookCalendar } from './OutlookCalendar/OutlookCalendar';
 
 export { default as Center } from './Center/Center';
 export { default as Donate } from './Donate/Donate';
@@ -20,3 +18,6 @@ export { default as Egg } from './Egg/Egg';
 export { default as Footer } from './Footer/Footer';
 export { default as Recents } from './Recents/Recents';
 export { default as Logo } from './Logo/Logo';
+
+export const _GoogleCalendar = () => import('./GoogleCalendar/GoogleCalendar');
+export const _OutlookCalendar = () => import('./OutlookCalendar/OutlookCalendar');

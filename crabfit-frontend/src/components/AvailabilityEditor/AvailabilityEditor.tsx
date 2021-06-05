@@ -1,4 +1,4 @@
-import { useState, useRef, Fragment } from 'react';
+import { useState, useRef, Fragment, Suspense, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocaleUpdateStore } from 'stores';
 import dayjs from 'dayjs';
@@ -24,7 +24,11 @@ import {
 } from 'components/AvailabilityViewer/availabilityViewerStyle';
 import { Time } from './availabilityEditorStyle';
 
-import { GoogleCalendar, OutlookCalendar, Center } from 'components';
+import { _GoogleCalendar, _OutlookCalendar, Center } from 'components';
+import { Loader } from '../Loading/loadingStyle';
+
+const GoogleCalendar = lazy(() => _GoogleCalendar());
+const OutlookCalendar = lazy(() => _OutlookCalendar());
 
 dayjs.extend(localeData);
 dayjs.extend(customParseFormat);
@@ -68,26 +72,28 @@ const AvailabilityEditor = ({
       {isSpecificDates && (
         <StyledMain>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
-            <GoogleCalendar
-              timeMin={dayjs(times[0], 'HHmm-DDMMYYYY').toISOString()}
-              timeMax={dayjs(times[times.length-1], 'HHmm-DDMMYYYY').add(15, 'm').toISOString()}
-              timeZone={timezone}
-              onImport={busyArray => onChange(
-                times.filter(time => !busyArray.some(busy =>
-                  dayjs(time, 'HHmm-DDMMYYYY').isBetween(busy.start, busy.end, null, '[)')
-                ))
-              )}
-            />
-            <OutlookCalendar
-              timeMin={dayjs(times[0], 'HHmm-DDMMYYYY').toISOString()}
-              timeMax={dayjs(times[times.length-1], 'HHmm-DDMMYYYY').add(15, 'm').toISOString()}
-              timeZone={timezone}
-              onImport={busyArray => onChange(
-                times.filter(time => !busyArray.some(busy =>
-                  dayjs(time, 'HHmm-DDMMYYYY').isBetween(dayjs.tz(busy.start.dateTime, busy.start.timeZone), dayjs.tz(busy.end.dateTime, busy.end.timeZone), null, '[)')
-                ))
-              )}
-            />
+            <Suspense fallback={<Loader />}>
+              <GoogleCalendar
+                timeMin={dayjs(times[0], 'HHmm-DDMMYYYY').toISOString()}
+                timeMax={dayjs(times[times.length-1], 'HHmm-DDMMYYYY').add(15, 'm').toISOString()}
+                timeZone={timezone}
+                onImport={busyArray => onChange(
+                  times.filter(time => !busyArray.some(busy =>
+                    dayjs(time, 'HHmm-DDMMYYYY').isBetween(busy.start, busy.end, null, '[)')
+                  ))
+                )}
+              />
+              <OutlookCalendar
+                timeMin={dayjs(times[0], 'HHmm-DDMMYYYY').toISOString()}
+                timeMax={dayjs(times[times.length-1], 'HHmm-DDMMYYYY').add(15, 'm').toISOString()}
+                timeZone={timezone}
+                onImport={busyArray => onChange(
+                  times.filter(time => !busyArray.some(busy =>
+                    dayjs(time, 'HHmm-DDMMYYYY').isBetween(dayjs.tz(busy.start.dateTime, busy.start.timeZone), dayjs.tz(busy.end.dateTime, busy.end.timeZone), null, '[)')
+                  ))
+                )}
+              />
+            </Suspense>
           </div>
         </StyledMain>
       )}
@@ -119,7 +125,7 @@ const AvailabilityEditor = ({
     										if (!timeLabel.time) return null;
     										if (!times.includes(`${timeLabel.time}-${date}`)) {
     											return (
-    												<TimeSpace key={x+y} />
+    												<TimeSpace key={x+y} className='timespace' title={t('event:greyed_times')} />
     											);
     										}
     										const time = `${timeLabel.time}-${date}`;

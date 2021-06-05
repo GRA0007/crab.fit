@@ -38,6 +38,10 @@ export const Handle = styled.div`
 	left: calc(${props => props.value * 4.1666666666666666}% - 11px);
 	cursor: ew-resize;
 	touch-action: none;
+  transition: left .1s;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 
 	&:after {
 		content: '|||';
@@ -73,4 +77,8 @@ export const Selected = styled.div`
 	top: 0;
 	background-color: ${props => props.theme.primary};
 	border-radius: 2px;
+  transition: left .1s, right .1s;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;

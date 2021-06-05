@@ -2,16 +2,16 @@ import styled from '@emotion/styled';
 
 export const Time = styled.div`
 	height: 10px;
-	margin: 1px;
-	background-color: ${props => props.theme.background};
 	touch-action: none;
+  transition: background-color .1s;
 
+  ${props => props.time.slice(2, 4) === '00' && `
+		border-top: 2px solid ${props.theme.text};
+	`}
 	${props => props.time.slice(2, 4) !== '00' && `
-		margin-top: -1px;
 		border-top: 2px solid transparent;
 	`}
 	${props => props.time.slice(2, 4) === '30' && `
-		margin-top: -1px;
 		border-top: 2px dotted ${props.theme.text};
 	`}
 

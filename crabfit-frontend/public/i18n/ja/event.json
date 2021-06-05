@@ -1,6 +1,5 @@
 {
   "available": "available",
-  "greyed_times": "This area is greyed out because it's not part of the event. You may be looking at this event in a different timezone from where it was created.",
 
   "nav": {
     "title": "Click to copy",
@@ -59,7 +58,6 @@
       "select_none": "Select none",
       "info": "Importing will overwrite your current availability",
       "button": "Import availability"
-    },
-    "outlook_cal": "Sync with Outlook Calendar"
+    }
   }
 }
