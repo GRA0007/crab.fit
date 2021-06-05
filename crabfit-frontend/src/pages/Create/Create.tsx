@@ -156,7 +156,7 @@ const Create = ({ offline }) => {
 				<TitleLarge>CRAB FIT</TitleLarge>
       </StyledMain>
 
-      {!createdEvent ? (
+      {createdEvent ? (
         <StyledMain>
           <OfflineMessage>
             <h2>{t('common:created', { date: createdEvent?.name })}</h2>
