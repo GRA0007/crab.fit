@@ -84,7 +84,7 @@ const Help = () => {
 
 			<AboutSection id="about">
 				<StyledMain>
-					<Center><Button buttonWidth="230px" onClick={() => push('/')}>{t('common:cta')}</Button></Center>
+					<Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
 				</StyledMain>
 			</AboutSection>
 

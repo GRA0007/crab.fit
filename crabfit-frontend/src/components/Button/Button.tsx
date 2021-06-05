@@ -1,16 +1,13 @@
-import { Wrapper, Top, Bottom } from './buttonStyle';
+import { Pressable } from './buttonStyle';
 
-const Button = ({
-	buttonHeight,
-	buttonWidth,
-  primaryColor,
-  secondaryColor,
-	...props
-}) => (
-	<Wrapper buttonHeight={buttonHeight} buttonWidth={buttonWidth}>
-		<Top primaryColor={primaryColor} secondaryColor={secondaryColor} {...props} />
-		<Bottom secondaryColor={secondaryColor} />
-	</Wrapper>
+const Button = ({ href, type = 'button', ...props }) => (
+	<Pressable
+    type={href ? undefined : type}
+    role="button"
+    as={href ? 'a' : 'button'}
+    href={href}
+    {...props}
+  />
 );
 
 export default Button;

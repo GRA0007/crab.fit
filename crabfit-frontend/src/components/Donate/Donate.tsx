@@ -97,7 +97,9 @@ const Donate = () => {
 
   return (
   	<Wrapper>
-  		<a
+			<Button
+				small
+        title={t('donate.title')}
         onClick={event => {
           if (store.TWA) {
             gtag('event', 'donate', { 'event_category': 'donate' });
@@ -116,15 +118,7 @@ const Donate = () => {
         target="_blank"
         rel="noreferrer"
         ref={buttonRef}
-      >
-  			<Button
-  				buttonHeight="30px"
-  				buttonWidth={`${Math.max(t('donate.button').length*10, 90)}px`}
-  				type="button"
-  				tabIndex="-1"
-          title={t('donate.title')}
-  			>{t('donate.button')}</Button>
-  		</a>
+			>{t('donate.button')}</Button>
 
       <Options
         isOpen={isOpen}

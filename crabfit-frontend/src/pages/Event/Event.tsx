@@ -349,7 +349,6 @@ const Event = (props) => {
 											type="submit"
 											isLoading={isLoginLoading}
 											disabled={isLoginLoading || isLoading}
-                      buttonWidth={`${Math.max(t('event:form.button').length*11, 100)}px`}
 										>{t('event:form.button')}</Button>
 									</LoginForm>
 									<Error open={!!error} onClose={() => setError(null)}>{error}</Error>

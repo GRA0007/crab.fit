@@ -100,7 +100,6 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
     		  <Button
             onClick={() => signIn()}
             isLoading={signedIn === undefined}
-            buttonWidth={`${Math.max(t('event:you.google_cal.login').length*10, 270)}px`}
             primaryColor="#4286F5"
             secondaryColor="#3367BD">
             <LoginButton>
@@ -156,8 +155,7 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
             <>
               <Info>{t('event:you.google_cal.info')}</Info>
               <Button
-                buttonWidth="170px"
-                buttonHeight="35px"
+                small
                 isLoading={freeBusyLoading}
                 disabled={freeBusyLoading}
                 onClick={() => importAvailability()}

@@ -122,10 +122,8 @@ const CalendarField = ({
         <>
     			<CalendarHeader>
     				<Button
-    					buttonHeight="30px"
-    					buttonWidth="30px"
+    					size="30px"
     					title={t('form.dates.tooltips.previous')}
-    					type="button"
     					onClick={() => {
     						if (month-1 < 0) {
     							setYear(year-1);
@@ -137,10 +135,8 @@ const CalendarField = ({
     				>&lt;</Button>
     				<span>{dayjs.months()[month]} {year}</span>
     				<Button
-    					buttonHeight="30px"
-    					buttonWidth="30px"
+    					size="30px"
     					title={t('form.dates.tooltips.next')}
-    					type="button"
     					onClick={() => {
     						if (month+1 > 11) {
     							setYear(year+1);

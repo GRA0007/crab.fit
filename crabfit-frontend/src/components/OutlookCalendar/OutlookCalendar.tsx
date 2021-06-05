@@ -167,7 +167,6 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
     		  <Button
             onClick={() => signIn()}
             isLoading={client === undefined}
-            buttonWidth={`${Math.max(t('event:you.outlook_cal').length*10, 270)}px`}
             primaryColor="#0364B9"
             secondaryColor="#02437D">
             <LoginButton>
@@ -223,8 +222,7 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
             <>
               <Info>{t('event:you.google_cal.info')}</Info>
               <Button
-                buttonWidth="170px"
-                buttonHeight="35px"
+                small
                 isLoading={freeBusyLoading}
                 disabled={freeBusyLoading}
                 onClick={() => importAvailability()}

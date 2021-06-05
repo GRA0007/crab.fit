@@ -231,7 +231,7 @@ const Create = ({ offline }) => {
 
       					<Error open={!!error} onClose={() => setError(null)}>{error}</Error>
 
-      					<Button type="submit" isLoading={isLoading} disabled={isLoading} buttonWidth="100%">{t('home:form.button')}</Button>
+      					<Button type="submit" isLoading={isLoading} disabled={isLoading} style={{ width: '100%' }}>{t('home:form.button')}</Button>
       				</CreateForm>
             )}
     			</StyledMain>
