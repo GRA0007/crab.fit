@@ -229,9 +229,7 @@ const Create = ({ offline }) => {
       						defaultOption={t('home:form.timezone.defaultOption')}
       					/>
 
-      					{error && (
-      						<Error onClose={() => setError(null)}>{error}</Error>
-      					)}
+      					<Error open={!!error} onClose={() => setError(null)}>{error}</Error>
 
       					<Button type="submit" isLoading={isLoading} disabled={isLoading} buttonWidth="100%">{t('home:form.button')}</Button>
       				</CreateForm>

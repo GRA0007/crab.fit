@@ -206,9 +206,7 @@ const Home = ({ offline }) => {
   						defaultOption={t('home:form.timezone.defaultOption')}
   					/>
 
-  					{error && (
-  						<Error onClose={() => setError(null)}>{error}</Error>
-  					)}
+  					<Error open={!!error} onClose={() => setError(null)}>{error}</Error>
 
   					<Center>
   						<Button type="submit" isLoading={isLoading} disabled={isLoading}>{t('home:form.button')}</Button>

@@ -352,7 +352,7 @@ const Event = (props) => {
                       buttonWidth={`${Math.max(t('event:form.button').length*11, 100)}px`}
 										>{t('event:form.button')}</Button>
 									</LoginForm>
-									{error && <Error onClose={() => setError(null)}>{error}</Error>}
+									<Error open={!!error} onClose={() => setError(null)}>{error}</Error>
 									<Info>{t('event:form.info')}</Info>
 								</>
 							)}
