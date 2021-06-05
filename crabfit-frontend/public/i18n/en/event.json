@@ -1,5 +1,6 @@
 {
   "available": "available",
+  "greyed_times": "This area is greyed out because it's not part of the event. You may be looking at this event in a different timezone from where it was created.",
 
   "nav": {
     "title": "Click to copy",

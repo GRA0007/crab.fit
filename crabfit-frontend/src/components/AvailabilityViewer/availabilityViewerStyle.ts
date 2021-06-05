@@ -35,20 +35,25 @@ export const Date = styled.div`
 export const Times = styled.div`
 	display: flex;
 	flex-direction: column;
-	background-color: ${props => props.theme.text};
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid transparent;
+
+  border-bottom: 2px solid ${props => props.theme.text};
+  border-left: 1px solid ${props => props.theme.text};
+  border-right: 1px solid ${props => props.theme.text};
 
   ${props => props.borderLeft && `
-    border-left: 1px solid transparent;
+    border-left: 2px solid ${props.theme.text};
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
   `}
   ${props => props.borderRight && `
-    border-right: 1px solid transparent;
+    border-right: 2px solid ${props.theme.text};
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
   `}
+
+  & .time + .timespace, & .timespace:first-of-type {
+    border-top: 2px solid ${props => props.theme.text};
+  }
 `;
 
 export const DateLabel = styled.label`
@@ -67,31 +72,28 @@ export const DayLabel = styled.label`
 
 export const Time = styled.div`
 	height: 10px;
-	margin: 1px;
-	background-color: ${props => props.theme.background};
   background-origin: border-box;
+  transition: background-color .1s;
 
+	${props => props.time.slice(2, 4) === '00' && `
+		border-top: 2px solid ${props.theme.text};
+	`}
 	${props => props.time.slice(2, 4) !== '00' && `
-		margin-top: -1px;
 		border-top: 2px solid transparent;
 	`}
 	${props => props.time.slice(2, 4) === '30' && `
-		margin-top: -1px;
 		border-top: 2px dotted ${props.theme.text};
 	`}
 
-  ${props => props.highlight && props.peopleCount === props.maxPeople && props.peopleCount > 0 ? `
+  background-color: ${props => `${props.theme.primary}${Math.round((props.peopleCount/props.maxPeople)*255).toString(16)}`};
+
+  ${props => props.highlight && props.peopleCount === props.maxPeople && props.peopleCount > 0 && `
     background-image: repeating-linear-gradient(
       45deg,
-  	  ${props.theme.primary},
-  	  ${props.theme.primary} 4.3px,
+  	  transparent,
+  	  transparent 4.3px,
   	  ${props.theme.primaryDark} 4.3px,
   	  ${props.theme.primaryDark} 8.6px
-  	);
-  ` : `
-  	background-image: linear-gradient(
-  		${`${props.theme.primary}${Math.round((props.peopleCount/props.maxPeople)*255).toString(16)}`},
-  		${`${props.theme.primary}${Math.round((props.peopleCount/props.maxPeople)*255).toString(16)}`}
   	);
   `}
 `;
@@ -159,7 +161,17 @@ export const TimeSpace = styled.div`
 	height: 10px;
 	position: relative;
 	border-top: 2px solid transparent;
-	background: ${props => props.theme.background};
+
+  &.timespace {
+    background-origin: border-box;
+    background-image: repeating-linear-gradient(
+      45deg,
+  	  transparent,
+  	  transparent 4.3px,
+  	  ${props => props.theme.loading} 4.3px,
+  	  ${props => props.theme.loading} 8.6px
+  	);
+  }
 `;
 
 export const TimeLabel = styled.label`
@@ -190,7 +202,7 @@ export const Person = styled.button`
   font: inherit;
   font-size: 15px;
   border-radius: 3px;
-  border: 1px solid ${props => props.theme.text};
+  border: 2px solid ${props => props.theme.text};
   color: ${props => props.theme.text};
   font-weight: 500;
   background: transparent;

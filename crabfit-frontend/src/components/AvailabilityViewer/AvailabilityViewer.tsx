@@ -91,7 +91,7 @@ const AvailabilityViewer = ({
                   if (!timeLabel.time) return null;
                   if (!times.includes(`${timeLabel.time}-${date}`)) {
                     return (
-                      <TimeSpace key={i} />
+                      <TimeSpace className='timespace' key={i} title={t('event:greyed_times')} />
                     );
                   }
                   const time = `${timeLabel.time}-${date}`;

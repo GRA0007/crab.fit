@@ -119,7 +119,7 @@ const AvailabilityEditor = ({
     										if (!timeLabel.time) return null;
     										if (!times.includes(`${timeLabel.time}-${date}`)) {
     											return (
-    												<TimeSpace key={x+y} />
+    												<TimeSpace key={x+y} className='timespace' title={t('event:greyed_times')} />
     											);
     										}
     										const time = `${timeLabel.time}-${date}`;

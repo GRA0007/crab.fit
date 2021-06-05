@@ -28,7 +28,7 @@ export const Bar = styled.div`
 	border-radius: 3px;
 	overflow: hidden;
 	margin: 0 8px;
-	border: 1px solid ${props => props.theme.text};
+	border: 2px solid ${props => props.theme.text};
 
 	@media (max-width: 400px) {
 		width: 100%;
