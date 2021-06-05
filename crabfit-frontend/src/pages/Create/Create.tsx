@@ -48,6 +48,7 @@ const Create = ({ offline }) => {
 	const [error, setError] = useState(null);
 	const [createdEvent, setCreatedEvent] = useState(null);
   const [copied, setCopied] = useState(null);
+  const [showFooter, setShowFooter] = useState(true);
 
   const { push } = useHistory();
   const { t } = useTranslation(['common', 'home', 'event']);
@@ -59,6 +60,17 @@ const Create = ({ offline }) => {
       push('/');
     }
 		document.title = 'Create a Crab Fit';
+
+    if (window.parent) {
+      window.parent.postMessage('crabfit-create', '*');
+      window.addEventListener('message', e => {
+        if (e.data === 'safari-extension') {
+          setShowFooter(false);
+        }
+      }, {
+        once: true
+      });
+    }
 	}, [push]);
 
 	const onSubmit = async data => {
@@ -144,7 +156,7 @@ const Create = ({ offline }) => {
 				<TitleLarge>CRAB FIT</TitleLarge>
       </StyledMain>
 
-      {createdEvent ? (
+      {!createdEvent ? (
         <StyledMain>
           <OfflineMessage>
             <h2>{t('common:created', { date: createdEvent?.name })}</h2>
@@ -165,7 +177,7 @@ const Create = ({ offline }) => {
               {/* eslint-disable-next-line */}
 							<Trans i18nKey="event:nav.shareinfo_alt">Click the link above to copy it to your clipboard, or share via <a onClick={() => gtag('event', 'send_email', { 'event_category': 'event' })} href={`mailto:?subject=${encodeURIComponent(t('event:nav.email_subject', { event_name: createdEvent?.name }))}&body=${encodeURIComponent(`${t('event:nav.email_body')} https://crab.fit/${createdEvent?.id}`)}`} target="_blank">email</a>.</Trans>
 						</ShareInfo>
-            <Footer small />
+            {showFooter && <Footer small />}
           </OfflineMessage>
         </StyledMain>
       ) : (
