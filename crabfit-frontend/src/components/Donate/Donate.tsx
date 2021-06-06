@@ -20,6 +20,7 @@ const Donate = () => {
   const firstLinkRef = useRef();
   const modalRef = useRef();
   const [isOpen, _setIsOpen] = useState(false);
+  const [closed, setClosed] = useState(false);
 
   const setIsOpen = open => {
     _setIsOpen(open);
@@ -100,6 +101,10 @@ const Donate = () => {
 				small
         title={t('donate.title')}
         onClick={event => {
+          if (closed) {
+            event.preventDefault();
+            return setClosed(false);
+          }
           if (store.TWA) {
             gtag('event', 'donate', { 'event_category': 'donate' });
             event.preventDefault();
@@ -116,6 +121,7 @@ const Donate = () => {
         href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5"
         target="_blank"
         rel="noreferrer"
+        id="donate_button"
         style={{ whiteSpace: 'nowrap' }}
 			>{t('donate.button')}</Button>
 
@@ -125,6 +131,9 @@ const Donate = () => {
         onBlur={e => {
           if (modalRef.current.contains(e.relatedTarget)) return;
           setIsOpen(false);
+          if (e.relatedTarget && e.relatedTarget.id === 'donate_button') {
+            setClosed(true);
+          }
         }}
       >
         <img src={paypal_logo} alt="Donate with PayPal" />
