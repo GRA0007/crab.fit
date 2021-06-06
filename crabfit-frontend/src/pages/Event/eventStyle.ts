@@ -109,7 +109,7 @@ export const Tab = styled.a`
 	color: ${props => props.theme.text};
 	padding: 8px 18px;
 	background-color: ${props => props.theme.primaryBackground};
-	border: 1px solid ${props => props.theme.primaryLight};
+	border: 1px solid ${props => props.theme.primary};
 	border-bottom: 0;
 	margin: 0 4px;
 	border-top-left-radius: 5px;

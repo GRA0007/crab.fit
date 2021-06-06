@@ -18,7 +18,6 @@ const Donate = () => {
   const { t } = useTranslation('common');
 
   const firstLinkRef = useRef();
-  const buttonRef = useRef();
   const modalRef = useRef();
   const [isOpen, _setIsOpen] = useState(false);
 
@@ -117,7 +116,6 @@ const Donate = () => {
         href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5"
         target="_blank"
         rel="noreferrer"
-        ref={buttonRef}
         style={{ whiteSpace: 'nowrap' }}
 			>{t('donate.button')}</Button>
 

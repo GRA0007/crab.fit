@@ -51,7 +51,7 @@ const Event = (props) => {
 
   const { t } = useTranslation(['common', 'event']);
 
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, setFocus } = useForm();
 	const { id } = props.match.params;
   const { offline } = props;
 	const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -329,20 +329,18 @@ const Event = (props) => {
 										<TextField
 											label={t('event:form.name')}
 											type="text"
-											name="name"
 											id="name"
 											inline
 											required
-											register={register}
+											{...register('name')}
 										/>
 
 										<TextField
 											label={t('event:form.password')}
 											type="password"
-											name="password"
 											id="password"
 											inline
-											register={register}
+											{...register('password')}
 										/>
 
 										<Button
@@ -394,7 +392,9 @@ const Event = (props) => {
 									e.preventDefault();
 									if (user) {
 										setTab('you');
-									}
+									} else {
+                    setFocus('name');
+                  }
 								}}
 								selected={tab === 'you'}
 								disabled={!user}

@@ -89,6 +89,10 @@ export const AboutSection = styled.section`
 	margin: 30px 0 0;
 	background-color: ${props => props.theme.primaryBackground};
 	padding: 20px 0;
+
+  & a {
+    color: ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
+  }
 `;
 
 export const P = styled.p`
@@ -124,4 +128,13 @@ export const StatLabel = styled.span`
 export const OfflineMessage = styled.div`
 	text-align: center;
   margin: 50px 0 20px;
+`;
+
+export const ButtonArea = styled.div`
+	display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 30px 0;
 `;

@@ -206,7 +206,7 @@ export const Person = styled.button`
   font: inherit;
   font-size: 15px;
   border-radius: 3px;
-  border: 2px solid ${props => props.theme.text};
+  border: 1px solid ${props => props.theme.text};
   color: ${props => props.theme.text};
   font-weight: 500;
   background: transparent;

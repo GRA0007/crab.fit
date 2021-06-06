@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const Recent = styled.a`
 	text-decoration: none;
-  color: inherit;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,6 +19,7 @@ export const Recent = styled.a`
     font-weight: 400;
     opacity: .8;
     white-space: nowrap;
+    color: ${props => props.theme.text};
   }
 
   &:hover .name {

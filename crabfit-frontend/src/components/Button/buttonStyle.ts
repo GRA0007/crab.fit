@@ -20,6 +20,12 @@ export const Pressable = styled.button`
   transform-style: preserve-3d;
   margin-bottom: 5px;
 
+  & svg, & img {
+    height: 1.2em;
+    width: 1.2em;
+    margin-right: .5em;
+  }
+
   ${props => props.size && `
     padding: 0;
     height: ${props.size};
@@ -39,7 +45,7 @@ export const Pressable = styled.button`
     transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
   }
 
-  &:hover {
+  &:hover, &:focus {
     transform: translate(0, 1px);
     &::before {
       transform: translate3d(0, 4px, -1em);
@@ -102,7 +108,7 @@ export const Pressable = styled.button`
     }
 	`}
 
-  ${props => props.alt && `
+  ${props => props.secondary && `
     background: transparent;
     border: 1px solid ${props.primaryColor || props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
     color: ${props.primaryColor || props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
@@ -111,7 +117,7 @@ export const Pressable = styled.button`
     &::before {
       content: none;
     }
-    &:hover, &:active {
+    &:hover, &:active, &:focus {
       transform: none;
     }
   `}

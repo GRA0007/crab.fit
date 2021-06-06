@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { Button, Center } from 'components';
 import { Loader } from '../Loading/loadingStyle';
 import {
-  LoginButton,
   CalendarList,
   CheckboxInput,
   CheckboxLabel,
@@ -168,11 +167,10 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
             onClick={() => signIn()}
             isLoading={client === undefined}
             primaryColor="#0364B9"
-            secondaryColor="#02437D">
-            <LoginButton>
-              <img src={outlookLogo} alt="" />
-              <span>{t('event:you.outlook_cal')}</span>
-            </LoginButton>
+            secondaryColor="#02437D"
+            icon={<img src={outlookLogo} alt="" />}
+          >
+              {t('event:you.outlook_cal')}
           </Button>
         </Center>
       ) : (

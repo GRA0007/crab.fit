@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Button, Center } from 'components';
 import { Loader } from '../Loading/loadingStyle';
 import {
-  LoginButton,
   CalendarList,
   CheckboxInput,
   CheckboxLabel,
@@ -101,11 +100,10 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
             onClick={() => signIn()}
             isLoading={signedIn === undefined}
             primaryColor="#4286F5"
-            secondaryColor="#3367BD">
-            <LoginButton>
-              <img src={googleLogo} alt="" />
-              <span>{t('event:you.google_cal.login')}</span>
-            </LoginButton>
+            secondaryColor="#3367BD"
+            icon={<img src={googleLogo} alt="" />}
+          >
+            {t('event:you.google_cal.login')}
           </Button>
         </Center>
       ) : (

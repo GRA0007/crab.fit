@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import {
 	Wrapper,
 	StyledLabel,
@@ -5,7 +6,7 @@ import {
 	StyledSelect,
 } from './selectFieldStyle';
 
-const SelectField = ({
+const SelectField = forwardRef(({
 	label,
 	subLabel,
 	id,
@@ -13,17 +14,16 @@ const SelectField = ({
 	inline = false,
 	small = false,
 	defaultOption,
-	register,
 	...props
-}) => (
+}, ref) => (
 	<Wrapper inline={inline} small={small}>
 		{label && <StyledLabel htmlFor={id} inline={inline} small={small}>{label}</StyledLabel>}
 		{subLabel && <StyledSubLabel htmlFor={id}>{subLabel}</StyledSubLabel>}
 
 		<StyledSelect
 			id={id}
-			ref={register}
       small={small}
+      ref={ref}
 			{...props}
 		>
 			{defaultOption && <option value="">{defaultOption}</option>}
@@ -38,6 +38,6 @@ const SelectField = ({
       )}
 		</StyledSelect>
 	</Wrapper>
-);
+));
 
 export default SelectField;

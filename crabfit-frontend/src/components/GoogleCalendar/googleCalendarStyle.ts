@@ -1,16 +1,5 @@
 import styled from '@emotion/styled';
 
-export const LoginButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  & img {
-    height: 1em;
-    margin-right: .8em;
-  }
-`;
-
 export const CalendarList = styled.div`
   width: 100%;
   & > div {

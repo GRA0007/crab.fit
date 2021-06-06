@@ -35,14 +35,17 @@ export const StyledLabel = styled.label`
 
 export const Option = styled.div`
 	flex: 1;
+  position: relative;
 `;
 
 export const HiddenInput = styled.input`
   height: 0;
   width: 0;
   position: absolute;
-  left: -1000px;
+  top: 0;
+  left: 0;
   opacity: 0;
+  appearance: none;
 
   &:checked + label {
     color: ${props => props.theme.background};
