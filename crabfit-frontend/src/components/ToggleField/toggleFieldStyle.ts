@@ -31,6 +31,12 @@ export const StyledLabel = styled.label`
 	display: block;
 	padding-bottom: 4px;
 	font-size: .9rem;
+
+  & svg {
+    height: 1em;
+    width: 1em;
+    vertical-align: middle;
+  }
 `;
 
 export const Option = styled.div`
