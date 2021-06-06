@@ -58,7 +58,7 @@ export const Title = styled.span`
 export const Tagline = styled.span`
 	text-decoration: underline;
   font-size: 14px;
-  padding-top: 6px;
+  padding-top: 2px;
   display: flex;
   align-items: center;
   justify-content: center;

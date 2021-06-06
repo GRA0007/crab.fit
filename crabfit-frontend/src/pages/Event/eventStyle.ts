@@ -90,7 +90,7 @@ export const ShareInfo = styled.p`
     cursor: pointer;
 
     &:hover {
-      color: ${props.theme.primaryDark};
+      color: ${props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
     }
   `}
 `;

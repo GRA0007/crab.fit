@@ -10,6 +10,7 @@ export const ToggleContainer = styled.div`
   border-radius: 3px;
   overflow: hidden;
   --focus-color: ${props => props.theme.primary};
+  transition: border .15s;
 
   &:focus-within {
     --focus-color: ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
@@ -69,5 +70,5 @@ export const LabelButton = styled.label`
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  transition: box-shadow .15s;
+  transition: box-shadow .15s, background-color .15s;
 `;
