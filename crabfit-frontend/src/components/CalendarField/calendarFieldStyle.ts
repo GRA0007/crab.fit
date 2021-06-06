@@ -78,7 +78,7 @@ export const Date = styled.button`
   }
 
 	background-color: ${props => props.theme.primaryBackground};
-	border: 1px solid ${props => props.theme.primaryLight};
+	border: 1px solid ${props => props.theme.primary};
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -87,20 +87,18 @@ export const Date = styled.button`
 	touch-action: none;
 
 	${props => props.otherMonth && `
-		color: ${props.theme.primaryLight};
+		color: ${props.theme.mode === 'light' ? props.theme.primaryLight : props.theme.primaryDark};
 	`}
 	${props => props.isToday && `
 		font-weight: 900;
-		color: ${props.theme.primaryDark};
+		color: ${props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
 	`}
 	${props => (props.selected || (props.mode === 'add' && props.selecting)) && `
 		color: ${props.otherMonth ? 'rgba(255,255,255,.5)' : '#FFF'};
 		background-color: ${props.theme.primary};
-		border-color: ${props.theme.primary};
 	`}
 	${props => props.mode === 'remove' && props.selecting && `
 		background-color: ${props.theme.primaryBackground};
-		border: 1px solid ${props.theme.primaryLight};
 		color: ${props.isToday ? props.theme.primaryDark : (props.otherMonth ? props.theme.primaryLight : 'inherit')};
 	`}
 `;

@@ -39,7 +39,7 @@ dayjs.extend(timezone);
 dayjs.extend(customParseFormat);
 
 const Create = ({ offline }) => {
-	const { register, handleSubmit } = useForm({
+	const { register, handleSubmit, setValue } = useForm({
 		defaultValues: {
 			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 		},
@@ -156,7 +156,7 @@ const Create = ({ offline }) => {
 				<TitleLarge>CRAB FIT</TitleLarge>
       </StyledMain>
 
-      {!createdEvent ? (
+      {createdEvent ? (
         <StyledMain>
           <OfflineMessage>
             <h2>{t('common:created', { date: createdEvent?.name })}</h2>
@@ -196,42 +196,40 @@ const Create = ({ offline }) => {
       						label={t('home:form.name.label')}
       						subLabel={t('home:form.name.sublabel')}
       						type="text"
-      						name="name"
       						id="name"
-      						register={register}
+      						{...register('name')}
       					/>
 
       					<CalendarField
       						label={t('home:form.dates.label')}
       						subLabel={t('home:form.dates.sublabel')}
-      						name="dates"
       						id="dates"
       						required
-      						register={register}
+                  setValue={setValue}
+                  {...register('dates')}
       					/>
 
       					<TimeRangeField
       						label={t('home:form.times.label')}
       						subLabel={t('home:form.times.sublabel')}
-      						name="times"
       						id="times"
       						required
-      						register={register}
+                  setValue={setValue}
+                  {...register('times')}
       					/>
 
       					<SelectField
       						label={t('home:form.timezone.label')}
-      						name="timezone"
       						id="timezone"
-      						register={register}
       						options={timezones}
       						required
+                  {...register('timezone')}
       						defaultOption={t('home:form.timezone.defaultOption')}
       					/>
 
       					<Error open={!!error} onClose={() => setError(null)}>{error}</Error>
 
-      					<Button type="submit" isLoading={isLoading} disabled={isLoading} buttonWidth="100%">{t('home:form.button')}</Button>
+      					<Button type="submit" isLoading={isLoading} disabled={isLoading} style={{ width: '100%' }}>{t('home:form.button')}</Button>
       				</CreateForm>
             )}
     			</StyledMain>

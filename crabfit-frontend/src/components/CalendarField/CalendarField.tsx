@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
@@ -47,13 +47,13 @@ const calculateMonth = (month, year, weekStart) => {
 	return dates;
 };
 
-const CalendarField = ({
+const CalendarField = forwardRef(({
 	label,
 	subLabel,
 	id,
-	register,
+  setValue,
 	...props
-}) => {
+}, ref) => {
   const weekStart = useSettingsStore(state => state.weekStart);
   const locale = useLocaleUpdateStore(state => state.locale);
   const { t } = useTranslation('home');
@@ -88,6 +88,8 @@ const CalendarField = ({
 		_setMode(newMode);
 	};
 
+  useEffect(() => setValue(props.name, type ? JSON.stringify(selectedDays) : JSON.stringify(selectedDates)), [type, selectedDays, selectedDates, setValue, props.name]);
+
 	useEffect(() => {
     if (dayjs.Ls.hasOwnProperty(locale) && weekStart !== dayjs.Ls[locale].weekStart) {
       dayjs.updateLocale(locale, { weekStart });
@@ -102,7 +104,7 @@ const CalendarField = ({
 			<input
 				id={id}
 				type="hidden"
-				ref={register}
+        ref={ref}
 				value={type ? JSON.stringify(selectedDays) : JSON.stringify(selectedDates)}
 				{...props}
 			/>
@@ -122,10 +124,8 @@ const CalendarField = ({
         <>
     			<CalendarHeader>
     				<Button
-    					buttonHeight="30px"
-    					buttonWidth="30px"
+    					size="30px"
     					title={t('form.dates.tooltips.previous')}
-    					type="button"
     					onClick={() => {
     						if (month-1 < 0) {
     							setYear(year-1);
@@ -137,10 +137,8 @@ const CalendarField = ({
     				>&lt;</Button>
     				<span>{dayjs.months()[month]} {year}</span>
     				<Button
-    					buttonHeight="30px"
-    					buttonWidth="30px"
+    					size="30px"
     					title={t('form.dates.tooltips.next')}
-    					type="button"
     					onClick={() => {
     						if (month+1 > 11) {
     							setYear(year+1);
@@ -215,8 +213,8 @@ const CalendarField = ({
           {(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort()).map((name, i) =>
             <Date
               key={name}
-              isToday={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart] === name}
-              title={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart] === name ? t('form.dates.tooltips.today') : ''}
+              isToday={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart === -1 ? 6 : dayjs().day()-weekStart] === name}
+              title={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart === -1 ? 6 : dayjs().day()-weekStart] === name ? t('form.dates.tooltips.today') : ''}
               selected={selectedDays.includes(((i + weekStart) % 7 + 7) % 7)}
               selecting={selectingDays.includes(((i + weekStart) % 7 + 7) % 7)}
               mode={mode}
@@ -261,6 +259,6 @@ const CalendarField = ({
       )}
 		</Wrapper>
 	);
-};
+});
 
 export default CalendarField;

@@ -38,8 +38,8 @@ export const StyledSelect = styled.select`
 	background: ${props => props.theme.primaryBackground};
 	color: inherit;
 	padding: 10px 14px;
-	border: 1px solid ${props => props.theme.primaryLight};
-	box-shadow: inset 0 0 0 0 ${props => props.theme.primaryLight};
+	border: 1px solid ${props => props.theme.primary};
+	box-shadow: inset 0 0 0 0 ${props => props.theme.primary};
 	border-radius: 3px;
 	outline: none;
 	transition: border-color .15s, box-shadow .15s;
@@ -50,8 +50,8 @@ export const StyledSelect = styled.select`
   background-size: 1em;
 
 	&:focus {
-		border: 1px solid ${props => props.theme.primary};
-		box-shadow: inset 0 -3px 0 0 ${props => props.theme.primary};
+		border: 1px solid ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
+		box-shadow: inset 0 -3px 0 0 ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
 	}
 
   ${props => props.small && `

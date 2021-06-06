@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import dayjs from 'dayjs';
 
 import { useSettingsStore, useLocaleUpdateStore } from 'stores';
@@ -14,13 +14,13 @@ import {
 
 const times = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'];
 
-const TimeRangeField = ({
+const TimeRangeField = forwardRef(({
 	label,
 	subLabel,
 	id,
-	register,
+  setValue,
 	...props
-}) => {
+}, ref) => {
   const timeFormat = useSettingsStore(state => state.timeFormat);
   const locale = useLocaleUpdateStore(state => state.locale);
 
@@ -37,6 +37,8 @@ const TimeRangeField = ({
 			rangeRect.current = rangeRef.current.getBoundingClientRect();
 		}
 	}, [rangeRef]);
+
+  useEffect(() => setValue(props.name, JSON.stringify({start, end})), [start, end, setValue, props.name]);
 
 	const handleMouseMove = e => {
 		if (isStartMoving.current || isEndMoving.current) {
@@ -60,8 +62,8 @@ const TimeRangeField = ({
 			<input
 				id={id}
 				type="hidden"
-				ref={register}
 				value={JSON.stringify({start, end})}
+        ref={ref}
 				{...props}
 			/>
 
@@ -139,6 +141,6 @@ const TimeRangeField = ({
 			</Range>
 		</Wrapper>
 	);
-};
+});
 
 export default TimeRangeField;

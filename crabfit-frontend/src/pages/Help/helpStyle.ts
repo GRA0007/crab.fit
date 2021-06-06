@@ -29,7 +29,7 @@ export const FakeCalendar = styled.div`
   }
   & .dates span {
     background-color: ${props => props.theme.primaryBackground};
-  	border: 1px solid ${props => props.theme.primaryLight};
+  	border: 1px solid ${props => props.theme.primary};
   	display: flex;
   	align-items: center;
   	justify-content: center;
@@ -38,15 +38,22 @@ export const FakeCalendar = styled.div`
     &.selected {
       color: #FFF;
   		background-color: ${props => props.theme.primary};
-  		border-color: ${props => props.theme.primary};
     }
+  }
+  & .dates span:first-of-type {
+    border-start-start-radius: 3px;
+    border-end-start-radius: 3px;
+  }
+  & .dates span:last-of-type {
+    border-end-end-radius: 3px;
+    border-start-end-radius: 3px;
   }
 `;
 
 export const FakeTimeRange = styled.div`
 	user-select: none;
   background-color: ${props => props.theme.primaryBackground};
-	border: 1px solid ${props => props.theme.primaryLight};
+	border: 1px solid ${props => props.theme.primary};
 	border-radius: 3px;
 	height: 50px;
 	position: relative;

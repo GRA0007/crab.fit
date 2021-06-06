@@ -1,41 +1,65 @@
 import styled from '@emotion/styled';
 
-export const Wrapper = styled.div`
-	display: inline-block;
-	position: relative;
+export const Pressable = styled.button`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  border: 0;
+  text-decoration: none;
+  font: inherit;
+  box-sizing: border-box;
+  background: ${props => props.primaryColor || props.theme.primary};
+  color: ${props => props.primaryColor ? '#FFF' : props.theme.background};
+  font-weight: 600;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
+  border-radius: 3px;
+  padding: ${props => props.small ? '.4em 1.3em' : '.6em 1.5em'};
+  transform-style: preserve-3d;
+  margin-bottom: 5px;
 
-	--btn-height: ${props => props.buttonHeight || '40px'};
-	--btn-width: ${props => props.buttonWidth || '100px'};
+  & svg, & img {
+    height: 1.2em;
+    width: 1.2em;
+    margin-right: .5em;
+  }
 
-	height: var(--btn-height);
-	width: var(--btn-width);
-`;
+  ${props => props.size && `
+    padding: 0;
+    height: ${props.size};
+    width: ${props.size};
+  `}
 
-export const Top = styled.button`
-	border: 0;
-	cursor: pointer;
-	font: inherit;
-	box-sizing: border-box;
-	background: ${props => props.primaryColor || props.theme.primary};
-	color: #FFF;
-	font-weight: 600;
-	text-shadow: 0 -1.5px .5px ${props => props.secondaryColor || props.theme.primaryDark};
-	padding: 0;
-	border-radius: 3px;
-	height: var(--btn-height);
-	width: var(--btn-width);
-	position: absolute;
-	top: -4px;
-	left: 0;
-	user-select: none;
-	transition: top .15s;
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: ${props => props.secondaryColor || props.theme.primaryDark};
+    border-radius: inherit;
+    transform: translate3d(0, 5px, -1em);
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+  }
 
-	&:active {
-		top: 0;
-	}
+  &:hover, &:focus {
+    transform: translate(0, 1px);
+    &::before {
+      transform: translate3d(0, 4px, -1em);
+    }
+  }
 
-	${props => props.isLoading && `
-		text-shadow: none;
+  &:active {
+    transform: translate(0, 5px);
+    &::before {
+      transform: translate3d(0, 0, -1em);
+    }
+  }
+
+  ${props => props.isLoading && `
 		color: transparent;
 		cursor: wait;
 
@@ -83,12 +107,18 @@ export const Top = styled.button`
       }
     }
 	`}
-`;
 
-export const Bottom = styled.div`
-	box-sizing: border-box;
-	background: ${props => props.secondaryColor || props.theme.primaryDark};
-	border-radius: 3px;
-	height: var(--btn-height);
-	width: var(--btn-width);
+  ${props => props.secondary && `
+    background: transparent;
+    border: 1px solid ${props.primaryColor || props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
+    color: ${props.primaryColor || props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
+    margin-bottom: 0;
+
+    &::before {
+      content: none;
+    }
+    &:hover, &:active, &:focus {
+      transform: none;
+    }
+  `}
 `;

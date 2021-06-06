@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
 	border-radius: 3px;
 	background-color: ${props => props.theme.error};
 	color: #FFFFFF;
-	padding: 12px 16px;
+	padding: 0 16px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -13,16 +13,17 @@ export const Wrapper = styled.div`
   max-height: 0;
   margin: 0;
   visibility: hidden;
-  transition: margin .2s, max-height .2s;
+  transition: margin .2s, padding .2s, max-height .2s;
 
   ${props => props.open && `
     opacity: 1;
     visibility: visible;
     margin: 20px 0;
+    padding: 12px 16px;
     max-height: 60px;
-    transition: opacity .15s .2s, max-height .2s, margin .2s, visibility .2s;
+    transition: opacity .15s .2s, max-height .2s, margin .2s, padding .2s, visibility .2s;
   `}
-  
+
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }

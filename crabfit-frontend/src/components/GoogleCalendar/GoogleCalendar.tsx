@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Button, Center } from 'components';
 import { Loader } from '../Loading/loadingStyle';
 import {
-  LoginButton,
   CalendarList,
   CheckboxInput,
   CheckboxLabel,
@@ -100,13 +99,11 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
     		  <Button
             onClick={() => signIn()}
             isLoading={signedIn === undefined}
-            buttonWidth={`${Math.max(t('event:you.google_cal.login').length*10, 270)}px`}
             primaryColor="#4286F5"
-            secondaryColor="#3367BD">
-            <LoginButton>
-              <img src={googleLogo} alt="" />
-              <span>{t('event:you.google_cal.login')}</span>
-            </LoginButton>
+            secondaryColor="#3367BD"
+            icon={<img src={googleLogo} alt="" />}
+          >
+            {t('event:you.google_cal.login')}
           </Button>
         </Center>
       ) : (
@@ -156,8 +153,7 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
             <>
               <Info>{t('event:you.google_cal.info')}</Info>
               <Button
-                buttonWidth="170px"
-                buttonHeight="35px"
+                small
                 isLoading={freeBusyLoading}
                 disabled={freeBusyLoading}
                 onClick={() => importAvailability()}

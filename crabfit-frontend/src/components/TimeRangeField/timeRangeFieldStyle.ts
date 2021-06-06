@@ -20,7 +20,7 @@ export const StyledSubLabel = styled.label`
 export const Range = styled.div`
 	user-select: none;
 	background-color: ${props => props.theme.primaryBackground};
-	border: 1px solid ${props => props.theme.primaryLight};
+	border: 1px solid ${props => props.theme.primary};
 	border-radius: 3px;
 	height: 50px;
 	position: relative;

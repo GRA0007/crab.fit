@@ -71,19 +71,19 @@ const Privacy = () => {
         <P>{t('privacy:p12')}</P>
 
         <h2>{t('privacy:h7')}</h2>
-        <P><Trans i18nKey="privacy:p13">The Service does not address anyone under the age of 13. Personally identifiable information is not knowingly collected from children under 13. If discovered that a child under 13 has provided the Service with personal information, such information will be immediately deleted from the servers. If you are a parent or guardian and you are aware that your child has provided the Service with personal information, please <a href="mailto:benjamin.grantGRA0007+crabfit@gmail.com">contact us</a> so that this information can be removed.</Trans></P>
+        <P><Trans i18nKey="privacy:p13">The Service does not address anyone under the age of 13. Personally identifiable information is not knowingly collected from children under 13. If discovered that a child under 13 has provided the Service with personal information, such information will be immediately deleted from the servers. If you are a parent or guardian and you are aware that your child has provided the Service with personal information, please <a href="mailto:crabfit@bengrant.dev">contact us</a> so that this information can be removed.</Trans></P>
 
         <h2>{t('privacy:h8')}</h2>
         <P>{t('privacy:p14')}</P>
         <P>{t('privacy:p15')}</P>
 
         <h2>{t('privacy:h9')}</h2>
-        <P><Trans i18nKey="privacy:p16">If you have any questions or suggestions about the Privacy Policy, do not hesitate to contact us at <a href="mailto:benjamin.grantGRA0007+crabfit@gmail.com">benjamin.grantGRA0007+crabfit@gmail.com</a>.</Trans></P>
+        <P><Trans i18nKey="privacy:p16">If you have any questions or suggestions about the Privacy Policy, do not hesitate to contact us at <a href="mailto:crabfit@bengrant.dev">crabfit@bengrant.dev</a>.</Trans></P>
       </StyledMain>
 
 			<AboutSection id="about">
 				<StyledMain>
-					<Center><Button buttonWidth="230px" onClick={() => push('/')}>{t('common:cta')}</Button></Center>
+					<Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
 				</StyledMain>
 			</AboutSection>
 

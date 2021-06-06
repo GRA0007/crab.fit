@@ -97,17 +97,17 @@ const App = () => {
 							borderRadius: 100,
 							border: `4px solid ${theme.primaryBackground}`,
 							width: 12,
-							background: `${theme.primaryLight}AA`,
+							background: `${theme.mode === 'light' ? theme.primaryLight : theme.primaryDark}AA`,
 						},
 						'*::-webkit-scrollbar-thumb:hover': {
-							background: `${theme.primaryLight}CC`,
+							background: `${theme.mode === 'light' ? theme.primaryLight : theme.primaryDark}CC`,
 						},
 						'*::-webkit-scrollbar-thumb:active': {
-							background: `${theme.primaryLight}`,
+							background: `${theme.mode === 'light' ? theme.primaryLight : theme.primaryDark}`,
 						},
 					})}
 				/>
-        
+
         <Suspense fallback={<Loading />}>
           <Settings />
         </Suspense>

@@ -9,9 +9,15 @@ export const ToggleContainer = styled.div`
   border: 1px solid ${props => props.theme.primary};
   border-radius: 3px;
   overflow: hidden;
+  --focus-color: ${props => props.theme.primary};
+  transition: border .15s;
 
-  &:focus-within label {
-    box-shadow: inset 0 -3px 0 0 var(--focus-color);
+  &:focus-within {
+    --focus-color: ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
+    border: 1px solid var(--focus-color);
+    & label {
+      box-shadow: inset 0 -3px 0 0 var(--focus-color);
+    }
   }
 
   & > div:first-of-type label {
@@ -26,23 +32,31 @@ export const StyledLabel = styled.label`
 	display: block;
 	padding-bottom: 4px;
 	font-size: .9rem;
+
+  & svg {
+    height: 1em;
+    width: 1em;
+    vertical-align: middle;
+  }
 `;
 
 export const Option = styled.div`
 	flex: 1;
+  position: relative;
 `;
 
 export const HiddenInput = styled.input`
   height: 0;
   width: 0;
   position: absolute;
-  left: -1000px;
+  top: 0;
+  left: 0;
   opacity: 0;
+  appearance: none;
 
   &:checked + label {
     color: ${props => props.theme.background};
-    background-color: ${props => props.theme.primary};
-    --focus-color: ${props => props.theme.primaryDark};
+    background-color: var(--focus-color);
   }
 `;
 
@@ -56,6 +70,5 @@ export const LabelButton = styled.label`
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  transition: box-shadow .15s;
-  --focus-color: ${props => props.theme.primary};
+  transition: box-shadow .15s, background-color .15s;
 `;

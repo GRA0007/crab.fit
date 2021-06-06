@@ -18,7 +18,6 @@ const Donate = () => {
   const { t } = useTranslation('common');
 
   const firstLinkRef = useRef();
-  const buttonRef = useRef();
   const modalRef = useRef();
   const [isOpen, _setIsOpen] = useState(false);
 
@@ -97,7 +96,9 @@ const Donate = () => {
 
   return (
   	<Wrapper>
-  		<a
+			<Button
+				small
+        title={t('donate.title')}
         onClick={event => {
           if (store.TWA) {
             gtag('event', 'donate', { 'event_category': 'donate' });
@@ -115,16 +116,8 @@ const Donate = () => {
         href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5"
         target="_blank"
         rel="noreferrer"
-        ref={buttonRef}
-      >
-  			<Button
-  				buttonHeight="30px"
-  				buttonWidth={`${Math.max(t('donate.button').length*10, 90)}px`}
-  				type="button"
-  				tabIndex="-1"
-          title={t('donate.title')}
-  			>{t('donate.button')}</Button>
-  		</a>
+        style={{ whiteSpace: 'nowrap' }}
+			>{t('donate.button')}</Button>
 
       <Options
         isOpen={isOpen}
