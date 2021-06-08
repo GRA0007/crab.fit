@@ -101,7 +101,7 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
             isLoading={signedIn === undefined}
             primaryColor="#4286F5"
             secondaryColor="#3367BD"
-            icon={<img src={googleLogo} alt="" />}
+            icon={<img aria-hidden="true" focusable="false" src={googleLogo} alt="" />}
           >
             {t('event:you.google_cal.login')}
           </Button>
