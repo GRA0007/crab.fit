@@ -120,8 +120,10 @@ const Donate = () => {
         }}
         href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5"
         target="_blank"
-        rel="noreferrer"
+        rel="noreferrer noopener payment"
         id="donate_button"
+        role="button"
+        aria-expanded={isOpen ? 'true' : 'false'}
         style={{ whiteSpace: 'nowrap' }}
 			>{t('donate.button')}</Button>
 
@@ -137,10 +139,10 @@ const Donate = () => {
         }}
       >
         <img src={paypal_logo} alt="Donate with PayPal" />
-        <a onClick={linkPressed} ref={firstLinkRef} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=2" target="_blank" rel="noreferrer">{t('donate.options.$2')}</a>
-        <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5" target="_blank" rel="noreferrer"><strong>{t('donate.options.$5')}</strong></a>
-        <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=10" target="_blank" rel="noreferrer">{t('donate.options.$10')}</a>
-        <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD" target="_blank" rel="noreferrer">{t('donate.options.choose')}</a>
+        <a onClick={linkPressed} ref={firstLinkRef} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=2" target="_blank" rel="noreferrer noopener payment">{t('donate.options.$2')}</a>
+        <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=5" target="_blank" rel="noreferrer noopener payment"><strong>{t('donate.options.$5')}</strong></a>
+        <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=10" target="_blank" rel="noreferrer noopener payment">{t('donate.options.$10')}</a>
+        <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD" target="_blank" rel="noreferrer noopener payment">{t('donate.options.choose')}</a>
       </Options>
   	</Wrapper>
   );

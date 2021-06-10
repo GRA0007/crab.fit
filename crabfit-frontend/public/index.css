@@ -19,3 +19,24 @@
   font-weight: 400;
   font-style: normal;
 }
+
+/* IE 10+ */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  #root {
+    font-family: Karla, sans-serif;
+    text-align: center;
+    margin: 20vh auto;
+    font-size: 1.3em;
+    font-weight: 600;
+  }
+  #root::before {
+    content: '🦀';
+    font-size: 1.5em;
+    display: block;
+    padding: 20px;
+  }
+  #root::after {
+    display: block;
+    content: 'Crab Fit doesn\'t work in Internet Explorer. Please try using a modern browser.';
+  }
+}

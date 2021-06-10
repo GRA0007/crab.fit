@@ -159,7 +159,7 @@ const Create = ({ offline }) => {
       {createdEvent ? (
         <StyledMain>
           <OfflineMessage>
-            <h2>{t('common:created', { date: createdEvent?.name })}</h2>
+            <h2>{createdEvent?.name}</h2>
             <ShareInfo
               onClick={() => navigator.clipboard?.writeText(`https://crab.fit/${createdEvent.id}`)
                   .then(() => {

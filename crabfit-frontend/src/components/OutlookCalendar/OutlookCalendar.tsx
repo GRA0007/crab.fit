@@ -168,7 +168,7 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
             isLoading={client === undefined}
             primaryColor="#0364B9"
             secondaryColor="#02437D"
-            icon={<img src={outlookLogo} alt="" />}
+            icon={<img aria-hidden="true" focusable="false" src={outlookLogo} alt="" />}
           >
               {t('event:you.outlook_cal')}
           </Button>
