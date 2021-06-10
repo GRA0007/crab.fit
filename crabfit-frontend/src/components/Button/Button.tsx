@@ -2,7 +2,7 @@ import { Pressable } from './buttonStyle';
 
 const Button = ({ href, type = 'button', icon, children, ...props }) => (
 	<Pressable
-    type={href && type}
+    type={type}
     as={href ? 'a' : 'button'}
     href={href}
     {...props}

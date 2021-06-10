@@ -246,7 +246,7 @@ const Home = ({ offline }) => {
                 }[browser]}
                 onClick={() => gtag('event', `download_extension_${browser}`, { 'event_category': 'home'})}
                 target="_blank"
-                rel="noopener"
+                rel="noreferrer noopener"
                 secondary
               >{{
                 chrome: t('home:about.chrome_extension'),
@@ -259,11 +259,11 @@ const Home = ({ offline }) => {
               icon={<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path fill="currentColor" d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" /></svg>}
               onClick={() => gtag('event', 'download_android_app', { 'event_category': 'home' })}
               target="_blank"
-              rel="noopener"
+              rel="noreferrer noopener"
               secondary
             >{t('home:about.android_app')}</Button>
           </ButtonArea>
-					<P><Trans i18nKey="home:about.content.p3">Created by <a href="https://bengrant.dev" target="_blank" rel="noopener author">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</Trans></P>
+					<P><Trans i18nKey="home:about.content.p3">Created by <a href="https://bengrant.dev" target="_blank" rel="noreferrer noopener author">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</Trans></P>
 					<P><Trans i18nKey="home:about.content.p4">The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer noopener">repository</a>. By using Crab Fit you agree to the <Link to="/privacy" rel="license">privacy policy</Link>.</Trans></P>
           <P><Trans i18nKey="home:about.content.p5">Consider donating below if it helped you out so it can stay free for everyone. 🦀</Trans></P>
 				</StyledMain>
