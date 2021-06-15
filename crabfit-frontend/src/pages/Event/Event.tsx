@@ -51,7 +51,7 @@ const Event = (props) => {
 
   const { t } = useTranslation(['common', 'event']);
 
-	const { register, handleSubmit, setFocus } = useForm();
+	const { register, handleSubmit, setFocus, reset } = useForm();
 	const { id } = props.match.params;
   const { offline } = props;
 	const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -226,8 +226,14 @@ const Event = (props) => {
 	}, [timezone]);
 
 	const onSubmit = async data => {
+    if (!data.name || data.name.length === 0) {
+      setFocus('name');
+      return setError(t('event:form.errors.name_required'));
+    }
+
 		setIsLoginLoading(true);
 		setError(null);
+
 		try {
 			const response = await api.post(`/event/${id}/people/${data.name}`, {
 				person: {
@@ -270,6 +276,7 @@ const Event = (props) => {
       gtag('event', 'login', {
         'event_category': 'event',
       });
+      reset();
 		}
 	};
 
@@ -321,7 +328,14 @@ const Event = (props) => {
 					<LoginSection id="login">
 						<StyledMain>
 							{user ? (
-								<h2>{t('event:form.signed_in', { name: user.name })}</h2>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '20px 0', flexWrap: 'wrap', gap: '10px' }}>
+  								<h2 style={{ margin: 0 }}>{t('event:form.signed_in', { name: user.name })}</h2>
+                  <Button small onClick={() => {
+                    setTab('group');
+                    setUser(null);
+                    setPassword(null);
+                  }}>{t('event:form.logout_button')}</Button>
+                </div>
 							) : (
 								<>
 									<h2>{t('event:form.signed_out')}</h2>

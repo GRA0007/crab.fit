@@ -17,11 +17,13 @@
     "name": "Your name",
     "password": "Password (optional)",
     "button": "Login",
+    "logout_button": "Sign out",
     "info": "These details are only for this event. Use a password to prevent others from changing your availability.",
 
     "timezone": "Your time zone",
 
     "errors": {
+      "name_required": "Your name is needed to store your availability.",
       "password_incorrect": "Password is incorrect. Check your name is spelled right.",
       "unknown": "Failed to login. Please try again."
     },
@@ -35,7 +37,7 @@
   },
   "error": {
     "title": "Event not found",
-    "body": "Check that the url you entered is correct."
+    "body": "Check that the url you entered is correct. Note that to protect your privacy, events are deleted after 3 months of inactivity."
   },
 
   "tabs": {

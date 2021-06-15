@@ -14,6 +14,9 @@ const createPerson = require('./routes/createPerson');
 const login = require('./routes/login');
 const updatePerson = require('./routes/updatePerson');
 
+const taskCleanup = require('./routes/taskCleanup');
+const taskLegacyCleanup = require('./routes/taskLegacyCleanup');
+
 const app = express();
 const port = 8080;
 const corsOptions = {
@@ -30,6 +33,7 @@ app.use((req, res, next) => {
   req.types = {
     event: process.env.NODE_ENV === 'production' ? 'Event' : 'DevEvent',
     person: process.env.NODE_ENV === 'production' ? 'Person' : 'DevPerson',
+    stats: process.env.NODE_ENV === 'production' ? 'Stats' : 'DevStats',
   };
 	next();
 });
@@ -45,6 +49,10 @@ app.get('/event/:eventId/people', getPeople);
 app.post('/event/:eventId/people', createPerson);
 app.post('/event/:eventId/people/:personName', login);
 app.patch('/event/:eventId/people/:personName', updatePerson);
+
+// Tasks
+app.get('/tasks/cleanup', taskCleanup);
+app.get('/tasks/legacyCleanup', taskLegacyCleanup);
 
 app.listen(port, () => {
 	console.log(`Crabfit API listening at http://localhost:${port} in ${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'} mode`)

@@ -83,7 +83,7 @@ export const Pressable = styled.button`
 			left: calc(50% - 12px);
 			height: 18px;
 			width: 18px;
-			border: 3px solid #FFF;
+			border: 3px solid ${props.primaryColor ? '#FFF' : props.theme.background};
 			border-left-color: transparent;
 			border-radius: 100px;
 			animation: load .5s linear infinite;
@@ -92,7 +92,7 @@ export const Pressable = styled.button`
     @media (prefers-reduced-motion: reduce) {
       &:after {
         content: 'loading...';
-        color: #FFF;
+        color: ${props.primaryColor ? '#FFF' : props.theme.background};
         animation: none;
         width: initial;
         height: initial;

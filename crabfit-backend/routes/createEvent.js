@@ -62,6 +62,18 @@ module.exports = async (req, res) => {
 			times: event.times,
       timezone: event.timezone,
 		});
+
+    // Update stats
+    let eventCountResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'eventCount'])))[0] || null;
+    if (eventCountResult) {
+      eventCountResult.value++;
+      await req.datastore.upsert(eventCountResult);
+    } else {
+  		await req.datastore.insert({
+  			key: req.datastore.key([req.types.stats, 'eventCount']),
+  			data: { value: 1 },
+  		});
+    }
 	} catch (e) {
 		console.error(e);
 		res.sendStatus(400);
