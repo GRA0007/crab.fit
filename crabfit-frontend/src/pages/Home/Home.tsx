@@ -265,7 +265,8 @@ const Home = ({ offline }) => {
           </ButtonArea>
 					<P><Trans i18nKey="home:about.content.p3">Created by <a href="https://bengrant.dev" target="_blank" rel="noreferrer noopener author">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</Trans></P>
 					<P><Trans i18nKey="home:about.content.p4">The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer noopener">repository</a>. By using Crab Fit you agree to the <Link to="/privacy" rel="license">privacy policy</Link>.</Trans></P>
-          <P><Trans i18nKey="home:about.content.p5">Consider donating below if it helped you out so it can stay free for everyone. 🦀</Trans></P>
+          <P>{t('home:about.content.p6')}</P>
+          <P>{t('home:about.content.p5')}</P>
 				</StyledMain>
 			</AboutSection>
 
