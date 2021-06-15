@@ -14,6 +14,7 @@ import {
   Options,
   Title,
   Icon,
+  LinkButton,
 } from '../GoogleCalendar/googleCalendarStyle';
 
 import outlookLogo from 'res/outlook.svg';
@@ -178,26 +179,23 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
           <Title>
             <Icon src={outlookLogo} alt="" />
             <strong>{t('event:you.outlook_cal')}</strong>
-            {/* eslint-disable-next-line */}
-            (<a href="#" onClick={e => {
+            (<LinkButton type="button" onClick={e => {
               e.preventDefault();
               signOut();
-            }}>{t('event:you.google_cal.logout')}</a>)
+            }}>{t('event:you.google_cal.logout')}</LinkButton>)
           </Title>
           <Options>
             {calendars !== undefined && !calendars.every(c => c.checked) && (
-              /* eslint-disable-next-line */
-              <a href="#" onClick={e => {
+              <LinkButton type="button" onClick={e => {
                 e.preventDefault();
                 setCalendars(calendars.map(c => ({...c, checked: true})));
-              }}>{t('event:you.google_cal.select_all')}</a>
+              }}>{t('event:you.google_cal.select_all')}</LinkButton>
             )}
             {calendars !== undefined && calendars.every(c => c.checked) && (
-              /* eslint-disable-next-line */
-              <a href="#" onClick={e => {
+              <LinkButton type="button" onClick={e => {
                 e.preventDefault();
                 setCalendars(calendars.map(c => ({...c, checked: false})));
-              }}>{t('event:you.google_cal.select_none')}</a>
+              }}>{t('event:you.google_cal.select_none')}</LinkButton>
             )}
           </Options>
           {calendars !== undefined ? calendars.map(calendar => (

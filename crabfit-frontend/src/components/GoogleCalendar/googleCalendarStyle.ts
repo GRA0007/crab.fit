@@ -119,3 +119,16 @@ export const Icon = styled.img`
     filter: invert(1);
   `}
 `;
+
+export const LinkButton = styled.button`
+  font: inherit;
+  color: ${props => props.theme.primary};
+  border: 0;
+  background: none;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+  display: inline;
+  cursor: pointer;
+  appearance: none;
+`;
