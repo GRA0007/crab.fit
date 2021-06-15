@@ -226,8 +226,14 @@ const Event = (props) => {
 	}, [timezone]);
 
 	const onSubmit = async data => {
+    if (!data.name || data.name.length === 0) {
+      setFocus('name');
+      return setError(t('event:form.errors.name_required'));
+    }
+
 		setIsLoginLoading(true);
 		setError(null);
+
 		try {
 			const response = await api.post(`/event/${id}/people/${data.name}`, {
 				person: {

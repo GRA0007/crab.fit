@@ -23,6 +23,7 @@
     "timezone": "Your time zone",
 
     "errors": {
+      "name_required": "Your name is needed to store your availability.",
       "password_incorrect": "Password is incorrect. Check your name is spelled right.",
       "unknown": "Failed to login. Please try again."
     },
