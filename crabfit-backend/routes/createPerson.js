@@ -36,6 +36,18 @@ module.exports = async (req, res) => {
 				await req.datastore.insert(entity);
 
 				res.sendStatus(201);
+
+        // Update stats
+        let personCountResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'personCount'])))[0] || null;
+        if (personCountResult) {
+          personCountResult.value++;
+          await req.datastore.upsert(personCountResult);
+        } else {
+      		await req.datastore.insert({
+      			key: req.datastore.key([req.types.stats, 'personCount']),
+      			data: { value: 1 },
+      		});
+        }
 			} else {
 				res.sendStatus(400);
 			}
