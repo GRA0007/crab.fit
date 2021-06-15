@@ -4,19 +4,24 @@ module.exports = async (req, res) => {
 	let eventCount = null;
 	let personCount = null;
 
-	try {
-		const eventQuery = req.datastore.createQuery(['__Stat_Kind__']).filter('kind_name', req.types.event);
-		const personQuery = req.datastore.createQuery(['__Stat_Kind__']).filter('kind_name', req.types.person);
+  try {
+		const eventResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'eventCount'])))[0] || null;
+		const personResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'personCount'])))[0] || null;
 
-		eventCount = (await req.datastore.runQuery(eventQuery))[0][0].count;
-		personCount = (await req.datastore.runQuery(personQuery))[0][0].count;
+    if (eventResult) {
+      eventCount = eventResult.value;
+    }
+    if (personResult) {
+      personCount = personResult.value;
+    }
+
 	} catch (e) {
 		console.error(e);
 	}
 
-	res.send({
-		eventCount: eventCount || null,
-		personCount: personCount || null,
-		version: package.version,
-	});
+  res.send({
+    eventCount,
+    personCount,
+    version: package.version,
+  });
 };

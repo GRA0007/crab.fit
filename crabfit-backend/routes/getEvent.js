@@ -1,3 +1,5 @@
+const dayjs = require('dayjs');
+
 module.exports = async (req, res) => {
 	const { eventId } = req.params;
 
@@ -9,6 +11,10 @@ module.exports = async (req, res) => {
 				id: eventId,
 				...event,
 			});
+
+      // Update last visited time
+      event.visited = dayjs().unix();
+      await req.datastore.upsert(event);
 		} else {
 			res.sendStatus(404);
 		}
