@@ -1,10 +1,6 @@
 const dayjs = require('dayjs');
 
 module.exports = async (req, res) => {
-  if (req.header('X-Appengine-Cron') === undefined) {
-    return res.status(400).send('This task can only be run from a cron job');
-  }
-
   const threeMonthsAgo = dayjs().subtract(3, 'month').unix();
 
   console.log(`Running LEGACY cleanup task at ${dayjs().format('h:mma D MMM YYYY')}`);
