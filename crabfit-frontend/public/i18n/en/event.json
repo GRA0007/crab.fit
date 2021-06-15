@@ -37,7 +37,7 @@
   },
   "error": {
     "title": "Event not found",
-    "body": "Check that the url you entered is correct."
+    "body": "Check that the url you entered is correct. Note that to protect your privacy, events are deleted after 3 months of inactivity."
   },
 
   "tabs": {
