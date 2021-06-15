@@ -19,7 +19,7 @@ If you speak a language other than English and you want to help translate Crab F
 
 1. Clone the repo.
 2. Run `yarn` in both backend and frontend folders.
-3. Run `node index.js` in the backend folder to start the API.
+3. Run `node index.js` in the backend folder to start the API. **Note:** you will need a google cloud app set up with datastore enabled and set your `GOOGLE_APPLICATION_CREDENTIALS` environment variable to your service key path.
 4. Run `yarn start` in the frontend folder to start the front end.
 
 ### 🔌 Browser extension
@@ -34,6 +34,7 @@ The browser extension in `crabfit-browser-extension` can be tested by first runn
 ### ⚙️ Backend
 1. In the backend folder `cd crabfit-backend`
 2. Deploy the backend `gcloud app deploy --project=crabfit --version=v1`
+3. To deploy cron jobs (i.e. monthly cleanup of old events), run `gcloud app deploy cron.yaml`
 
 ### 🔌 Browser extension
 Compress everything inside the `crabfit-browser-extension` folder and use that zip to deploy using Chrome web store and Mozilla Add-on store.
