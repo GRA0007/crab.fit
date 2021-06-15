@@ -17,6 +17,7 @@
     "name": "Your name",
     "password": "Password (optional)",
     "button": "Login",
+    "logout_button": "Sign out",
     "info": "These details are only for this event. Use a password to prevent others from changing your availability.",
 
     "timezone": "Your time zone",
