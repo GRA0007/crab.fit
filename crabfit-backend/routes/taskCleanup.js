@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
 
   const threeMonthsAgo = dayjs().subtract(3, 'month').unix();
 
-  console.log('Running cleanup task at', dayjs().format('h:mma D MMM YYYY'));
+  console.log(`Running cleanup task at ${dayjs().format('h:mma D MMM YYYY')}`);
 
 	try {
     // Fetch events that haven't been visited in over 3 months
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 
 		if (oldEvents && oldEvents.length > 0) {
       let oldEventIds = oldEvents.map(e => e[req.datastore.KEY].name);
-      console.log('Found', oldEventIds.length, 'events to remove');
+      console.log(`Found ${oldEventIds.length} events to remove`);
 
       // Fetch availabilities linked to the events discovered
       let peopleDiscovered = 0;
@@ -32,11 +32,11 @@ module.exports = async (req, res) => {
 
       await req.datastore.delete(oldEvents.map(event => event[req.datastore.KEY]));
 
-      console.log('Cleanup successful:', oldEventIds.length, 'events and', peopleDiscovered, 'people removed');
+      console.log(`Cleanup successful: ${oldEventIds.length} events and ${peopleDiscovered} people removed`);
 
 			res.sendStatus(200);
 		} else {
-      console.log('Found', 0, 'events to remove, ending cleanup');
+      console.log(`Found 0 events to remove, ending cleanup`);
 			res.sendStatus(404);
 		}
 	} catch (e) {

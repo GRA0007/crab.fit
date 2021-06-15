@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
 
   const threeMonthsAgo = dayjs().subtract(3, 'month').unix();
 
-  console.log('Running LEGACY cleanup task at', dayjs().format('h:mma D MMM YYYY'));
+  console.log(`Running LEGACY cleanup task at ${dayjs().format('h:mma D MMM YYYY')}`);
 
 	try {
     // Fetch events that haven't been visited in over 3 months
@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     oldEvents = oldEvents.filter(event => !event.hasOwnProperty('visited'));
 
 		if (oldEvents && oldEvents.length > 0) {
-      console.log('Found', oldEvents.length, 'events that were missing a visited date');
+      console.log(`Found ${oldEvents.length} events that were missing a visited date`);
 
       // Filter events that are older than 3 months and missing a visited date
       oldEvents = oldEvents.filter(event => event.created < threeMonthsAgo);
@@ -50,11 +50,11 @@ module.exports = async (req, res) => {
           }
         }));
 
-        console.log('Legacy cleanup successful:', eventsRemoved, 'events and', peopleRemoved, 'people removed');
+        console.log(`Legacy cleanup successful: ${eventsRemoved} events and ${peopleRemoved} people removed`);
 
   			res.sendStatus(200);
     	} else {
-        console.log('Found', 0, 'events that are older than 3 months and missing a visited date, ending LEGACY cleanup');
+        console.log('Found 0 events that are older than 3 months and missing a visited date, ending LEGACY cleanup');
     		res.sendStatus(404);
     	}
 		} else {
