@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, Global } from '@emotion/react';
+import { Workbox } from 'workbox-window';
 
-import { Settings, Loading, Egg } from 'components';
+import { Settings, Loading, Egg, UpdateDialog } from 'components';
 
 import { useSettingsStore } from 'stores';
 import theme from 'theme';
@@ -15,6 +16,8 @@ const Create = lazy(() => import('pages/Create/Create'));
 const Help = lazy(() => import('pages/Help/Help'));
 const Privacy = lazy(() => import('pages/Privacy/Privacy'));
 
+const wb = new Workbox('sw.js');
+
 const App = () => {
   const colortheme = useSettingsStore(state => state.theme);
 	const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -24,6 +27,8 @@ const App = () => {
   const [eggCount, setEggCount] = useState(0);
   const [eggVisible, setEggVisible] = useState(false);
   const [eggKey, setEggKey] = useState(0);
+
+  const [updateAvailable, setUpdateAvailable] = useState(false);
 
   const eggHandler = useCallback(
     event => {
@@ -54,6 +59,19 @@ const App = () => {
       window.removeEventListener('offline', onOffline, false);
       window.removeEventListener('online', onOnline, false);
     };
+  }, []);
+
+  useEffect(() => {
+    // Register service worker
+    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+      wb.addEventListener('installed', event => {
+        if (event.isUpdate) {
+          setUpdateAvailable(true);
+        }
+      });
+
+      wb.register();
+    }
   }, []);
 
   useEffect(() => {
@@ -139,6 +157,12 @@ const App = () => {
             </Suspense>
           )} />
 				</Switch>
+
+        {updateAvailable && (
+          <Suspense fallback={<Loading />}>
+            <UpdateDialog onClose={() => setUpdateAvailable(false)} />
+          </Suspense>
+        )}
 
         {eggVisible && <Egg eggKey={eggKey} onClose={() => setEggVisible(false)} />}
 			</ThemeProvider>
