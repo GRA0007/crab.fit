@@ -48,10 +48,14 @@
     "availabilities": "Ketersediaan dibuat",
     "content": {
       "p1": "Crab Fit membantu Anda menyesuaikan acara dengan jadwal semua orang. Cukup buat acara di atas dan kirim tautan ke semua orang yang berpartisipasi. Hasil diperbarui secara langsung dan Anda akan dapat melihat peta panas saat semua orang bebas.<1 /><2>Pelajari lebih lanjut tentang cara Crab Fit</2>.",
-      "p2": "Apakah Anda membuat banyak? Dapatkan <1>ekstensi Chrome</1> atau <3>ekstensi Firefox</3> untuk browser Anda! Anda juga dapat mengunduh <5>aplikasi Android</5> untuk merencanakan saat dalam perjalanan.",
       "p3": "Dibuat oleh <1>Ben Grant</1>, Crab Fit adalah solusi modern untuk debat perencanaan acara grup Anda.",
       "p4": "Kode Crab Fit adalah open source, jika Anda menemukan masalah atau ingin berkontribusi, Anda dapat mengunjungi <1>repositori</1>. Dengan menggunakan Crab Fit, Anda menyetujui <3>kebijakan privasi</3>.",
+      "p6": "Untuk melindungi privasi Anda, acara dihapus setelah 3 bulan tidak aktif, dan semua kata sandi di-hash dengan aman.",
       "p5": "Pertimbangkan untuk berdonasi di bawah jika itu membantu Anda sehingga dapat tetap gratis untuk semua orang. 🦀"
-    }
+    },
+    "chrome_extension": "Dapatkan Ekstensi Chrome",
+    "firefox_extension": "Dapatkan Ekstensi Firefox",
+    "safari_extension": "Dapatkan Ekstensi Safari",
+    "android_app": "Unduh aplikasi Android"
   }
 }
