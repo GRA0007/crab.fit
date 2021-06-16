@@ -1,5 +1,6 @@
 {
   "available": "disponible",
+  "greyed_times": "Cette zone est grisée car elle ne fait pas partie de l'événement. Vous regardez peut-être cet événement dans un fuseau horaire différent de celui où il a été créé.",
 
   "nav": {
     "title": "Cliquez pour copier",
@@ -16,11 +17,13 @@
     "name": "Votre nom",
     "password": "Mot de passe (facultatif)",
     "button": "Connexion",
+    "logout_button": "Déconnexion",
     "info": "Ces détails ne concernent que cet événement. Utilisez un mot de passe pour empêcher les autres de modifier votre disponibilité.",
 
     "timezone": "Votre fuseau horaire",
 
     "errors": {
+      "name_required": "Votre nom est nécessaire pour enregistrer votre disponibilité.",
       "password_incorrect": "Le mot de passe est incorrect. Vérifiez que votre nom est correctement orthographié.",
       "unknown": "Échec de la connexion. Veuillez réessayer."
     },
@@ -34,7 +37,7 @@
   },
   "error": {
     "title": "Événement introuvable",
-    "body": "Vérifiez que l'URL que vous avez saisie est correcte."
+    "body": "Vérifiez que l'URL que vous avez saisie est correcte. Notez que pour protéger votre vie privée, les événements sont supprimés après 3 mois d'inactivité."
   },
 
   "tabs": {
@@ -58,6 +61,7 @@
       "select_none": "Tout déselectionner",
       "info": "L'importation écrasera votre disponibilité actuelle",
       "button": "Importer la disponibilité"
-    }
+    },
+    "outlook_cal": "Synchroniser avec le calendrier Outlook"
   }
 }
