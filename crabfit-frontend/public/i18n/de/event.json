@@ -1,5 +1,7 @@
 {
   "available": "Verfügbar",
+  "greyed_times": "Dieser Bereich ist ausgegraut, da er nicht zum Event gehört. Möglicherweise sehen Sie sich dieses Ereignis in einer anderen Zeitzone als dem Ort an, an dem es erstellt wurde.",
+
   "nav": {
     "title": "Zum kopieren klicken",
     "copied": "Kopiert!",
@@ -11,15 +13,21 @@
   "form": {
     "signed_out": "Melde dich an, um deine Verfügbarkeit hinzuzufügen",
     "signed_in": "Als {{name}} angemeldet",
+
     "name": "Dein Name",
     "password": "Passwort (optional)",
     "button": "Anmelden",
+    "logout_button": "Ausloggen",
     "info": "Diese Angaben gelten nur für diese Veranstaltung. Verwende ein Passwort, um zu verhindern, dass andere deine Verfügbarkeit ändern.",
+
     "timezone": "Deine Zeitzone",
+
     "errors": {
+      "name_required": "Ihr Name wird benötigt, um Ihre Verfügbarkeit zu speichern.",
       "password_incorrect": "Das Passwort ist inkorrekt. Überprüfe, ob deine Angaben richtig geschrieben sind.",
       "unknown": "Einloggen fehlgeschlagen. Bitte versuche es erneut."
     },
+
     "created_in_timezone": "Diese Veranstaltung wurde in der Zeitzone <strong>{{timezone}}</strong> erstellt. <3>Klicke hier</3> um sie zu übernehmen.",
     "local_timezone": "Deine lokale Zeitzone wird als <strong>{{timezone}}</strong> erkannt. <3>Klicke hier</3> um sie zu übernehmen."
   },
@@ -29,18 +37,21 @@
   },
   "error": {
     "title": "Event nicht gefunden",
-    "body": "Überprüfe, ob die URL korrekt ist."
+    "body": "Überprüfe, ob die URL korrekt ist. Beachten Sie, dass Ereignisse zum Schutz Ihrer Privatsphäre nach 3 Monaten Inaktivität gelöscht werden."
   },
+
   "tabs": {
     "you": "Deine Verfügbarkeit",
     "you_tooltip": "Melde dich an, um deine Verfügbarkeit festzulegen",
     "group": "Gruppenverfügbarkeit"
   },
+
   "group": {
     "legend_tooltip": "Klicke hier, um die grösste Verfügbarkeit hervorzuheben",
     "info1": "Bewege den Mauszeiger oder tippe auf den Kalender unten, um zu sehen, wer verfügbar ist",
     "info2": "Klicke auf die Namen unten, um einzelne Personen anzuzeigen"
   },
+
   "you": {
     "info": "Klicke und ziehe im Kalender unten, um deine Verfügbarkeit festzulegen",
     "google_cal": {
@@ -50,6 +61,7 @@
       "select_none": "Keine wählen",
       "info": "Durch den Import wird deine aktuelle Verfügbarkeit überschrieben",
       "button": "Verfügbarkeit importieren"
-    }
+    },
+    "outlook_cal": "Mit Outlook Kalender synchronisieren"
   }
 }
