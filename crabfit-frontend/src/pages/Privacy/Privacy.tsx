@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -22,10 +22,13 @@ const Privacy = () => {
   const { push } = useHistory();
   const { t, i18n } = useTranslation(['common', 'privacy']);
   const contentRef = useRef();
+  const [content, setContent] = useState('');
 
 	useEffect(() => {
 		document.title = `${t('privacy:name')} - Crab Fit`;
 	}, [t]);
+
+  useEffect(() => setContent(contentRef.current?.innerText || ''), [contentRef]);
 
 	return (
 		<>
@@ -39,7 +42,7 @@ const Privacy = () => {
         {!i18n.language.startsWith('en') && (
           <p>
             <a
-              href={`https://translate.google.com/?sl=en&tl=${i18n.language.substring(0, 2)}&text=${encodeURIComponent(`${translationDisclaimer}\n\n${contentRef.current?.innerText}`)}&op=translate`}
+              href={`https://translate.google.com/?sl=en&tl=${i18n.language.substring(0, 2)}&text=${encodeURIComponent(`${translationDisclaimer}\n\n${content}`)}&op=translate`}
               target="_blank"
               rel="noreferrer noopener"
             >{t('privacy:translate')}</a>

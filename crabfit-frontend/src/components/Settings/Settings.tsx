@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTheme } from '@emotion/react';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 
@@ -25,6 +26,7 @@ const setDefaults = (lang, store) => {
 };
 
 const Settings = () => {
+  const { pathname } = useLocation();
   const theme = useTheme();
   const store = useSettingsStore();
   const [isOpen, _setIsOpen] = useState(false);
@@ -70,6 +72,13 @@ const Settings = () => {
   i18n.on('languageChanged', lang => {
     setDefaults(lang, store);
   });
+
+  // Reset scroll on navigation
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    document.documentElement.style.scrollBehavior = 'smooth';
+  }, [pathname]);
 
   return (
     <>
