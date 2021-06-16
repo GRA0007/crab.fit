@@ -1,5 +1,6 @@
 {
   "available": "tersedia",
+  "greyed_times": "Area ini berwarna abu-abu karena bukan bagian dari acara. Anda mungkin berada di zona waktu yang berbeda.",
 
   "nav": {
     "title": "Klik untuk menyalin",
@@ -16,11 +17,13 @@
     "name": "Namamu",
     "password": "Kata sandi (opsional)",
     "button": "Masuk",
+    "logout_button": "Keluar",
     "info": "Rincian ini hanya untuk acara ini. Gunakan kata sandi untuk mencegah orang lain mengubah ketersediaan Anda.",
 
     "timezone": "Zona waktu Anda",
 
     "errors": {
+      "name_required": "Nama Anda diperlukan untuk menyimpan ketersediaan Anda.",
       "password_incorrect": "Kata sandi salah. Periksa nama Anda dieja dengan benar.",
       "unknown": "Gagal untuk masuk. Silakan coba lagi."
     },
@@ -34,7 +37,7 @@
   },
   "error": {
     "title": "Acara tidak ditemukan",
-    "body": "Periksa apakah url yang Anda masukkan benar."
+    "body": "Periksa apakah url yang Anda masukkan benar. Perhatikan bahwa untuk melindungi privasi Anda, acara akan dihapus setelah 3 bulan tidak aktif."
   },
 
   "tabs": {
@@ -58,6 +61,7 @@
       "select_none": "Hapus semua",
       "info": "Mengimpor akan menimpa ketersediaan Anda saat ini",
       "button": "Impor ketersediaan Anda"
-    }
+    },
+    "outlook_cal": "Sinkronkan dengan Kalender Outlook"
   }
 }
