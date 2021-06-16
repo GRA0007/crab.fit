@@ -1,0 +1,58 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Create your own",
+  "cta": "Create your own Crab Fit!",
+  "created": "Created {{date}}",
+  "donate": {
+    "info": "Thank you for using Crab Fit. If you like it, consider donating.",
+    "button": "Donate",
+    "title": "Every amount counts :)",
+    "options": {
+      "$2": "Donate $2",
+      "$5": "Donate $5",
+      "$10": "Donate $10",
+      "choose": "Choose an amount"
+    },
+    "messages": {
+      "about": "If it's helped you out at all, consider donating to help keep it running. 🦀",
+      "success": "Thank you for your donation! Without you, Crab Fit wouldn't be free, so thank you and keep being super awesome!",
+      "error": "Cannot make donation through Google. Please try donating through the website crab.fit 🦀"
+    }
+  },
+  "options": {
+    "name": "Options",
+    "weekStart": {
+      "label": "Week starts on",
+      "options": {
+        "Sunday": "Sunday",
+        "Monday": "Monday"
+      }
+    },
+    "timeFormat": {
+      "label": "Time format",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Theme",
+      "options": {
+        "System": "System",
+        "Light": "Light",
+        "Dark": "Dark"
+      }
+    },
+    "highlight": {
+      "label": "Highlight highest availability",
+      "title": "Make the highest availability on the heatmap stand out",
+      "options": {
+        "Off": "Off",
+        "On": "On"
+      }
+    },
+    "language": {
+      "label": "Language"
+    }
+  }
+}
