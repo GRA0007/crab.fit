@@ -1,5 +1,6 @@
 {
   "available": "disponible",
+  "greyed_times": "Esta área está atenuada porque no es parte del evento. Es posible que esté viendo este evento en una zona horaria diferente de donde se creó.",
 
   "nav": {
     "title": "Haga clic para copiar",
@@ -16,11 +17,13 @@
     "name": "Tu nombre",
     "password": "Contraseña (opcional)",
     "button": "Iniciar sesión",
+    "logout_button": "Desconectar",
     "info": "Estos detalles son solo para este evento. Utilice una contraseña para evitar que otros cambien su disponibilidad.",
 
     "timezone": "Tu zona horaria",
 
     "errors": {
+      "name_required": "Su nombre es necesario para almacenar su disponibilidad.",
       "password_incorrect": "La contraseña es incorrecta. Compruebe que su nombre esté bien escrito.",
       "unknown": "Error al iniciar sesión. Inténtalo de nuevo."
     },
@@ -58,6 +61,7 @@
       "select_none": "Seleccionar ninguno",
       "info": "La importación sobrescribirá su disponibilidad actual",
       "button": "Disponibilidad de importación"
-    }
+    },
+    "outlook_cal": "Sincronizar con el calendario de Outlook"
   }
 }
