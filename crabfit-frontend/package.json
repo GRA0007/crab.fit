@@ -40,6 +40,7 @@
     "workbox-routing": "^5.1.3",
     "workbox-strategies": "^5.1.3",
     "workbox-streams": "^5.1.3",
+    "workbox-window": "^6.1.5",
     "zustand": "^3.3.2"
   },
   "scripts": {
@@ -67,6 +68,7 @@
     ]
   },
   "devDependencies": {
-    "react-app-rewired": "^2.1.8"
+    "react-app-rewired": "^2.1.8",
+    "workbox-webpack-plugin": "^5.1.3"
   }
 }

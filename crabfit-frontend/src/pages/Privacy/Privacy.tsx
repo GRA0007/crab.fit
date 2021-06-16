@@ -28,7 +28,7 @@ const Privacy = () => {
 		document.title = `${t('privacy:name')} - Crab Fit`;
 	}, [t]);
 
-  useEffect(() => setContent(contentRef.current?.innerText || ''), [contentRef.current]);
+  useEffect(() => setContent(contentRef.current?.innerText || ''), [contentRef]);
 
 	return (
 		<>

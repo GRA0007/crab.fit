@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
+import { Workbox } from 'workbox-window';
 import 'i18n';
 
 ReactDOM.render(
@@ -12,9 +11,16 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorkerRegistration.register();
+if ('serviceWorker' in navigator) {
+  const wb = new Workbox('sw.js');
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  wb.addEventListener('installed', event => {
+    if (event.isUpdate) {
+      if (window.confirm(`New content is available!. Click OK to refresh`)) {
+        window.location.reload();
+      }
+    }
+  });
+
+  wb.register();
+}
