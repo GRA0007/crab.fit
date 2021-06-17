@@ -54,5 +54,13 @@
     "language": {
       "label": "Sprache"
     }
+  },
+  "update": {
+    "heading": "Crab Fit wurde aktualisiert",
+    "body": "Eine neue Version von Crab Fit ist verfügbar, die Updates, Fixes und neue Funktionen enthält.",
+    "buttons": {
+      "close": "Entlassen",
+      "reload": "Neu laden"
+    }
   }
 }
