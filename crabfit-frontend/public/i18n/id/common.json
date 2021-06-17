@@ -54,5 +54,13 @@
     "language": {
       "label": "Bahasa"
     }
+  },
+  "update": {
+    "heading": "Crab Fit telah diperbarui",
+    "body": "Versi baru Crab Fit tersedia, yang mencakup pembaruan, perbaikan, dan fitur baru.",
+    "buttons": {
+      "close": "Menutup",
+      "reload": "Muat ulang"
+    }
   }
 }
