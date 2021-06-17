@@ -74,11 +74,7 @@ const Settings = () => {
   });
 
   // Reset scroll on navigation
-  useEffect(() => {
-    document.documentElement.style.scrollBehavior = 'auto';
-    window.scrollTo(0, 0);
-    document.documentElement.style.scrollBehavior = 'smooth';
-  }, [pathname]);
+  useEffect(() => window.scrollTo(0, 0), [pathname]);
 
   return (
     <>
