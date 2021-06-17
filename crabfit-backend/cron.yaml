@@ -2,6 +2,8 @@ cron:
   - description: "clean up old events"
     url: /tasks/cleanup
     schedule: every monday 09:00
+    target: api
   - description: "clean up old events without a visited date"
     url: /tasks/legacyCleanup
     schedule: every tuesday 09:00
+    target: api
