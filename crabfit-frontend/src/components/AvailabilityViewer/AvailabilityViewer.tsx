@@ -7,7 +7,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { useSettingsStore, useLocaleUpdateStore } from 'stores';
 
-import { Legend, Center } from 'components';
+import { Legend } from 'components';
 import {
   Wrapper,
   ScrollWrapper,

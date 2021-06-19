@@ -243,3 +243,16 @@ paths:
           description: "Not found"
         400:
           description: "Not called from a cron job"
+  "/tasks/removeOrphans":
+    get:
+      summary: "Deletes people if the event they were created under no longer exists"
+      operationId: "taskRemoveOrphans"
+      tags:
+        - tasks
+      responses:
+        200:
+          description: "OK"
+        404:
+          description: "Not found"
+        400:
+          description: "Not called from a cron job"

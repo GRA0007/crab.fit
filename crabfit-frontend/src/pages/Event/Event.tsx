@@ -96,7 +96,7 @@ const Event = (props) => {
     };
 
     fetchEvent();
-  }, [id, addRecent]);
+  }, [id, addRecent, removeRecent]);
 
   useEffect(() => {
     const fetchPeople = async () => {

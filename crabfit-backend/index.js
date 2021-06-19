@@ -16,6 +16,7 @@ const updatePerson = require('./routes/updatePerson');
 
 const taskCleanup = require('./routes/taskCleanup');
 const taskLegacyCleanup = require('./routes/taskLegacyCleanup');
+const taskRemoveOrphans = require('./routes/taskRemoveOrphans');
 
 const app = express();
 const port = 8080;
@@ -53,6 +54,7 @@ app.patch('/event/:eventId/people/:personName', updatePerson);
 // Tasks
 app.get('/tasks/cleanup', taskCleanup);
 app.get('/tasks/legacyCleanup', taskLegacyCleanup);
+app.get('/tasks/removeOrphans', taskRemoveOrphans);
 
 app.listen(port, () => {
 	console.log(`Crabfit API listening at http://localhost:${port} in ${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'} mode`)
