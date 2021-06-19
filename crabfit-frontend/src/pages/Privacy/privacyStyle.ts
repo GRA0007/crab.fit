@@ -14,3 +14,9 @@ export const Note = styled.p`
     color: ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
   }
 `;
+
+export const ButtonArea = styled.div`
+  @media print {
+    display: none;
+  }
+`;

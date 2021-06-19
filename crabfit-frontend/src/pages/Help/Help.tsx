@@ -20,6 +20,7 @@ import {
   Step,
   FakeCalendar,
   FakeTimeRange,
+  ButtonArea,
 } from './helpStyle';
 
 const Help = () => {
@@ -82,11 +83,13 @@ const Help = () => {
         />
       </StyledMain>
 
-      <AboutSection id="about">
-        <StyledMain>
-          <Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
-        </StyledMain>
-      </AboutSection>
+      <ButtonArea>
+        <AboutSection id="about">
+          <StyledMain>
+            <Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
+          </StyledMain>
+        </AboutSection>
+      </ButtonArea>
 
       <Footer />
     </>

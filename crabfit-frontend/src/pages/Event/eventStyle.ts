@@ -38,6 +38,12 @@ export const EventDate = styled.span`
       border-radius: 3px;
     }
   `}
+
+  @media print {
+    &::after {
+      content: ' - ' attr(title);
+    }
+  }
 `;
 
 export const LoginForm = styled.form`
@@ -61,6 +67,10 @@ export const LoginForm = styled.form`
 export const LoginSection = styled.section`
   background-color: ${props => props.theme.primaryBackground};
   padding: 10px 0;
+
+  @media print {
+    display: none;
+  }
 `;
 
 export const Info = styled.p`
@@ -93,6 +103,12 @@ export const ShareInfo = styled.p`
       color: ${props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};
     }
   `}
+
+  @media print {
+    &.instructions {
+      display: none;
+    }
+  }
 `;
 
 export const Tabs = styled.div`
@@ -100,6 +116,10 @@ export const Tabs = styled.div`
   align-items: center;
   justify-content: center;
   margin: 30px 0 20px;
+  
+  @media print {
+    display: none;
+  }
 `;
 
 export const Tab = styled.a`

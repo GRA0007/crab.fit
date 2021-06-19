@@ -19,4 +19,8 @@ export const Wrapper = styled.footer`
       margin-bottom: 20px;
     }
   `}
+
+  @media print {
+    display: none;
+  }
 `;

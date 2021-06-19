@@ -121,4 +121,14 @@ export const Pressable = styled.button`
       transform: none;
     }
   `}
+
+  @media print {
+    ${props => !props.secondary && `
+      box-shadow: 0 4px 0 0 ${props.secondaryColor || props.theme.primaryDark};
+    `}
+
+    &::before {
+      display: none;
+    }
+  }
 `;

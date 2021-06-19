@@ -108,3 +108,9 @@ export const FakeTimeRange = styled.div`
     border-radius: 2px;
   }
 `;
+
+export const ButtonArea = styled.div`
+  @media print {
+    display: none;
+  }
+`;

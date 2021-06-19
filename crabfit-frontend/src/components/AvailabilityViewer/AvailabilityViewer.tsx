@@ -29,6 +29,7 @@ import {
   People,
   Person,
   StyledMain,
+  Info,
 } from './availabilityViewerStyle';
 
 import locales from 'res/dayjs_locales';
@@ -162,10 +163,10 @@ const AvailabilityViewer = ({
           total={people.filter(p => p.availability.length > 0).length}
           onSegmentFocus={count => setFocusCount(count)}
         />
-        <Center style={{textAlign: 'center'}}>{t('event:group.info1')}</Center>
+        <Info>{t('event:group.info1')}</Info>
         {people.length > 1 && (
           <>
-            <Center style={{textAlign: 'center'}}>{t('event:group.info2')}</Center>
+            <Info>{t('event:group.info2')}</Info>
             <People>
               {people.map((person, i) =>
                 <Person

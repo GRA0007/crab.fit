@@ -14,7 +14,7 @@ import {
   AboutSection,
   P,
 } from '../Home/homeStyle';
-import { Note } from './privacyStyle';
+import { Note, ButtonArea } from './privacyStyle';
 
 const translationDisclaimer = 'While the translated document is provided for your convenience, the English version as displayed at https://crab.fit is legally binding.';
 
@@ -98,11 +98,13 @@ const Privacy = () => {
         </div>
       </StyledMain>
 
-      <AboutSection id="about">
-        <StyledMain>
-          <Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
-        </StyledMain>
-      </AboutSection>
+      <ButtonArea>
+        <AboutSection>
+          <StyledMain>
+            <Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
+          </StyledMain>
+        </AboutSection>
+      </ButtonArea>
 
       <Footer />
     </>

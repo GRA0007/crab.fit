@@ -33,6 +33,9 @@ export const OpenButton = styled.button`
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
+  @media print {
+    display: none;
+  }
 `;
 
 export const Cover = styled.div`
@@ -80,6 +83,9 @@ export const Modal = styled.div`
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
+  }
+  @media print {
+    display: none;
   }
 `;
 

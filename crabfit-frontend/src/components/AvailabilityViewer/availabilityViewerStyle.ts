@@ -220,3 +220,12 @@ export const Person = styled.button`
     border-color: ${props.theme.primary};
   `}
 `;
+
+export const Info = styled.span`
+  display: block;
+  text-align: center;
+
+  @media print {
+    display: none;
+  }
+`;

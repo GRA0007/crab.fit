@@ -93,6 +93,7 @@ const App = () => {
           styles={theme => ({
             html: {
               scrollBehavior: 'smooth',
+              '-webkit-print-color-adjust': 'exact',
             },
             body: {
               backgroundColor: theme.background,

@@ -47,6 +47,7 @@ const Event = (props) => {
   const weekStart = useSettingsStore(state => state.weekStart);
 
   const addRecent = useRecentsStore(state => state.addRecent);
+  const removeRecent = useRecentsStore(state => state.removeRecent);
   const locale = useLocaleUpdateStore(state => state.locale);
 
   const { t } = useTranslation(['common', 'event']);
@@ -86,6 +87,9 @@ const Event = (props) => {
         document.title = `${response.data.name} | Crab Fit`;
       } catch (e) {
         console.error(e);
+        if (e.status === 404) {
+          removeRecent(id);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -302,7 +306,7 @@ const Event = (props) => {
               }
               title={!!navigator.clipboard ? t('event:nav.title') : ''}
             >{copied ?? `https://crab.fit/${id}`}</ShareInfo>
-            <ShareInfo isLoading={isLoading}>
+            <ShareInfo isLoading={isLoading} className="instructions">
               {!!event?.name &&
                 <Trans i18nKey="event:nav.shareinfo">Copy the link to this page, or share via <a onClick={() => gtag('event', 'send_email', { 'event_category': 'event' })} href={`mailto:?subject=${encodeURIComponent(t('event:nav.email_subject', { event_name: event?.name }))}&body=${encodeURIComponent(`${t('event:nav.email_body')} https://crab.fit/${id}`)}`}>email</a>.</Trans>
               }

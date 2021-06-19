@@ -62,4 +62,8 @@ export const Tagline = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media print {
+    display: none;
+  }
 `;

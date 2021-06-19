@@ -1,5 +1,11 @@
 import styled from '@emotion/styled';
 
+export const Wrapper = styled.div`
+  @media print {
+    display: none;
+  }
+`;
+
 export const Recent = styled.a`
   text-decoration: none;
   display: flex;
