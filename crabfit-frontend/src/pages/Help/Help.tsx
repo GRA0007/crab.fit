@@ -3,41 +3,42 @@ import { Link, useHistory } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 
 import {
-	Button,
-	Center,
-	Footer,
+  Button,
+  Center,
+  Footer,
   AvailabilityViewer,
   Logo,
 } from 'components';
 
 import {
   StyledMain,
-	AboutSection,
-	P,
+  AboutSection,
+  P,
 } from '../Home/homeStyle';
 
 import {
   Step,
   FakeCalendar,
   FakeTimeRange,
+  ButtonArea,
 } from './helpStyle';
 
 const Help = () => {
   const { push } = useHistory();
   const { t } = useTranslation(['common', 'help']);
 
-	useEffect(() => {
-		document.title = t('help:name');
-	}, [t]);
+  useEffect(() => {
+    document.title = t('help:name');
+  }, [t]);
 
-	return (
-		<>
-			<StyledMain>
+  return (
+    <>
+      <StyledMain>
         <Logo />
       </StyledMain>
 
       <StyledMain>
-  			<h1>{t('help:name')}</h1>
+        <h1>{t('help:name')}</h1>
         <P>{t('help:p1')}</P>
         <P>{t('help:p2')}</P>
 
@@ -80,17 +81,19 @@ const Help = () => {
           min={0}
           max={5}
         />
-			</StyledMain>
+      </StyledMain>
 
-			<AboutSection id="about">
-				<StyledMain>
-					<Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
-				</StyledMain>
-			</AboutSection>
+      <ButtonArea>
+        <AboutSection id="about">
+          <StyledMain>
+            <Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
+          </StyledMain>
+        </AboutSection>
+      </ButtonArea>
 
-			<Footer />
-		</>
-	);
+      <Footer />
+    </>
+  );
 };
 
 export default Help;

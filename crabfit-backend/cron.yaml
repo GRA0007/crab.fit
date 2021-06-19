@@ -7,3 +7,7 @@ cron:
     url: /tasks/legacyCleanup
     schedule: every tuesday 09:00
     target: api
+  - description: "remove people with an event id that no longer exists"
+    url: /tasks/removeOrphans
+    schedule: 1st wednesday of month 09:00
+    target: api

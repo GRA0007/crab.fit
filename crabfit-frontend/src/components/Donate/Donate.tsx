@@ -96,9 +96,9 @@ const Donate = () => {
   };
 
   return (
-  	<Wrapper>
-			<Button
-				small
+    <Wrapper>
+      <Button
+        small
         title={t('donate.title')}
         onClick={event => {
           if (closed) {
@@ -125,7 +125,7 @@ const Donate = () => {
         role="button"
         aria-expanded={isOpen ? 'true' : 'false'}
         style={{ whiteSpace: 'nowrap' }}
-			>{t('donate.button')}</Button>
+      >{t('donate.button')}</Button>
 
       <Options
         isOpen={isOpen}
@@ -144,7 +144,7 @@ const Donate = () => {
         <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD&amount=10" target="_blank" rel="noreferrer noopener payment">{t('donate.options.$10')}</a>
         <a onClick={linkPressed} href="https://www.paypal.com/donate?business=N89X6YXRT5HKW&item_name=Crab+Fit+Donation&currency_code=AUD" target="_blank" rel="noreferrer noopener payment">{t('donate.options.choose')}</a>
       </Options>
-  	</Wrapper>
+    </Wrapper>
   );
 }
 

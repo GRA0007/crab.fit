@@ -3,18 +3,18 @@ import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import {
-	Button,
-	Center,
-	Footer,
+  Button,
+  Center,
+  Footer,
   Logo,
 } from 'components';
 
 import {
-	StyledMain,
-	AboutSection,
-	P,
+  StyledMain,
+  AboutSection,
+  P,
 } from '../Home/homeStyle';
-import { Note } from './privacyStyle';
+import { Note, ButtonArea } from './privacyStyle';
 
 const translationDisclaimer = 'While the translated document is provided for your convenience, the English version as displayed at https://crab.fit is legally binding.';
 
@@ -24,20 +24,20 @@ const Privacy = () => {
   const contentRef = useRef();
   const [content, setContent] = useState('');
 
-	useEffect(() => {
-		document.title = `${t('privacy:name')} - Crab Fit`;
-	}, [t]);
+  useEffect(() => {
+    document.title = `${t('privacy:name')} - Crab Fit`;
+  }, [t]);
 
   useEffect(() => setContent(contentRef.current?.innerText || ''), [contentRef]);
 
-	return (
-		<>
-			<StyledMain>
+  return (
+    <>
+    <StyledMain>
         <Logo />
       </StyledMain>
 
       <StyledMain>
-  			<h1>{t('privacy:name')}</h1>
+        <h1>{t('privacy:name')}</h1>
 
         {!i18n.language.startsWith('en') && (
           <p>
@@ -58,9 +58,9 @@ const Privacy = () => {
           <h2>Information Collection and Use</h2>
           <P>The Service uses third party services that may collect information used to identify you.</P>
           <P>Links to privacy policies of the third party service providers used by the Service:</P>
-          <ul>
+          <P as="ul">
             <li><a href="https://www.google.com/policies/privacy/" target="blank">Google Play Services</a></li>
-          </ul>
+          </P>
 
           <h2>Log Data</h2>
           <P>When you use the Service, in the case of an error, data and information is collected to improve the Service, which may include your IP address, device name, operating system version, app configuration and the time and date of the error.</P>
@@ -71,12 +71,12 @@ const Privacy = () => {
 
           <h2>Service Providers</h2>
           <P>Third-party companies may be employed for the following reasons:</P>
-          <ul>
+          <P as="ul">
             <li>To facilitate the Service</li>
             <li>To provide the Service on our behalf</li>
             <li>To perform Service-related services</li>
             <li>To assist in analyzing how the Service is used</li>
-          </ul>
+          </P>
           <P>To perform these tasks, the third parties may have access to your Personal Information, but are obligated not to disclose or use this information for any purpose except the above.</P>
 
           <h2>Security</h2>
@@ -98,15 +98,17 @@ const Privacy = () => {
         </div>
       </StyledMain>
 
-			<AboutSection id="about">
-				<StyledMain>
-					<Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
-				</StyledMain>
-			</AboutSection>
+      <ButtonArea>
+        <AboutSection>
+          <StyledMain>
+            <Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
+          </StyledMain>
+        </AboutSection>
+      </ButtonArea>
 
-			<Footer />
-		</>
-	);
+      <Footer />
+    </>
+  );
 };
 
 export default Privacy;

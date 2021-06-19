@@ -60,34 +60,34 @@ export const Pressable = styled.button`
   }
 
   ${props => props.isLoading && `
-		color: transparent;
-		cursor: wait;
+    color: transparent;
+    cursor: wait;
 
     & img {
       opacity: 0;
     }
 
-		@keyframes load {
-			from {
-				transform: rotate(0deg);
-			}
-			to {
-				transform: rotate(360deg);
-			}
-		}
+    @keyframes load {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-		&:after {
-			content: '';
-			position: absolute;
-			top: calc(50% - 12px);
-			left: calc(50% - 12px);
-			height: 18px;
-			width: 18px;
-			border: 3px solid ${props.primaryColor ? '#FFF' : props.theme.background};
-			border-left-color: transparent;
-			border-radius: 100px;
-			animation: load .5s linear infinite;
-		}
+    &:after {
+      content: '';
+      position: absolute;
+      top: calc(50% - 12px);
+      left: calc(50% - 12px);
+      height: 18px;
+      width: 18px;
+      border: 3px solid ${props.primaryColor ? '#FFF' : props.theme.background};
+      border-left-color: transparent;
+      border-radius: 100px;
+      animation: load .5s linear infinite;
+    }
 
     @media (prefers-reduced-motion: reduce) {
       &:after {
@@ -106,7 +106,7 @@ export const Pressable = styled.button`
         justify-content: center;
       }
     }
-	`}
+  `}
 
   ${props => props.secondary && `
     background: transparent;
@@ -121,4 +121,14 @@ export const Pressable = styled.button`
       transform: none;
     }
   `}
+
+  @media print {
+    ${props => !props.secondary && `
+      box-shadow: 0 4px 0 0 ${props.secondaryColor || props.theme.primaryDark};
+    `}
+
+    &::before {
+      display: none;
+    }
+  }
 `;

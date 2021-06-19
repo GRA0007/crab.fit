@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   border-radius: 3px;
   width: 400px;
   box-sizing: border-box;
-  max-width: calc(100% - 20px);
+  max-width: calc(100% - 40px);
   box-shadow: 0 3px 6px 0 rgba(0,0,0,.3);
 
   & h2 {
@@ -31,4 +31,5 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 16px;
+  flex-wrap: wrap;
 `;

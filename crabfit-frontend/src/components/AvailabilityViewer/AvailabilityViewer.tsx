@@ -7,28 +7,29 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { useSettingsStore, useLocaleUpdateStore } from 'stores';
 
-import { Legend, Center } from 'components';
+import { Legend } from 'components';
 import {
-	Wrapper,
-	ScrollWrapper,
-	Container,
-	Date,
-	Times,
-	DateLabel,
-	DayLabel,
-	Time,
-	Spacer,
-	Tooltip,
-	TooltipTitle,
-	TooltipDate,
-	TooltipContent,
+  Wrapper,
+  ScrollWrapper,
+  Container,
+  Date,
+  Times,
+  DateLabel,
+  DayLabel,
+  Time,
+  Spacer,
+  Tooltip,
+  TooltipTitle,
+  TooltipDate,
+  TooltipContent,
   TooltipPerson,
-	TimeLabels,
-	TimeLabel,
-	TimeSpace,
+  TimeLabels,
+  TimeLabel,
+  TimeSpace,
   People,
   Person,
   StyledMain,
+  Info,
 } from './availabilityViewerStyle';
 
 import locales from 'res/dayjs_locales';
@@ -38,16 +39,16 @@ dayjs.extend(customParseFormat);
 dayjs.extend(relativeTime);
 
 const AvailabilityViewer = ({
-	times,
-	timeLabels,
-	dates,
+  times,
+  timeLabels,
+  dates,
   isSpecificDates,
-	people = [],
-	min = 0,
-	max = 0,
-	...props
+  people = [],
+  min = 0,
+  max = 0,
+  ...props
 }) => {
-	const [tooltip, setTooltip] = useState(null);
+  const [tooltip, setTooltip] = useState(null);
   const timeFormat = useSettingsStore(state => state.timeFormat);
   const highlight = useSettingsStore(state => state.highlight);
   const [filteredPeople, setFilteredPeople] = useState([]);
@@ -153,7 +154,7 @@ const AvailabilityViewer = ({
     times,
   ]);
 
-	return (
+  return (
     <>
       <StyledMain>
         <Legend
@@ -162,10 +163,10 @@ const AvailabilityViewer = ({
           total={people.filter(p => p.availability.length > 0).length}
           onSegmentFocus={count => setFocusCount(count)}
         />
-        <Center style={{textAlign: 'center'}}>{t('event:group.info1')}</Center>
+        <Info>{t('event:group.info1')}</Info>
         {people.length > 1 && (
           <>
-            <Center style={{textAlign: 'center'}}>{t('event:group.info2')}</Center>
+            <Info>{t('event:group.info2')}</Info>
             <People>
               {people.map((person, i) =>
                 <Person
@@ -194,19 +195,19 @@ const AvailabilityViewer = ({
         )}
       </StyledMain>
 
-  		<Wrapper ref={wrapper}>
-    		<ScrollWrapper>
-    			{heatmap}
+      <Wrapper ref={wrapper}>
+        <ScrollWrapper>
+          {heatmap}
 
-    			{tooltip && (
-    				<Tooltip
-    					x={tooltip.x}
-    					y={tooltip.y}
-    				>
-    					<TooltipTitle>{tooltip.available}</TooltipTitle>
-    					<TooltipDate>{tooltip.date}</TooltipDate>
+          {tooltip && (
+            <Tooltip
+              x={tooltip.x}
+              y={tooltip.y}
+            >
+              <TooltipTitle>{tooltip.available}</TooltipTitle>
+              <TooltipDate>{tooltip.date}</TooltipDate>
               {!!filteredPeople.length && (
-      					<TooltipContent>
+                <TooltipContent>
                   {tooltip.people.map(person =>
                     <TooltipPerson key={person}>{person}</TooltipPerson>
                   )}
@@ -215,12 +216,12 @@ const AvailabilityViewer = ({
                   )}
                 </TooltipContent>
               )}
-    				</Tooltip>
-    			)}
+            </Tooltip>
+          )}
         </ScrollWrapper>
-  		</Wrapper>
+      </Wrapper>
     </>
-	);
+  );
 };
 
 export default AvailabilityViewer;

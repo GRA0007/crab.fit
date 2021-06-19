@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-	margin: 10px 0;
+  margin: 10px 0;
 `;
 
 export const ToggleContainer = styled.div`
-	display: flex;
+  display: flex;
   border: 1px solid ${props => props.theme.primary};
   border-radius: 3px;
   overflow: hidden;
@@ -29,9 +29,9 @@ export const ToggleContainer = styled.div`
 `;
 
 export const StyledLabel = styled.label`
-	display: block;
-	padding-bottom: 4px;
-	font-size: .9rem;
+  display: block;
+  padding-bottom: 4px;
+  font-size: .9rem;
 
   & svg {
     height: 1em;
@@ -41,7 +41,7 @@ export const StyledLabel = styled.label`
 `;
 
 export const Option = styled.div`
-	flex: 1;
+  flex: 1;
   position: relative;
 `;
 

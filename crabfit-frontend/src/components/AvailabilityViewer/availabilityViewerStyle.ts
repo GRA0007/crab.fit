@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-	overflow-y: visible;
-	margin: 20px 0;
+  overflow-y: visible;
+  margin: 20px 0;
   position: relative;
 `;
 
@@ -11,30 +11,30 @@ export const ScrollWrapper = styled.div`
 `;
 
 export const Container = styled.div`
-	display: inline-flex;
-	box-sizing: border-box;
+  display: inline-flex;
+  box-sizing: border-box;
   min-width: 100%;
-	align-items: flex-end;
-	justify-content: center;
-	padding: 0 calc(calc(100% - 600px) / 2);
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 calc(calc(100% - 600px) / 2);
 
-	@media (max-width: 660px) {
-		padding: 0 30px;
-	}
+  @media (max-width: 660px) {
+    padding: 0 30px;
+  }
 `;
 
 export const Date = styled.div`
-	flex-shrink: 0;
-	display: flex;
-	flex-direction: column;
-	width: 60px;
-	min-width: 60px;
-	margin-bottom: 10px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 60px;
+  min-width: 60px;
+  margin-bottom: 10px;
 `;
 
 export const Times = styled.div`
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
   border-bottom: 2px solid ${props => props.theme.text};
   border-left: 1px solid ${props => props.theme.text};
@@ -57,44 +57,44 @@ export const Times = styled.div`
 `;
 
 export const DateLabel = styled.label`
-	display: block;
-	font-size: 12px;
-	text-align: center;
-	user-select: none;
+  display: block;
+  font-size: 12px;
+  text-align: center;
+  user-select: none;
 `;
 
 export const DayLabel = styled.label`
-	display: block;
-	font-size: 15px;
-	text-align: center;
-	user-select: none;
+  display: block;
+  font-size: 15px;
+  text-align: center;
+  user-select: none;
 `;
 
 export const Time = styled.div`
-	height: 10px;
+  height: 10px;
   background-origin: border-box;
   transition: background-color .1s;
 
-	${props => props.time.slice(2, 4) === '00' && `
-		border-top: 2px solid ${props.theme.text};
-	`}
-	${props => props.time.slice(2, 4) !== '00' && `
-		border-top: 2px solid transparent;
-	`}
-	${props => props.time.slice(2, 4) === '30' && `
-		border-top: 2px dotted ${props.theme.text};
-	`}
+  ${props => props.time.slice(2, 4) === '00' && `
+    border-top: 2px solid ${props.theme.text};
+  `}
+  ${props => props.time.slice(2, 4) !== '00' && `
+    border-top: 2px solid transparent;
+  `}
+  ${props => props.time.slice(2, 4) === '30' && `
+    border-top: 2px dotted ${props.theme.text};
+  `}
 
   background-color: ${props => `${props.theme.primary}${Math.round((props.peopleCount/props.maxPeople)*255).toString(16)}`};
 
   ${props => props.highlight && props.peopleCount === props.maxPeople && props.peopleCount > 0 && `
     background-image: repeating-linear-gradient(
       45deg,
-  	  transparent,
-  	  transparent 4.3px,
-  	  ${props.theme.primaryDark} 4.3px,
-  	  ${props.theme.primaryDark} 8.6px
-  	);
+      transparent,
+      transparent 4.3px,
+      ${props.theme.primaryDark} 4.3px,
+      ${props.theme.primaryDark} 8.6px
+    );
   `}
 
   @media (prefers-reduced-motion: reduce) {
@@ -103,40 +103,40 @@ export const Time = styled.div`
 `;
 
 export const Spacer = styled.div`
-	width: 12px;
-	flex-shrink: 0;
+  width: 12px;
+  flex-shrink: 0;
 `;
 
 export const Tooltip = styled.div`
-	position: absolute;
-	top: ${props => props.y}px;
-	left: ${props => props.x}px;
-	transform: translateX(-50%);
-	border: 1px solid ${props => props.theme.text};
-	border-radius: 3px;
-	padding: 4px 8px;
-	background-color: ${props => props.theme.background}${props => props.theme.mode === 'light' ? 'EE' : 'DD'};
-	max-width: 200px;
-	pointer-events: none;
+  position: absolute;
+  top: ${props => props.y}px;
+  left: ${props => props.x}px;
+  transform: translateX(-50%);
+  border: 1px solid ${props => props.theme.text};
+  border-radius: 3px;
+  padding: 4px 8px;
+  background-color: ${props => props.theme.background}${props => props.theme.mode === 'light' ? 'EE' : 'DD'};
+  max-width: 200px;
+  pointer-events: none;
   z-index: 100;
   user-select: none;
 `;
 
 export const TooltipTitle = styled.span`
-	font-size: 15px;
-	display: block;
-	font-weight: 700;
+  font-size: 15px;
+  display: block;
+  font-weight: 700;
 `;
 
 export const TooltipDate = styled.span`
-	font-size: 13px;
-	display: block;
-	opacity: .8;
-	font-weight: 600;
+  font-size: 13px;
+  display: block;
+  opacity: .8;
+  font-weight: 600;
 `;
 
 export const TooltipContent = styled.div`
-	font-size: 13px;
+  font-size: 13px;
   padding: 4px 0;
 `;
 
@@ -154,38 +154,38 @@ export const TooltipPerson = styled.span`
 `;
 
 export const TimeLabels = styled.div`
-	flex-shrink: 0;
-	display: flex;
-	flex-direction: column;
-	width: 40px;
-	padding-right: 6px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 40px;
+  padding-right: 6px;
 `;
 
 export const TimeSpace = styled.div`
-	height: 10px;
-	position: relative;
-	border-top: 2px solid transparent;
+  height: 10px;
+  position: relative;
+  border-top: 2px solid transparent;
 
   &.timespace {
     background-origin: border-box;
     background-image: repeating-linear-gradient(
       45deg,
-  	  transparent,
-  	  transparent 4.3px,
-  	  ${props => props.theme.loading} 4.3px,
-  	  ${props => props.theme.loading} 8.6px
-  	);
+      transparent,
+      transparent 4.3px,
+      ${props => props.theme.loading} 4.3px,
+      ${props => props.theme.loading} 8.6px
+    );
   }
 `;
 
 export const TimeLabel = styled.label`
-	display: block;
-	position: absolute;
-	top: -.7em;
-	font-size: 12px;
-	text-align: right;
-	user-select: none;
-	width: 100%;
+  display: block;
+  position: absolute;
+  top: -.7em;
+  font-size: 12px;
+  text-align: right;
+  user-select: none;
+  width: 100%;
 `;
 
 export const StyledMain = styled.div`
@@ -219,4 +219,13 @@ export const Person = styled.button`
     color: #FFFFFF;
     border-color: ${props.theme.primary};
   `}
+`;
+
+export const Info = styled.span`
+  display: block;
+  text-align: center;
+
+  @media print {
+    display: none;
+  }
 `;
