@@ -9,30 +9,30 @@ import timezone from 'dayjs/plugin/timezone';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import {
-	TextField,
-	CalendarField,
-	TimeRangeField,
-	SelectField,
-	Button,
-	Center,
-	Error,
+  TextField,
+  CalendarField,
+  TimeRangeField,
+  SelectField,
+  Button,
+  Center,
+  Error,
   Footer,
   Recents,
 } from 'components';
 
 import {
-	StyledMain,
-	CreateForm,
-	TitleSmall,
-	TitleLarge,
-	Logo,
-	Links,
-	AboutSection,
-	P,
-	Stats,
-	Stat,
-	StatNumber,
-	StatLabel,
+  StyledMain,
+  CreateForm,
+  TitleSmall,
+  TitleLarge,
+  Logo,
+  Links,
+  AboutSection,
+  P,
+  Stats,
+  Stat,
+  StatNumber,
+  StatLabel,
   OfflineMessage,
   ButtonArea,
 } from './homeStyle';
@@ -49,120 +49,120 @@ dayjs.extend(timezone);
 dayjs.extend(customParseFormat);
 
 const Home = ({ offline }) => {
-	const { register, handleSubmit, setValue } = useForm({
-		defaultValues: {
-			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-		},
-	});
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState(null);
-	const [stats, setStats] = useState({
-		eventCount: null,
-		personCount: null,
-		version: 'loading...',
-	});
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: {
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    },
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [stats, setStats] = useState({
+    eventCount: null,
+    personCount: null,
+    version: 'loading...',
+  });
   const [browser, setBrowser] = useState(undefined);
-	const { push } = useHistory();
+  const { push } = useHistory();
   const { t } = useTranslation(['common', 'home']);
   const isTWA = useTWAStore(state => state.TWA);
 
-	useEffect(() => {
-		const fetch = async () => {
-			try {
-				const response = await api.get('/stats');
-				setStats(response.data);
-			} catch (e) {
-				console.error(e);
-			}
-		};
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const response = await api.get('/stats');
+        setStats(response.data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
 
-		fetch();
-		document.title = 'Crab Fit';
+    fetch();
+    document.title = 'Crab Fit';
     setBrowser(detect_browser());
-	}, []);
+  }, []);
 
-	const onSubmit = async data => {
-		setIsLoading(true);
-		setError(null);
-		try {
-			const { start, end } = JSON.parse(data.times);
-			const dates = JSON.parse(data.dates);
+  const onSubmit = async data => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const { start, end } = JSON.parse(data.times);
+      const dates = JSON.parse(data.dates);
 
-			if (dates.length === 0) {
-				return setError(t('home:form.errors.no_dates'));
-			}
+      if (dates.length === 0) {
+        return setError(t('home:form.errors.no_dates'));
+      }
       const isSpecificDates = typeof dates[0] === 'string' && dates[0].length === 8;
-			if (start === end) {
-				return setError(t('home:form.errors.same_times'));
-			}
+      if (start === end) {
+        return setError(t('home:form.errors.same_times'));
+      }
 
-			let times = dates.reduce((times, date) => {
-				let day = [];
-				for (let i = start; i < (start > end ? 24 : end); i++) {
+      let times = dates.reduce((times, date) => {
+        let day = [];
+        for (let i = start; i < (start > end ? 24 : end); i++) {
           if (isSpecificDates) {
-  					day.push(
-  						dayjs.tz(date, 'DDMMYYYY', data.timezone)
-  						.hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
-  					);
+            day.push(
+              dayjs.tz(date, 'DDMMYYYY', data.timezone)
+              .hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
+            );
           } else {
             day.push(
               dayjs().tz(data.timezone)
               .day(date).hour(i).minute(0).utc().format('HHmm-d')
             );
           }
-				}
-				if (start > end) {
-					for (let i = 0; i < end; i++) {
+        }
+        if (start > end) {
+          for (let i = 0; i < end; i++) {
             if (isSpecificDates) {
-    					day.push(
-    						dayjs.tz(date, 'DDMMYYYY', data.timezone)
-    						.hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
-    					);
+              day.push(
+                dayjs.tz(date, 'DDMMYYYY', data.timezone)
+                .hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
+              );
             } else {
               day.push(
                 dayjs().tz(data.timezone)
                 .day(date).hour(i).minute(0).utc().format('HHmm-d')
               );
             }
-					}
-				}
-				return [...times, ...day];
-			}, []);
+          }
+        }
+        return [...times, ...day];
+      }, []);
 
-			if (times.length === 0) {
-				return setError(t('home:form.errors.no_time'));
-			}
+      if (times.length === 0) {
+        return setError(t('home:form.errors.no_time'));
+      }
 
-			const response = await api.post('/event', {
-				event: {
-					name: data.name,
-					times: times,
+      const response = await api.post('/event', {
+        event: {
+          name: data.name,
+          times: times,
           timezone: data.timezone,
-				},
-			});
-			push(`/${response.data.id}`);
+        },
+      });
+      push(`/${response.data.id}`);
       gtag('event', 'create_event', {
         'event_category': 'home',
       });
-		} catch (e) {
-			setError(t('home:form.errors.unknown'));
-			console.error(e);
-		} finally {
-			setIsLoading(false);
-		}
-	};
+    } catch (e) {
+      setError(t('home:form.errors.unknown'));
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-	return (
-		<>
-			<StyledMain>
-				<Center>
-					<Logo src={logo} alt="" />
-				</Center>
-				<TitleSmall altChars={/[A-Z]/g.test(t('home:create'))}>{t('home:create')}</TitleSmall>
-				<TitleLarge>CRAB FIT</TitleLarge>
-				<Links>
-					<a href="#about">{t('home:nav.about')}</a> / <a href="#donate">{t('home:nav.donate')}</a>
-				</Links>
+  return (
+    <>
+      <StyledMain>
+        <Center>
+          <Logo src={logo} alt="" />
+        </Center>
+        <TitleSmall altChars={/[A-Z]/g.test(t('home:create'))}>{t('home:create')}</TitleSmall>
+        <TitleLarge>CRAB FIT</TitleLarge>
+        <Links>
+          <a href="#about">{t('home:nav.about')}</a> / <a href="#donate">{t('home:nav.donate')}</a>
+        </Links>
       </StyledMain>
 
       <Recents />
@@ -174,65 +174,65 @@ const Home = ({ offline }) => {
             <P>{t('home:offline')}</P>
           </OfflineMessage>
         ) : (
-  				<CreateForm onSubmit={handleSubmit(onSubmit)} id="create">
-  					<TextField
-  						label={t('home:form.name.label')}
-  						subLabel={t('home:form.name.sublabel')}
-  						type="text"
-  						id="name"
+          <CreateForm onSubmit={handleSubmit(onSubmit)} id="create">
+            <TextField
+              label={t('home:form.name.label')}
+              subLabel={t('home:form.name.sublabel')}
+              type="text"
+              id="name"
               {...register('name')}
-  					/>
+            />
 
-  					<CalendarField
-  						label={t('home:form.dates.label')}
-  						subLabel={t('home:form.dates.sublabel')}
-  						id="dates"
+            <CalendarField
+              label={t('home:form.dates.label')}
+              subLabel={t('home:form.dates.sublabel')}
+              id="dates"
               required
               setValue={setValue}
               {...register('dates')}
-  					/>
+            />
 
-  					<TimeRangeField
-  						label={t('home:form.times.label')}
-  						subLabel={t('home:form.times.sublabel')}
-  						id="times"
+            <TimeRangeField
+              label={t('home:form.times.label')}
+              subLabel={t('home:form.times.sublabel')}
+              id="times"
               required
               setValue={setValue}
               {...register('times')}
-  					/>
+            />
 
-  					<SelectField
-  						label={t('home:form.timezone.label')}
-  						id="timezone"
-  						options={timezones}
+            <SelectField
+              label={t('home:form.timezone.label')}
+              id="timezone"
+              options={timezones}
               required
               {...register('timezone')}
-  						defaultOption={t('home:form.timezone.defaultOption')}
-  					/>
+              defaultOption={t('home:form.timezone.defaultOption')}
+            />
 
-  					<Error open={!!error} onClose={() => setError(null)}>{error}</Error>
+            <Error open={!!error} onClose={() => setError(null)}>{error}</Error>
 
-  					<Center>
-  						<Button type="submit" isLoading={isLoading} disabled={isLoading}>{t('home:form.button')}</Button>
-  					</Center>
-  				</CreateForm>
+            <Center>
+              <Button type="submit" isLoading={isLoading} disabled={isLoading}>{t('home:form.button')}</Button>
+            </Center>
+          </CreateForm>
         )}
-			</StyledMain>
+      </StyledMain>
 
-			<AboutSection id="about">
-				<StyledMain>
-					<h2>{t('home:about.name')}</h2>
-					<Stats>
-						<Stat>
-							<StatNumber>{stats.eventCount ?? '350+'}</StatNumber>
-							<StatLabel>{t('home:about.events')}</StatLabel>
-						</Stat>
-						<Stat>
-							<StatNumber>{stats.personCount ?? '550+'}</StatNumber>
-							<StatLabel>{t('home:about.availabilities')}</StatLabel>
-						</Stat>
-					</Stats>
-					<P><Trans i18nKey="home:about.content.p1">Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<br /><Link to="/how-to" rel="help">Learn more about how to Crab Fit</Link>.</Trans></P>
+      <AboutSection id="about">
+        <StyledMain>
+          <h2>{t('home:about.name')}</h2>
+          <Stats>
+            <Stat>
+              <StatNumber>{stats.eventCount ?? '350+'}</StatNumber>
+              <StatLabel>{t('home:about.events')}</StatLabel>
+            </Stat>
+            <Stat>
+              <StatNumber>{stats.personCount ?? '550+'}</StatNumber>
+              <StatLabel>{t('home:about.availabilities')}</StatLabel>
+            </Stat>
+          </Stats>
+          <P><Trans i18nKey="home:about.content.p1">Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<br /><Link to="/how-to" rel="help">Learn more about how to Crab Fit</Link>.</Trans></P>
           {isTWA !== true && (
             <ButtonArea>
               {['chrome', 'firefox', 'safari'].includes(browser) && (
@@ -267,16 +267,16 @@ const Home = ({ offline }) => {
               >{t('home:about.android_app')}</Button>
             </ButtonArea>
           )}
-					<P><Trans i18nKey="home:about.content.p3">Created by <a href="https://bengrant.dev" target="_blank" rel="noreferrer noopener author">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</Trans></P>
-					<P><Trans i18nKey="home:about.content.p4">The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer noopener">repository</a>. By using Crab Fit you agree to the <Link to="/privacy" rel="license">privacy policy</Link>.</Trans></P>
+          <P><Trans i18nKey="home:about.content.p3">Created by <a href="https://bengrant.dev" target="_blank" rel="noreferrer noopener author">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</Trans></P>
+          <P><Trans i18nKey="home:about.content.p4">The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer noopener">repository</a>. By using Crab Fit you agree to the <Link to="/privacy" rel="license">privacy policy</Link>.</Trans></P>
           <P>{t('home:about.content.p6')}</P>
           <P>{t('home:about.content.p5')}</P>
-				</StyledMain>
-			</AboutSection>
+        </StyledMain>
+      </AboutSection>
 
-			<Footer />
-		</>
-	);
+      <Footer />
+    </>
+  );
 };
 
 export default Home;

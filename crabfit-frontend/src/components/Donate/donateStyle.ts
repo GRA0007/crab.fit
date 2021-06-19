@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Options = styled.div`
-	position: absolute;
+  position: absolute;
   bottom: calc(100% + 20px);
   right: 0;
   background-color: ${props => props.theme.background};

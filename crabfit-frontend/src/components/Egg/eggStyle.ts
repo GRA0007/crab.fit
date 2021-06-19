@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-	position: fixed;
+  position: fixed;
   background: rgba(0,0,0,.6);
   top: 0;
   left: 0;
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Image = styled.img`
-	max-width: 80%;
-	max-height: 80%;
+  max-width: 80%;
+  max-height: 80%;
   position: absolute;
 `;

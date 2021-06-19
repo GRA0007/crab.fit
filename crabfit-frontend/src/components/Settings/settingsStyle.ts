@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
 
 export const OpenButton = styled.button`
-	border: 0;
-	background: none;
-	height: 50px;
-	width: 50px;
-	cursor: pointer;
-	color: inherit;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  border: 0;
+  background: none;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 12px;
   right: 12px;
@@ -36,7 +36,7 @@ export const OpenButton = styled.button`
 `;
 
 export const Cover = styled.div`
-	position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -50,7 +50,7 @@ export const Cover = styled.div`
 `;
 
 export const Modal = styled.div`
-	position: absolute;
+  position: absolute;
   top: 70px;
   right: 12px;
   background-color: ${props => props.theme.background};
@@ -84,7 +84,7 @@ export const Modal = styled.div`
 `;
 
 export const Heading = styled.span`
-	font-size: 1.5rem;
+  font-size: 1.5rem;
   display: block;
   margin: 6px 0;
   line-height: 1em;

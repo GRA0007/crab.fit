@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Recent = styled.a`
-	text-decoration: none;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: space-between;

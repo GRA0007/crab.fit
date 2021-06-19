@@ -9,23 +9,23 @@ import { useSettingsStore, useLocaleUpdateStore } from 'stores';
 
 import { Legend, Center } from 'components';
 import {
-	Wrapper,
-	ScrollWrapper,
-	Container,
-	Date,
-	Times,
-	DateLabel,
-	DayLabel,
-	Time,
-	Spacer,
-	Tooltip,
-	TooltipTitle,
-	TooltipDate,
-	TooltipContent,
+  Wrapper,
+  ScrollWrapper,
+  Container,
+  Date,
+  Times,
+  DateLabel,
+  DayLabel,
+  Time,
+  Spacer,
+  Tooltip,
+  TooltipTitle,
+  TooltipDate,
+  TooltipContent,
   TooltipPerson,
-	TimeLabels,
-	TimeLabel,
-	TimeSpace,
+  TimeLabels,
+  TimeLabel,
+  TimeSpace,
   People,
   Person,
   StyledMain,
@@ -38,16 +38,16 @@ dayjs.extend(customParseFormat);
 dayjs.extend(relativeTime);
 
 const AvailabilityViewer = ({
-	times,
-	timeLabels,
-	dates,
+  times,
+  timeLabels,
+  dates,
   isSpecificDates,
-	people = [],
-	min = 0,
-	max = 0,
-	...props
+  people = [],
+  min = 0,
+  max = 0,
+  ...props
 }) => {
-	const [tooltip, setTooltip] = useState(null);
+  const [tooltip, setTooltip] = useState(null);
   const timeFormat = useSettingsStore(state => state.timeFormat);
   const highlight = useSettingsStore(state => state.highlight);
   const [filteredPeople, setFilteredPeople] = useState([]);
@@ -153,7 +153,7 @@ const AvailabilityViewer = ({
     times,
   ]);
 
-	return (
+  return (
     <>
       <StyledMain>
         <Legend
@@ -194,19 +194,19 @@ const AvailabilityViewer = ({
         )}
       </StyledMain>
 
-  		<Wrapper ref={wrapper}>
-    		<ScrollWrapper>
-    			{heatmap}
+      <Wrapper ref={wrapper}>
+        <ScrollWrapper>
+          {heatmap}
 
-    			{tooltip && (
-    				<Tooltip
-    					x={tooltip.x}
-    					y={tooltip.y}
-    				>
-    					<TooltipTitle>{tooltip.available}</TooltipTitle>
-    					<TooltipDate>{tooltip.date}</TooltipDate>
+          {tooltip && (
+            <Tooltip
+              x={tooltip.x}
+              y={tooltip.y}
+            >
+              <TooltipTitle>{tooltip.available}</TooltipTitle>
+              <TooltipDate>{tooltip.date}</TooltipDate>
               {!!filteredPeople.length && (
-      					<TooltipContent>
+                <TooltipContent>
                   {tooltip.people.map(person =>
                     <TooltipPerson key={person}>{person}</TooltipPerson>
                   )}
@@ -215,12 +215,12 @@ const AvailabilityViewer = ({
                   )}
                 </TooltipContent>
               )}
-    				</Tooltip>
-    			)}
+            </Tooltip>
+          )}
         </ScrollWrapper>
-  		</Wrapper>
+      </Wrapper>
     </>
-	);
+  );
 };
 
 export default AvailabilityViewer;

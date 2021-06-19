@@ -160,11 +160,11 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
   // eslint-disable-next-line
   }, [client]);
 
-	return (
+  return (
     <>
       {!client ? (
         <Center>
-    		  <Button
+          <Button
             onClick={() => signIn()}
             isLoading={client === undefined}
             primaryColor="#0364B9"
@@ -228,7 +228,7 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
         </CalendarList>
       )}
     </>
-	);
+  );
 };
 
 export default OutlookCalendar;

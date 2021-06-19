@@ -3,16 +3,16 @@ import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import {
-	Button,
-	Center,
-	Footer,
+  Button,
+  Center,
+  Footer,
   Logo,
 } from 'components';
 
 import {
-	StyledMain,
-	AboutSection,
-	P,
+  StyledMain,
+  AboutSection,
+  P,
 } from '../Home/homeStyle';
 import { Note } from './privacyStyle';
 
@@ -24,20 +24,20 @@ const Privacy = () => {
   const contentRef = useRef();
   const [content, setContent] = useState('');
 
-	useEffect(() => {
-		document.title = `${t('privacy:name')} - Crab Fit`;
-	}, [t]);
+  useEffect(() => {
+    document.title = `${t('privacy:name')} - Crab Fit`;
+  }, [t]);
 
   useEffect(() => setContent(contentRef.current?.innerText || ''), [contentRef]);
 
-	return (
-		<>
-			<StyledMain>
+  return (
+    <>
+    <StyledMain>
         <Logo />
       </StyledMain>
 
       <StyledMain>
-  			<h1>{t('privacy:name')}</h1>
+        <h1>{t('privacy:name')}</h1>
 
         {!i18n.language.startsWith('en') && (
           <p>
@@ -98,15 +98,15 @@ const Privacy = () => {
         </div>
       </StyledMain>
 
-			<AboutSection id="about">
-				<StyledMain>
-					<Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
-				</StyledMain>
-			</AboutSection>
+      <AboutSection id="about">
+        <StyledMain>
+          <Center><Button onClick={() => push('/')}>{t('common:cta')}</Button></Center>
+        </StyledMain>
+      </AboutSection>
 
-			<Footer />
-		</>
-	);
+      <Footer />
+    </>
+  );
 };
 
 export default Privacy;

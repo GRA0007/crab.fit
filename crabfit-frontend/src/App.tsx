@@ -20,8 +20,8 @@ const wb = new Workbox('sw.js');
 
 const App = () => {
   const colortheme = useSettingsStore(state => state.theme);
-	const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-	const [isDark, setIsDark] = useState(darkQuery.matches);
+  const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  const [isDark, setIsDark] = useState(darkQuery.matches);
   const [offline, setOffline] = useState(!window.navigator.onLine);
 
   const [eggCount, setEggCount] = useState(0);
@@ -46,7 +46,7 @@ const App = () => {
     [eggCount, eggKey]
   );
 
-	darkQuery.addListener(e => colortheme === 'System' && setIsDark(e.matches));
+  darkQuery.addListener(e => colortheme === 'System' && setIsDark(e.matches));
 
   useEffect(() => {
     const onOffline = () => setOffline(true);
@@ -87,56 +87,56 @@ const App = () => {
   }, [colortheme, darkQuery.matches]);
 
   return (
-		<BrowserRouter>
-			<ThemeProvider theme={theme[isDark ? 'dark' : 'light']}>
-				<Global
-					styles={theme => ({
-						html: {
-							scrollBehavior: 'smooth',
-						},
-						body: {
-							backgroundColor: theme.background,
-							color: theme.text,
-							fontFamily: `'Karla', sans-serif`,
-							fontWeight: theme.mode === 'dark' ? 500 : 600,
-							margin: 0,
-						},
-						a: {
-							color: theme.primary,
-						},
-						'*::-webkit-scrollbar': {
-							width: 16,
-							height: 16,
-						},
-						'*::-webkit-scrollbar-track': {
-							background: `${theme.primaryBackground}`,
-						},
-						'*::-webkit-scrollbar-thumb': {
-							borderRadius: 100,
-							border: `4px solid ${theme.primaryBackground}`,
-							width: 12,
-							background: `${theme.mode === 'light' ? theme.primaryLight : theme.primaryDark}AA`,
-						},
-						'*::-webkit-scrollbar-thumb:hover': {
-							background: `${theme.mode === 'light' ? theme.primaryLight : theme.primaryDark}CC`,
-						},
-						'*::-webkit-scrollbar-thumb:active': {
-							background: `${theme.mode === 'light' ? theme.primaryLight : theme.primaryDark}`,
-						},
-					})}
-				/>
+    <BrowserRouter>
+      <ThemeProvider theme={theme[isDark ? 'dark' : 'light']}>
+        <Global
+          styles={theme => ({
+            html: {
+              scrollBehavior: 'smooth',
+            },
+            body: {
+              backgroundColor: theme.background,
+              color: theme.text,
+              fontFamily: `'Karla', sans-serif`,
+              fontWeight: theme.mode === 'dark' ? 500 : 600,
+              margin: 0,
+            },
+            a: {
+              color: theme.primary,
+            },
+            '*::-webkit-scrollbar': {
+              width: 16,
+              height: 16,
+            },
+            '*::-webkit-scrollbar-track': {
+              background: `${theme.primaryBackground}`,
+            },
+            '*::-webkit-scrollbar-thumb': {
+              borderRadius: 100,
+              border: `4px solid ${theme.primaryBackground}`,
+              width: 12,
+              background: `${theme.mode === 'light' ? theme.primaryLight : theme.primaryDark}AA`,
+            },
+            '*::-webkit-scrollbar-thumb:hover': {
+              background: `${theme.mode === 'light' ? theme.primaryLight : theme.primaryDark}CC`,
+            },
+            '*::-webkit-scrollbar-thumb:active': {
+              background: `${theme.mode === 'light' ? theme.primaryLight : theme.primaryDark}`,
+            },
+          })}
+        />
 
         <Suspense fallback={<Loading />}>
           <Settings />
         </Suspense>
 
-		    <Switch>
-					<Route path="/" exact render={props => (
+        <Switch>
+          <Route path="/" exact render={props => (
             <Suspense fallback={<Loading />}>
               <Home offline={offline} {...props} />
             </Suspense>
           )} />
-					<Route path="/how-to" exact render={props => (
+          <Route path="/how-to" exact render={props => (
             <Suspense fallback={<Loading />}>
               <Help {...props} />
             </Suspense>
@@ -146,17 +146,17 @@ const App = () => {
               <Privacy {...props} />
             </Suspense>
           )} />
-					<Route path="/create" exact render={props => (
+          <Route path="/create" exact render={props => (
             <Suspense fallback={<Loading />}>
               <Create offline={offline} {...props} />
             </Suspense>
           )} />
-					<Route path="/:id" exact render={props => (
+          <Route path="/:id" exact render={props => (
             <Suspense fallback={<Loading />}>
               <Event offline={offline} {...props} />
             </Suspense>
           )} />
-				</Switch>
+        </Switch>
 
         {updateAvailable && (
           <Suspense fallback={<Loading />}>
@@ -165,8 +165,8 @@ const App = () => {
         )}
 
         {eggVisible && <Egg eggKey={eggKey} onClose={() => setEggVisible(false)} />}
-			</ThemeProvider>
-		</BrowserRouter>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

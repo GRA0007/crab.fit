@@ -8,7 +8,7 @@ export const Note = styled.p`
   margin: 16px 0;
   box-sizing: border-box;
   font-weight: 500;
-	line-height: 1.6em;
+  line-height: 1.6em;
 
   & a {
     color: ${props => props.theme.mode === 'light' ? props.theme.primaryDark : props.theme.primaryLight};

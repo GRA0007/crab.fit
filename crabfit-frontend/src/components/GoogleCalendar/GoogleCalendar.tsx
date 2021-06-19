@@ -93,11 +93,11 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
     }
   }, [signedIn]);
 
-	return (
+  return (
     <>
       {!signedIn ? (
         <Center>
-    		  <Button
+          <Button
             onClick={() => signIn()}
             isLoading={signedIn === undefined}
             primaryColor="#4286F5"
@@ -161,7 +161,7 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
         </CalendarList>
       )}
     </>
-	);
+  );
 };
 
 export default GoogleCalendar;
