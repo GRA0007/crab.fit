@@ -224,11 +224,11 @@ const Home = ({ offline }) => {
           <h2>{t('home:about.name')}</h2>
           <Stats>
             <Stat>
-              <StatNumber>{stats.eventCount ?? '350+'}</StatNumber>
+              <StatNumber>{stats.eventCount ?? '600+'}</StatNumber>
               <StatLabel>{t('home:about.events')}</StatLabel>
             </Stat>
             <Stat>
-              <StatNumber>{stats.personCount ?? '550+'}</StatNumber>
+              <StatNumber>{stats.personCount ?? '1500+'}</StatNumber>
               <StatLabel>{t('home:about.availabilities')}</StatLabel>
             </Stat>
           </Stats>
