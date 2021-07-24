@@ -1,5 +1,6 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
+import locales from 'res/dayjs_locales';
 
 export const useSettingsStore = create(persist(
   set => ({
@@ -44,3 +45,20 @@ export const useLocaleUpdateStore = create(set => ({
   locale: 'en',
   setLocale: locale => set({ locale }),
 }));
+
+export const useTranslateStore = create(persist(
+  set => ({
+    navigatorLang: navigator.language,
+    navigatorSupported: Object.keys(locales).includes(navigator.language.substring(0, 2)),
+    translateDialogDismissed: false,
+
+    setDialogDismissed: value => set({ translateDialogDismissed: value }),
+  }),
+  {
+    name: 'crabfit-translate',
+    blacklist: [
+      'navigatorLang',
+      'navigatorSupported',
+    ],
+  },
+));

@@ -3,9 +3,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, Global } from '@emotion/react';
 import { Workbox } from 'workbox-window';
 
-import { Settings, Loading, Egg, UpdateDialog } from 'components';
+import { Settings, Loading, Egg, UpdateDialog, TranslateDialog } from 'components';
 
-import { useSettingsStore } from 'stores';
+import { useSettingsStore, useTranslateStore } from 'stores';
 import theme from 'theme';
 
 const EGG_PATTERN = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -29,6 +29,8 @@ const App = () => {
   const [eggKey, setEggKey] = useState(0);
 
   const [updateAvailable, setUpdateAvailable] = useState(false);
+  const languageSupported = useTranslateStore(state => state.navigatorSupported);
+  const translateDialogDismissed = useTranslateStore(state => state.translateDialogDismissed);
 
   const eggHandler = useCallback(
     event => {
@@ -93,7 +95,7 @@ const App = () => {
           styles={theme => ({
             html: {
               scrollBehavior: 'smooth',
-              '-webkit-print-color-adjust': 'exact',
+              WebkitPrintColorAdjust: 'exact',
             },
             body: {
               backgroundColor: theme.background,
@@ -126,6 +128,8 @@ const App = () => {
             },
           })}
         />
+
+        {!languageSupported && !translateDialogDismissed && <TranslateDialog />}
 
         <Suspense fallback={<Loading />}>
           <Settings />

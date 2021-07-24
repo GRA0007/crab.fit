@@ -19,6 +19,7 @@ export { default as Footer } from './Footer/Footer';
 export { default as Recents } from './Recents/Recents';
 export { default as Logo } from './Logo/Logo';
 export { default as UpdateDialog } from './UpdateDialog/UpdateDialog';
+export { default as TranslateDialog } from './TranslateDialog/TranslateDialog';
 
 export const _GoogleCalendar = () => import('./GoogleCalendar/GoogleCalendar');
 export const _OutlookCalendar = () => import('./OutlookCalendar/OutlookCalendar');
