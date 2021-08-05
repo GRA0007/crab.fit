@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 
@@ -14,6 +14,8 @@ import {
   StyledMain,
   AboutSection,
   P,
+  VideoWrapper,
+  VideoLink,
 } from '../Home/homeStyle';
 
 import {
@@ -23,9 +25,12 @@ import {
   ButtonArea,
 } from './helpStyle';
 
+import video_thumb from 'res/video_thumb.jpg';
+
 const Help = () => {
   const { push } = useHistory();
   const { t } = useTranslation(['common', 'help']);
+  const [videoPlay, setVideoPlay] = useState(false);
 
   useEffect(() => {
     document.title = t('help:name');
@@ -39,6 +44,22 @@ const Help = () => {
 
       <StyledMain>
         <h1>{t('help:name')}</h1>
+        {videoPlay ? (
+          <VideoWrapper>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/yXGd4VXZzcY?modestbranding=1&rel=0&autoplay=1" title={t('common:video.title')} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </VideoWrapper>
+        ) : (
+          <VideoLink
+            href="https://www.youtube.com/watch?v=yXGd4VXZzcY"
+            onClick={e => {
+              e.preventDefault();
+              setVideoPlay(true);
+            }}
+          >
+            <img src={video_thumb} alt={t('common:video.button')} />
+            <span>{t('common:video.button')}</span>
+          </VideoLink>
+        )}
         <P>{t('help:p1')}</P>
         <P>{t('help:p2')}</P>
 
