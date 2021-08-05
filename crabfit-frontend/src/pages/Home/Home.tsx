@@ -35,6 +35,8 @@ import {
   StatLabel,
   OfflineMessage,
   ButtonArea,
+  VideoWrapper,
+  VideoLink,
 } from './homeStyle';
 
 import api from 'services';
@@ -42,6 +44,7 @@ import { detect_browser } from 'utils';
 import { useTWAStore } from 'stores';
 
 import logo from 'res/logo.svg';
+import video_thumb from 'res/video_thumb.jpg';
 import timezones from 'res/timezones.json';
 
 dayjs.extend(utc);
@@ -62,6 +65,7 @@ const Home = ({ offline }) => {
     version: 'loading...',
   });
   const [browser, setBrowser] = useState(undefined);
+  const [videoPlay, setVideoPlay] = useState(false);
   const { push } = useHistory();
   const { t } = useTranslation(['common', 'home']);
   const isTWA = useTWAStore(state => state.TWA);
@@ -233,6 +237,24 @@ const Home = ({ offline }) => {
             </Stat>
           </Stats>
           <P><Trans i18nKey="home:about.content.p1">Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<br /><Link to="/how-to" rel="help">Learn more about how to Crab Fit</Link>.</Trans></P>
+
+          {videoPlay ? (
+            <VideoWrapper>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/yXGd4VXZzcY?modestbranding=1&rel=0&autoplay=1" title={t('common:video.title')} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </VideoWrapper>
+          ) : (
+            <VideoLink
+              href="https://www.youtube.com/watch?v=yXGd4VXZzcY"
+              onClick={e => {
+                e.preventDefault();
+                setVideoPlay(true);
+              }}
+            >
+              <img src={video_thumb} alt={t('common:video.button')} />
+              <span>{t('common:video.button')}</span>
+            </VideoLink>
+          )}
+
           {isTWA !== true && (
             <ButtonArea>
               {['chrome', 'firefox', 'safari'].includes(browser) && (
