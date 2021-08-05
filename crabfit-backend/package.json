@@ -4,7 +4,7 @@
   "description": "API for Crabfit",
   "main": "index.js",
   "author": "Ben Grant",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "private": true,
   "engines": {
     "node": ">=10.0.0"
