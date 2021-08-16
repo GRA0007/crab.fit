@@ -1,0 +1,70 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Stwórz swojego",
+  "cta": "Stwórz swojego Crab Fita!",
+  "created": "Stworzony {{date}}",
+  "donate": {
+    "info": "Dziękujemy za używanie Crab Fit! Jeżeli ci się spodobał, możesz przekazać darowiznę.",
+    "button": "Przekaż darowiznę",
+    "title": "Każda ilość się liczy :)",
+    "options": {
+      "$2": "Przekaż $2",
+      "$5": "Przekaż $5",
+      "$10": "Przekaż $10",
+      "choose": "Wybierz kwotę"
+    },
+    "messages": {
+      "about": "Jeżeli ci pomogliśmy, weź pod uwagę przekazanie darowizny. 🦀",
+      "success": "Dziękujemy za darowiznę! Bez ciebie, Crab Fit nie był by darmowy, więc bardzo dziękujemy!",
+      "error": "Nie można wykonać darowizny przez Google. Prosze spróbować przez crab.fit 🦀"
+    }
+  },
+  "options": {
+    "name": "Opcje",
+    "weekStart": {
+      "label": "Tydzień zaczyna się w",
+      "options": {
+        "Sunday": "Niedziele",
+        "Monday": "Poniedziałek"
+      }
+    },
+    "timeFormat": {
+      "label": "Format czasu",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Styl",
+      "options": {
+        "System": "System",
+        "Light": "Jasny",
+        "Dark": "Ciemny"
+      }
+    },
+    "highlight": {
+      "label": "Wyróżnij największą dostępność",
+      "title": "Wyróżnij największą dostępność w planie",
+      "options": {
+        "Off": "Off",
+        "On": "On"
+      }
+    },
+    "language": {
+      "label": "Język"
+    }
+  },
+  "update": {
+    "heading": "Crab Fit został zaktualizowany",
+    "body": "Nowa wersja Crab Fita jest dostępna, która zawiera aktualizacje, poprawki oraz nowe funkcje.",
+    "buttons": {
+      "close": "Zamknij",
+      "reload": "Przeładuj"
+    }
+  },
+  "video": {
+    "title": "Promocyjne wideo Crab Fita",
+    "button": "Obejrzyj wideo"
+  }
+}
