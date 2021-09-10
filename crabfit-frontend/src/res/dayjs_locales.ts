@@ -54,6 +54,12 @@ const locales = {
     weekStart: 0,
     timeFormat: '24h',
   },
+  'pl': { // Polish
+    name: 'Polskie',
+    import: () => import('dayjs/locale/pl'),
+    weekStart: 1,
+    timeFormat: '12h',
+  },
   'ru': { // Russian
     name: 'Pусский',
     import: () => import('dayjs/locale/ru'),
