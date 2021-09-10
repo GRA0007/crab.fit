@@ -162,7 +162,7 @@ const Home = ({ offline }) => {
         <Center>
           <Logo src={logo} alt="" />
         </Center>
-        <TitleSmall altChars={/[A-Z]/g.test(t('home:create'))}>{t('home:create')}</TitleSmall>
+        <TitleSmall altChars={/^[A-Za-z ]+$/.test(t('home:create'))}>{t('home:create')}</TitleSmall>
         <TitleLarge>CRAB FIT</TitleLarge>
         <Links>
           <a href="#about">{t('home:nav.about')}</a> / <a href="#donate">{t('home:nav.donate')}</a>
