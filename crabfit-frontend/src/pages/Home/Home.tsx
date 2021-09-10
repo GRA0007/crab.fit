@@ -162,7 +162,7 @@ const Home = ({ offline }) => {
         <Center>
           <Logo src={logo} alt="" />
         </Center>
-        <TitleSmall altChars={/[A-Z]/g.test(t('home:create'))}>{t('home:create')}</TitleSmall>
+        <TitleSmall altChars={/^[A-Za-z ]+$/.test(t('home:create'))}>{t('home:create')}</TitleSmall>
         <TitleLarge>CRAB FIT</TitleLarge>
         <Links>
           <a href="#about">{t('home:nav.about')}</a> / <a href="#donate">{t('home:nav.donate')}</a>
@@ -228,11 +228,11 @@ const Home = ({ offline }) => {
           <h2>{t('home:about.name')}</h2>
           <Stats>
             <Stat>
-              <StatNumber>{stats.eventCount ?? '700+'}</StatNumber>
+              <StatNumber>{stats.eventCount ?? '1100+'}</StatNumber>
               <StatLabel>{t('home:about.events')}</StatLabel>
             </Stat>
             <Stat>
-              <StatNumber>{stats.personCount ?? '1600+'}</StatNumber>
+              <StatNumber>{stats.personCount ?? '3700+'}</StatNumber>
               <StatLabel>{t('home:about.availabilities')}</StatLabel>
             </Stat>
           </Stats>

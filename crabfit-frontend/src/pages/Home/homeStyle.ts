@@ -22,6 +22,7 @@ export const TitleSmall = styled.span`
   text-transform: uppercase;
 
   ${props => !props.altChars && `
+    font-family: sans-serif;
     font-size: 2rem;
     font-weight: 600;
     line-height: 1.2em;
