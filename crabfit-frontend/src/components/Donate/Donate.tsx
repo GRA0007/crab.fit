@@ -45,6 +45,13 @@ const Donate = () => {
     try {
       let service = await window.getDigitalGoodsService(PAYMENT_METHOD);
       await service.acknowledge(token, type);
+      if ('acknowledge' in service) {
+        // DGAPI 1.0
+        service.acknowledge(token, type);
+      } else {
+        // DGAPI 2.0
+        service.consume(token);
+      }
       onComplete();
     } catch (error) {
       console.error(error);
