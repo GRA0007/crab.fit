@@ -1,0 +1,61 @@
+{
+  "create": "CRIE O SEU",
+  "recently_visited": "Você olhou recentemente",
+  "nav": {
+    "about": "Sobre",
+    "donate": "Faça uma doação"
+  },
+  "form": {
+    "name": {
+      "label": "Dê um nome ao seu evento!",
+      "sublabel": "Ou deixe em branco para ter um nome aleatório "
+    },
+    "dates": {
+      "label": "Quais serão os dias?",
+      "sublabel": "Clique e arraste para selecionar",
+      "options": {
+        "specific": "Datas específicas",
+        "week": "Dias da semana"
+      },
+      "tooltips": {
+        "previous": "mês anterior",
+        "next": "próximo mês",
+        "today": "hoje"
+      }
+    },
+    "times": {
+      "label": "Qual o período de tempo para seu evento?",
+      "sublabel": "Clique e arraste para definir um intervalo de horário"
+    },
+    "timezone": {
+      "label": "Qual o fuso horário?",
+      "defaultOption": "Escolhe..."
+    },
+
+    "button": "Criar",
+    "errors": {
+      "no_dates": "Nenhuma data foi selecionada",
+      "same_times": "Horário de inicio e fim não pode ser idéntico",
+      "no_time": "Nenhum horário foi selecionado",
+      "unknown": "Algo deu errado. Por favor tente de novo."
+    }
+  },
+  "offline": "Para salvar seu Crab Fit tem que ter acesso à internet. Por favor verifique sua conexão.",
+
+  "about": {
+    "name": "Sobre Crab Fit",
+    "events": "eventos criados",
+    "availabilities": "disponibilidades registradas",
+    "content": {
+      "p1": "Crab Fit te ajuda achar o melhor dia e horário para seu evento, encaixando as agendas de todos participantes! Simplesmente crie um evento acima e mande o link para todos convidados. Cada participante define seus próprios horários disponíveis. Os resultados são mostrados imediatamente destacando visualmente quando todo mundo está livre!<1/><2>Aprenda mais como usar Crab Fit!</2>",
+      "p3": "Criado por <1>Ben Grant</1>, Crab Fit é a ferramenta moderna para resolver o problema de  agendar eventos de qualquer tipo.",
+      "p4": "Crab Fit é código aberto, open source. Se você tem questões, achou bugs ou quer contribuir visite o <1>repositório</1>. Usando Crab Fit você aceita a  <3>política de privacidade</3>.",
+      "p6": "Para proteger sua privacidade todos eventos inativos por mais de 3 meses são deletados. Todas as senhas são codificados em hash.",
+      "p5": "Não hesite fazer uma doação se você achou o Crab Fit útil, para que continue gratuito para todos! 🦀"
+    },
+    "chrome_extension": "Baixe a extensão do Chrome",
+    "firefox_extension": "Baixe a extensão do Firefox",
+    "safari_extension": "Baixe a extensão do Safari",
+    "android_app": "Baixe o app de Android"
+  }
+}
