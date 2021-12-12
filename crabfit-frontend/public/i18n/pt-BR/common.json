@@ -1,0 +1,70 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Crie o seu",
+  "cta": "Crie o seu próprio Crab Fit!",
+  "created": "Criado {{date}}",
+  "donate": {
+    "info": "Obrigado por usar Crab Fit! Gostou? Faça uma doação.",
+    "button": "Doar",
+    "title": "Todo valor vale :)",
+    "options": {
+      "$2": "Doar $2",
+      "$5": "Doar $5",
+      "$10": "Doar $10",
+      "choose": "Escolhe um valor"
+    },
+    "messages": {
+      "about": "Achou o Crab Fit útil? Faça uma doação para para mantê-lo funcionando. 🦀",
+      "success": "Obrigado por sua doação! Sem essas contribuições Crab Fit não poderia ser gratuito e por isso te agradeço muito. Você é o máximo!",
+      "error": "Doação através do Google não pode ser feita. Por favor tente no site crab.fit 🦀"
+    }
+  },
+  "options": {
+    "name": "Opções",
+    "weekStart": {
+      "label": "A semana começa com",
+      "options": {
+        "Sunday": "domingo",
+        "Monday": "segunda‑feira"
+      }
+    },
+    "timeFormat": {
+      "label": "formato de horas",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Aparência",
+      "options": {
+        "System": "sistema",
+        "Light": "claro",
+        "Dark": "escuro"
+      }
+    },
+    "highlight": {
+      "label": "destacar disponibilidade alta",
+      "title": "realçar visualmente a maior visibilidade",
+      "options": {
+        "Off": "Desl.",
+        "On": "Lig."
+      }
+    },
+    "language": {
+      "label": "idioma"
+    }
+  },
+  "update": {
+    "heading": "Crab Fit foi atualizado",
+    "body": "Uma nova versão está disponível com atualizações, correções e funções novas.",
+    "buttons": {
+      "close": "Fechar",
+      "reload": "Recarregar"
+    }
+  },
+  "video": {
+    "title": "Vídeo promocional Crab Fit",
+    "button": "veja o vídeo"
+  }
+}
