@@ -1,0 +1,67 @@
+{
+  "available": "disponível",
+  "greyed_times": "Esta área está desabilitada por não fazer parte do evento. Provavelmente você esta em outro fuso horário do que usado pelo evento.",
+
+  "nav": {
+    "title": "Clique para copiar",
+    "copied": "Copiado!",
+    "shareinfo": "Copie o link para esta página ou compartilhe via <1>email.</1>",
+    "shareinfo_alt": "Clique no link acima para copiar ou compartilhe via <1>email.</1>",
+    "email_subject": "Agendando {{event_name}}",
+    "email_body": "Entre nesse link para inserir seu tempo disponível:"
+  },
+  "form": {
+    "signed_out": "Entre e informe seu tempo disponível",
+    "signed_in": "Seu nome de usuário: {{name}}",
+
+    "name": "Seu nome ou apelido",
+    "password": "Senha (opcional)",
+    "button": "Começar",
+    "logout_button": "Sair",
+    "info": "Essas informações são usadas somente para este evento. Use uma senha para prevenir que outros alterem seus horários. ",
+
+    "timezone": "Seu fuso horário",
+
+    "errors": {
+      "name_required": "Um nome é necessário para salvar seus horários livres.",
+      "password_incorrect": "Senha não confere. Verifique seu nome e senha.",
+      "unknown": "Erro ao entrar. Tente novamente."
+    },
+
+    "created_in_timezone": "Esse evento foi criado no fuso horário <strong>{{timezone}}</strong>. <3>Clique aqui</3> para trocar para este fuso.",
+    "local_timezone": "Foi detectado que você está no fuso horário <strong>{{timezone}}</strong>. <3>Clique aquí</3> para aplicar."
+  },
+  "offline": {
+    "title": "Você está offline",
+    "body": "Crab Fit não funciona offline.<br />Verifique sua conexão e tente novamente."
+  },
+  "error": {
+    "title": "Evento não encontrado",
+    "body": "Verifique a URL usada. Fique atento que eventos são apagados após 3 meses de inatividade!"
+  },
+
+  "tabs": {
+    "you": "Seu tempo disponível",
+    "you_tooltip": "Entre para informar seu tempo disponível",
+    "group": "Disponibilidade do grupo"
+  },
+
+  "group": {
+    "legend_tooltip": "Clique para destacar o melhor tempo",
+    "info1": "Passe o mouse ou toque o calendário pra ver quem está livre",
+    "info2": "Clique nos nomes pra ver a disponibilidade de cada um"
+  },
+
+  "you": {
+    "info": "Clique e arraste para assinalar seu tempo livre no calendário",
+    "google_cal": {
+      "login": "Sincronizar com sua Agenda Google",
+      "logout": "sair",
+      "select_all": "Selecionar todos",
+      "select_none": "Selecionar nenhum",
+      "info": "Ao importar você substituirá sua disponibilidade atual",
+      "button": "Importar horários disponíveis"
+    },
+    "outlook_cal": "Sincronizar com sua Agenda Outlook"
+  }
+}
