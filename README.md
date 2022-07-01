@@ -38,3 +38,125 @@ The browser extension in `crabfit-browser-extension` can be tested by first runn
 
 ### 🔌 Browser extension
 Compress everything inside the `crabfit-browser-extension` folder and use that zip to deploy using Chrome web store and Mozilla Add-on store.
+
+## API call
+You can make POST requests to directly get a schedule based on some dates.
+
+> Note: format codes are 1989 C, cf. [here](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes) for instance.
+
+### Request
+API endpoint: `https://api-dot-crabfit.uc.r.appspot.com/event`
+
+#### Specific dates
+Payload:
+```json
+{
+   "event":{
+      "name":"Name of your event",
+      "times":[
+         "A list of dates in the format HHmm-ddMMyyyy",
+         "Please take into account it should be GMT (UTC±00:00)"
+      ],
+      "timezone":"Your prefered timezone, in the DST format"
+   }
+}
+```
+
+Example:
+```json
+{
+   "event":{
+      "name":"Some nerd meeting!",
+      "times":[
+         "0700-29072022",
+         "0800-29072022",
+         "0700-15072022",
+         "0800-15072022",
+         "0700-01072022",
+         "0800-01072022",
+      ],
+      "timezone":"Europe/Paris"
+   }
+}
+```
+
+#### Days of the week
+Payload:
+```json
+{
+   "event":{
+      "name":"Name of your event",
+      "times":[
+         "A list of dates in the format HHmm-w",
+         "Please take into account it should be GMT (UTC±00:00)"
+      ],
+      "timezone":"Your prefered timezone, in the DST format"
+   }
+}
+```
+
+Example:
+```json
+{
+   "event":{
+      "name":"Some (other) nerd meeting!",
+      "times":[
+         "0700-1",
+         "0800-1",
+         "0700-3",
+         "0800-3",
+         "0700-5",
+         "0800-5"
+      ],
+      "timezone":"Europe/Paris"
+   }
+}
+```
+
+### Response
+You should get a JSON response that looks like this:
+```json
+{
+   "id":"link-to-your-schedule",
+   "name":"testing api",
+   "created":"timestamp",
+   "times":[
+       "Your chosen dates"
+   ],
+   "timezone":"Your chosen timezone"
+}
+```
+
+Example:
+```json
+{
+   "id":"some-final-nerd-meeting-123456",
+   "name":"Some (final!) nerd meeting!",
+   "created":1656671214,
+   "times":[
+      "0700-13072022",
+      "0800-13072022",
+      "0900-13072022"
+   ],
+   "timezone":"Europe/Paris"
+}
+```
+
+To use, simply append the `id` to the website, i.e., https://crab.fit/link-to-your-schedule, e.g., https://crab.fit/some-final-nerd-meeting-123456.
+
+### (Python) Example
+```python
+import requests
+
+request_url = "https://api-dot-crabfit.uc.r.appspot.com/event"
+response_url = "https://crab.fit/"
+
+payload = {"event": {"name": "Testing the API !", "times": ["0700-13072022","0800-13072022","0900-13072022"], "timezone":"Europe/Paris"}
+response = requests.post(base_url, json=payload)
+
+if response.status_code == 201:
+    schedule_url = f"{response_url}{response.json()["id"]}"
+else:
+    # It did not work 🤷‍♀️ - time for some error handling!
+    schedule_url = None  # ... Or not.
+```
