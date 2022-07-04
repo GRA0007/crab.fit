@@ -62,5 +62,9 @@
       "close": "Fermer",
       "reload": "Recharger"
     }
+  },
+  "video": {
+    "title": "Vidéo promotionnelle de Crab Fit",
+    "button": "Regardez la vidéo"
   }
 }
