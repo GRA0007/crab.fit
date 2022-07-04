@@ -8,7 +8,7 @@
     "button": "Faire un don",
     "title": "Chaque montant compte :)",
     "options": {
-      "$2": "Faites un don de $2",
+      "$2": "Faire un don de $2",
       "$5": "Faites un don de $5",
       "$10": "Faites un don de $10",
       "choose": "Choisissez un montant"
@@ -62,5 +62,9 @@
       "close": "Fermer",
       "reload": "Recharger"
     }
+  },
+  "video": {
+    "title": "Vidéo promotionnelle de Crab Fit",
+    "button": "Regardez la vidéo"
   }
 }
