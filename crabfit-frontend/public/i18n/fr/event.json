@@ -4,10 +4,10 @@
 
   "nav": {
     "title": "Cliquez pour copier",
-    "copied": "Copié!",
+    "copied": "Copié !",
     "shareinfo": "Copiez le lien vers cette page ou partagez-le par <1>e-mail</1>.",
-    "shareinfo_alt": "Cliquez sur le lien ci-dessus pour le copier dans votre presse-papiers ou le partager par <1>e-mail</1>.",
-    "email_subject": "Planification {{event_name}}",
+    "shareinfo_alt": "Cliquez sur le lien ci-dessus pour le copier dans votre presse-papier ou le partager par <1>e-mail</1>.",
+    "email_subject": "Planification de {{event_name}}",
     "email_body": "Visitez ce lien pour saisir vos disponibilités:"
   },
   "form": {
