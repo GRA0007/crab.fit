@@ -1,16 +1,16 @@
 {
   "name": "Crab Fit",
-  "tagline": "Crée le tien",
-  "cta": "Créez votre propre Crab Fit!",
+  "tagline": "Créez le votre",
+  "cta": "Créez votre propre Crab Fit !",
   "created": "Créé {{date}}",
   "donate": {
     "info": "Merci d'utiliser Crab Fit. Si vous l'aimez, pensez à faire un don.",
     "button": "Faire un don",
     "title": "Chaque montant compte :)",
     "options": {
-      "$2": "Faites un don de $2",
-      "$5": "Faites un don de $5",
-      "$10": "Faites un don de $10",
+      "$2": "Faire un don de $2",
+      "$5": "Faire un don de $5",
+      "$10": "Faire un don de $10",
       "choose": "Choisissez un montant"
     },
     "messages": {
@@ -40,7 +40,7 @@
       "options": {
         "System": "Système",
         "Light": "Clair",
-        "Dark": "Foncé"
+        "Dark": "Sombre"
       }
     },
     "highlight": {
@@ -62,5 +62,9 @@
       "close": "Fermer",
       "reload": "Recharger"
     }
+  },
+  "video": {
+    "title": "Vidéo promotionnelle de Crab Fit",
+    "button": "Regarder la vidéo"
   }
 }
