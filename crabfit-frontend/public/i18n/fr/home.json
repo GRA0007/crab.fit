@@ -1,17 +1,17 @@
 {
-  "create": "CREER UN",
-  "recently_visited": "Récemment visité",
+  "create": "CRÉER UN",
+  "recently_visited": "Récemment visités",
   "nav": {
-    "about": "Info",
+    "about": "A propos",
     "donate": "Faire un don"
   },
   "form": {
     "name": {
-      "label": "Donnez un nom à votre événement!",
+      "label": "Donnez un nom à votre événement !",
       "sublabel": "Ou laissez vide pour en générer un"
     },
     "dates": {
-      "label": "Quelles dates pourraient fonctionner?",
+      "label": "Quelles dates pourraient fonctionner ?",
       "sublabel": "Cliquez et faites glisser pour sélectionner",
       "options": {
         "specific": "Dates spécifiques",
@@ -24,7 +24,7 @@
       }
     },
     "times": {
-      "label": "Quels temps pourraient fonctionner?",
+      "label": "Quels temps pourraient fonctionner ?",
       "sublabel": "Cliquez et faites glisser pour sélectionner une plage de temps"
     },
     "timezone": {
@@ -40,18 +40,18 @@
       "unknown": "Un problème est survenu. Veuillez réessayer plus tard."
     }
   },
-  "offline": "Vous ne pouvez pas créer un Crab Fit si vous ne disposez pas d'une connexion Internet. Veuillez vous assurer que vous êtes connecté.",
+  "offline": "Vous ne pouvez pas créer un Crab Fit si vous ne disposez pas d'une connexion Internet. Veuillez vous assurer que vous êtes connecté·e.",
 
   "about": {
     "name": "À propos de Crab Fit",
     "events": "Événements créés",
     "availabilities": "Disponibilités saisies",
     "content": {
-      "p1": "Crab Fit vous aide à adapter votre événement aux horaires de chacun. Créez simplement un événement ci-dessus et envoyez le lien à tous les participants. Les résultats sont mis à jour en direct et vous pourrez voir une carte thermique de quand tout le monde est libre.<1/><2>En savoir plus sur la façon de Crab Fit</2>.",
-      "p3": "Créé par <1>Ben Grant</1>, Crab Fit est la solution moderne pour vos débats de planification d'événements de groupe.",
-      "p4": "Le code de Crab Fit est open source, si vous trouvez des problèmes ou souhaitez contribuer, vous pouvez visiter le <1>référentiel</1>. En utilisant Crab Fit, vous acceptez la <3>politique de confidentialité</3>.",
-      "p6": "Pour protéger votre vie privée, les événements sont supprimés après 3 mois d'inactivité et tous les mots de passe sont hachés en toute sécurité.",
-      "p5": "Pensez à faire un don ci-dessous si cela vous a aidé afin qu'il puisse rester gratuit pour tout le monde. 🦀"
+      "p1": "Crab Fit vous aide à adapter votre événement aux horaires de chacun·e. Créez simplement un événement ci-dessus et envoyez le lien à tous les participant·e·s. Les résultats sont mis à jour en direct et vous pourrez voir une carte thermique de quand tout le monde est libre.<1/><2>En savoir plus sur comment utiliser Crab Fit</2>.",
+      "p3": "Créé par <1>Ben Grant</1>, Crab Fit est la solution moderne pour vos conflits de planification d'événements de groupe.",
+      "p4": "Le code de Crab Fit est open source, si vous trouvez des problèmes ou souhaitez contribuer, vous pouvez visiter le <1>repository</1>. En utilisant Crab Fit, vous acceptez notre <3>politique de confidentialité</3>.",
+      "p6": "Pour protéger votre vie privée, les événements sont supprimés après 3 mois d'inactivité, et tous les mots de passe sont hachés en toute sécurité.",
+      "p5": "Pensez à faire un don ci-dessous si Crab Fit vous a aidé·e, afin qu'il puisse rester gratuit pour tout le monde. 🦀"
     },
     "chrome_extension": "Obtenez l'extension Chrome",
     "firefox_extension": "Obtenez l'extension Firefox",
