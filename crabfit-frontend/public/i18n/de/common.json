@@ -62,5 +62,9 @@
       "close": "Entlassen",
       "reload": "Neu laden"
     }
+  },
+  "video": {
+    "title": "Crab Fit Promo Video",
+    "button": "Unser Video"
   }
 }
