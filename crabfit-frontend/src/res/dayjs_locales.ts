@@ -60,12 +60,24 @@ const locales = {
     weekStart: 1,
     timeFormat: '12h',
   },
+  'pt-BR': { // Portuguese (Brazil)
+    name: 'Português (do Brasil)',
+    import: () => import('dayjs/locale/pt-br'),
+    weekStart: 0,
+    timeFormat: '24h',
+  },
   'ru': { // Russian
     name: 'Pусский',
     import: () => import('dayjs/locale/ru'),
     weekStart: 1,
     timeFormat: '24h',
   },
+  // 'zh-CN': { // Chinese
+  //   name: '中文',
+  //   import: () => import('dayjs/locale/zh-cn'),
+  //   weekStart: 1,
+  //   timeFormat: '12h',
+  // },
 };
 
 export default locales;
