@@ -47,8 +47,8 @@
       "label": "Wyróżnij największą dostępność",
       "title": "Wyróżnij największą dostępność w planie",
       "options": {
-        "Off": "Off",
-        "On": "On"
+        "Off": "Wyłącz",
+        "On": "Włącz"
       }
     },
     "language": {
