@@ -66,8 +66,8 @@ const App = () => {
           <Route path="/" element={<Pages.Home />} />
           <Route path="/how-to" element={<Pages.Help />} />
           <Route path="/privacy" element={<Pages.Privacy />} />
-          {/* <Route path="/create" element={<Pages.Create />} />
-          <Route path="/:id" element={<Pages.Event />} /> */}
+          <Route path="/create" element={<Pages.Create />} />
+          <Route path="/:id" element={<Pages.Event />} />
         </Routes>
       </Suspense>
 
