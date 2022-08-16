@@ -27,7 +27,7 @@ jobs:
     - run: yarn install --immutable
     - run: yarn build
     - name: Copy app.yaml to build
-      run: 'cp app.yaml ./build/app.yaml'
+      run: 'cp app.yaml ./dist/app.yaml'
     - id: auth
       uses: google-github-actions/auth@v0
       with:
@@ -35,5 +35,5 @@ jobs:
     - id: deploy
       uses: google-github-actions/deploy-appengine@v0
       with:
-        working_directory: crabfit-frontend/build
+        working_directory: crabfit-frontend
         version: v1
