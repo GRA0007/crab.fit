@@ -63,9 +63,9 @@ const App = () => {
         <Settings />
 
         <Routes>
-          {/* <Route path="/" element={<Pages.Home />} /> */}
-          {/* <Route path="/" element={<Pages.Help />} /> */}
-          <Route path="/" element={<Pages.Privacy />} />
+          <Route path="/" element={<Pages.Home />} />
+          <Route path="/how-to" element={<Pages.Help />} />
+          <Route path="/privacy" element={<Pages.Privacy />} />
           {/* <Route path="/create" element={<Pages.Create />} />
           <Route path="/:id" element={<Pages.Event />} /> */}
         </Routes>

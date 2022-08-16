@@ -10,6 +10,7 @@ const Button = ({
   secondaryColor,
   small,
   size,
+  isLoading,
   ...props
 }) => (
   <Pressable
@@ -21,6 +22,7 @@ const Button = ({
     $secondaryColor={secondaryColor}
     $small={small}
     $size={size}
+    $isLoading={isLoading}
     {...props}
   >
     {icon}

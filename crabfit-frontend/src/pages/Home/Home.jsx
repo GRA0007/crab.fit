@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { useTranslation, Trans } from 'react-i18next';
+import { useEffect, useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useTranslation, Trans } from 'react-i18next'
 
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 
 import {
   TextField,
@@ -18,7 +18,7 @@ import {
   Error,
   Footer,
   Recents,
-} from 'components';
+} from '/src/components'
 
 import {
   StyledMain,
@@ -37,82 +37,82 @@ import {
   ButtonArea,
   VideoWrapper,
   VideoLink,
-} from './homeStyle';
+} from './Home.styles'
 
-import api from 'services';
-import { detect_browser } from 'utils';
-import { useTWAStore } from 'stores';
+import api from '/src/services'
+import { detect_browser } from '/src/utils'
+import { useTWAStore } from '/src/stores'
 
-import logo from 'res/logo.svg';
-import video_thumb from 'res/video_thumb.jpg';
-import timezones from 'res/timezones.json';
+import logo from '/src/res/logo.svg'
+import video_thumb from '/src/res/video_thumb.jpg'
+import timezones from '/src/res/timezones.json'
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.extend(customParseFormat);
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.extend(customParseFormat)
 
 const Home = ({ offline }) => {
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     },
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [stats, setStats] = useState({
     eventCount: null,
     personCount: null,
     version: 'loading...',
-  });
-  const [browser, setBrowser] = useState(undefined);
-  const [videoPlay, setVideoPlay] = useState(false);
-  const { push } = useHistory();
-  const { t } = useTranslation(['common', 'home']);
-  const isTWA = useTWAStore(state => state.TWA);
+  })
+  const [browser, setBrowser] = useState(undefined)
+  const [videoPlay, setVideoPlay] = useState(false)
+  const navigate = useNavigate()
+  const { t } = useTranslation(['common', 'home'])
+  const isTWA = useTWAStore(state => state.TWA)
 
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await api.get('/stats');
-        setStats(response.data);
+        const response = await api.get('/stats')
+        setStats(response.data)
       } catch (e) {
-        console.error(e);
+        console.error(e)
       }
-    };
+    }
 
-    fetch();
-    document.title = 'Crab Fit';
-    setBrowser(detect_browser());
-  }, []);
+    fetch()
+    document.title = 'Crab Fit'
+    setBrowser(detect_browser())
+  }, [])
 
   const onSubmit = async data => {
-    setIsLoading(true);
-    setError(null);
+    setIsLoading(true)
+    setError(null)
     try {
-      const { start, end } = JSON.parse(data.times);
-      const dates = JSON.parse(data.dates);
+      const { start, end } = JSON.parse(data.times)
+      const dates = JSON.parse(data.dates)
 
       if (dates.length === 0) {
-        return setError(t('home:form.errors.no_dates'));
+        return setError(t('home:form.errors.no_dates'))
       }
-      const isSpecificDates = typeof dates[0] === 'string' && dates[0].length === 8;
+      const isSpecificDates = typeof dates[0] === 'string' && dates[0].length === 8
       if (start === end) {
-        return setError(t('home:form.errors.same_times'));
+        return setError(t('home:form.errors.same_times'))
       }
 
-      let times = dates.reduce((times, date) => {
-        let day = [];
+      const times = dates.reduce((times, date) => {
+        const day = []
         for (let i = start; i < (start > end ? 24 : end); i++) {
           if (isSpecificDates) {
             day.push(
               dayjs.tz(date, 'DDMMYYYY', data.timezone)
-              .hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
-            );
+                .hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
+            )
           } else {
             day.push(
               dayjs().tz(data.timezone)
-              .day(date).hour(i).minute(0).utc().format('HHmm-d')
-            );
+                .day(date).hour(i).minute(0).utc().format('HHmm-d')
+            )
           }
         }
         if (start > end) {
@@ -120,21 +120,21 @@ const Home = ({ offline }) => {
             if (isSpecificDates) {
               day.push(
                 dayjs.tz(date, 'DDMMYYYY', data.timezone)
-                .hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
-              );
+                  .hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
+              )
             } else {
               day.push(
                 dayjs().tz(data.timezone)
-                .day(date).hour(i).minute(0).utc().format('HHmm-d')
-              );
+                  .day(date).hour(i).minute(0).utc().format('HHmm-d')
+              )
             }
           }
         }
-        return [...times, ...day];
-      }, []);
+        return [...times, ...day]
+      }, [])
 
       if (times.length === 0) {
-        return setError(t('home:form.errors.no_time'));
+        return setError(t('home:form.errors.no_time'))
       }
 
       const response = await api.post('/event', {
@@ -143,18 +143,18 @@ const Home = ({ offline }) => {
           times: times,
           timezone: data.timezone,
         },
-      });
-      push(`/${response.data.id}`);
+      })
+      navigate(`/${response.data.id}`)
       gtag('event', 'create_event', {
         'event_category': 'home',
-      });
+      })
     } catch (e) {
-      setError(t('home:form.errors.unknown'));
-      console.error(e);
+      setError(t('home:form.errors.unknown'))
+      console.error(e)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <>
@@ -162,7 +162,7 @@ const Home = ({ offline }) => {
         <Center>
           <Logo src={logo} alt="" />
         </Center>
-        <TitleSmall altChars={/^[A-Za-z ]+$/.test(t('home:create'))}>{t('home:create')}</TitleSmall>
+        <TitleSmall $altChars={/^[A-Za-z ]+$/.test(t('home:create'))}>{t('home:create')}</TitleSmall>
         <TitleLarge>CRAB FIT</TitleLarge>
         <Links>
           <a href="#about">{t('home:nav.about')}</a> / <a href="#donate">{t('home:nav.donate')}</a>
@@ -228,11 +228,11 @@ const Home = ({ offline }) => {
           <h2>{t('home:about.name')}</h2>
           <Stats>
             <Stat>
-              <StatNumber>{stats.eventCount ?? '1100+'}</StatNumber>
+              <StatNumber>{new Intl.NumberFormat().format(stats.eventCount ?? 7000)}{!stats.eventCount && '+'}</StatNumber>
               <StatLabel>{t('home:about.events')}</StatLabel>
             </Stat>
             <Stat>
-              <StatNumber>{stats.personCount ?? '3700+'}</StatNumber>
+              <StatNumber>{new Intl.NumberFormat().format(stats.personCount ?? 25000)}{!stats.personCount && '+'}</StatNumber>
               <StatLabel>{t('home:about.availabilities')}</StatLabel>
             </Stat>
           </Stats>
@@ -240,14 +240,14 @@ const Home = ({ offline }) => {
 
           {videoPlay ? (
             <VideoWrapper>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/yXGd4VXZzcY?modestbranding=1&rel=0&autoplay=1" title={t('common:video.title')} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/yXGd4VXZzcY?modestbranding=1&rel=0&autoplay=1" title={t('common:video.title')} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </VideoWrapper>
           ) : (
             <VideoLink
               href="https://www.youtube.com/watch?v=yXGd4VXZzcY"
               onClick={e => {
-                e.preventDefault();
-                setVideoPlay(true);
+                e.preventDefault()
+                setVideoPlay(true)
               }}
             >
               <img src={video_thumb} alt={t('common:video.button')} />
@@ -274,10 +274,10 @@ const Home = ({ offline }) => {
                   rel="noreferrer noopener"
                   secondary
                 >{{
-                  chrome: t('home:about.chrome_extension'),
-                  firefox: t('home:about.firefox_extension'),
-                  safari: t('home:about.safari_extension'),
-                }[browser]}</Button>
+                    chrome: t('home:about.chrome_extension'),
+                    firefox: t('home:about.firefox_extension'),
+                    safari: t('home:about.safari_extension'),
+                  }[browser]}</Button>
               )}
               <Button
                 href="https://play.google.com/store/apps/details?id=fit.crab"
@@ -298,7 +298,7 @@ const Home = ({ offline }) => {
 
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

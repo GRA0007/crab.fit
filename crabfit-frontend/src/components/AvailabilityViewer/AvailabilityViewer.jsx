@@ -84,8 +84,8 @@ const AvailabilityViewer = ({
               <DayLabel>{parsedDate.format('ddd')}</DayLabel>
 
               <Times
-                borderRight={last}
-                borderLeft={i === 0 || (parsedDate).diff(isSpecificDates ? dayjs(dates[i-1], 'DDMMYYYY') : dayjs().day(dates[i-1]), 'day') > 1}
+                $borderRight={last}
+                $borderLeft={i === 0 || (parsedDate).diff(isSpecificDates ? dayjs(dates[i-1], 'DDMMYYYY') : dayjs().day(dates[i-1]), 'day') > 1}
               >
                 {timeLabels.map((timeLabel, i) => {
                   if (!timeLabel.time) return null
@@ -102,13 +102,13 @@ const AvailabilityViewer = ({
                   return (
                     <Time
                       key={i}
-                      time={time}
+                      $time={time}
                       className="time"
-                      peopleCount={focusCount !== null && focusCount !== peopleHere.length ? 0 : peopleHere.length}
+                      $peopleCount={focusCount !== null && focusCount !== peopleHere.length ? 0 : peopleHere.length}
                       aria-label={peopleHere.join(', ')}
-                      maxPeople={tempFocus !== null ? 1 : Math.min(max, filteredPeople.length)}
-                      minPeople={tempFocus !== null ? 0 : Math.min(min, filteredPeople.length)}
-                      highlight={highlight}
+                      $maxPeople={tempFocus !== null ? 1 : Math.min(max, filteredPeople.length)}
+                      $minPeople={tempFocus !== null ? 0 : Math.min(min, filteredPeople.length)}
+                      $highlight={highlight}
                       onMouseEnter={e => {
                         const cellBox = e.currentTarget.getBoundingClientRect()
                         const wrapperBox = wrapper?.current?.getBoundingClientRect() ?? { x: 0, y: 0 }
@@ -170,7 +170,7 @@ const AvailabilityViewer = ({
               {people.map((person, i) =>
                 <Person
                   key={i}
-                  filtered={filteredPeople.includes(person.name)}
+                  $filtered={filteredPeople.includes(person.name)}
                   onClick={() => {
                     setTempFocus(null)
                     if (filteredPeople.includes(person.name)) {
@@ -200,8 +200,8 @@ const AvailabilityViewer = ({
 
           {tooltip && (
             <Tooltip
-              x={tooltip.x}
-              y={tooltip.y}
+              $x={tooltip.x}
+              $y={tooltip.y}
             >
               <TooltipTitle>{tooltip.available}</TooltipTitle>
               <TooltipDate>{tooltip.date}</TooltipDate>

@@ -1,6 +1,7 @@
 import { styled } from 'goober'
+import { forwardRef } from 'react'
 
-export const Wrapper = styled('div')`
+export const Wrapper = styled('div', forwardRef)`
   overflow-y: visible;
   margin: 20px 0;
   position: relative;
@@ -40,12 +41,12 @@ export const Times = styled('div')`
   border-left: 1px solid var(--text);
   border-right: 1px solid var(--text);
 
-  ${props => props.borderLeft && `
+  ${props => props.$borderLeft && `
     border-left: 2px solid var(--text);
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
   `}
-  ${props => props.borderRight && `
+  ${props => props.$borderRight && `
     border-right: 2px solid var(--text);
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -75,19 +76,19 @@ export const Time = styled('div')`
   background-origin: border-box;
   transition: background-color .1s;
 
-  ${props => props.time.slice(2, 4) === '00' && `
+  ${props => props.$time.slice(2, 4) === '00' && `
     border-top: 2px solid var(--text);
   `}
-  ${props => props.time.slice(2, 4) !== '00' && `
+  ${props => props.$time.slice(2, 4) !== '00' && `
     border-top: 2px solid transparent;
   `}
-  ${props => props.time.slice(2, 4) === '30' && `
+  ${props => props.$time.slice(2, 4) === '30' && `
     border-top: 2px dotted var(--text);
   `}
 
-  background-color: ${props => `#FF0000${Math.round((props.peopleCount/props.maxPeople)*255).toString(16)}`};
+  background-color: ${props => `#FF0000${Math.round((props.$peopleCount/props.$maxPeople)*255).toString(16)}`};
 
-  ${props => props.highlight && props.peopleCount === props.maxPeople && props.peopleCount > 0 && `
+  ${props => props.$highlight && props.$peopleCount === props.$maxPeople && props.$peopleCount > 0 && `
     background-image: repeating-linear-gradient(
       45deg,
       transparent,
@@ -109,8 +110,8 @@ export const Spacer = styled('div')`
 
 export const Tooltip = styled('div')`
   position: absolute;
-  top: ${props => props.y}px;
-  left: ${props => props.x}px;
+  top: ${props => props.$y}px;
+  left: ${props => props.$x}px;
   transform: translateX(-50%);
   border: 1px solid var(--text);
   border-radius: 3px;
@@ -214,7 +215,7 @@ export const Person = styled('button')`
   padding: 2px 8px;
   user-select: none;
 
-  ${props => props.filtered && `
+  ${props => props.$filtered && `
     background: var(--primary);
     color: #FFFFFF;
     border-color: var(--primary);

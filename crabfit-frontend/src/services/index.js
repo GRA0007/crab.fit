@@ -8,30 +8,31 @@ const handleError = error => {
 }
 
 const api = {
-  get: async (endpoint, data) => {
+  get: async endpoint => {
     try {
       const response = await fetch(API_URL + endpoint)
-      return Promise.resolve(response)
+      const json = await response.json()
+      return Promise.resolve(json)
     } catch (error) {
       return handleError(error)
     }
   },
   post: async (endpoint, data, options = {}) => {
     try {
-      const response = await instance.post(endpoint, data, options);
-      return Promise.resolve(response);
+      const response = await fetch(API_URL + endpoint, data, options)
+      return Promise.resolve(response)
     } catch (error) {
-      return handleError(error);
+      return handleError(error)
     }
   },
   patch: async (endpoint, data) => {
     try {
-      const response = await instance.patch(endpoint, data);
-      return Promise.resolve(response);
+      const response = await fetch(API_URL + endpoint, data)
+      return Promise.resolve(response)
     } catch (error) {
-      return handleError(error);
+      return handleError(error)
     }
   },
-};
+}
 
-export default api;
+export default api

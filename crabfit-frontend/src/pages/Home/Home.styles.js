@@ -21,7 +21,7 @@ export const TitleSmall = styled('span')`
   line-height: 1em;
   text-transform: uppercase;
 
-  ${props => !props.altChars && `
+  ${props => !props.$altChars && `
     font-family: sans-serif;
     font-size: 2rem;
     font-weight: 600;
@@ -163,10 +163,10 @@ export const VideoLink = styled('a')`
   margin: 0 auto;
   transition: transform .15s;
 
-  :hover, :focus {
+  &:hover, &:focus {
     transform: translateY(-2px);
   }
-  :active {
+  &:active {
     transform: translateY(-1px);
   }
 
@@ -188,7 +188,7 @@ export const VideoLink = styled('a')`
     text-shadow: 0 0 20px rgba(0,0,0,.8);
     user-select: none;
 
-    ::before {
+    &::before {
       content: '';
       display: block;
       height: 2em;
@@ -196,7 +196,7 @@ export const VideoLink = styled('a')`
       background: currentColor;
       border-radius: 100%;
       margin: 0 auto .4em;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='${props => encodeURIComponent(props.theme.primaryDark)}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'%3E%3Cpolygon points='5 3 19 12 5 21 5 3'%3E%3C/polygon%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='red' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'%3E%3Cpolygon points='5 3 19 12 5 21 5 3'%3E%3C/polygon%3E%3C/svg%3E");
       background-position: center;
       background-repeat: no-repeat;
       background-size: 1em;

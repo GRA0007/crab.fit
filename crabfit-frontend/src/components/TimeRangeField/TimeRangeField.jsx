@@ -68,12 +68,12 @@ const TimeRangeField = forwardRef(({
       />
 
       <Range ref={rangeRef}>
-        <Selected start={start} end={start > end ? 24 : end} />
-        {start > end && <Selected start={start > end ? 0 : start} end={end} />}
+        <Selected $start={start} $end={start > end ? 24 : end} />
+        {start > end && <Selected $start={start > end ? 0 : start} $end={end} />}
         <Handle
-          value={start}
+          $value={start}
           label={timeFormat === '24h' ? times[start] : dayjs().hour(times[start]).format('ha')}
-          extraPadding={end - start === 1 ? 'padding-right: 20px;' : (start - end === 1 ? 'padding-left: 20px;' : '')}
+          $extraPadding={end - start === 1 ? 'padding-right: 20px;' : (start - end === 1 ? 'padding-left: 20px;' : '')}
           onMouseDown={() => {
             document.addEventListener('mousemove', handleMouseMove)
             isStartMoving.current = true
@@ -105,9 +105,9 @@ const TimeRangeField = forwardRef(({
           }}
         />
         <Handle
-          value={end}
+          $value={end}
           label={timeFormat === '24h' ? times[end] : dayjs().hour(times[end]).format('ha')}
-          extraPadding={end - start === 1 ? 'padding-left: 20px;' : (start - end === 1 ? 'padding-right: 20px;' : '')}
+          $extraPadding={end - start === 1 ? 'padding-left: 20px;' : (start - end === 1 ? 'padding-right: 20px;' : '')}
           onMouseDown={() => {
             document.addEventListener('mousemove', handleMouseMove)
             isEndMoving.current = true

@@ -14,8 +14,8 @@ const TextField = forwardRef(({
   inline = false,
   ...props
 }, ref) => (
-  <Wrapper inline={inline}>
-    {label && <StyledLabel htmlFor={id} inline={inline}>{label}</StyledLabel>}
+  <Wrapper $inline={inline}>
+    {label && <StyledLabel htmlFor={id} $inline={inline}>{label}</StyledLabel>}
     {subLabel && <StyledSubLabel htmlFor={id}>{subLabel}</StyledSubLabel>}
     <StyledInput id={id} ref={ref} {...props} />
   </Wrapper>

@@ -1,4 +1,5 @@
 import { styled } from 'goober'
+import { forwardRef } from 'react'
 
 export const Wrapper = styled('div')`
   margin: 30px 0;
@@ -17,7 +18,7 @@ export const StyledSubLabel = styled('label')`
   opacity: .6;
 `
 
-export const Range = styled('div')`
+export const Range = styled('div', forwardRef)`
   user-select: none;
   background-color: var(--surface);
   border: 1px solid var(--primary);
@@ -35,7 +36,7 @@ export const Handle = styled('div')`
   border-radius: 3px;
   position: absolute;
   top: -10px;
-  left: calc(${props => props.value * 4.166}% - 11px);
+  left: calc(${props => props.$value * 4.166}% - 11px);
   cursor: ew-resize;
   touch-action: none;
   transition: left .1s;
@@ -65,15 +66,15 @@ export const Handle = styled('div')`
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    ${props => props.extraPadding}
+    ${props => props.$extraPadding}
   }
 `
 
 export const Selected = styled('div')`
   position: absolute;
   height: 100%;
-  left: ${props => props.start * 4.166}%;
-  right: calc(100% - ${props => props.end * 4.166}%);
+  left: ${props => props.$start * 4.166}%;
+  right: calc(100% - ${props => props.$end * 4.166}%);
   top: 0;
   background-color: var(--primary);
   border-radius: 2px;

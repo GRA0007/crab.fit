@@ -86,19 +86,19 @@ export const Date = styled('button')`
   user-select: none;
   touch-action: none;
 
-  ${props => props.otherMonth && `
+  ${props => props.$otherMonth && `
     color: var(--tertiary);
   `}
-  ${props => props.isToday && `
+  ${props => props.$isToday && `
     font-weight: 900;
     color: var(--secondary);
   `}
-  ${props => (props.selected || (props.mode === 'add' && props.selecting)) && `
-    color: ${props.otherMonth ? 'rgba(255,255,255,.5)' : '#FFF'};
+  ${props => (props.$selected || (props.$mode === 'add' && props.$selecting)) && `
+    color: ${props.$otherMonth ? 'rgba(255,255,255,.5)' : '#FFF'};
     background-color: var(--primary);
   `}
-  ${props => props.mode === 'remove' && props.selecting && `
+  ${props => props.$mode === 'remove' && props.$selecting && `
     background-color: var(--surface);
-    color: ${props.isToday ? 'var(--secondary)' : (props.otherMonth ? 'var(--tertiary)' : 'inherit')};
+    color: ${props.$isToday ? 'var(--secondary)' : (props.$otherMonth ? 'var(--tertiary)' : 'inherit')};
   `}
 `

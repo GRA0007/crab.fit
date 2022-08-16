@@ -160,12 +160,12 @@ const CalendarField = forwardRef(({
               dateRow.map((date, x) =>
                 <Date
                   key={y+x}
-                  otherMonth={date.month() !== month}
-                  isToday={date.isToday()}
+                  $otherMonth={date.month() !== month}
+                  $isToday={date.isToday()}
                   title={`${date.date()} ${dayjs.months()[date.month()]}${date.isToday() ? ` (${t('form.dates.tooltips.today')})` : ''}`}
-                  selected={selectedDates.includes(date.format('DDMMYYYY'))}
-                  selecting={selectingDates.includes(date)}
-                  mode={mode}
+                  $selected={selectedDates.includes(date.format('DDMMYYYY'))}
+                  $selecting={selectingDates.includes(date)}
+                  $mode={mode}
                   type="button"
                   onKeyPress={e => {
                     if (e.key === ' ' || e.key === 'Enter') {
@@ -213,11 +213,11 @@ const CalendarField = forwardRef(({
           {(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort()).map((name, i) =>
             <Date
               key={name}
-              isToday={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart === -1 ? 6 : dayjs().day()-weekStart] === name}
+              $isToday={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart === -1 ? 6 : dayjs().day()-weekStart] === name}
               title={(weekStart ? [...dayjs.weekdaysShort().filter((_,i) => i !== 0), dayjs.weekdaysShort()[0]] : dayjs.weekdaysShort())[dayjs().day()-weekStart === -1 ? 6 : dayjs().day()-weekStart] === name ? t('form.dates.tooltips.today') : ''}
-              selected={selectedDays.includes(((i + weekStart) % 7 + 7) % 7)}
-              selecting={selectingDays.includes(((i + weekStart) % 7 + 7) % 7)}
-              mode={mode}
+              $selected={selectedDays.includes(((i + weekStart) % 7 + 7) % 7)}
+              $selecting={selectingDays.includes(((i + weekStart) % 7 + 7) % 7)}
+              $mode={mode}
               type="button"
               onKeyPress={e => {
                 if (e.key === ' ' || e.key === 'Enter') {

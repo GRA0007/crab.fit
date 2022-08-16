@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 export const Wrapper = styled('div')`
   margin: 30px 0;
 
-  ${props => props.inline && `
+  ${props => props.$inline && `
     margin: 0;
   `}
 `
@@ -14,7 +14,7 @@ export const StyledLabel = styled('label')`
   padding-bottom: 4px;
   font-size: 18px;
 
-  ${props => props.inline && `
+  ${props => props.$inline && `
     font-size: 16px;
   `}
 `
