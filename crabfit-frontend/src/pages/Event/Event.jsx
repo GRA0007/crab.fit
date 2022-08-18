@@ -76,15 +76,15 @@ const Event = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await api.get(`/event/${id}`)
+        const event = await api.get(`/event/${id}`)
 
-        setEvent(response.data)
+        setEvent(event)
         addRecent({
-          id: response.data.id,
-          created: response.data.created,
-          name: response.data.name,
+          id: event.id,
+          created: event.created,
+          name: event.name,
         })
-        document.title = `${response.data.name} | Crab Fit`
+        document.title = `${event.name} | Crab Fit`
       } catch (e) {
         console.error(e)
         if (e.status === 404) {
@@ -101,8 +101,8 @@ const Event = () => {
   useEffect(() => {
     const fetchPeople = async () => {
       try {
-        const response = await api.get(`/event/${id}/people`)
-        const adjustedPeople = response.data.people.map(person => ({
+        const { people } = await api.get(`/event/${id}/people`)
+        const adjustedPeople = people.map(person => ({
           ...person,
           availability: (!!person.availability.length && person.availability[0].length === 13)
             ? person.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY'))
@@ -206,12 +206,12 @@ const Event = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await api.post(`/event/${id}/people/${user.name}`, { person: { password } })
+        const resUser = await api.post(`/event/${id}/people/${user.name}`, { person: { password } })
         const adjustedUser = {
-          ...response.data,
-          availability: (!!response.data.availability.length && response.data.availability[0].length === 13)
-            ? response.data.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY'))
-            : response.data.availability.map(date => dayjs(date, 'HHmm').day(date.substring(5)).utc(true).tz(timezone).format('HHmm-d')),
+          ...resUser,
+          availability: (!!resUser.availability.length && resUser.availability[0].length === 13)
+            ? resUser.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY'))
+            : resUser.availability.map(date => dayjs(date, 'HHmm').day(date.substring(5)).utc(true).tz(timezone).format('HHmm-d')),
         }
         setUser(adjustedUser)
       } catch (e) {
@@ -222,8 +222,7 @@ const Event = () => {
     if (user) {
       fetchUser()
     }
-  // eslint-disable-next-line
-  }, [timezone]);
+  }, [timezone])
 
   const onSubmit = async data => {
     if (!data.name || data.name.length === 0) {
@@ -235,17 +234,17 @@ const Event = () => {
     setError(null)
 
     try {
-      const response = await api.post(`/event/${id}/people/${data.name}`, {
+      const resUser = await api.post(`/event/${id}/people/${data.name}`, {
         person: {
           password: data.password,
         },
       })
       setPassword(data.password)
       const adjustedUser = {
-        ...response.data,
-        availability: (!!response.data.availability.length && response.data.availability[0].length === 13)
-          ? response.data.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY'))
-          : response.data.availability.map(date => dayjs(date, 'HHmm').day(date.substring(5)).utc(true).tz(timezone).format('HHmm-d')),
+        ...resUser,
+        availability: (!!resUser.availability.length && resUser.availability[0].length === 13)
+          ? resUser.availability.map(date => dayjs(date, 'HHmm-DDMMYYYY').utc(true).tz(timezone).format('HHmm-DDMMYYYY'))
+          : resUser.availability.map(date => dayjs(date, 'HHmm').day(date.substring(5)).utc(true).tz(timezone).format('HHmm-d')),
       }
       setUser(adjustedUser)
       setTab('you')

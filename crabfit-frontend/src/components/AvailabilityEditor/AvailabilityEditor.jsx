@@ -118,8 +118,8 @@ const AvailabilityEditor = ({
                     <DayLabel>{parsedDate.format('ddd')}</DayLabel>
 
                     <Times
-                      borderRight={last}
-                      borderLeft={x === 0 || (parsedDate).diff(isSpecificDates ? dayjs(dates[x-1], 'DDMMYYYY') : dayjs().day(dates[x-1]), 'day') > 1}
+                      $borderRight={last}
+                      $borderLeft={x === 0 || (parsedDate).diff(isSpecificDates ? dayjs(dates[x-1], 'DDMMYYYY') : dayjs().day(dates[x-1]), 'day') > 1}
                     >
                       {timeLabels.map((timeLabel, y) => {
                         if (!timeLabel.time) return null
@@ -133,11 +133,11 @@ const AvailabilityEditor = ({
                         return (
                           <Time
                             key={x+y}
-                            time={time}
+                            $time={time}
                             className="time"
-                            selected={value.includes(time)}
-                            selecting={selectingTimes.includes(time)}
-                            mode={mode}
+                            $selected={value.includes(time)}
+                            $selecting={selectingTimes.includes(time)}
+                            $mode={mode}
                             onPointerDown={e => {
                               e.preventDefault()
                               startPos.current = {x, y}

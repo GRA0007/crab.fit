@@ -125,18 +125,18 @@ const Create = ({ offline }) => {
         return setError(t('home:form.errors.no_time'))
       }
 
-      const response = await api.post('/event', {
+      const event = await api.post('/event', {
         event: {
           name: data.name,
           times: times,
           timezone: data.timezone,
         },
       })
-      setCreatedEvent(response.data)
+      setCreatedEvent(event)
       addRecent({
-        id: response.data.id,
-        created: response.data.created,
-        name: response.data.name,
+        id: event.id,
+        created: event.created,
+        name: event.name,
       })
       gtag('event', 'create_event', {
         'event_category': 'create',

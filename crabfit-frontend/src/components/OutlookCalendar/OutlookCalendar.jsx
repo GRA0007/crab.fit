@@ -137,7 +137,7 @@ const OutlookCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
       .finally(() => setFreeBusyLoading(false))
   }
 
-  useEffect(() => checkLogin(), [])
+  useEffect(() => void checkLogin(), [])
 
   useEffect(() => {
     if (client) {

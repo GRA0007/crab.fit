@@ -74,7 +74,7 @@ const Home = ({ offline }) => {
     const fetch = async () => {
       try {
         const response = await api.get('/stats')
-        setStats(response.data)
+        setStats(response)
       } catch (e) {
         console.error(e)
       }
@@ -144,7 +144,7 @@ const Home = ({ offline }) => {
           timezone: data.timezone,
         },
       })
-      navigate(`/${response.data.id}`)
+      navigate(`/${response.id}`)
       gtag('event', 'create_event', {
         'event_category': 'home',
       })

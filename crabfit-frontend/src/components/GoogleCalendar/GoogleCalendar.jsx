@@ -70,7 +70,7 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
       })
   }
 
-  useEffect(() => calendarLogin(), [])
+  useEffect(() => void calendarLogin(), [])
 
   useEffect(() => {
     if (signedIn) {
