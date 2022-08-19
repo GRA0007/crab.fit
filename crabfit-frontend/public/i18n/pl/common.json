@@ -55,14 +55,6 @@
       "label": "Język"
     }
   },
-  "update": {
-    "heading": "Crab Fit został zaktualizowany",
-    "body": "Nowa wersja Crab Fita jest dostępna, która zawiera aktualizacje, poprawki oraz nowe funkcje.",
-    "buttons": {
-      "close": "Zamknij",
-      "reload": "Przeładuj"
-    }
-  },
   "video": {
     "title": "Promocyjne wideo Crab Fita",
     "button": "Obejrzyj wideo"

@@ -55,14 +55,6 @@
       "label": "Language"
     }
   },
-  "update": {
-    "heading": "Crab Fit has been updated",
-    "body": "A new version of Crab Fit is available, which includes updates, fixes, and new features.",
-    "buttons": {
-      "close": "Close",
-      "reload": "Reload"
-    }
-  },
   "video": {
     "title": "Crab Fit Promotional Video",
     "button": "Watch the video"
