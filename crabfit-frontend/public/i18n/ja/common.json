@@ -54,13 +54,5 @@
     "language": {
       "label": "言語"
     }
-  },
-  "update": {
-    "heading": "Crab Fit が更新されました",
-    "body": "新しいバージョンの Crab Fit を利用できます。不具合の修正や新機能の追加などが行われています。",
-    "buttons": {
-      "close": "閉じる",
-      "reload": "再読込"
-    }
   }
 }
