@@ -2,12 +2,13 @@
 
 import { clientsClaim, skipWaiting } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
-import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
+import { precacheAndRoute, createHandlerBoundToURL, cleanupOutdatedCaches } from 'workbox-precaching'
 import { registerRoute } from 'workbox-routing'
 import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies'
 
 skipWaiting()
 clientsClaim()
+cleanupOutdatedCaches()
 
 // Injection point
 precacheAndRoute(self.__WB_MANIFEST)
