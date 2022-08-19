@@ -1,22 +1,18 @@
 import { useState, useEffect, useCallback, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Workbox } from 'workbox-window'
 
 import * as Pages from '/src/pages'
-import { Settings, Loading, Egg, UpdateDialog, TranslateDialog } from '/src/components'
+import { Settings, Loading, Egg, TranslateDialog } from '/src/components'
 
 import { useSettingsStore, useTranslateStore } from '/src/stores'
 
 const EGG_PATTERN = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a']
-
-const wb = new Workbox('sw.js')
 
 const App = () => {
   const [eggCount, setEggCount] = useState(0)
   const [eggVisible, setEggVisible] = useState(false)
   const [eggKey, setEggKey] = useState(0)
 
-  const [updateAvailable, setUpdateAvailable] = useState(false)
   const languageSupported = useTranslateStore(state => state.navigatorSupported)
   const translateDialogDismissed = useTranslateStore(state => state.translateDialogDismissed)
 
@@ -29,19 +25,6 @@ const App = () => {
       setEggVisible(true)
     }
   }, [eggCount, eggKey])
-
-  useEffect(() => {
-    // Register service worker
-    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
-      wb.addEventListener('installed', event => {
-        if (event.isUpdate) {
-          setUpdateAvailable(true)
-        }
-      })
-
-      wb.register()
-    }
-  }, [])
 
   useEffect(() => {
     document.addEventListener('keyup', eggHandler, false)
@@ -70,12 +53,6 @@ const App = () => {
           <Route path="/:id" element={<Pages.Event />} />
         </Routes>
       </Suspense>
-
-      {updateAvailable && (
-        <Suspense fallback={<Loading />}>
-          <UpdateDialog onClose={() => setUpdateAvailable(false)} />
-        </Suspense>
-      )}
 
       {eggVisible && <Egg eggKey={eggKey} onClose={() => setEggVisible(false)} />}
     </>
