@@ -1,4 +1,4 @@
-const API_URL = process.env.NODE_ENV === 'production' ? 'https://api-dot-crabfit.uc.r.appspot.com' : 'http://localhost:8080'
+const API_URL = process.env.NODE_ENV === 'production' ? 'https://api.crab.fit' : 'http://localhost:8080'
 
 const handleError = error => {
   if (error && error.status) {
