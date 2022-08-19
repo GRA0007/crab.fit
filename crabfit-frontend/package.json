@@ -3,58 +3,47 @@
   "version": "1.0.0",
   "private": true,
   "license": "GPL-3.0-only",
-  "dependencies": {
-    "@azure/msal-browser": "^2.14.2",
-    "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^11.1.5",
-    "@microsoft/microsoft-graph-client": "^2.2.1",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.31",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
-    "axios": "^0.21.1",
-    "dayjs": "^1.10.4",
-    "gapi-script": "^1.2.0",
-    "i18next": "^20.2.4",
-    "i18next-browser-languagedetector": "^6.1.1",
-    "i18next-http-backend": "^1.2.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-hook-form": "^7.8.1",
-    "react-i18next": "^11.8.15",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.2.2",
-    "web-vitals": "^1.0.1",
-    "workbox-background-sync": "^5.1.3",
-    "workbox-broadcast-update": "^5.1.3",
-    "workbox-cacheable-response": "^5.1.3",
-    "workbox-core": "^5.1.3",
-    "workbox-expiration": "^5.1.3",
-    "workbox-google-analytics": "^5.1.3",
-    "workbox-navigation-preload": "^5.1.3",
-    "workbox-precaching": "^5.1.3",
-    "workbox-range-requests": "^5.1.3",
-    "workbox-routing": "^5.1.3",
-    "workbox-strategies": "^5.1.3",
-    "workbox-streams": "^5.1.3",
-    "workbox-window": "^6.1.5",
-    "zustand": "^3.3.2"
-  },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint --ext .js,.jsx ./src"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "@azure/msal-browser": "^2.28.1",
+    "@microsoft/microsoft-graph-client": "^3.0.2",
+    "dayjs": "^1.11.5",
+    "gapi-script": "^1.2.0",
+    "goober": "^2.1.10",
+    "i18next": "^21.9.0",
+    "i18next-browser-languagedetector": "^6.1.5",
+    "i18next-http-backend": "^1.4.1",
+    "lucide-react": "^0.84.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.34.1",
+    "react-i18next": "^11.18.4",
+    "react-router-dom": "^6.3.0",
+    "workbox-background-sync": "^6.5.4",
+    "workbox-broadcast-update": "^6.5.4",
+    "workbox-cacheable-response": "^6.5.4",
+    "workbox-core": "^6.5.4",
+    "workbox-expiration": "^6.5.4",
+    "workbox-google-analytics": "^6.5.4",
+    "workbox-navigation-preload": "^6.5.4",
+    "workbox-precaching": "^6.5.4",
+    "workbox-range-requests": "^6.5.4",
+    "workbox-routing": "^6.5.4",
+    "workbox-strategies": "^6.5.4",
+    "workbox-streams": "^6.5.4",
+    "workbox-window": "^6.5.4",
+    "zustand": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^2.0.1",
+    "eslint": "^8.22.0",
+    "eslint-plugin-react": "^7.30.1",
+    "vite": "^3.0.7",
+    "workbox-webpack-plugin": "^6.5.4"
   },
   "browserslist": {
     "production": [
@@ -67,9 +56,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "react-app-rewired": "^2.1.8",
-    "workbox-webpack-plugin": "^5.1.3"
   }
 }

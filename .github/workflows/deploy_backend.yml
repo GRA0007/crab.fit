@@ -1,0 +1,30 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches: ['main']
+    paths: ['crabfit-backend/**']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: crabfit-backend
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - id: auth
+      uses: google-github-actions/auth@v0
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+    - id: deploy
+      uses: google-github-actions/deploy-appengine@v0
+      with:
+        working_directory: crabfit-backend
+        version: v1

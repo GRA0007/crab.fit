@@ -21,7 +21,7 @@ const taskRemoveOrphans = require('./routes/taskRemoveOrphans');
 const app = express();
 const port = 8080;
 const corsOptions = {
-	origin: process.env.NODE_ENV === 'production' ? 'https://crab.fit' : 'http://localhost:3000',
+	origin: process.env.NODE_ENV === 'production' ? 'https://crab.fit' : 'http://localhost:5173',
 };
 
 const datastore = new Datastore({
