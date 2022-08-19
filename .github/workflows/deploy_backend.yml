@@ -1,9 +1,9 @@
-name: Deploy Frontend
+name: Deploy Backend
 
 on:
   push:
     branches: ['main']
-    paths: ['crabfit-frontend/**']
+    paths: ['crabfit-backend/**']
 
 jobs:
   deploy:
@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: crabfit-frontend
+        working-directory: crabfit-backend
 
     permissions:
       contents: read
@@ -19,13 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 17
-        cache: yarn
-        cache-dependency-path: '**/yarn.lock'
-    - run: yarn install --immutable
-    - run: yarn build
     - id: auth
       uses: google-github-actions/auth@v0
       with:
@@ -33,5 +26,5 @@ jobs:
     - id: deploy
       uses: google-github-actions/deploy-appengine@v0
       with:
-        working_directory: crabfit-frontend
+        working_directory: crabfit-backend
         version: v1
