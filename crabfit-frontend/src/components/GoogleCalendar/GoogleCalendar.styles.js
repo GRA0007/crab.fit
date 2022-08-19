@@ -30,15 +30,6 @@ export const CheckboxInput = styled('input')`
     border: 2px solid var(--text);
     background-color: var(--text);
   }
-  &:focus + label {
-    box-shadow: 0 0 0 2px ${props => props.theme.text}44;
-    background-color: ${props => props.theme.text}44;
-    outline: none;
-  }
-  &:checked:focus + label {
-    box-shadow: 0 0 0 2px ${props => props.color || props.theme.primary}44;
-    background-color: ${props => props.color || props.theme.primary}44;
-  }
 `
 
 export const CheckboxLabel = styled('label')`
@@ -114,10 +105,7 @@ export const Icon = styled('img')`
   height: 24px;
   width: 24px;
   margin-right: 12px;
-
-  ${props => props.theme.mode === 'light' && `
-    filter: invert(1);
-  `}
+  filter: invert(1);
 `
 
 export const LinkButton = styled('button')`
