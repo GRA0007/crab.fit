@@ -31,7 +31,7 @@ const Legend = ({
         {[...Array(max+1-min).keys()].map(i => i+min).map(i =>
           <Grade
             key={i}
-            $color={`#FF0000${Math.round((i/(max))*255).toString(16)}`}
+            $color={`#F79E00${Math.round((i/(max))*255).toString(16)}`}
             $highlight={highlight && i === max && max > 0}
             onMouseOver={() => onSegmentFocus(i)}
           />

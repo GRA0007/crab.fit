@@ -39,7 +39,7 @@ export const Pressable = styled('button')`
     width: 100%;
     top: 0;
     left: 0;
-    background: ${props => props.$secondaryColor || 'var(--secondary)'};
+    background: ${props => props.$secondaryColor || 'var(--shadow)'};
     border-radius: inherit;
     transform: translate3d(0, 5px, -1em);
     transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);

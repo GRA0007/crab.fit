@@ -86,15 +86,15 @@ export const Time = styled('div')`
     border-top: 2px dotted var(--text);
   `}
 
-  background-color: ${props => `#FF0000${Math.round((props.$peopleCount/props.$maxPeople)*255).toString(16)}`};
+  background-color: ${props => `#F79E00${Math.round((props.$peopleCount/props.$maxPeople)*255).toString(16)}`};
 
   ${props => props.$highlight && props.$peopleCount === props.$maxPeople && props.$peopleCount > 0 && `
     background-image: repeating-linear-gradient(
       45deg,
       transparent,
       transparent 4.3px,
-      var(--secondary) 4.3px,
-      var(--secondary) 8.6px
+      var(--shadow) 4.3px,
+      var(--shadow) 8.6px
     );
   `}
 

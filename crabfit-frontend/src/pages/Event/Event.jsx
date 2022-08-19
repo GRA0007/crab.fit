@@ -402,7 +402,7 @@ const Event = () => {
                     setFocus('name')
                   }
                 }}
-                selected={tab === 'you'}
+                $selected={tab === 'you'}
                 disabled={!user}
                 title={user ? '' : t('event:tabs.you_tooltip')}
               >{t('event:tabs.you')}</Tab>
@@ -412,7 +412,7 @@ const Event = () => {
                   e.preventDefault()
                   setTab('group')
                 }}
-                selected={tab === 'group'}
+                $selected={tab === 'group'}
               >{t('event:tabs.group')}</Tab>
             </Tabs>
           </StyledMain>

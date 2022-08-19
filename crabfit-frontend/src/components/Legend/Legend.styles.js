@@ -45,8 +45,8 @@ export const Grade = styled('div')`
       45deg,
       var(--primary),
       var(--primary) 4.5px,
-      var(--secondary) 4.5px,
-      var(--secondary) 9px
+      var(--shadow) 4.5px,
+      var(--shadow) 9px
     );
   `}
 `

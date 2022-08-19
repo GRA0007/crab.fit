@@ -23,12 +23,15 @@
 :root {
   color-scheme: light dark;
 
+  --primary: #F79E00;
+
   /* LIGHT */
   --background-light: #FFFFFF;
   --text-light: #000000;
-  --primary-light: #F79E00;
-  --secondary-light: #F48600;
-  --tertiary-light: #F4BB60;
+  --shadow-light: #F48600;
+  --highlight-light: #F4BB60;
+  --secondary-light: var(--shadow-light);
+  --tertiary-light: var(--highlight-light);
   --surface-light: #FEF2DD;
   --error-light: #D32F2F;
   --loading-light: #DDDDDD;
@@ -37,9 +40,10 @@
   /* DARK */
   --background-dark: #111111;
   --text-dark: #DDDDDD;
-  --primary-dark: #F79E00;
-  --secondary-dark: #F4BB60;
-  --tertiary-dark: #CC7313;
+  --shadow-dark: #CC7313;
+  --highlight-dark: #F4BB60;
+  --secondary-dark: var(--highlight-dark);
+  --tertiary-dark: var(--shadow-dark);
   --surface-dark: #30240F;
   --error-dark: #E53935;
   --loading-dark: #444444;
@@ -48,7 +52,8 @@
   /* Define light defaults */
   --background: var(--background-light);
   --text: var(--text-light);
-  --primary: var(--primary-light);
+  --shadow: var(--shadow-light);
+  --highlight: var(--highlight-light);
   --secondary: var(--secondary-light);
   --tertiary: var(--tertiary-light);
   --surface: var(--surface-light);
@@ -61,7 +66,8 @@
   :root {
     --background: var(--background-dark);
     --text: var(--text-dark);
-    --primary: var(--primary-dark);
+    --shadow: var(--shadow-dark);
+    --highlight: var(--highlight-dark);
     --secondary: var(--secondary-dark);
     --tertiary: var(--tertiary-dark);
     --surface: var(--surface-dark);
@@ -90,7 +96,8 @@ body {
 
   --background: var(--background-light);
   --text: var(--text-light);
-  --primary: var(--primary-light);
+  --shadow: var(--shadow-light);
+  --highlight: var(--highlight-light);
   --secondary: var(--secondary-light);
   --tertiary: var(--tertiary-light);
   --surface: var(--surface-light);
@@ -105,7 +112,8 @@ body {
 
     --background: var(--background-dark);
     --text: var(--text-dark);
-    --primary: var(--primary-dark);
+    --shadow: var(--shadow-dark);
+    --highlight: var(--highlight-dark);
     --secondary: var(--secondary-dark);
     --tertiary: var(--tertiary-dark);
     --surface: var(--surface-dark);
@@ -136,13 +144,13 @@ a {
   border-radius: 100px;
   border: 4px solid var(--surface);
   width: 12px;
-  background: var(--secondary);
-}
-*::-webkit-scrollbar-thumb:hover {
   background: var(--tertiary);
 }
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
 *::-webkit-scrollbar-thumb:active {
-  background: red;
+  background: var(--secondary);
 }
 
 /* IE 10+ */

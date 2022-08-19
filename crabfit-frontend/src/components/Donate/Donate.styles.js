@@ -12,9 +12,7 @@ export const Options = styled('div', forwardRef)`
   bottom: calc(100% + 20px);
   right: 0;
   background-color: var(--background);
-  ${/* FIXME: ${props => props.theme.mode === 'dark' && `
-    border: 1px solid ${props.theme.primaryBackground};
-  `} */''}
+  border: 1px solid var(--surface);
   z-index: 60;
   padding: 4px 10px;
   border-radius: 14px;

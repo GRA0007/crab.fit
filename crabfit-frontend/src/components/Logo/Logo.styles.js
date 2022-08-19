@@ -51,7 +51,7 @@ export const Title = styled('span')`
   color: var(--primary);
   font-family: 'Molot', sans-serif;
   font-weight: 400;
-  text-shadow: 0 2px 0 var(--secondary);
+  text-shadow: 0 2px 0 var(--shadow);
   line-height: 1em;
 `
 

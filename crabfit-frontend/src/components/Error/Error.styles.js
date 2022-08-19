@@ -40,4 +40,5 @@ export const CloseButton = styled('button')`
   align-items: center;
   justify-content: center;
   margin-left: 16px;
+  padding: 0;
 `

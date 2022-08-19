@@ -1,4 +1,4 @@
-import { styled } from 'goober'
+import { keyframes, styled } from 'goober'
 
 export const StyledMain = styled('div')`
   width: 600px;
@@ -37,7 +37,7 @@ export const TitleLarge = styled('h1')`
   color: var(--primary);
   font-family: 'Molot', sans-serif;
   font-weight: 400;
-  text-shadow: 0 4px 0 var(--secondary);
+  text-shadow: 0 4px 0 var(--shadow);
   line-height: 1em;
   text-transform: uppercase;
 
@@ -46,26 +46,26 @@ export const TitleLarge = styled('h1')`
   }
 `
 
+const jelly = keyframes`
+  from,to {
+    transform: scale(1,1);
+  }
+  25% {
+    transform: scale(.9,1.1);
+  }
+  50% {
+    transform: scale(1.1,.9);
+  }
+  75% {
+    transform: scale(.95,1.05);
+  }
+`
+
 export const Logo = styled('img')`
   width: 80px;
   transition: transform .15s;
-  animation: jelly .5s 1 .05s;
+  animation: ${jelly} .5s 1 .05s;
   user-select: none;
-
-  @keyframes jelly {
-    from,to {
-      transform: scale(1,1)
-    }
-    25% {
-      transform: scale(.9,1.1)
-    }
-    50% {
-      transform: scale(1.1,.9)
-    }
-    75% {
-      transform: scale(.95,1.05)
-    }
-  }
 
   &:active {
     animation: none;
@@ -196,7 +196,7 @@ export const VideoLink = styled('a')`
       background: currentColor;
       border-radius: 100%;
       margin: 0 auto .4em;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='red' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'%3E%3Cpolygon points='5 3 19 12 5 21 5 3'%3E%3C/polygon%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23F79E00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'%3E%3Cpolygon points='5 3 19 12 5 21 5 3'%3E%3C/polygon%3E%3C/svg%3E");
       background-position: center;
       background-repeat: no-repeat;
       background-size: 1em;

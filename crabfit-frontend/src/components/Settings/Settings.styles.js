@@ -19,15 +19,8 @@ export const OpenButton = styled('button')`
   transition: transform .15s;
   padding: 0;
 
-  &:focus {
-    outline: 0;
-  }
-  &:focus-visible {
-    /* FIXME: background-color: props => props.theme.text22; */
-  }
-
   ${props => props.$isOpen && `
-    transform: rotate(-45deg);
+    transform: rotate(-60deg);
   `}
 
   @media (prefers-reduced-motion: reduce) {
@@ -57,9 +50,7 @@ export const Modal = styled('div')`
   top: 70px;
   right: 12px;
   background-color: var(--background);
-  ${/* FIXME: props => props.theme.mode === 'dark' && `
-    border: 1px solid props.theme.primaryBackground;
-  ` */''}
+  border: 1px solid var(--surface);
   z-index: 150;
   padding: 10px 18px;
   border-radius: 3px;

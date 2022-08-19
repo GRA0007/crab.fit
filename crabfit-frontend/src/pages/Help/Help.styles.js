@@ -63,7 +63,7 @@ export const FakeTimeRange = styled('div')`
     height: calc(100% + 20px);
     width: 20px;
     border: 1px solid var(--primary);
-    background-color: var(--tertiary);
+    background-color: var(--highlight);
     border-radius: 3px;
     position: absolute;
     top: -10px;
@@ -79,7 +79,7 @@ export const FakeTimeRange = styled('div')`
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--secondary);
+      color: var(--shadow);
     }
 
     &:before {

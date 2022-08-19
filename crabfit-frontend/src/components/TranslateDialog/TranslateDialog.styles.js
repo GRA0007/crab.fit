@@ -5,9 +5,7 @@ export const Wrapper = styled('div')`
   top: 20px;
   left: 20px;
   background-color: var(--background);
-  /* FIXME: ${props => props.theme.mode === 'dark' && `
-    border: 1px solid ${props.theme.primaryBackground};
-  `} */
+  border: 1px solid var(--surface);
   z-index: 900;
   padding: 20px;
   border-radius: 3px;
