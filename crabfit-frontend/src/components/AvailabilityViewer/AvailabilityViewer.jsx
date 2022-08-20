@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import localeData from 'dayjs/plugin/localeData'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import createPalette from 'hue-map'
 
 import { useSettingsStore, useLocaleUpdateStore } from '/src/stores'
 
@@ -50,6 +51,7 @@ const AvailabilityViewer = ({
   const [tooltip, setTooltip] = useState(null)
   const timeFormat = useSettingsStore(state => state.timeFormat)
   const highlight = useSettingsStore(state => state.highlight)
+  const colormap = useSettingsStore(state => state.colormap)
   const [filteredPeople, setFilteredPeople] = useState([])
   const [touched, setTouched] = useState(false)
   const [tempFocus, setTempFocus] = useState(null)
@@ -64,6 +66,13 @@ const AvailabilityViewer = ({
     setFilteredPeople(people.map(p => p.name))
     setTouched(people.length <= 1)
   }, [people])
+
+  const [palette, setPalette] = useState([])
+
+  useEffect(() => setPalette(createPalette({
+    map: colormap === 'crabfit' ? [[0, [247,158,0,0]], [1, [247,158,0,255]]] : colormap,
+    steps: tempFocus !== null ? 2 : Math.min(max, filteredPeople.length)+1,
+  })), [tempFocus, filteredPeople, max, colormap])
 
   const heatmap = useMemo(() => (
     <Container>
@@ -104,7 +113,8 @@ const AvailabilityViewer = ({
                       key={i}
                       $time={time}
                       className="time"
-                      $peopleCount={focusCount !== null && focusCount !== peopleHere.length ? 0 : peopleHere.length}
+                      $peopleCount={focusCount !== null && focusCount !== peopleHere.length ? null : peopleHere.length}
+                      $palette={palette}
                       aria-label={peopleHere.join(', ')}
                       $maxPeople={tempFocus !== null ? 1 : Math.min(max, filteredPeople.length)}
                       $minPeople={tempFocus !== null ? 0 : Math.min(min, filteredPeople.length)}
@@ -129,9 +139,7 @@ const AvailabilityViewer = ({
                 })}
               </Times>
             </Date>
-            {last && dates.length !== i+1 && (
-              <Spacer />
-            )}
+            {last && dates.length !== i+1 && <Spacer />}
           </Fragment>
         )
       })}
@@ -151,6 +159,7 @@ const AvailabilityViewer = ({
     timeFormat,
     timeLabels,
     times,
+    palette,
   ])
 
   return (

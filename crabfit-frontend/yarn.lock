@@ -2185,6 +2185,11 @@ html-parse-stringify@^3.0.1:
   dependencies:
     void-elements "3.1.0"
 
+hue-map@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/hue-map/-/hue-map-0.1.0.tgz#75aad75552d37cd748955cbafce7d83e3ff289ab"
+  integrity sha512-WC3Uzgymj+M55zdU6kOzbFEItp/3OGeVvzvc2O2DC8/zV8I51T+YVoWQEwfnPgR08GlZTO9fUEr90E5gdMtlgA==
+
 i18next-browser-languagedetector@^6.1.5:
   version "6.1.5"
   resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-6.1.5.tgz#ed8c9319a8d246995d8ec8fccb5bf5f4248d0fb1"

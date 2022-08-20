@@ -53,6 +53,9 @@
     },
     "language": {
       "label": "Language"
+    },
+    "colormap": {
+      "label": "Heatmap colors"
     }
   },
   "video": {

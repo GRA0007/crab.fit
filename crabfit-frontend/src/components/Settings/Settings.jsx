@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
 import { Settings as SettingsIcon } from 'lucide-react'
+import { maps } from 'hue-map'
 
 import { ToggleField, SelectField } from '/src/components'
 
@@ -136,6 +137,24 @@ const Settings = () => {
           }}
           value={store.highlight ? 'On' : 'Off'}
           onChange={value => store.setHighlight(value === 'On')}
+        />
+
+        <SelectField
+          label={t('options.colormap.label')}
+          name="colormap"
+          id="colormap"
+          options={{
+            'crabfit': 'Crab Fit (classic)',
+            ...Object.fromEntries(Object.keys(maps).map(palette => [
+              palette,
+              palette.split('-')
+                .map(w => w[0].toLocaleUpperCase() + w.substring(1).toLocaleLowerCase())
+                .join(' '),
+            ])),
+          }}
+          small
+          value={store.colormap}
+          onChange={event => store.setColormap(event.target.value)}
         />
 
         <SelectField
