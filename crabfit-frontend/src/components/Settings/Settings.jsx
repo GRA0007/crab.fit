@@ -131,7 +131,7 @@ const Settings = () => {
           name="colormap"
           id="colormap"
           options={{
-            'crabfit': 'Crab Fit (classic)',
+            'crabfit': t('options.colormap.classic'),
             ...Object.fromEntries(Object.keys(maps).map(palette => [
               palette,
               palette.split('-')

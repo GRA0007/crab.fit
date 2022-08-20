@@ -55,7 +55,8 @@
       "label": "Language"
     },
     "colormap": {
-      "label": "Heatmap colors"
+      "label": "Heatmap colors",
+      "classic": "Crab Fit (classic)"
     }
   },
   "video": {
