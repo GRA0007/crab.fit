@@ -19,6 +19,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 17
+        cache: yarn
+        cache-dependency-path: '**/yarn.lock'
+    - run: yarn install --immutable
+    - run: yarn build
     - id: auth
       uses: google-github-actions/auth@v0
       with:

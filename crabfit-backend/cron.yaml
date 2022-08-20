@@ -3,10 +3,6 @@ cron:
     url: /tasks/cleanup
     schedule: every monday 09:00
     target: api
-  - description: "clean up old events without a visited date"
-    url: /tasks/legacyCleanup
-    schedule: every tuesday 09:00
-    target: api
   - description: "remove people with an event id that no longer exists"
     url: /tasks/removeOrphans
     schedule: 1st wednesday of month 09:00

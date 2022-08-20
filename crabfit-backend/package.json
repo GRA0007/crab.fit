@@ -1,24 +1,34 @@
 {
   "name": "crabfit-backend",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "API for Crabfit",
-  "main": "index.js",
   "author": "Ben Grant",
   "license": "GPL-3.0-only",
   "private": true,
+  "source": "index.js",
+  "main": "dist/index.js",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "build:dev": "NODE_ENV=development parcel build --no-cache",
+    "dev": "rm -rf .parcel-cache dist && NODE_ENV=development nodemon --exec \"yarn build:dev && yarn start\" --watch routes --watch res --watch index.js",
+    "build": "parcel build",
+    "start": "node ./dist/index.js",
+    "lint": "eslint index.js ./routes"
   },
   "dependencies": {
-    "@google-cloud/datastore": "^6.3.1",
+    "@google-cloud/datastore": "^7.0.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
-    "dayjs": "^1.10.4",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "dayjs": "^1.11.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "punycode": "^2.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.22.0",
+    "nodemon": "^2.0.19",
+    "parcel": "^2.7.0"
   }
 }
