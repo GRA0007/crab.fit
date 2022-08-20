@@ -33,14 +33,8 @@ const api = {
       if (!response.ok) {
         throw response
       }
-
-      //TODO: hack until api update
-      try {
-        const json = await response.json()
-        return Promise.resolve(json)
-      } catch (e) {
-        return Promise.resolve(response)
-      }
+      const json = await response.json()
+      return Promise.resolve(json)
     } catch (error) {
       return handleError(error)
     }
@@ -58,14 +52,8 @@ const api = {
       if (!response.ok) {
         throw response
       }
-
-      //TODO: hack until api update
-      try {
-        const json = await response.json()
-        return Promise.resolve(json)
-      } catch (e) {
-        return Promise.resolve(response)
-      }
+      const json = await response.json()
+      return Promise.resolve(json)
     } catch (error) {
       return handleError(error)
     }
