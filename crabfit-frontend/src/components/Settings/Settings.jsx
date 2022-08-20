@@ -126,19 +126,6 @@ const Settings = () => {
           onChange={value => store.setTheme(value)}
         />
 
-        <ToggleField
-          label={t('options.highlight.label')}
-          name="highlight"
-          id="highlight"
-          title={t('options.highlight.title')}
-          options={{
-            'Off': t('options.highlight.options.Off'),
-            'On': t('options.highlight.options.On'),
-          }}
-          value={store.highlight ? 'On' : 'Off'}
-          onChange={value => store.setHighlight(value === 'On')}
-        />
-
         <SelectField
           label={t('options.colormap.label')}
           name="colormap"
@@ -155,6 +142,19 @@ const Settings = () => {
           small
           value={store.colormap}
           onChange={event => store.setColormap(event.target.value)}
+        />
+
+        <ToggleField
+          label={t('options.highlight.label')}
+          name="highlight"
+          id="highlight"
+          title={t('options.highlight.title')}
+          options={{
+            'Off': t('options.highlight.options.Off'),
+            'On': t('options.highlight.options.On'),
+          }}
+          value={store.highlight ? 'On' : 'Off'}
+          onChange={value => store.setHighlight(value === 'On')}
         />
 
         <SelectField
