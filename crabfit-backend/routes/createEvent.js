@@ -77,7 +77,7 @@ const createEvent = async (req, res) => {
     }
   } catch (e) {
     console.error(e)
-    res.sendStatus(400)
+    res.status(400).send({ error: 'An error occurred while creating the event' })
   }
 }
 

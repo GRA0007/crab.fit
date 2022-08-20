@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 
 const taskRemoveOrphans = async (req, res) => {
   if (req.header('X-Appengine-Cron') === undefined) {
-    return res.status(400).send('This task can only be run from a cron job')
+    return res.status(400).send({ error: 'This task can only be run from a cron job' })
   }
 
   const threeMonthsAgo = dayjs().subtract(3, 'month').unix()

@@ -13,7 +13,7 @@ const getPeople = async (req, res) => {
     res.send({ people })
   } catch (e) {
     console.error(e)
-    res.sendStatus(404)
+    res.status(404).send({ error: 'Person not found' })
   }
 }
 

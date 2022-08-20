@@ -14,7 +14,8 @@
     "build:dev": "NODE_ENV=development parcel build --no-cache",
     "dev": "rm -rf .parcel-cache dist && NODE_ENV=development nodemon --exec \"yarn build:dev && yarn start\" --watch routes --watch res --watch index.js",
     "build": "parcel build",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/index.js",
+    "lint": "eslint index.js ./routes"
   },
   "dependencies": {
     "@google-cloud/datastore": "^7.0.0",

@@ -14,7 +14,7 @@ const login = async (req, res) => {
       if (personResult.password) {
         const passwordsMatch = person && person.password && await bcrypt.compare(person.password, personResult.password)
         if (!passwordsMatch) {
-          return res.status(401).send('Incorrect password')
+          return res.status(401).send({ error: 'Incorrect password' })
         }
       }
 
@@ -24,11 +24,11 @@ const login = async (req, res) => {
         created: personResult.created,
       })
     } else {
-      res.sendStatus(404)
+      res.status(404).send({ error: 'Person does not exist' })
     }
   } catch (e) {
     console.error(e)
-    res.sendStatus(404)
+    res.status(400).send({ error: 'An error occurred' })
   }
 }
 

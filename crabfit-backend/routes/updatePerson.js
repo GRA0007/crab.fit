@@ -15,7 +15,7 @@ const updatePerson = async (req, res) => {
         if (personResult.password) {
           const passwordsMatch = person.password && await bcrypt.compare(person.password, personResult.password)
           if (!passwordsMatch) {
-            return res.status(401).send('Incorrect password')
+            return res.status(401).send({ error: 'Incorrect password' })
           }
         }
 
@@ -24,16 +24,16 @@ const updatePerson = async (req, res) => {
           availability: person.availability,
         })
 
-        res.sendStatus(200)
+        res.status(200).send({ success: 'Updated' })
       } else {
-        res.sendStatus(400)
+        res.status(400).send({ error: 'Availability must be set' })
       }
     } else {
-      res.sendStatus(404)
+      res.status(404).send({ error: 'Person not found' })
     }
   } catch (e) {
     console.error(e)
-    res.sendStatus(400)
+    res.status(400).send('An error occurred')
   }
 }
 

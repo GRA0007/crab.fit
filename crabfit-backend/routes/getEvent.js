@@ -18,11 +18,11 @@ const getEvent = async (req, res) => {
         visited: dayjs().unix()
       })
     } else {
-      res.sendStatus(404)
+      res.status(404).send({ error: 'Event not found' })
     }
   } catch (e) {
     console.error(e)
-    res.sendStatus(404)
+    res.status(404).send({ error: 'Event not found' })
   }
 }
 

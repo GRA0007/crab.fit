@@ -35,7 +35,7 @@ const createPerson = async (req, res) => {
 
         await req.datastore.insert(entity)
 
-        res.sendStatus(201)
+        res.status(201).send({ success: 'Created' })
 
         // Update stats
         const personCountResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'personCount'])))[0] || null
@@ -51,14 +51,14 @@ const createPerson = async (req, res) => {
           })
         }
       } else {
-        res.sendStatus(400)
+        res.status(400).send({ error: 'Unable to create person' })
       }
     } else {
-      res.sendStatus(404)
+      res.status(404).send({ error: 'Event does not exist' })
     }
   } catch (e) {
     console.error(e)
-    res.sendStatus(400)
+    res.status(400).send({ error: 'An error occurred while creating the person' })
   }
 }
 
