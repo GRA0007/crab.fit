@@ -1,27 +1,29 @@
-const package = require('../package.json');
+import packageJson from '../package.json'
 
-module.exports = async (req, res) => {
-	let eventCount = null;
-	let personCount = null;
+const stats = async (req, res) => {
+  let eventCount = null
+  let personCount = null
 
   try {
-		const eventResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'eventCount'])))[0] || null;
-		const personResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'personCount'])))[0] || null;
+    const eventResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'eventCount'])))[0] || null
+    const personResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'personCount'])))[0] || null
 
     if (eventResult) {
-      eventCount = eventResult.value;
+      eventCount = eventResult.value
     }
     if (personResult) {
-      personCount = personResult.value;
+      personCount = personResult.value
     }
 
-	} catch (e) {
-		console.error(e);
-	}
+  } catch (e) {
+    console.error(e)
+  }
 
   res.send({
     eventCount,
     personCount,
-    version: package.version,
-  });
-};
+    version: packageJson.version,
+  })
+}
+
+export default stats

@@ -1,25 +1,29 @@
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 
-module.exports = async (req, res) => {
-	const { eventId } = req.params;
+const getEvent = async (req, res) => {
+  const { eventId } = req.params
 
-	try {
-		let event = (await req.datastore.get(req.datastore.key([req.types.event, eventId])))[0];
+  try {
+    const event = (await req.datastore.get(req.datastore.key([req.types.event, eventId])))[0]
 
-		if (event) {
-			res.send({
-				id: eventId,
-				...event,
-			});
+    if (event) {
+      res.send({
+        id: eventId,
+        ...event,
+      })
 
       // Update last visited time
-      event.visited = dayjs().unix();
-      await req.datastore.upsert(event);
-		} else {
-			res.sendStatus(404);
-		}
-	} catch (e) {
-		console.error(e);
-		res.sendStatus(404);
-	}
-};
+      await req.datastore.upsert({
+        ...event,
+        visited: dayjs().unix()
+      })
+    } else {
+      res.sendStatus(404)
+    }
+  } catch (e) {
+    console.error(e)
+    res.sendStatus(404)
+  }
+}
+
+export default getEvent

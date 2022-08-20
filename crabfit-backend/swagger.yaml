@@ -230,19 +230,6 @@ paths:
           description: "Not found"
         400:
           description: "Not called from a cron job"
-  "/tasks/legacyCleanup":
-    get:
-      summary: "Delete events inactive for more than 3 months that don't have a visited date"
-      operationId: "taskLegacyCleanup"
-      tags:
-        - tasks
-      responses:
-        200:
-          description: "OK"
-        404:
-          description: "Not found"
-        400:
-          description: "Not called from a cron job"
   "/tasks/removeOrphans":
     get:
       summary: "Deletes people if the event they were created under no longer exists"
