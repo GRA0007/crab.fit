@@ -8,10 +8,11 @@ import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies'
 
 skipWaiting()
 clientsClaim()
-cleanupOutdatedCaches()
 
 // Injection point
 precacheAndRoute(self.__WB_MANIFEST)
+
+cleanupOutdatedCaches()
 
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$')
 registerRoute(
