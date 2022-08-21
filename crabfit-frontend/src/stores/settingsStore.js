@@ -7,11 +7,13 @@ const useSettingsStore = create(persist(
     timeFormat: '12h',
     theme: 'System',
     highlight: false,
+    colormap: 'crabfit',
 
     setWeekStart: weekStart => set({ weekStart }),
     setTimeFormat: timeFormat => set({ timeFormat }),
     setTheme: theme => set({ theme }),
     setHighlight: highlight => set({ highlight }),
+    setColormap: colormap => set({ colormap }),
   }),
   { name: 'crabfit-settings' },
 ))

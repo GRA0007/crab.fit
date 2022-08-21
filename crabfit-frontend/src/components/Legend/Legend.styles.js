@@ -43,10 +43,10 @@ export const Grade = styled('div')`
   ${props => props.$highlight && `
     background-image: repeating-linear-gradient(
       45deg,
-      var(--primary),
-      var(--primary) 4.5px,
-      var(--shadow) 4.5px,
-      var(--shadow) 9px
+      transparent,
+      transparent 4.5px,
+      rgba(0,0,0,.5) 4.5px,
+      rgba(0,0,0,.5) 9px
     );
   `}
 `

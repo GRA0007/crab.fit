@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import createPalette from 'hue-map'
 
 import { useSettingsStore } from '/src/stores'
 
@@ -17,7 +19,15 @@ const Legend = ({
 }) => {
   const { t } = useTranslation('event')
   const highlight = useSettingsStore(state => state.highlight)
+  const colormap = useSettingsStore(state => state.colormap)
   const setHighlight = useSettingsStore(state => state.setHighlight)
+
+  const [palette, setPalette] = useState([])
+
+  useEffect(() => setPalette(createPalette({
+    map: colormap === 'crabfit' ? [[0, [247,158,0,0]], [1, [247,158,0,255]]] : colormap,
+    steps: max+1-min,
+  })), [min, max, colormap])
 
   return (
     <Wrapper>
@@ -31,7 +41,7 @@ const Legend = ({
         {[...Array(max+1-min).keys()].map(i => i+min).map(i =>
           <Grade
             key={i}
-            $color={`#F79E00${Math.round((i/(max))*255).toString(16)}`}
+            $color={palette[i]}
             $highlight={highlight && i === max && max > 0}
             onMouseOver={() => onSegmentFocus(i)}
           />
