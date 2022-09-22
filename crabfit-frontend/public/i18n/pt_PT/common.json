@@ -1,0 +1,66 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Cria o teu",
+  "cta": "Cria o teu Crab Fit!",
+  "created": "Criado a {{date}}",
+  "donate": {
+    "info": "Obrigado por usares o Crab Fit. Se gostaste, por favor considera fazer uma doação.",
+    "button": "Doar",
+    "title": "Qualquer montante ajuda :)",
+    "options": {
+      "$2": "Doar $2",
+      "$5": "Doar $5",
+      "$10": "Doar $10",
+      "choose": "Escolher um montante"
+    },
+    "messages": {
+      "about": "O Crab Fit ajudou-te? Se sim, considera fazer uma doação para que continue a funcionar. 🦀",
+      "success": "Obrigado pela tua doação! Sem ti, o Crab Fit não seria gratuito, por isso agradecemos tua ajuda. És o máximo!",
+      "error": "Doação através do Google não pode ser feita. Por favor tenta através do site crab.fit 🦀"
+    }
+  },
+  "options": {
+    "name": "Opções",
+    "weekStart": {
+      "label": "Semana começa a",
+      "options": {
+        "Sunday": "Domingo",
+        "Monday": "Segunda-feira"
+      }
+    },
+    "timeFormat": {
+      "label": "Formato de hora",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Modo",
+      "options": {
+        "System": "Sistema",
+        "Light": "Claro",
+        "Dark": "Escuro"
+      }
+    },
+    "highlight": {
+      "label": "Realçar disponibilidade mais alta",
+      "title": "Destacar visualmente a hora com maior disponibilidade no mapa de calor",
+      "options": {
+        "Off": "Não",
+        "On": "Sim"
+      }
+    },
+    "language": {
+      "label": "Idioma"
+    },
+    "colormap": {
+      "label": "Cores do mapa de calor",
+      "classic": "Crab Fit (clássico)"
+    }
+  },
+  "video": {
+    "title": "Vídeo promocional Crab Fit",
+    "button": "Ver o vídeo"
+  }
+}
