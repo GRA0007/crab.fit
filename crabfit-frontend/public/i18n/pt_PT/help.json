@@ -1,0 +1,23 @@
+{
+  "name": "Como usar o Crab Fit",
+
+  "p1": "O Crab Fit é uma ferramenta que te ajuda a planear eventos com amigos ou colegas de trabalho. Basta criares um evento, adicionares a tua disponibilidade, partilhares e veres a disponibilidade de toda a gente!",
+  "p2": "Abaixo estão instruções passo-a-passo para criares o teu evento no Crab Fit.",
+
+  "s1": "Passo 1",
+
+  "p3": "Usa o formulário em <1>crab.fit</1>para criares um evento novo. Aqui só precisas de inserir aproximadamente o período durante o qual o teu evento vai acontecer.",
+  "p4": "Por exemplo, vamos criar o \"Almoço de Aniversário da Jenny\". A Jenny quer que o almoço seja na mesma semana que o seu aniversário, a 15 de abril. No entanto,  ela sabe que nem todos os seus amigos estarão disponíveis no dia 15. Ela também não quer que o almoço seja no fim de semana.",
+  "p5": "A Jenny também sabe que, como é um almoço, não pode começar antes das 11 da manhã nem terminar depois das 5 da tarde.",
+
+  "s2": "Passo 2",
+
+  "p6": "Adiciona a tua disponibilidade para o evento que acabaste de criar.",
+  "p7": "No nosso exemplo, a Jenny adiciona a sua disponibilidade para o almoço de aniversário. Ela está disponível toda a semana, exceto depois das 3 da tarde de terça-feira e antes da 1 da tarde de sexta-feira.",
+
+  "s3": "Passo 3",
+
+  "p8": "Envia o link a toda a gente que queiras convidar.",
+  "p9": "Depois de a Jenny enviar o link aos seus amigos e de esperar que estes partilhem a sua disponibilidade, ela pode facilmente ver todas as horas disponíveis no mapa de calor abaixo. A área mais escura corresponde à hora  em que estão todos disponíveis!",
+  "p10": "Neste exemplo, os amigos da Jenny estão disponíveis sexta-feira, dia 16, da 1 às 3 da tarde."
+}
