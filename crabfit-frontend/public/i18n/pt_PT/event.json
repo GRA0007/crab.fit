@@ -1,0 +1,67 @@
+{
+  "available": "disponível",
+  "greyed_times": "Esta secção está indisponível pois não faz parte do evento. Podes estar a visualizar este evento num fuso horário diferente daquele em que foi criado.",
+
+  "nav": {
+    "title": "Clica para copiar",
+    "copied": "Copiado!",
+    "shareinfo": "Copia o link para esta página, ou partilha por <1>email</1>.",
+    "shareinfo_alt": "Clica no link acima para copiar, ou partilha por <1>email</1>.",
+    "email_subject": "A agendar {{event_name}}",
+    "email_body": "Visita esta página para inserires a tua disponibilidade:"
+  },
+  "form": {
+    "signed_out": "Inicia sessão para adicionares a tua disponibilidade",
+    "signed_in": "Sessão iniciada como {{name}}",
+
+    "name": "O teu nome",
+    "password": "Palavra-passe (opcional)",
+    "button": "Iniciar sessão",
+    "logout_button": "Terminar sessão",
+    "info": "Esta informação só será utilizada para este evento. Usa uma palavra-passe para prevenir que outros alterem a tua disponibilidade.",
+
+    "timezone": "O teu fuso horário",
+
+    "errors": {
+      "name_required": "É necessário um nome para guardar a tua disponibilidade.",
+      "password_incorrect": "Palavra-passe incorreta. Verifica se o teu nome está correto.",
+      "unknown": "Erro ao iniciar sessão. Por favor tenta novamente."
+    },
+
+    "created_in_timezone": "Este evento foi criado no fuso horário <strong>{{timezone}}</strong>. <3>Clica aqui</3>para o usares.",
+    "local_timezone": "Detetámos que o teu fuso horário local é <strong>{{timezone}}</strong>. <3>Clica aqui</3>para o usares."
+  },
+  "offline": {
+    "title": "Estás offline",
+    "body": "O Crab Fit não funciona offline. <br />Verifica a tua ligação e tenta novamente."
+  },
+  "error": {
+    "title": "Evento não encontrado",
+    "body": "Certifica-te que o URL que inseriste está correto. Tem em atenção que, para proteger a tua privacidade, eventos são eliminados após 3 meses de inatividade."
+  },
+
+  "tabs": {
+    "you": "A tua disponibilidade",
+    "you_tooltip": "Inicia sessão para adicionares a tua disponibilidade",
+    "group": "Disponibilidade do grupo"
+  },
+
+  "group": {
+    "legend_tooltip": "Clica para realçar a hora com maior disponibilidade",
+    "info1": "Passa o cursor ou clica no calendário abaixo para ver quem está disponível",
+    "info2": "Clica nos nomes abaixo para ver a disponibilidade de cada pessoa"
+  },
+
+  "you": {
+    "info": "Clica e arrasta no calendário abaixo para definires a tua disponibilidade.",
+    "google_cal": {
+      "login": "Sincronizar com o Calendário Google",
+      "logout": "terminar sessão",
+      "select_all": "Selecionar tudo",
+      "select_none": "Selecionar nenhum",
+      "info": "Importar substituirá a tua disponibilidade atual",
+      "button": "Importar disponibilidade"
+    },
+    "outlook_cal": "Sincronizar com o Calendário do Outlook"
+  }
+}
