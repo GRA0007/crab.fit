@@ -1,3 +1,4 @@
+import { loadStats } from '../model/methods'
 import packageJson from '../package.json'
 
 const stats = async (req, res) => {
@@ -5,8 +6,8 @@ const stats = async (req, res) => {
   let personCount = null
 
   try {
-    const eventResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'eventCount'])))[0] || null
-    const personResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'personCount'])))[0] || null
+    const eventResult = await loadStats('eventCount')
+    const personResult = await loadStats('personCount')
 
     if (eventResult) {
       eventCount = eventResult.value

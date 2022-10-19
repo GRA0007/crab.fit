@@ -1,14 +1,12 @@
 import bcrypt from 'bcrypt'
+import { loadPerson } from '../model/methods'
 
 const login = async (req, res) => {
   const { eventId, personName } = req.params
   const { person } = req.body
 
   try {
-    const query = req.datastore.createQuery(req.types.person)
-      .filter('eventId', eventId)
-      .filter('name', personName)
-    const personResult = (await req.datastore.runQuery(query))[0][0]
+    const personResult = await loadPerson(eventId, personName)
 
     if (personResult) {
       if (personResult.password) {
