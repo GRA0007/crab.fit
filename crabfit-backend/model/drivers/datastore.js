@@ -10,10 +10,12 @@ const datastore = new Datastore({
   keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 })
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 const TYPES = {
-  event: process.env.NODE_ENV === 'production' ? 'Event' : 'DevEvent',
-  person: process.env.NODE_ENV === 'production' ? 'Person' : 'DevPerson',
-  stats: process.env.NODE_ENV === 'production' ? 'Stats' : 'DevStats',
+  event: isProduction ? 'Event' : 'DevEvent',
+  person: isProduction ? 'Person' : 'DevPerson',
+  stats: isProduction ? 'Stats' : 'DevStats',
 }
 
 export class Event extends BaseEvent {
