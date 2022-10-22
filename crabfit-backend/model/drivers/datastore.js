@@ -4,6 +4,11 @@
  * These implementations use Google's Datastore to store the data.
  */
 import { BaseEvent, BasePerson, BaseStat } from "../base"
+import { Datastore } from '@google-cloud/datastore'
+
+const datastore = new Datastore({
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+})
 
 const TYPES = {
   event: process.env.NODE_ENV === 'production' ? 'Event' : 'DevEvent',

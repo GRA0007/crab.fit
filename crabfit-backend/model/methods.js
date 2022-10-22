@@ -1,9 +1,3 @@
-import { Datastore } from '@google-cloud/datastore'
-
-const datastore = new Datastore({
-  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
-})
-
 export async function findEvent(eventId) {
   const query = datastore.createQuery(TYPES.event)
     .select('__key__')
