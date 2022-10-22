@@ -3,6 +3,7 @@ import punycode from 'punycode/'
 
 import adjectives from '../res/adjectives.json'
 import crabs from '../res/crabs.json'
+import { findEvent, loadStats, storeEvent, storeStats, upsertStats } from '../model/methods'
 
 const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1)
 
@@ -31,28 +32,14 @@ const createEvent = async (req, res) => {
     // Check if the event ID already exists, and if so generate a new one
     let eventResult
     do {
-      const query = req.datastore.createQuery(req.types.event)
-        .select('__key__')
-        .filter('__key__', req.datastore.key([req.types.event, eventId]))
-
-      eventResult = (await req.datastore.runQuery(query))[0][0]
+      eventResult = await findEvent(eventId)
 
       if (eventResult !== undefined) {
         eventId = generateId(name)
       }
     } while (eventResult !== undefined)
 
-    const entity = {
-      key: req.datastore.key([req.types.event, eventId]),
-      data: {
-        name: name,
-        created: currentTime,
-        times: event.times,
-        timezone: event.timezone,
-      },
-    }
-
-    await req.datastore.insert(entity)
+    await storeEvent(eventId, name, currentTime, event)
 
     res.status(201).send({
       id: eventId,
@@ -63,17 +50,11 @@ const createEvent = async (req, res) => {
     })
 
     // Update stats
-    const eventCountResult = (await req.datastore.get(req.datastore.key([req.types.stats, 'eventCount'])))[0] || null
+    const eventCountResult = await loadStats('eventCount')
     if (eventCountResult) {
-      await req.datastore.upsert({
-        ...eventCountResult,
-        value: eventCountResult.value + 1,
-      })
+      await upsertStats(eventCountResult, eventCountResult.value + 1)
     } else {
-      await req.datastore.insert({
-        key: req.datastore.key([req.types.stats, 'eventCount']),
-        data: { value: 1 },
-      })
+      await storeStats('eventCount', 1)
     }
   } catch (e) {
     console.error(e)

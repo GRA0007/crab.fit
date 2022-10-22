@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { deleteEvents, deletePeople, findOldEvents, findPeopleOfEvent, getEventIds } from '../model/methods'
 
 const taskCleanup = async (req, res) => {
   if (req.header('X-Appengine-Cron') === undefined) {
@@ -11,26 +12,24 @@ const taskCleanup = async (req, res) => {
 
   try {
     // Fetch events that haven't been visited in over 3 months
-    const eventQuery = req.datastore.createQuery(req.types.event).filter('visited', '<', threeMonthsAgo)
-    const oldEvents = (await req.datastore.runQuery(eventQuery))[0]
+    const oldEvents = await findOldEvents(threeMonthsAgo)
 
     if (oldEvents && oldEvents.length > 0) {
-      const oldEventIds = oldEvents.map(e => e[req.datastore.KEY].name)
+      const oldEventIds = getEventIds(oldEvents)
       console.log(`Found ${oldEventIds.length} events to remove`)
 
       // Fetch availabilities linked to the events discovered
       let peopleDiscovered = 0
       await Promise.all(oldEventIds.map(async eventId => {
-        const peopleQuery = req.datastore.createQuery(req.types.person).filter('eventId', eventId)
-        const oldPeople = (await req.datastore.runQuery(peopleQuery))[0]
+        const oldPeople = findPeopleOfEvent(eventId)
 
         if (oldPeople && oldPeople.length > 0) {
           peopleDiscovered += oldPeople.length
-          await req.datastore.delete(oldPeople.map(person => person[req.datastore.KEY]))
+          await deletePeople(oldPeople)
         }
       }))
 
-      await req.datastore.delete(oldEvents.map(event => event[req.datastore.KEY]))
+      await deleteEvents(oldEvents)
 
       console.log(`Cleanup successful: ${oldEventIds.length} events and ${peopleDiscovered} people removed`)
 

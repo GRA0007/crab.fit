@@ -1,14 +1,13 @@
 import bcrypt from 'bcrypt'
 
+import { loadPerson, upsertPerson } from '../model/methods'
+
 const updatePerson = async (req, res) => {
   const { eventId, personName } = req.params
   const { person } = req.body
 
   try {
-    const query = req.datastore.createQuery(req.types.person)
-      .filter('eventId', eventId)
-      .filter('name', personName)
-    const personResult = (await req.datastore.runQuery(query))[0][0]
+    const personResult = await loadPerson(eventId, personName)
 
     if (personResult) {
       if (person && person.availability) {
@@ -19,10 +18,7 @@ const updatePerson = async (req, res) => {
           }
         }
 
-        await req.datastore.upsert({
-          ...personResult,
-          availability: person.availability,
-        })
+        await upsertPerson(personResult, person.availability)
 
         res.status(200).send({ success: 'Updated' })
       } else {
