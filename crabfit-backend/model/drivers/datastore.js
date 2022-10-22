@@ -12,19 +12,15 @@ const datastore = new Datastore({
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-const TYPES = {
-  event: isProduction ? 'Event' : 'DevEvent',
-  person: isProduction ? 'Person' : 'DevPerson',
-  stats: isProduction ? 'Stats' : 'DevStats',
-}
-
 export class Event extends BaseEvent {
+
+  static #datastoreKind = isProduction ? 'Event' : 'DevEvent'
 
   static async create(eventId, name, created, times, timezone, visited) {
     // TODO Return Event instance
     // TODO Handle the "visited" parameter (currently simply ignored)
     const entity = {
-      key: datastore.key([TYPES.event, eventId]),
+      key: datastore.key([this.#datastoreKind, eventId]),
       data: {
         name: name,
         created: created,
@@ -38,7 +34,7 @@ export class Event extends BaseEvent {
 
   static async get(eventId) {
     // TODO Return Event instance
-    return (await datastore.get(datastore.key([TYPES.event, eventId])))[0]
+    return (await datastore.get(datastore.key([this.#datastoreKind, eventId])))[0]
   }
 
   async save() {
@@ -58,11 +54,13 @@ export class Event extends BaseEvent {
 
 export class Person extends BasePerson {
 
+  static #datastoreKind = isProduction ? 'Person' : 'DevPerson'
+
   static async create(name, password, eventId, created, availability) {
     // TODO Return Person instance
     // TODO Handle the "availability" parameter (currently simply ignored)
     const entity = {
-      key: datastore.key(TYPES.person),
+      key: datastore.key(this.#datastoreKind),
       data: {
         name: name.trim(),
         password: password,
@@ -77,7 +75,7 @@ export class Person extends BasePerson {
 
   static async find(eventId, name) {
     // TODO Return Person instance
-    const query = datastore.createQuery(TYPES.person)
+    const query = datastore.createQuery(this.#datastoreKind)
     .filter('eventId', eventId)
     .filter('name', name)
 
@@ -96,17 +94,19 @@ export class Person extends BasePerson {
 
 export class Stat extends BaseStat {
 
+  static #datastoreKind = isProduction ? 'Stats' : 'DevStats'
+
   static async create(statId, value) {
     // TODO Return Stat instance
     await datastore.insert({
-      key: datastore.key([TYPES.stats, statId]),
+      key: datastore.key([this.#datastoreKind, statId]),
       data: { value },
     })
   }
 
   static async get(statId) {
     // TODO Return Stat instance
-    return (await datastore.get(datastore.key([TYPES.stats, statId])))[0] || null
+    return (await datastore.get(datastore.key([this.#datastoreKind, statId])))[0] || null
   }
 
   async save() {
