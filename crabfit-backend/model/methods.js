@@ -1,11 +1,5 @@
 import { Datastore } from '@google-cloud/datastore'
 
-const TYPES = {
-  event: process.env.NODE_ENV === 'production' ? 'Event' : 'DevEvent',
-  person: process.env.NODE_ENV === 'production' ? 'Person' : 'DevPerson',
-  stats: process.env.NODE_ENV === 'production' ? 'Stats' : 'DevStats',
-}
-
 const datastore = new Datastore({
   keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 })

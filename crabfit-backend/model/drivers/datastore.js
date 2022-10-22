@@ -5,6 +5,12 @@
  */
 import { BaseEvent, BasePerson, BaseStat } from "../base"
 
+const TYPES = {
+  event: process.env.NODE_ENV === 'production' ? 'Event' : 'DevEvent',
+  person: process.env.NODE_ENV === 'production' ? 'Person' : 'DevPerson',
+  stats: process.env.NODE_ENV === 'production' ? 'Stats' : 'DevStats',
+}
+
 export class Event extends BaseEvent {
 
   static async create(eventId, name, created, times, timezone, visited) {
