@@ -109,8 +109,8 @@ export class Stat extends BaseStat {
   }
 
   static async get(statId) {
-    // TODO Return Stat instance
-    return (await datastore.get(datastore.key([this.#datastoreKind, statId])))[0] || null
+    const [entityData] = await datastore.get(datastore.key([this.#datastoreKind, statId]))
+    return entityData ? new Stat(statId, entityData) : null
   }
 
   async save() {
