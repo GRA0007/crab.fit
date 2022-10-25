@@ -29,7 +29,7 @@ export class Event extends BaseEvent {
 
   static async get(eventId) {
     const [entityData] = await datastore.get(datastore.key([this.#datastoreKind, eventId]))
-    return new Event(eventId, entityData)
+    return entityData ? new Event(eventId, entityData) : null
   }
 
   async save() {
