@@ -12,6 +12,8 @@ const datastore = new Datastore({
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+// TODO (for all three classes): Maybe integrate the datastoreKey somehow, so it doesn't have to be generated every time
+
 export class Event extends BaseEvent {
 
   static #datastoreKind = isProduction ? 'Event' : 'DevEvent'
