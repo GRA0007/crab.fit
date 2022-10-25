@@ -17,24 +17,19 @@ export class Event extends BaseEvent {
   static #datastoreKind = isProduction ? 'Event' : 'DevEvent'
 
   static async create(eventId, name, created, times, timezone, visited) {
-    // TODO Return Event instance
-    // TODO Handle the "visited" parameter (currently simply ignored)
+    const entityData = { name, created, times, timezone, visited }
     const entity = {
       key: datastore.key([this.#datastoreKind, eventId]),
-      data: {
-        name: name,
-        created: created,
-        times: times,
-        timezone: timezone,
-      },
+      data: entityData
     }
-  
+
     await datastore.insert(entity)
+    return new Event(eventId, entityData)
   }
 
   static async get(eventId) {
-    // TODO Return Event instance
-    return (await datastore.get(datastore.key([this.#datastoreKind, eventId])))[0]
+    const [entityData] = await datastore.get(datastore.key([this.#datastoreKind, eventId]))
+    return new Event(eventId, entityData)
   }
 
   async save() {
