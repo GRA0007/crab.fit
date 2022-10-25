@@ -33,11 +33,19 @@ export class Event extends BaseEvent {
   }
 
   async save() {
-    // TODO Use "this" instead of entity, integrate the "visited" property somehow
-    await datastore.upsert({
-      ...entity,
-      visited: visited
-    })
+    const entityData = {
+      name: this.name,
+      created: this.created,
+      times: this.times,
+      timezone: this.timezone,
+      visited: this.visited
+    }
+    const entity = {
+      key: datastore.key([this.#datastoreKind, this.id]),
+      data: entityData
+    }
+
+    await datastore.upsert(entity)
   }
 
   async delete() {
