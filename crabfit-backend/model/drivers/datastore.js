@@ -61,7 +61,6 @@ export class Person extends BasePerson {
 
   static async create(name, password, eventId, created, availability) {
     // TODO Return Person instance
-    // TODO Handle the "availability" parameter (currently simply ignored)
     const entity = {
       key: datastore.key(this.#datastoreKind),
       data: {
@@ -69,7 +68,7 @@ export class Person extends BasePerson {
         password: password,
         eventId: eventId,
         created: created,
-        availability: [],
+        availability: availability || [],
       },
     }
   
