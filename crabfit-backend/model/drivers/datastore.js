@@ -99,11 +99,13 @@ export class Stat extends BaseStat {
   static #datastoreKind = isProduction ? 'Stats' : 'DevStats'
 
   static async create(statId, value) {
-    // TODO Return Stat instance
+    const entityData = { value }
     await datastore.insert({
       key: datastore.key([this.#datastoreKind, statId]),
-      data: { value },
+      data: entityData,
     })
+
+    return new Stat(statId, entityData)
   }
 
   static async get(statId) {
