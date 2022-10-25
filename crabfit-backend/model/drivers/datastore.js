@@ -49,8 +49,7 @@ export class Event extends BaseEvent {
   }
 
   async delete() {
-    // TODO Use "this" instead of person, integrate the KEY somehow
-    await datastore.delete(person[datastore.KEY])
+    await datastore.delete(datastore.key([this.#datastoreKind, this.id]))
   }
 
 }
