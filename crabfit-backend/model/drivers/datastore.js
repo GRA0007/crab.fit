@@ -114,11 +114,15 @@ export class Stat extends BaseStat {
   }
 
   async save() {
-    // TODO Use "this" instead of entity, integrate the "value" property somehow
-    await datastore.upsert({
-      ...entity,
-      value: value,
-    })
+    const entityData = {
+      value: this.value
+    }
+    const entity = {
+      key: datastore.key([this.#datastoreKind, this.id]),
+      data: entityData
+    }
+
+    await datastore.upsert(entity)
   }
 
 }
