@@ -61,19 +61,22 @@ export class Person extends BasePerson {
   static #datastoreKind = isProduction ? 'Person' : 'DevPerson'
 
   static async create(name, password, eventId, created, availability) {
-    // TODO Return Person instance
+    const entityData = { 
+      name: name.trim(), 
+      password, 
+      eventId, 
+      created, 
+      availability: availability || [] 
+    }
+
     const entity = {
       key: datastore.key(this.#datastoreKind),
-      data: {
-        name: name.trim(),
-        password: password,
-        eventId: eventId,
-        created: created,
-        availability: availability || [],
-      },
+      data: entityData
     }
-  
     await datastore.insert(entity)
+
+    // TODO Somehow determine what the id is from the datastore.key generated above
+    return new Person(undefined, entityData)
   }
 
   static async find(eventId, name) {
