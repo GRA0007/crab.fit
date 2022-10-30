@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { deleteEvents, deletePeople, findOldEvents, findPeopleOfEvent, getEventIds } from '../model/methods'
+import { Event, Person } from '../model'
 
 const taskCleanup = async (req, res) => {
   if (req.header('X-Appengine-Cron') === undefined) {
@@ -12,26 +12,25 @@ const taskCleanup = async (req, res) => {
 
   try {
     // Fetch events that haven't been visited in over 3 months
-    const oldEvents = await findOldEvents(threeMonthsAgo)
+    const oldEvents = await Event.findOlderThan(threeMonthsAgo)
 
     if (oldEvents && oldEvents.length > 0) {
-      const oldEventIds = getEventIds(oldEvents)
-      console.log(`Found ${oldEventIds.length} events to remove`)
+      console.log(`Found ${oldEvents.length} events to remove`)
 
       // Fetch availabilities linked to the events discovered
       let peopleDiscovered = 0
-      await Promise.all(oldEventIds.map(async eventId => {
-        const oldPeople = findPeopleOfEvent(eventId)
+      await Promise.all(oldEvents.map(async event => {
+        const oldPeople = await event.findPeople()
 
         if (oldPeople && oldPeople.length > 0) {
           peopleDiscovered += oldPeople.length
-          await deletePeople(oldPeople)
+          await Person.deleteAll(oldPeople)
         }
       }))
 
-      await deleteEvents(oldEvents)
+      await Event.deleteAll(oldEvents)
 
-      console.log(`Cleanup successful: ${oldEventIds.length} events and ${peopleDiscovered} people removed`)
+      console.log(`Cleanup successful: ${oldEvents.length} events and ${peopleDiscovered} people removed`)
 
       res.sendStatus(200)
     } else {
