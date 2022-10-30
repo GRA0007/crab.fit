@@ -34,6 +34,16 @@ export class Event extends BaseEvent {
     return entityData ? new Event(eventId, entityData) : null
   }
 
+  static async findOlderThan(timestamp) {
+    const eventQuery = datastore.createQuery(this.#datastoreKind).filter('visited', '<', timestamp)
+
+    const queryResults = (await datastore.runQuery(eventQuery))[0].map(
+      queryResult => new Event(queryResult[datastore.KEY].id, queryResult)
+    )
+
+    return queryResults
+  }
+
   static async deleteAll(events) {
     await datastore.delete(events.map(event => datastore.key([this.#datastoreKind, event.id])))
   }
