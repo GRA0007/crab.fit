@@ -1,10 +1,10 @@
-import { findPeopleOfEvent } from "../model/methods"
+import { Event } from "../model"
 
 const getPeople = async (req, res) => {
   const { eventId } = req.params
 
   try {
-    let people = await findPeopleOfEvent(eventId)
+    let people = await Event.get(eventId).findPeople()
     people = people.map(person => ({
       name: person.name,
       availability: person.availability,
