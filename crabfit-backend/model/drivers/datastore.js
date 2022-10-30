@@ -116,6 +116,16 @@ export class Person extends BasePerson {
     return name !== undefined ? queryResults[0] : queryResults
   }
 
+  static async findOlderThan(timestamp) {
+    const peopleQuery = datastore.createQuery(this.#datastoreKind).filter('created', '<', timestamp)
+
+    const queryResults = (await datastore.runQuery(peopleQuery))[0].map(
+      queryResult => new Person(queryResult[datastore.KEY].id, queryResult)
+    )
+
+    return queryResults
+  }
+
   static async deleteAll(people) {
     await datastore.delete(people.map(person => datastore.key([this.#datastoreKind, person.id])))
   }

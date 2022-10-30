@@ -7,9 +7,6 @@ export async function findEvent(eventId) {
 }
 
 export async function findOldPeople(threeMonthsAgo) {
-  const peopleQuery = datastore.createQuery(TYPES.person).filter('created', '<', threeMonthsAgo)
-  const oldPeople = (await datastore.runQuery(peopleQuery))[0]
-  return oldPeople
 }
 
 export async function findOldEvents(threeMonthsAgo) {
