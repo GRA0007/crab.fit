@@ -34,6 +34,10 @@ export class Event extends BaseEvent {
     return entityData ? new Event(eventId, entityData) : null
   }
 
+  static async deleteAll(events) {
+    await datastore.delete(events.map(event => datastore.key([this.#datastoreKind, event.id])))
+  }
+
   async save() {
     const entityData = {
       name: this.name,
@@ -100,6 +104,10 @@ export class Person extends BasePerson {
     )
 
     return name !== undefined ? queryResults[0] : queryResults
+  }
+
+  static async deleteAll(people) {
+    await datastore.delete(people.map(person => datastore.key([this.#datastoreKind, person.id])))
   }
 
   async save() {

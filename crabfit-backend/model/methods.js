@@ -49,11 +49,9 @@ export async function upsertStats(entity, value) {
 }
 
 export async function deleteEvents(events) {
-  await datastore.delete(events.map(event => event[datastore.KEY]))
 }
 
 export async function deletePeople(people) {
-  await datastore.delete(people.map(person => person[datastore.KEY]))
 }
 
 export async function deletePerson(person) {
