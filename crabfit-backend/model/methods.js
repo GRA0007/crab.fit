@@ -60,5 +60,4 @@ export async function deletePerson(person) {
 }
 
 export function getEventIds(events) {
-  return events.map(e => e[datastore.KEY].name)
 }
