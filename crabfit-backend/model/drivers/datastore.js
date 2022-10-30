@@ -91,11 +91,19 @@ export class Person extends BasePerson {
   }
 
   async save() {
-    // TODO Use "this" instead of entity, integrate the "availability" property somehow
-    await datastore.upsert({
-      ...entity,
-      availability: availability
-    })
+    const entityData = {
+      name: this.name,
+      password: this.password,
+      eventId: this.eventId,
+      created: this.created,
+      availability: this.availability
+    }
+    const entity = {
+      key: datastore.key([this.#datastoreKind, this.id]),
+      data: entityData
+    }
+
+    await datastore.upsert(entity)
   }
 
 }
