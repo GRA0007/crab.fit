@@ -1,4 +1,5 @@
 export async function findEvent(eventId) {
+  // TODO Find out if this can be replaced by Event.get(eventId)
   const query = datastore.createQuery(TYPES.event)
     .select('__key__')
     .filter('__key__', datastore.key([TYPES.event, eventId]))
