@@ -1,15 +1,15 @@
 import dayjs from 'dayjs'
 import bcrypt from 'bcrypt'
 
-import { loadEvent, loadPerson, loadStats, storePerson, storeStats, upsertStats } from '../model/methods'
+import { Event, Person, Stat } from '../model'
 
 const createPerson = async (req, res) => {
   const { eventId } = req.params
   const { person } = req.body
 
   try {
-    const event = await loadEvent(eventId)
-    const personResult = await loadPerson(eventId, person.name)
+    const event = await Event.get(eventId)
+    const personResult = await Person.find(eventId, person.name)
 
     if (event) {
       if (person && personResult === undefined) {
@@ -21,16 +21,17 @@ const createPerson = async (req, res) => {
           hash = await bcrypt.hash(person.password, 10)
         }
 
-        await storePerson(person, hash, eventId, currentTime)
+        await Person.create(person.name, hash, eventId, currentTime)
 
         res.status(201).send({ success: 'Created' })
 
         // Update stats
-        const personCountResult = await loadStats('personCount')
+        const personCountResult = await Stat.get('personCount')
         if (personCountResult) {
-          await upsertStats(personCountResult, personCountResult.value + 1)
+          personCountResult.value += 1
+          await personCountResult.save()
         } else {
-          await storeStats('personCount', 1)
+          await Stat.create('personCount', 1)
         }
       } else {
         res.status(400).send({ error: 'Unable to create person' })
