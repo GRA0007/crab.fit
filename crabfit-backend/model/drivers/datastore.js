@@ -81,12 +81,13 @@ export class Person extends BasePerson {
   }
 
   static async find(eventId, name) {
-    // TODO Return Person instance
     const query = datastore.createQuery(this.#datastoreKind)
     .filter('eventId', eventId)
     .filter('name', name)
 
-    return (await datastore.runQuery(query))[0][0]
+    const queryResult = (await datastore.runQuery(query))[0][0]
+
+    return new Person(queryResult[datastore.KEY].id, queryResult)
   }
 
   async save() {
