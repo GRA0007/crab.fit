@@ -44,6 +44,14 @@ export class BaseEvent {
   }
 
   /**
+   * Find and return all events older than the given timestamp
+   * @param {Number} timestamp 
+   */
+  static async findOlderThan(timestamp) {
+    throw new Error("Not implemented")
+  }
+
+  /**
    * Delete all the given events. This has the same effect as calling:
    * events.forEach(it => it.delete())
    * 
@@ -114,6 +122,14 @@ export class BasePerson {
    * @param {String} name The name of the person to find
    */
   static async find(eventId, name) {
+    throw new Error("Not implemented")
+  }
+
+  /**
+   * Find and return all people older than the given timestamp
+   * @param {Number} timestamp 
+   */
+  static async findOlderThan(timestamp) {
     throw new Error("Not implemented")
   }
 
