@@ -44,6 +44,17 @@ export class BaseEvent {
   }
 
   /**
+   * Delete all the given events. This has the same effect as calling:
+   * events.forEach(it => it.delete())
+   * 
+   * However, this implementation may be more efficient for large numbers,
+   * e.g. by making use of a batch mode of the underlying storage system.
+   */
+  static async deleteAll(events) {
+    throw new Error("Not implemented")
+  }
+
+  /**
    * Save the event to storage.
    */
   async save() {
@@ -103,6 +114,17 @@ export class BasePerson {
    * @param {String} name The name of the person to find
    */
   static async find(eventId, name) {
+    throw new Error("Not implemented")
+  }
+
+  /**
+   * Delete all the given people. This has the same effect as calling:
+   * people.forEach(it => it.delete())
+   * 
+   * However, this implementation may be more efficient for large numbers,
+   * e.g. by making use of a batch mode of the underlying storage system.
+   */
+  static async deleteAll(people) {
     throw new Error("Not implemented")
   }
 
