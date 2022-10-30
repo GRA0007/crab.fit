@@ -1,13 +1,13 @@
 import bcrypt from 'bcrypt'
 
-import { loadPerson, upsertPerson } from '../model/methods'
+import { Person } from '../model'
 
 const updatePerson = async (req, res) => {
   const { eventId, personName } = req.params
   const { person } = req.body
 
   try {
-    const personResult = await loadPerson(eventId, personName)
+    const personResult = await Person.find(eventId, personName)
 
     if (personResult) {
       if (person && person.availability) {
@@ -18,7 +18,8 @@ const updatePerson = async (req, res) => {
           }
         }
 
-        await upsertPerson(personResult, person.availability)
+        personResult.availability = person.availability
+        await personResult.save()
 
         res.status(200).send({ success: 'Updated' })
       } else {
