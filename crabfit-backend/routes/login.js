@@ -1,12 +1,12 @@
 import bcrypt from 'bcrypt'
-import { loadPerson } from '../model/methods'
+import { Person } from '../model'
 
 const login = async (req, res) => {
   const { eventId, personName } = req.params
   const { person } = req.body
 
   try {
-    const personResult = await loadPerson(eventId, personName)
+    const personResult = await Person.find(eventId, personName)
 
     if (personResult) {
       if (personResult.password) {
