@@ -80,14 +80,22 @@ export class Person extends BasePerson {
     return new Person(key.id, entityData)
   }
 
+  /**
+   * @param {string} eventId Id of the event whose participants we're looking for
+   * @param {string?} name Optional: Name of the participant
+   * @returns If a name is specified, the one person with that name, otherwise a list of persons
+   */
   static async find(eventId, name) {
-    const query = datastore.createQuery(this.#datastoreKind)
-    .filter('eventId', eventId)
-    .filter('name', name)
+    const query = datastore.createQuery(this.#datastoreKind).filter('eventId', eventId)
+    if(name !== undefined) {
+      query.filter('name', name)
+    }
 
-    const queryResult = (await datastore.runQuery(query))[0][0]
+    const queryResults = (await datastore.runQuery(query))[0].map(
+      queryResult => new Person(queryResult[datastore.KEY].id, queryResult)
+    )
 
-    return new Person(queryResult[datastore.KEY].id, queryResult)
+    return name !== undefined ? queryResults[0] : queryResults
   }
 
   async save() {
