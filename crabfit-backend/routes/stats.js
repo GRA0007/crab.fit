@@ -1,4 +1,4 @@
-import { loadStats } from '../model/methods'
+import { Stat } from '../model'
 import packageJson from '../package.json'
 
 const stats = async (req, res) => {
@@ -6,8 +6,8 @@ const stats = async (req, res) => {
   let personCount = null
 
   try {
-    const eventResult = await loadStats('eventCount')
-    const personResult = await loadStats('personCount')
+    const eventResult = await Stat.get('eventCount')
+    const personResult = await Stat.get('personCount')
 
     if (eventResult) {
       eventCount = eventResult.value
