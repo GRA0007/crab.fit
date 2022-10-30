@@ -56,6 +56,13 @@ export class BaseEvent {
   async delete() {
     throw new Error("Not implemented")
   }
+
+  /**
+   * Find the people participating in this event
+   */
+  async findPeople() {
+    throw new Error("Not implemented")
+  }
 }
 
 export class BasePerson {
