@@ -54,6 +54,10 @@ export class Event extends BaseEvent {
     await datastore.delete(datastore.key([this.#datastoreKind, this.id]))
   }
 
+  async findPeople() {
+    return await Person.find(this.id)
+  }
+
 }
 
 export class Person extends BasePerson {
