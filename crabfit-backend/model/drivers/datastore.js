@@ -69,14 +69,15 @@ export class Person extends BasePerson {
       availability: availability || [] 
     }
 
+    // Don't specify a name (and also no numeric id), so a numeric id is automatically generated for us
+    const key = datastore.key(this.#datastoreKind)
     const entity = {
-      key: datastore.key(this.#datastoreKind),
+      key,
       data: entityData
     }
     await datastore.insert(entity)
 
-    // TODO Somehow determine what the id is from the datastore.key generated above
-    return new Person(undefined, entityData)
+    return new Person(key.id, entityData)
   }
 
   static async find(eventId, name) {
