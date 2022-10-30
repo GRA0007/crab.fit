@@ -3,7 +3,7 @@ import punycode from 'punycode/'
 
 import adjectives from '../res/adjectives.json'
 import crabs from '../res/crabs.json'
-import { findEvent, loadStats, storeEvent, storeStats, upsertStats } from '../model/methods'
+import { Event, Stat } from '../model'
 
 const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1)
 
@@ -32,14 +32,14 @@ const createEvent = async (req, res) => {
     // Check if the event ID already exists, and if so generate a new one
     let eventResult
     do {
-      eventResult = await findEvent(eventId)
+      eventResult = await Event.get(eventId)
 
       if (eventResult !== undefined) {
         eventId = generateId(name)
       }
     } while (eventResult !== undefined)
 
-    await storeEvent(eventId, name, currentTime, event)
+    await Event.create(eventId, name, currentTime, event.times, event.timezone)
 
     res.status(201).send({
       id: eventId,
@@ -50,11 +50,12 @@ const createEvent = async (req, res) => {
     })
 
     // Update stats
-    const eventCountResult = await loadStats('eventCount')
+    const eventCountResult = await Stat.get('eventCount')
     if (eventCountResult) {
-      await upsertStats(eventCountResult, eventCountResult.value + 1)
+      eventCountResult.value += 1
+      await eventCountResult.save()
     } else {
-      await storeStats('eventCount', 1)
+      await Stat.create('eventCount', 1)
     }
   } catch (e) {
     console.error(e)
