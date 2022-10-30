@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { deletePerson, findOldPeople, loadEvent } from '../model/methods'
+import { Person, Event } from '../model'
 
 const taskRemoveOrphans = async (req, res) => {
   if (req.header('X-Appengine-Cron') === undefined) {
@@ -12,7 +12,7 @@ const taskRemoveOrphans = async (req, res) => {
 
   try {
     // Fetch people that are older than 3 months
-    const oldPeople = await findOldPeople(threeMonthsAgo)
+    const oldPeople = await Person.findOlderThan(threeMonthsAgo)
 
     if (oldPeople && oldPeople.length > 0) {
       console.log(`Found ${oldPeople.length} people older than 3 months, checking for events`)
@@ -20,11 +20,11 @@ const taskRemoveOrphans = async (req, res) => {
       // Fetch events linked to the people discovered
       let peopleWithoutEvents = 0
       await Promise.all(oldPeople.map(async person => {
-        const event = await loadEvent(person.eventId)
+        const event = await Event.get(person.eventId)
 
         if (!event) {
           peopleWithoutEvents++
-          await deletePerson(person)
+          await person.delete()
         }
       }))
 
