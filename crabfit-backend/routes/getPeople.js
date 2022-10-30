@@ -1,4 +1,4 @@
-import { Event } from "../model"
+import { Event } from '../model'
 
 const getPeople = async (req, res) => {
   const { eventId } = req.params

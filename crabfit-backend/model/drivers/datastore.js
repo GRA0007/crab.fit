@@ -3,7 +3,7 @@
  *
  * These implementations use Google's Datastore to store the data.
  */
-import { BaseEvent, BasePerson, BaseStat } from "../base"
+import { BaseEvent, BasePerson, BaseStat } from '../base'
 import { Datastore } from '@google-cloud/datastore'
 
 const datastore = new Datastore({
