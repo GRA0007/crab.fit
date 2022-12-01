@@ -126,7 +126,7 @@ const AvailabilityViewer = ({
                         setTooltip({
                           x: Math.round(cellBox.x-wrapperBox.x + cellBox.width/2),
                           y: Math.round(cellBox.y-wrapperBox.y + cellBox.height)+6,
-                          available: `${peopleHere.length} / ${people.length} ${t('event:available')}`,
+                          available: `${peopleHere.length} / ${filteredPeople.length} ${t('event:available')}`,
                           date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format(isSpecificDates ? `${timeText} ddd, D MMM YYYY` : `${timeText} ddd`),
                           people: peopleHere,
                         })
@@ -168,7 +168,7 @@ const AvailabilityViewer = ({
         <Legend
           min={Math.min(min, filteredPeople.length)}
           max={Math.min(max, filteredPeople.length)}
-          total={people.filter(p => p.availability.length > 0).length}
+          total={filteredPeople.length}
           onSegmentFocus={count => setFocusCount(count)}
         />
         <Info>{t('event:group.info1')}</Info>
