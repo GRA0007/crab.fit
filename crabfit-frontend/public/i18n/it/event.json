@@ -1,0 +1,67 @@
+{
+  "available": "disponibile",
+  "greyed_times": "Quest'area è grigia perchè non è parte dell'evento. Potresti star guardando a questo evento in un fuso orario diverso da quando sia stato creato.",
+
+  "nav": {
+    "title": "Clicca per copiare",
+    "copied": "Copiato!",
+    "shareinfo": "Copia il link a questa pagina, o condividilo via <1>email</1>.",
+    "shareinfo_alt": "Clicca sul link qui sopra per copiarlo, o condividilo via <1>email</1>.",
+    "email_subject": "Programmazione di {{event_name}}",
+    "email_body": "Apri questo link per impostare la tua disponibilità:"
+  },
+  "form": {
+    "signed_out": "Accedi per impostare la tua disponibilità",
+    "signed_in": "Accesso come {{name}}",
+
+    "name": "Il tuo nome",
+    "password": "Password (facoltativo)",
+    "button": "Accedi",
+    "logout_button": "Esci",
+    "info": "Questi dettagli valgono solo per questo evento. Usa una password per evitare che qualcun altro modifichi la tua disponibilità.",
+
+    "timezone": "Il tuo fuso orario",
+
+    "errors": {
+      "name_required": "Il tuo nome è necessario per salvare la tua disponibilità.",
+      "password_incorrect": "La password non è corretta. Controlla che il tuo nome sia scritto correttamente.",
+      "unknown": "Accesso fallito. Per favore, riprova."
+    },
+
+    "created_in_timezone": "Questo evento è stato creato nel fuso orario <strong>{{timezone}}</strong>. <3>Clicca qui</3> per usarlo.",
+    "local_timezone": "Il tuo fuso orario viene rilevato come <strong>{{timezone}}</strong>. <3>Clicca qui </3> per usarlo."
+  },
+  "offline": {
+    "title": "Sei offline",
+    "body": "Crab Fit non funziona offline.<br />Controlla la tua connessione ad internet e riprova."
+  },
+  "error": {
+    "title": "Evento non trovato",
+    "body": "Controlla che il link che hai scritto sia corretto. Nota che per proteggere la privacy, gli eventi sono eliminati dopo 3 mesi di inattività."
+  },
+
+  "tabs": {
+    "you": "La tua disponibilità",
+    "you_tooltip": "Accedi per impostare la tua disponibilità",
+    "group": "Disponibilità gruppo"
+  },
+
+  "group": {
+    "legend_tooltip": "Clicca per evidenziare il periodo con maggiore disponibilità",
+    "info1": "Muovi il mouse o clicca sul calendario per vedere chi sia disponibile",
+    "info2": "Clicca sui nomi qui sotto per vedere le persone individualmente"
+  },
+
+  "you": {
+    "info": "Clicca e trascina nel calendario qui sotto per impostare la tua disponibilità",
+    "google_cal": {
+      "login": "Sincronizza con il calendario Google",
+      "logout": "Esci",
+      "select_all": "Seleziona tutto",
+      "select_none": "Seleziona nessuno",
+      "info": "L'importazione sovrascriverà la tua disponibilità attuale",
+      "button": "Importa la disponibilità"
+    },
+    "outlook_cal": "Sincronizza con il calendario Outlook"
+  }
+}
