@@ -1,0 +1,61 @@
+{
+  "create": "CREA UN",
+  "recently_visited": "Visitati di recente",
+  "nav": {
+    "about": "Informazioni",
+    "donate": "Dona"
+  },
+  "form": {
+    "name": {
+      "label": "Dai un nome al tuo evento!",
+      "sublabel": "O non farlo per generarlo automaticamente"
+    },
+    "dates": {
+      "label": "Quali date potrebbero funzionare?",
+      "sublabel": "Clicca e trascina per selezionare",
+      "options": {
+        "specific": "Date specifiche",
+        "week": "Giorni della settimana"
+      },
+      "tooltips": {
+        "previous": "Lo scorso mese",
+        "next": "Il prossimo mese",
+        "today": "oggi"
+      }
+    },
+    "times": {
+      "label": "Quali orario potrebbero funzionare?",
+      "sublabel": "Clicca e trascina per selezionare un intervallo di tempo"
+    },
+    "timezone": {
+      "label": "Ed il fuso orario",
+      "defaultOption": "Seleziona..."
+    },
+
+    "button": "Crea",
+    "errors": {
+      "no_dates": "Non è stata selezionata nessuna data",
+      "same_times": "L'ora di inizio e di fine non possono essere uguali",
+      "no_time": "Non c'è nessuna ora selezionata",
+      "unknown": "Si è verificato un problema. Riprova più tardi."
+    }
+  },
+  "offline": "Non puoi creare un Crab Fit quando non hai una connessione ad internet. Per favore, assicurati di essere connesso.",
+
+  "about": {
+    "name": "Su Crab Fit",
+    "events": "Evento creato",
+    "availabilities": "disponibilità create",
+    "content": {
+      "p1": "Crab Fit ti aiuta ad organizzare il tuo evento considerando le disponibilità di tutti. Crea semplicemente un evento ed invia il link a tutti i partecipanti. I dati si aggiornano sul momento e potrai vedere una heat-map di quando tutti siano disponibili.<1/><2>Altre informazioni su come usare Crab Fit</2>.",
+      "p3": "Creato da <1>Ben Grant</1>, Crab Fit è la soluzione moderna per le tue discussioni sull'organizzazione degli eventi di gruppo.",
+      "p4": "Il codice di Crab Fit è open source, se notassi un problema o volessi contribuire, visita il <1>repository</1>. Con l'utilizzo di Crab Fit accetti la <3>privacy policy</3>.",
+      "p6": "Per proteggere la tua privacy, gli eventi vengono eliminati dopo 3 mesi di inattività, e tutte le password sono crittografate in modo sicuro.",
+      "p5": "Considera una donazione qui sotto se ti ha aiutato in modo che Crab Fit rimanga gratis per tutti. 🦀"
+    },
+    "chrome_extension": "Aggiungi l'estensione a Chrome",
+    "firefox_extension": "Aggiungi l'estensione a Firefox",
+    "safari_extension": "Aggiungi l'estensione a Safari",
+    "android_app": "Scarica l'app Android"
+  }
+}
