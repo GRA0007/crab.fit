@@ -17,6 +17,7 @@ import {
 } from './Settings.styles'
 
 import locales from '/src/i18n/locales'
+import { unhyphenate } from '/src/utils'
 
 // Language specific options
 const setDefaults = (lang, store) => {
@@ -132,11 +133,9 @@ const Settings = () => {
           id="colormap"
           options={{
             'crabfit': t('options.colormap.classic'),
-            ...Object.fromEntries(Object.keys(maps).map(palette => [
+            ...Object.fromEntries(Object.keys(maps).sort().map(palette => [
               palette,
-              palette.split('-')
-                .map(w => w[0].toLocaleUpperCase() + w.substring(1).toLocaleLowerCase())
-                .join(' '),
+              unhyphenate(palette)
             ])),
           }}
           small
