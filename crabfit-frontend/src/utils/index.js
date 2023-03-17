@@ -30,3 +30,8 @@ export const detect_browser = () => {
   if (isFirefox) return 'firefox'
   if (isOpera) return 'opera'
 }
+
+export const unhyphenate = s =>
+  s.split('-')
+    .map(w => w[0].toLocaleUpperCase() + w.substring(1).toLocaleLowerCase())
+    .join(' ')
