@@ -2,7 +2,7 @@
   "create": "CRÉER UN",
   "recently_visited": "Récemment visités",
   "nav": {
-    "about": "A propos",
+    "about": "À propos",
     "donate": "Faire un don"
   },
   "form": {
@@ -24,7 +24,7 @@
       }
     },
     "times": {
-      "label": "Quels temps pourraient fonctionner ?",
+      "label": "Quels créneaux horaires pourraient fonctionner ?",
       "sublabel": "Cliquez et faites glisser pour sélectionner une plage de temps"
     },
     "timezone": {
