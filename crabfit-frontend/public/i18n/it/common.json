@@ -44,7 +44,7 @@
       }
     },
     "highlight": {
-      "label": "Evidenzia la disponibilità maggiore",
+      "label": "Evidenzia i periodi con maggiore disponibilità",
       "title": "Evidenzia i periodi con maggiore disponibilità nella heatmap",
       "options": {
         "Off": "Disattivato",
