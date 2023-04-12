@@ -14,7 +14,7 @@
     "dayjs": "^1.11.5",
     "gapi-script": "^1.2.0",
     "goober": "^2.1.10",
-    "hue-map": "^0.1.1",
+    "hue-map": "^1.0.0",
     "i18next": "^21.9.0",
     "i18next-browser-languagedetector": "^6.1.5",
     "i18next-http-backend": "^1.4.1",

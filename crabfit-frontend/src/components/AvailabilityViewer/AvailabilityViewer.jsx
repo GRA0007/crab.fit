@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import localeData from 'dayjs/plugin/localeData'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import createPalette from 'hue-map'
+import { createPalette } from 'hue-map'
 
 import { useSettingsStore, useLocaleUpdateStore } from '/src/stores'
 
@@ -72,7 +72,7 @@ const AvailabilityViewer = ({
   useEffect(() => setPalette(createPalette({
     map: colormap === 'crabfit' ? [[0, [247,158,0,0]], [1, [247,158,0,255]]] : colormap,
     steps: tempFocus !== null ? 2 : Math.min(max, filteredPeople.length)+1,
-  })), [tempFocus, filteredPeople, max, colormap])
+  }).format()), [tempFocus, filteredPeople, max, colormap])
 
   const heatmap = useMemo(() => (
     <Container>
