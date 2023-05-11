@@ -3,7 +3,7 @@ name: Deploy Backend
 on:
   push:
     branches: ['main']
-    paths: ['crabfit-backend/**']
+    paths: ['backend/**']
 
 jobs:
   deploy:
@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: crabfit-backend
+        working-directory: backend
 
     permissions:
       contents: read
@@ -33,5 +33,5 @@ jobs:
     - id: deploy
       uses: google-github-actions/deploy-appengine@v0
       with:
-        working_directory: crabfit-backend
+        working_directory: backend
         version: v1

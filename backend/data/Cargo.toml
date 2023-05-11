@@ -1,0 +1,9 @@
+[package]
+name = "data"
+description = "Structs and traits for the data storage and transfer of Crab Fit"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-trait = "0.1.68"
+chrono = "0.4.24"

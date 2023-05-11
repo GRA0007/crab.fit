@@ -1,3 +1,4 @@
 /graphics
 .DS_Store
-/crabfit-browser-extension/*.zip
+/browser-extension/*.zip
+js-backend

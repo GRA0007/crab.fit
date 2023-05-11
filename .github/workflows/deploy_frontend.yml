@@ -3,7 +3,7 @@ name: Deploy Frontend
 on:
   push:
     branches: ['main']
-    paths: ['crabfit-frontend/**']
+    paths: ['frontend/**']
 
 jobs:
   deploy:
@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: crabfit-frontend
+        working-directory: frontend
 
     permissions:
       contents: read
@@ -33,5 +33,5 @@ jobs:
     - id: deploy
       uses: google-github-actions/deploy-appengine@v0
       with:
-        working_directory: crabfit-frontend
+        working_directory: frontend
         version: v1

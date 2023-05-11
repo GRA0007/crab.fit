@@ -1,9 +1,0 @@
-cron:
-  - description: "clean up old events"
-    url: /tasks/cleanup
-    schedule: every monday 09:00
-    target: api
-  - description: "remove people with an event id that no longer exists"
-    url: /tasks/removeOrphans
-    schedule: 1st wednesday of month 09:00
-    target: api
