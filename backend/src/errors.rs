@@ -4,7 +4,7 @@ use common::adaptor::Adaptor;
 pub enum ApiError<A: Adaptor> {
     AdaptorError(A::Error),
     NotFound,
-    // NotAuthorized,
+    NotAuthorized,
 }
 
 // Define what the error types above should return
@@ -16,7 +16,7 @@ impl<A: Adaptor> IntoResponse for ApiError<A> {
                 StatusCode::INTERNAL_SERVER_ERROR.into_response()
             }
             ApiError::NotFound => StatusCode::NOT_FOUND.into_response(),
-            // ApiError::NotAuthorized => StatusCode::UNAUTHORIZED.into_response(),
+            ApiError::NotAuthorized => StatusCode::UNAUTHORIZED.into_response(),
         }
     }
 }

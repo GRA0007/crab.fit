@@ -9,3 +9,6 @@ pub use create_event::create_event;
 
 mod get_people;
 pub use get_people::get_people;
+
+mod get_person;
+pub use get_person::get_person;

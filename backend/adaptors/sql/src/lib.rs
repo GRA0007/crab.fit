@@ -71,17 +71,23 @@ impl Adaptor for SqlAdaptor {
     }
 
     async fn upsert_person(&self, event_id: String, person: Person) -> Result<Person, Self::Error> {
-        Ok(person::ActiveModel {
-            name: Set(person.name),
+        let data = person::ActiveModel {
+            name: Set(person.name.clone()),
             password_hash: Set(person.password_hash),
             created_at: Set(person.created_at.naive_utc()),
             availability: Set(serde_json::to_value(person.availability).unwrap_or(json!([]))),
-            event_id: Set(event_id),
-        }
-        .save(&self.db)
-        .await?
-        .try_into_model()?
-        .into())
+            event_id: Set(event_id.clone()),
+        };
+
+        Ok(
+            match person::Entity::find_by_id((event_id, person.name))
+                .one(&self.db)
+                .await?
+            {
+                Some(_) => data.update(&self.db).await?.try_into_model()?.into(),
+                None => data.insert(&self.db).await?.try_into_model()?.into(),
+            },
+        )
     }
 
     async fn get_event(&self, id: String) -> Result<Option<Event>, Self::Error> {

@@ -58,3 +58,8 @@ impl From<Person> for PersonResponse {
         }
     }
 }
+
+#[derive(Deserialize)]
+pub struct PersonInput {
+    pub password: Option<String>,
+}

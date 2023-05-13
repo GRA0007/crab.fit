@@ -39,9 +39,10 @@ async fn main() {
     let app = Router::new()
         .route("/", get(get_root))
         .route("/stats", get(get_stats))
-        .route("/event/:event_id", get(get_event))
         .route("/event", post(create_event))
+        .route("/event/:event_id", get(get_event))
         .route("/event/:event_id/people", get(get_people))
+        .route("/event/:event_id/people/:person_name", get(get_person))
         .with_state(shared_state);
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
