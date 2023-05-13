@@ -2,7 +2,7 @@ use std::{net::SocketAddr, sync::Arc};
 
 use axum::{
     extract,
-    routing::{get, post},
+    routing::{get, patch, post},
     Router, Server,
 };
 use routes::*;
@@ -43,11 +43,15 @@ async fn main() {
         .route("/event/:event_id", get(get_event))
         .route("/event/:event_id/people", get(get_people))
         .route("/event/:event_id/people/:person_name", get(get_person))
+        .route("/event/:event_id/people/:person_name", patch(update_person))
         .with_state(shared_state);
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
 
-    println!("Crab Fit API listening at http://{} in {} mode", addr, MODE);
+    println!(
+        "🦀 Crab Fit API listening at http://{} in {} mode",
+        addr, MODE
+    );
     Server::bind(&addr)
         .serve(app.into_make_service())
         .await

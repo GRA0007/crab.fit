@@ -80,7 +80,7 @@ impl Adaptor for SqlAdaptor {
         };
 
         Ok(
-            match person::Entity::find_by_id((event_id, person.name))
+            match person::Entity::find_by_id((person.name, event_id))
                 .one(&self.db)
                 .await?
             {
@@ -156,7 +156,16 @@ impl SqlAdaptor {
 
         // Connect to the database
         let db = Database::connect(&connection_string).await.unwrap();
-        println!("Connected to database at {}", connection_string);
+        println!(
+            "{} Connected to database at {}",
+            match db {
+                DatabaseConnection::SqlxMySqlPoolConnection(_) => "🐬",
+                DatabaseConnection::SqlxPostgresPoolConnection(_) => "🐘",
+                DatabaseConnection::SqlxSqlitePoolConnection(_) => "🪶",
+                DatabaseConnection::Disconnected => panic!("Failed to connect"),
+            },
+            connection_string
+        );
 
         // Setup tables
         Migrator::up(&db, None).await.unwrap();

@@ -1,5 +1,5 @@
 use axum::Json;
-use common::{event::Event, person::Person};
+use common::{event::Event, person::Person, stats::Stats};
 use serde::{Deserialize, Serialize};
 
 use crate::errors::ApiError;
@@ -19,7 +19,7 @@ pub struct EventResponse {
     pub name: String,
     pub times: Vec<String>,
     pub timezone: String,
-    pub created: i64,
+    pub created_at: i64,
 }
 
 impl From<Event> for EventResponse {
@@ -29,24 +29,33 @@ impl From<Event> for EventResponse {
             name: value.name,
             times: value.times,
             timezone: value.timezone,
-            created: value.created_at.timestamp(),
+            created_at: value.created_at.timestamp(),
         }
     }
 }
 
 #[derive(Serialize)]
-#[serde(rename_all(serialize = "camelCase"))]
 pub struct StatsResponse {
     pub event_count: i32,
     pub person_count: i32,
     pub version: String,
 }
 
+impl From<Stats> for StatsResponse {
+    fn from(value: Stats) -> Self {
+        Self {
+            event_count: value.event_count,
+            person_count: value.person_count,
+            version: env!("CARGO_PKG_VERSION").to_string(),
+        }
+    }
+}
+
 #[derive(Serialize)]
 pub struct PersonResponse {
     pub name: String,
     pub availability: Vec<String>,
-    pub created: i64,
+    pub created_at: i64,
 }
 
 impl From<Person> for PersonResponse {
@@ -54,12 +63,18 @@ impl From<Person> for PersonResponse {
         Self {
             name: value.name,
             availability: value.availability,
-            created: value.created_at.timestamp(),
+            created_at: value.created_at.timestamp(),
         }
     }
 }
 
 #[derive(Deserialize)]
-pub struct PersonInput {
+pub struct GetPersonInput {
     pub password: Option<String>,
+}
+
+#[derive(Deserialize)]
+pub struct UpdatePersonInput {
+    pub password: Option<String>,
+    pub availability: Vec<String>,
 }

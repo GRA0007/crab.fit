@@ -22,13 +22,7 @@ pub async fn get_event<A: Adaptor>(
         .map_err(ApiError::AdaptorError)?;
 
     match event {
-        Some(event) => Ok(Json(EventResponse {
-            id: event.id,
-            name: event.name,
-            times: event.times,
-            timezone: event.timezone,
-            created: event.created_at.timestamp(),
-        })),
+        Some(event) => Ok(Json(event.into())),
         None => Err(ApiError::NotFound),
     }
 }

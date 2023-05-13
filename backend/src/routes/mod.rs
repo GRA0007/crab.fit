@@ -12,3 +12,6 @@ pub use get_people::get_people;
 
 mod get_person;
 pub use get_person::get_person;
+
+mod update_person;
+pub use update_person::update_person;

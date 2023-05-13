@@ -6,14 +6,14 @@ use common::{adaptor::Adaptor, person::Person};
 
 use crate::{
     errors::ApiError,
-    payloads::{ApiResult, PersonInput, PersonResponse},
+    payloads::{ApiResult, GetPersonInput, PersonResponse},
     State,
 };
 
 pub async fn get_person<A: Adaptor>(
     extract::State(state): State<A>,
     Path((event_id, person_name)): Path<(String, String)>,
-    input: Option<Json<PersonInput>>,
+    input: Option<Json<GetPersonInput>>,
 ) -> ApiResult<PersonResponse, A> {
     let adaptor = &state.lock().await.adaptor;
 
@@ -77,7 +77,7 @@ pub async fn get_person<A: Adaptor>(
     }
 }
 
-fn verify_password(person: &Person, raw: Option<String>) -> bool {
+pub fn verify_password(person: &Person, raw: Option<String>) -> bool {
     match &person.password_hash {
         Some(hash) => bcrypt::verify(raw.unwrap_or(String::from("")), hash).unwrap_or(false),
         // Specifically allow a user who doesn't have a password
