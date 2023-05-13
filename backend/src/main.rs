@@ -1,23 +1,19 @@
-use std::{net::SocketAddr, sync::Arc};
+use std::{env, net::SocketAddr, sync::Arc};
 
 use axum::{
     extract,
+    http::{HeaderValue, Method},
     routing::{get, patch, post},
     Router, Server,
 };
 use routes::*;
 use sql_adaptor::SqlAdaptor;
 use tokio::sync::Mutex;
+use tower_http::cors::CorsLayer;
 
 mod errors;
 mod payloads;
 mod routes;
-
-#[cfg(debug_assertions)]
-const MODE: &str = "debug";
-
-#[cfg(not(debug_assertions))]
-const MODE: &str = "release";
 
 pub struct ApiState<A> {
     adaptor: A,
@@ -36,6 +32,18 @@ async fn main() {
         adaptor: SqlAdaptor::new().await,
     }));
 
+    let cors = CorsLayer::new()
+        .allow_methods([Method::GET, Method::POST, Method::PATCH])
+        .allow_origin(
+            if cfg!(debug_assertions) {
+                "http://localhost:1234".to_owned()
+            } else {
+                env::var("FRONTEND_URL").expect("Missing FRONTEND_URL environment variable")
+            }
+            .parse::<HeaderValue>()
+            .unwrap(),
+        );
+
     let app = Router::new()
         .route("/", get(get_root))
         .route("/stats", get(get_stats))
@@ -44,13 +52,19 @@ async fn main() {
         .route("/event/:event_id/people", get(get_people))
         .route("/event/:event_id/people/:person_name", get(get_person))
         .route("/event/:event_id/people/:person_name", patch(update_person))
-        .with_state(shared_state);
+        .with_state(shared_state)
+        .layer(cors);
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
 
     println!(
         "🦀 Crab Fit API listening at http://{} in {} mode",
-        addr, MODE
+        addr,
+        if cfg!(debug_assertions) {
+            "debug"
+        } else {
+            "release"
+        }
     );
     Server::bind(&addr)
         .serve(app.into_make_service())
