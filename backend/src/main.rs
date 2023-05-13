@@ -1,15 +1,18 @@
 use std::{env, net::SocketAddr, sync::Arc};
 
 use axum::{
+    error_handling::HandleErrorLayer,
     extract,
     http::{HeaderValue, Method},
     routing::{get, patch, post},
-    Router, Server,
+    BoxError, Router, Server,
 };
 use routes::*;
 use sql_adaptor::SqlAdaptor;
 use tokio::sync::Mutex;
-use tower_http::cors::CorsLayer;
+use tower::ServiceBuilder;
+use tower_governor::{errors::display_error, governor::GovernorConfigBuilder, GovernorLayer};
+use tower_http::{cors::CorsLayer, trace::TraceLayer};
 
 mod errors;
 mod payloads;
@@ -32,6 +35,7 @@ async fn main() {
         adaptor: SqlAdaptor::new().await,
     }));
 
+    // CORS configuration
     let cors = CorsLayer::new()
         .allow_methods([Method::GET, Method::POST, Method::PATCH])
         .allow_origin(
@@ -44,6 +48,19 @@ async fn main() {
             .unwrap(),
         );
 
+    // Rate limiting configuration (using tower_governor)
+    // From the docs: Allows bursts with up to eight requests and replenishes
+    // one element after 500ms, based on peer IP.
+    let governor_config = Box::new(GovernorConfigBuilder::default().finish().unwrap());
+    let rate_limit = ServiceBuilder::new()
+        // Handle errors from governor and convert into HTTP responses
+        .layer(HandleErrorLayer::new(|e: BoxError| async move {
+            display_error(e)
+        }))
+        .layer(GovernorLayer {
+            config: Box::leak(governor_config),
+        });
+
     let app = Router::new()
         .route("/", get(get_root))
         .route("/stats", get(get_stats))
@@ -53,7 +70,9 @@ async fn main() {
         .route("/event/:event_id/people/:person_name", get(get_person))
         .route("/event/:event_id/people/:person_name", patch(update_person))
         .with_state(shared_state)
-        .layer(cors);
+        .layer(cors)
+        .layer(rate_limit)
+        .layer(TraceLayer::new_for_http());
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
 
@@ -67,7 +86,7 @@ async fn main() {
         }
     );
     Server::bind(&addr)
-        .serve(app.into_make_service())
+        .serve(app.into_make_service_with_connect_info::<SocketAddr>())
         .await
         .unwrap();
 }
