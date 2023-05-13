@@ -36,6 +36,7 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Event::Id).string().not_null().primary_key())
                     .col(ColumnDef::new(Event::Name).string().not_null())
                     .col(ColumnDef::new(Event::CreatedAt).timestamp().not_null())
+                    .col(ColumnDef::new(Event::VisitedAt).timestamp().not_null())
                     .col(ColumnDef::new(Event::Times).json().not_null())
                     .col(ColumnDef::new(Event::Timezone).string().not_null())
                     .to_owned(),
@@ -105,6 +106,7 @@ enum Event {
     Id,
     Name,
     CreatedAt,
+    VisitedAt,
     Times,
     Timezone,
 }

@@ -4,12 +4,19 @@ version = "1.1.0"
 edition = "2021"
 
 [workspace]
-members = ["data", "adaptors/*"]
+members = ["common", "adaptors/*"]
 
 [dependencies]
 axum = "0.6.18"
 serde = { version = "1.0.162", features = ["derive"] }
 tokio = { version = "1.28.0", features = ["macros", "rt-multi-thread"] }
-data = { path = "data" }
+common = { path = "common" }
 sql-adaptor = { path = "adaptors/sql" }
 dotenv = "0.15.0"
+serde_json = "1.0.96"
+rand = "0.8.5"
+punycode = "0.4.1"
+regex = "1.8.1"
+tracing = "0.1.37"
+tracing-subscriber = "0.3.17"
+chrono = "0.4.24"

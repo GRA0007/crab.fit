@@ -4,6 +4,7 @@ pub struct Event {
     pub id: String,
     pub name: String,
     pub created_at: DateTime<Utc>,
+    pub visited_at: DateTime<Utc>,
     pub times: Vec<String>,
     pub timezone: String,
 }

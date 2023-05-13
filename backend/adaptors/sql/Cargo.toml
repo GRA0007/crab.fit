@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 async-trait = "0.1.68"
-data = { path = "../../data" }
+common = { path = "../../common" }
 sea-orm = { version = "0.11.3", features = [ "macros", "sqlx-mysql", "sqlx-postgres", "sqlx-sqlite", "runtime-tokio-native-tls" ] }
 serde = { version = "1.0.162", features = [ "derive" ] }
 async-std = { version = "1", features = ["attributes", "tokio1"] }

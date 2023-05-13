@@ -1,8 +1,17 @@
-use std::net::SocketAddr;
+use std::{net::SocketAddr, sync::Arc};
 
-use axum::{routing::get, Router, Server};
-use data::adaptor::Adaptor;
-use sql_adaptor::PostgresAdaptor;
+use axum::{
+    extract,
+    routing::{get, post},
+    Router, Server,
+};
+use routes::*;
+use sql_adaptor::SqlAdaptor;
+use tokio::sync::Mutex;
+
+mod errors;
+mod payloads;
+mod routes;
 
 #[cfg(debug_assertions)]
 const MODE: &str = "debug";
@@ -10,14 +19,29 @@ const MODE: &str = "debug";
 #[cfg(not(debug_assertions))]
 const MODE: &str = "release";
 
+pub struct ApiState<A> {
+    adaptor: A,
+}
+
+pub type State<A> = extract::State<Arc<Mutex<ApiState<A>>>>;
+
 #[tokio::main]
 async fn main() {
+    tracing_subscriber::fmt::init();
+
     // Load env
     dotenv::dotenv().ok();
 
-    PostgresAdaptor::new().await;
+    let shared_state = Arc::new(Mutex::new(ApiState {
+        adaptor: SqlAdaptor::new().await,
+    }));
 
-    let app = Router::new().route("/", get(get_root));
+    let app = Router::new()
+        .route("/", get(get_root))
+        .route("/stats", get(get_stats))
+        .route("/event/:event_id", get(get_event))
+        .route("/event", post(create_event))
+        .with_state(shared_state);
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
 
