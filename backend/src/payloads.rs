@@ -8,7 +8,7 @@ pub type ApiResult<T, A> = Result<Json<T>, ApiError<A>>;
 
 #[derive(Deserialize)]
 pub struct EventInput {
-    pub name: String,
+    pub name: Option<String>,
     pub times: Vec<String>,
     pub timezone: String,
 }

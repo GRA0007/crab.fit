@@ -19,9 +19,9 @@ pub async fn create_event<A: Adaptor>(
     let now = chrono::offset::Utc::now();
 
     // Generate a name if none provided
-    let name = match input.name.trim() {
-        "" => generate_name(),
-        x => x.to_string(),
+    let name = match input.name {
+        Some(x) if !x.is_empty() => x.trim().to_string(),
+        _ => generate_name(),
     };
 
     // Generate an ID
