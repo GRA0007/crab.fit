@@ -26,3 +26,5 @@ bcrypt = "0.14.0"
 tower-http = { version = "0.4.0", features = ["cors", "trace"] }
 tower_governor = "0.0.4"
 tower = "0.4.13"
+utoipa = { version = "3.3.0", features = ["axum_extras", "preserve_order"] }
+utoipa-swagger-ui = { version = "3.1.3", features = ["axum"] }

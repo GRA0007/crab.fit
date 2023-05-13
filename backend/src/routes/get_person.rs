@@ -10,6 +10,25 @@ use crate::{
     State,
 };
 
+#[utoipa::path(
+    get,
+    path = "/event/{event_id}/people/{person_name}",
+    params(
+        ("event_id", description = "The ID of the event"),
+        ("person_name", description = "The name of the person"),
+    ),
+    request_body(content = GetPersonInput, description = "Person details"),
+    responses(
+        (status = 200, description = "Ok", body = PersonResponse),
+        (status = 401, description = "Incorrect password"),
+        (status = 404, description = "Event not found"),
+        (status = 415, description = "Unsupported input format"),
+        (status = 422, description = "Invalid input provided"),
+        (status = 429, description = "Too many requests"),
+    ),
+    tag = "person",
+)]
+/// Login or create a person for an event
 pub async fn get_person<A: Adaptor>(
     extract::State(state): State<A>,
     Path((event_id, person_name)): Path<(String, String)>,

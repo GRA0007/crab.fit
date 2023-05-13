@@ -1,19 +1,20 @@
 use axum::Json;
 use common::{event::Event, person::Person, stats::Stats};
 use serde::{Deserialize, Serialize};
+use utoipa::ToSchema;
 
 use crate::errors::ApiError;
 
 pub type ApiResult<T, A> = Result<Json<T>, ApiError<A>>;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 pub struct EventInput {
     pub name: Option<String>,
     pub times: Vec<String>,
     pub timezone: String,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, ToSchema)]
 pub struct EventResponse {
     pub id: String,
     pub name: String,
@@ -34,7 +35,7 @@ impl From<Event> for EventResponse {
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, ToSchema)]
 pub struct StatsResponse {
     pub event_count: i32,
     pub person_count: i32,
@@ -51,7 +52,7 @@ impl From<Stats> for StatsResponse {
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, ToSchema)]
 pub struct PersonResponse {
     pub name: String,
     pub availability: Vec<String>,
@@ -68,12 +69,12 @@ impl From<Person> for PersonResponse {
     }
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 pub struct GetPersonInput {
     pub password: Option<String>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 pub struct UpdatePersonInput {
     pub password: Option<String>,
     pub availability: Vec<String>,

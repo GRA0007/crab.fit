@@ -12,6 +12,25 @@ use crate::{
 
 use super::get_person::verify_password;
 
+#[utoipa::path(
+    patch,
+    path = "/event/{event_id}/people/{person_name}",
+    params(
+        ("event_id", description = "The ID of the event"),
+        ("person_name", description = "The name of the person"),
+    ),
+    request_body(content = UpdatePersonInput, description = "Person details"),
+    responses(
+        (status = 200, description = "Ok", body = PersonResponse),
+        (status = 401, description = "Incorrect password"),
+        (status = 404, description = "Event or person not found"),
+        (status = 415, description = "Unsupported input format"),
+        (status = 422, description = "Invalid input provided"),
+        (status = 429, description = "Too many requests"),
+    ),
+    tag = "person",
+)]
+/// Update a person's availabilities
 pub async fn update_person<A: Adaptor>(
     extract::State(state): State<A>,
     Path((event_id, person_name)): Path<(String, String)>,

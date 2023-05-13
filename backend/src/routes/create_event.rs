@@ -1,18 +1,31 @@
-use axum::{extract, Json};
+use axum::{extract, http::StatusCode, Json};
 use common::{adaptor::Adaptor, event::Event};
 use rand::{seq::SliceRandom, thread_rng, Rng};
 use regex::Regex;
 
 use crate::{
     errors::ApiError,
-    payloads::{ApiResult, EventInput, EventResponse},
+    payloads::{EventInput, EventResponse},
     State,
 };
 
+#[utoipa::path(
+    post,
+    path = "/event",
+    request_body(content = EventInput, description = "New event details"),
+    responses(
+        (status = 201, description = "Created", body = EventResponse),
+        (status = 415, description = "Unsupported input format"),
+        (status = 422, description = "Invalid input provided"),
+        (status = 429, description = "Too many requests"),
+    ),
+    tag = "event",
+)]
+/// Create a new event
 pub async fn create_event<A: Adaptor>(
     extract::State(state): State<A>,
     Json(input): Json<EventInput>,
-) -> ApiResult<EventResponse, A> {
+) -> Result<(StatusCode, Json<EventResponse>), ApiError<A>> {
     let adaptor = &state.lock().await.adaptor;
 
     // Get the current timestamp
@@ -55,7 +68,7 @@ pub async fn create_event<A: Adaptor>(
         .await
         .map_err(ApiError::AdaptorError)?;
 
-    Ok(Json(event.into()))
+    Ok((StatusCode::CREATED, Json(event.into())))
 }
 
 // Generate a random name based on an adjective and a crab species
