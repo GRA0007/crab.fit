@@ -6,3 +6,6 @@ pub use get_stats::get_stats;
 
 mod create_event;
 pub use create_event::create_event;
+
+mod get_people;
+pub use get_people::get_people;

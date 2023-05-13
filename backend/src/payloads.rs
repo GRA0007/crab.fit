@@ -1,5 +1,5 @@
 use axum::Json;
-use common::event::Event;
+use common::{event::Event, person::Person};
 use serde::{Deserialize, Serialize};
 
 use crate::errors::ApiError;
@@ -40,4 +40,21 @@ pub struct StatsResponse {
     pub event_count: i32,
     pub person_count: i32,
     pub version: String,
+}
+
+#[derive(Serialize)]
+pub struct PersonResponse {
+    pub name: String,
+    pub availability: Vec<String>,
+    pub created: i64,
+}
+
+impl From<Person> for PersonResponse {
+    fn from(value: Person) -> Self {
+        Self {
+            name: value.name,
+            availability: value.availability,
+            created: value.created_at.timestamp(),
+        }
+    }
 }
