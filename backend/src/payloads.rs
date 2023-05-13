@@ -70,12 +70,6 @@ impl From<Person> for PersonResponse {
 }
 
 #[derive(Deserialize, ToSchema)]
-pub struct GetPersonInput {
-    pub password: Option<String>,
-}
-
-#[derive(Deserialize, ToSchema)]
-pub struct UpdatePersonInput {
-    pub password: Option<String>,
+pub struct PersonInput {
     pub availability: Vec<String>,
 }

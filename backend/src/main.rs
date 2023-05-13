@@ -16,6 +16,9 @@ use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 
+use crate::docs::ApiDoc;
+
+mod docs;
 mod errors;
 mod payloads;
 mod routes;
@@ -32,35 +35,6 @@ async fn main() {
 
     // Load env
     dotenv::dotenv().ok();
-
-    #[derive(OpenApi)]
-    #[openapi(
-        info(title = "Crab Fit API"),
-        paths(
-            routes::get_stats::get_stats,
-            routes::create_event::create_event,
-            routes::get_event::get_event,
-            routes::get_people::get_people,
-            routes::get_person::get_person,
-            routes::update_person::update_person,
-        ),
-        components(
-            schemas(
-                payloads::StatsResponse,
-                payloads::EventResponse,
-                payloads::PersonResponse,
-                payloads::EventInput,
-                payloads::GetPersonInput,
-                payloads::UpdatePersonInput,
-            ),
-        ),
-        tags(
-            (name = "info"),
-            (name = "event"),
-            (name = "person"),
-        ),
-    )]
-    struct ApiDoc;
 
     let shared_state = Arc::new(Mutex::new(ApiState {
         adaptor: SqlAdaptor::new().await,

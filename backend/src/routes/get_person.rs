@@ -1,12 +1,14 @@
 use axum::{
     extract::{self, Path},
-    Json,
+    headers::{authorization::Bearer, Authorization},
+    Json, TypedHeader,
 };
+use base64::{engine::general_purpose, Engine};
 use common::{adaptor::Adaptor, person::Person};
 
 use crate::{
     errors::ApiError,
-    payloads::{ApiResult, GetPersonInput, PersonResponse},
+    payloads::{ApiResult, PersonResponse},
     State,
 };
 
@@ -17,7 +19,7 @@ use crate::{
         ("event_id", description = "The ID of the event"),
         ("person_name", description = "The name of the person"),
     ),
-    request_body(content = GetPersonInput, description = "Person details"),
+    security((), ("password" = [])),
     responses(
         (status = 200, description = "Ok", body = PersonResponse),
         (status = 401, description = "Incorrect password"),
@@ -32,15 +34,12 @@ use crate::{
 pub async fn get_person<A: Adaptor>(
     extract::State(state): State<A>,
     Path((event_id, person_name)): Path<(String, String)>,
-    input: Option<Json<GetPersonInput>>,
+    bearer: Option<TypedHeader<Authorization<Bearer>>>,
 ) -> ApiResult<PersonResponse, A> {
     let adaptor = &state.lock().await.adaptor;
 
     // Get inputted password
-    let password = match input {
-        Some(Json(i)) => i.password,
-        None => None,
-    };
+    let password = parse_password(bearer);
 
     let existing_people = adaptor
         .get_people(event_id.clone())
@@ -96,9 +95,20 @@ pub async fn get_person<A: Adaptor>(
     }
 }
 
+pub fn parse_password(bearer: Option<TypedHeader<Authorization<Bearer>>>) -> Option<String> {
+    bearer.map(|TypedHeader(Authorization(b))| {
+        String::from_utf8(
+            general_purpose::STANDARD
+                .decode(b.token().trim())
+                .unwrap_or(vec![]),
+        )
+        .unwrap_or("".to_owned())
+    })
+}
+
 pub fn verify_password(person: &Person, raw: Option<String>) -> bool {
     match &person.password_hash {
-        Some(hash) => bcrypt::verify(raw.unwrap_or(String::from("")), hash).unwrap_or(false),
+        Some(hash) => bcrypt::verify(raw.unwrap_or("".to_owned()), hash).unwrap_or(false),
         // Specifically allow a user who doesn't have a password
         // set to log in with or without any password input
         None => true,

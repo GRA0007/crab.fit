@@ -1,16 +1,17 @@
 use axum::{
     extract::{self, Path},
-    Json,
+    headers::{authorization::Bearer, Authorization},
+    Json, TypedHeader,
 };
 use common::{adaptor::Adaptor, person::Person};
 
 use crate::{
     errors::ApiError,
-    payloads::{ApiResult, PersonResponse, UpdatePersonInput},
+    payloads::{ApiResult, PersonInput, PersonResponse},
     State,
 };
 
-use super::get_person::verify_password;
+use super::get_person::{parse_password, verify_password};
 
 #[utoipa::path(
     patch,
@@ -19,7 +20,8 @@ use super::get_person::verify_password;
         ("event_id", description = "The ID of the event"),
         ("person_name", description = "The name of the person"),
     ),
-    request_body(content = UpdatePersonInput, description = "Person details"),
+    security((), ("password" = [])),
+    request_body(content = PersonInput, description = "Person details"),
     responses(
         (status = 200, description = "Ok", body = PersonResponse),
         (status = 401, description = "Incorrect password"),
@@ -34,7 +36,8 @@ use super::get_person::verify_password;
 pub async fn update_person<A: Adaptor>(
     extract::State(state): State<A>,
     Path((event_id, person_name)): Path<(String, String)>,
-    Json(input): Json<UpdatePersonInput>,
+    bearer: Option<TypedHeader<Authorization<Bearer>>>,
+    Json(input): Json<PersonInput>,
 ) -> ApiResult<PersonResponse, A> {
     let adaptor = &state.lock().await.adaptor;
 
@@ -56,7 +59,7 @@ pub async fn update_person<A: Adaptor>(
         .ok_or(ApiError::NotFound)?;
 
     // Verify password (if set)
-    if !verify_password(&existing_person, input.password) {
+    if !verify_password(&existing_person, parse_password(bearer)) {
         return Err(ApiError::NotAuthorized);
     }
 
