@@ -1,5 +1,5 @@
 use axum::Json;
-use common::{event::Event, person::Person, stats::Stats};
+use common::{Event, Person, Stats};
 use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
 

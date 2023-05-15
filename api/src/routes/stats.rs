@@ -1,5 +1,5 @@
 use axum::{extract, Json};
-use common::adaptor::Adaptor;
+use common::Adaptor;
 
 use crate::{
     errors::ApiError,

@@ -1,13 +1,8 @@
 use std::{collections::HashMap, error::Error, fmt::Display};
 
 use async_trait::async_trait;
-use chrono::Utc;
-use common::{
-    adaptor::Adaptor,
-    event::{Event, EventDeletion},
-    person::Person,
-    stats::Stats,
-};
+use chrono::{DateTime, Utc};
+use common::{Adaptor, Event, Person, Stats};
 use tokio::sync::Mutex;
 
 struct State {
@@ -68,14 +63,23 @@ impl Adaptor for MemoryAdaptor {
         ))
     }
 
-    async fn upsert_person(&self, event_id: String, person: Person) -> Result<Person, Self::Error> {
+    async fn upsert_person(
+        &self,
+        event_id: String,
+        person: Person,
+    ) -> Result<Option<Person>, Self::Error> {
         let mut state = self.state.lock().await;
+
+        // Check event exists
+        if state.events.get(&event_id).is_none() {
+            return Ok(None);
+        }
 
         state
             .people
             .insert((event_id, person.name.clone()), person.clone());
 
-        Ok(person)
+        Ok(Some(person))
     }
 
     async fn get_event(&self, id: String) -> Result<Option<Event>, Self::Error> {
@@ -98,21 +102,38 @@ impl Adaptor for MemoryAdaptor {
         Ok(event)
     }
 
-    async fn delete_event(&self, id: String) -> Result<EventDeletion, Self::Error> {
+    async fn delete_events(&self, cutoff: DateTime<Utc>) -> Result<Stats, Self::Error> {
         let mut state = self.state.lock().await;
 
-        let mut person_count: u64 = state.people.len() as u64;
+        // Delete events older than cutoff date
+        let mut deleted_event_ids: Vec<String> = Vec::new();
+        state.events = state
+            .events
+            .clone()
+            .into_iter()
+            .filter(|(id, event)| {
+                if event.visited_at >= cutoff {
+                    true
+                } else {
+                    deleted_event_ids.push(id.into());
+                    false
+                }
+            })
+            .collect();
+
+        let mut person_count = state.people.len() as i64;
         state.people = state
             .people
             .clone()
             .into_iter()
-            .filter(|((event_id, _), _)| event_id != &id)
+            .filter(|((event_id, _), _)| deleted_event_ids.contains(event_id))
             .collect();
-        person_count -= state.people.len() as u64;
+        person_count -= state.people.len() as i64;
 
-        state.events.remove(&id);
-
-        Ok(EventDeletion { id, person_count })
+        Ok(Stats {
+            event_count: deleted_event_ids.len() as i64,
+            person_count,
+        })
     }
 }
 

@@ -17,6 +17,7 @@ use utoipa::{
         routes::person::get_people,
         routes::person::get_person,
         routes::person::update_person,
+        routes::tasks::cleanup,
     ),
     components(schemas(
         payloads::StatsResponse,

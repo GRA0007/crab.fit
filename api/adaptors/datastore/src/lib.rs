@@ -2,15 +2,10 @@ use std::{env, error::Error, fmt::Display};
 
 use async_trait::async_trait;
 use chrono::{DateTime, NaiveDateTime, Utc};
-use common::{
-    adaptor::Adaptor,
-    event::{Event, EventDeletion},
-    person::Person,
-    stats::Stats,
-};
+use common::{Adaptor, Event, Person, Stats};
 use google_cloud::{
     authorize::ApplicationCredentials,
-    datastore::{Client, Filter, FromValue, IntoValue, Key, Query},
+    datastore::{Client, Filter, FromValue, IntoValue, Key, KeyID, Query},
 };
 use tokio::sync::Mutex;
 
@@ -95,8 +90,21 @@ impl Adaptor for DatastoreAdaptor {
         ))
     }
 
-    async fn upsert_person(&self, event_id: String, person: Person) -> Result<Person, Self::Error> {
+    async fn upsert_person(
+        &self,
+        event_id: String,
+        person: Person,
+    ) -> Result<Option<Person>, Self::Error> {
         let mut client = self.client.lock().await;
+
+        // Check the event exists
+        if client
+            .get::<DatastoreEvent, _>(Key::new(EVENT_KIND).id(event_id.clone()))
+            .await?
+            .is_none()
+        {
+            return Ok(None);
+        }
 
         // Check if person exists
         let existing_person = client
@@ -122,7 +130,7 @@ impl Adaptor for DatastoreAdaptor {
             .put((key, DatastorePerson::from_person(person.clone(), event_id)))
             .await?;
 
-        Ok(person)
+        Ok(Some(person))
     }
 
     async fn get_event(&self, id: String) -> Result<Option<Event>, Self::Error> {
@@ -151,25 +159,45 @@ impl Adaptor for DatastoreAdaptor {
         Ok(event)
     }
 
-    async fn delete_event(&self, id: String) -> Result<EventDeletion, Self::Error> {
+    async fn delete_events(&self, cutoff: DateTime<Utc>) -> Result<Stats, Self::Error> {
         let mut client = self.client.lock().await;
 
         let mut keys_to_delete: Vec<Key> = client
-            .query(
-                Query::new(PERSON_KIND)
-                    .filter(Filter::Equal("eventId".into(), id.clone().into_value())),
-            )
+            .query(Query::new(EVENT_KIND).filter(Filter::LesserThan(
+                "visited".into(),
+                cutoff.timestamp().into_value(),
+            )))
             .await?
             .iter()
             .map(|entity| entity.key().clone())
             .collect();
 
-        let person_count = keys_to_delete.len().try_into().unwrap();
-        keys_to_delete.insert(0, Key::new(EVENT_KIND).id(id.clone()));
+        let event_count = keys_to_delete.len() as i64;
+
+        let events_to_delete = keys_to_delete.clone();
+        for e in events_to_delete.iter() {
+            if let KeyID::StringID(id) = e.get_id() {
+                let mut event_people_to_delete: Vec<Key> = client
+                    .query(
+                        Query::new(PERSON_KIND)
+                            .filter(Filter::Equal("eventId".into(), id.clone().into_value())),
+                    )
+                    .await?
+                    .iter()
+                    .map(|entity| entity.key().clone())
+                    .collect();
+                keys_to_delete.append(&mut event_people_to_delete);
+            }
+        }
+
+        let person_count = keys_to_delete.len() as i64 - event_count;
 
         client.delete_all(keys_to_delete).await?;
 
-        Ok(EventDeletion { id, person_count })
+        Ok(Stats {
+            event_count,
+            person_count,
+        })
     }
 }
 

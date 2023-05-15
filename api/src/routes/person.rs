@@ -4,7 +4,7 @@ use axum::{
     Json, TypedHeader,
 };
 use base64::{engine::general_purpose, Engine};
-use common::{adaptor::Adaptor, person::Person};
+use common::{Adaptor, Person};
 
 use crate::{
     errors::ApiError,
@@ -120,6 +120,7 @@ pub async fn get_person<A: Adaptor>(
                     )
                     .await
                     .map_err(ApiError::AdaptorError)?
+                    .unwrap()
                     .into(),
             ))
         }
@@ -189,6 +190,7 @@ pub async fn update_person<A: Adaptor>(
             )
             .await
             .map_err(ApiError::AdaptorError)?
+            .unwrap()
             .into(),
     ))
 }

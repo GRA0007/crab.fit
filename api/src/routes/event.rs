@@ -3,7 +3,7 @@ use axum::{
     http::StatusCode,
     Json,
 };
-use common::{adaptor::Adaptor, event::Event};
+use common::{Adaptor, Event};
 use rand::{seq::SliceRandom, thread_rng, Rng};
 use regex::Regex;
 

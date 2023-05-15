@@ -1,13 +1,8 @@
 use std::{env, error::Error};
 
 use async_trait::async_trait;
-use chrono::{DateTime as ChronoDateTime, Utc};
-use common::{
-    adaptor::Adaptor,
-    event::{Event, EventDeletion},
-    person::Person,
-    stats::Stats,
-};
+use chrono::{DateTime, Utc};
+use common::{Adaptor, Event, Person, Stats};
 use entity::{event, person, stats};
 use migration::{Migrator, MigratorTrait};
 use sea_orm::{
@@ -70,7 +65,11 @@ impl Adaptor for SqlAdaptor {
         })
     }
 
-    async fn upsert_person(&self, event_id: String, person: Person) -> Result<Person, Self::Error> {
+    async fn upsert_person(
+        &self,
+        event_id: String,
+        person: Person,
+    ) -> Result<Option<Person>, Self::Error> {
         let data = person::ActiveModel {
             name: Set(person.name.clone()),
             password_hash: Set(person.password_hash),
@@ -79,7 +78,16 @@ impl Adaptor for SqlAdaptor {
             event_id: Set(event_id.clone()),
         };
 
-        Ok(
+        // Check if the event exists
+        if event::Entity::find_by_id(event_id.clone())
+            .one(&self.db)
+            .await?
+            .is_none()
+        {
+            return Ok(None);
+        }
+
+        Ok(Some(
             match person::Entity::find_by_id((person.name, event_id))
                 .one(&self.db)
                 .await?
@@ -87,7 +95,7 @@ impl Adaptor for SqlAdaptor {
                 Some(_) => data.update(&self.db).await?.try_into_model()?.into(),
                 None => data.insert(&self.db).await?.try_into_model()?.into(),
             },
-        )
+        ))
     }
 
     async fn get_event(&self, id: String) -> Result<Option<Event>, Self::Error> {
@@ -118,27 +126,43 @@ impl Adaptor for SqlAdaptor {
         .into())
     }
 
-    async fn delete_event(&self, id: String) -> Result<EventDeletion, Self::Error> {
-        let event_id = id.clone();
-        let person_count = self
+    async fn delete_events(&self, cutoff: DateTime<Utc>) -> Result<Stats, Self::Error> {
+        let (event_count, person_count) = self
             .db
-            .transaction::<_, u64, DbErr>(|t| {
+            .transaction::<_, (i64, i64), DbErr>(|t| {
                 Box::pin(async move {
+                    // Get events older than the cutoff date
+                    let old_events = event::Entity::find()
+                        .filter(event::Column::VisitedAt.lt(cutoff.naive_utc()))
+                        .all(t)
+                        .await?;
+
                     // Delete people
-                    let people_delete_result = person::Entity::delete_many()
-                        .filter(person::Column::EventId.eq(&event_id))
+                    let mut people_deleted: i64 = 0;
+                    // TODO: run concurrently
+                    for e in old_events.iter() {
+                        let people_delete_result = person::Entity::delete_many()
+                            .filter(person::Column::EventId.eq(&e.id))
+                            .exec(t)
+                            .await?;
+                        people_deleted += people_delete_result.rows_affected as i64;
+                    }
+
+                    // Delete events
+                    let event_delete_result = event::Entity::delete_many()
+                        .filter(event::Column::VisitedAt.lt(cutoff.naive_utc()))
                         .exec(t)
                         .await?;
 
-                    // Delete event
-                    event::Entity::delete_by_id(event_id).exec(t).await?;
-
-                    Ok(people_delete_result.rows_affected)
+                    Ok((event_delete_result.rows_affected as i64, people_deleted))
                 })
             })
             .await?;
 
-        Ok(EventDeletion { id, person_count })
+        Ok(Stats {
+            event_count,
+            person_count,
+        })
     }
 }
 
@@ -190,8 +214,8 @@ impl From<event::Model> for Event {
         Self {
             id: value.id,
             name: value.name,
-            created_at: ChronoDateTime::<Utc>::from_utc(value.created_at, Utc),
-            visited_at: ChronoDateTime::<Utc>::from_utc(value.visited_at, Utc),
+            created_at: DateTime::<Utc>::from_utc(value.created_at, Utc),
+            visited_at: DateTime::<Utc>::from_utc(value.visited_at, Utc),
             times: serde_json::from_value(value.times).unwrap_or(vec![]),
             timezone: value.timezone,
         }
@@ -203,7 +227,7 @@ impl From<person::Model> for Person {
         Self {
             name: value.name,
             password_hash: value.password_hash,
-            created_at: ChronoDateTime::<Utc>::from_utc(value.created_at, Utc),
+            created_at: DateTime::<Utc>::from_utc(value.created_at, Utc),
             availability: serde_json::from_value(value.availability).unwrap_or(vec![]),
         }
     }

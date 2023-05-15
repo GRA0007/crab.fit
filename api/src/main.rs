@@ -82,6 +82,7 @@ async fn main() {
             "/event/:event_id/people/:person_name",
             patch(person::update_person),
         )
+        .route("/tasks/cleanup", patch(tasks::cleanup))
         .with_state(shared_state)
         .layer(cors)
         .layer(rate_limit)

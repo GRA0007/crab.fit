@@ -1,5 +1,5 @@
 use axum::{http::StatusCode, response::IntoResponse};
-use common::adaptor::Adaptor;
+use common::Adaptor;
 
 pub enum ApiError<A: Adaptor> {
     AdaptorError(A::Error),

@@ -10,6 +10,7 @@ Note, you will need to have the following crates as dependencies in your adaptor
 
 - `common`<br>Includes a trait for implementing your adaptor, as well as structs your adaptor needs to return.
 - `async-trait`<br>Required because the trait from `common` uses async functions, make sure you include `#[async_trait]` above your trait implementation.
+- `chrono`<br>Required to deal with dates in the common structs and trait function signatures.
 
 Once you've created the adaptor, you'll need to make sure it's included as a dependency in the root [`Cargo.toml`](../Cargo.toml), and add a feature flag with the same name. Make sure you also document the new adaptor in the [api readme](../README.md).
 
