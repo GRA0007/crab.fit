@@ -20,7 +20,7 @@ common = { path = "common" }
 sql-adaptor = { path = "adaptors/sql" }
 datastore-adaptor = { path = "adaptors/datastore" }
 memory-adaptor = { path = "adaptors/memory" }
-dotenv = "0.15.0"
+dotenvy = "0.15.7"
 serde_json = "1.0.96"
 rand = "0.8.5"
 punycode = "0.4.1"

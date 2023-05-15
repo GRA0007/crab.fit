@@ -35,7 +35,7 @@ async fn main() {
     tracing_subscriber::fmt::init();
 
     // Load env
-    dotenv::dotenv().ok();
+    dotenvy::dotenv().ok();
 
     let shared_state = Arc::new(Mutex::new(ApiState {
         adaptor: create_adaptor().await,

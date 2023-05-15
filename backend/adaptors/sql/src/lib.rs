@@ -158,23 +158,28 @@ async fn get_stats_row(db: &DatabaseConnection) -> Result<stats::ActiveModel, Db
 
 impl SqlAdaptor {
     pub async fn new() -> Self {
-        let connection_string = env::var("DATABASE_URL").unwrap();
+        let connection_string =
+            env::var("DATABASE_URL").expect("Expected DATABASE_URL environment variable");
 
         // Connect to the database
-        let db = Database::connect(&connection_string).await.unwrap();
+        let db = Database::connect(&connection_string)
+            .await
+            .expect("Failed to connect to SQL database");
         println!(
             "{} Connected to database at {}",
             match db {
                 DatabaseConnection::SqlxMySqlPoolConnection(_) => "🐬",
                 DatabaseConnection::SqlxPostgresPoolConnection(_) => "🐘",
                 DatabaseConnection::SqlxSqlitePoolConnection(_) => "🪶",
-                DatabaseConnection::Disconnected => panic!("Failed to connect"),
+                DatabaseConnection::Disconnected => panic!("Failed to connect to SQL database"),
             },
             connection_string
         );
 
         // Setup tables
-        Migrator::up(&db, None).await.unwrap();
+        Migrator::up(&db, None)
+            .await
+            .expect("Failed to set up tables in the database");
 
         Self { db }
     }

@@ -203,19 +203,22 @@ impl Adaptor for DatastoreAdaptor {
 
 impl DatastoreAdaptor {
     pub async fn new() -> Self {
-        let project_name = env::var("GCP_PROJECT_NAME").unwrap();
-
         // Load credentials
-        let credentials: ApplicationCredentials =
-            serde_json::from_str(&env::var("GCP_CREDENTIALS").unwrap()).unwrap();
+        let credentials: ApplicationCredentials = serde_json::from_str(
+            &env::var("GCP_CREDENTIALS").expect("Expected GCP_CREDENTIALS environment variable"),
+        )
+        .expect("GCP_CREDENTIALS environment variable is not valid JSON");
 
         // Connect to datastore
-        let client = Client::from_credentials(project_name.clone(), credentials)
+        let client = Client::from_credentials(credentials.project_id.clone(), credentials.clone())
             .await
-            .unwrap();
+            .expect("Failed to setup datastore client");
         let client = Mutex::new(client);
 
-        println!("🎛️ Connected to datastore in project {}", project_name);
+        println!(
+            "🎛️  Connected to datastore in project {}",
+            credentials.project_id
+        );
 
         Self { client }
     }
