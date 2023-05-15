@@ -609,7 +609,7 @@ dependencies = [
 
 [[package]]
 name = "crabfit-api"
-version = "2.0.0"
+version = "3.0.0"
 dependencies = [
  "axum",
  "base64 0.21.0",
