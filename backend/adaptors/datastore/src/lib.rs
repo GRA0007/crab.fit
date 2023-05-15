@@ -31,14 +31,8 @@ impl Adaptor for DatastoreAdaptor {
     type Error = DatastoreAdaptorError;
 
     async fn get_stats(&self) -> Result<Stats, Self::Error> {
-        let mut client = self.client.lock().await;
-
-        let key = Key::new(STATS_KIND);
-        let event_count = client
-            .get(key.clone().id(STATS_EVENTS_ID))
-            .await?
-            .unwrap_or(0);
-        let person_count = client.get(key.id(STATS_PEOPLE_ID)).await?.unwrap_or(0);
+        let event_count = get_stats_value(&self.client, STATS_EVENTS_ID).await?;
+        let person_count = get_stats_value(&self.client, STATS_PEOPLE_ID).await?;
 
         Ok(Stats {
             event_count,
@@ -50,8 +44,10 @@ impl Adaptor for DatastoreAdaptor {
         let mut client = self.client.lock().await;
 
         let key = Key::new(STATS_KIND).id(STATS_EVENTS_ID);
-        let event_count = client.get(key.clone()).await?.unwrap_or(0) + 1;
-        client.put((key, event_count)).await?;
+        let event_count = get_stats_value(&self.client, STATS_EVENTS_ID).await? + 1;
+
+        let updated_props = HashMap::from([(String::from("value"), event_count.into_value())]);
+        client.put((key, updated_props)).await?;
         Ok(event_count)
     }
 
@@ -59,8 +55,10 @@ impl Adaptor for DatastoreAdaptor {
         let mut client = self.client.lock().await;
 
         let key = Key::new(STATS_KIND).id(STATS_PEOPLE_ID);
-        let person_count = client.get(key.clone()).await?.unwrap_or(0) + 1;
-        client.put((key, person_count)).await?;
+        let person_count = get_stats_value(&self.client, STATS_PEOPLE_ID).await? + 1;
+
+        let updated_props = HashMap::from([(String::from("value"), person_count.into_value())]);
+        client.put((key, updated_props)).await?;
         Ok(person_count)
     }
 
@@ -222,6 +220,17 @@ impl DatastoreAdaptor {
 
         Self { client }
     }
+}
+
+async fn get_stats_value(client: &Mutex<Client>, id: &str) -> Result<i64, DatastoreAdaptorError> {
+    let mut client = client.lock().await;
+    Ok(client
+        .get(Key::new(STATS_KIND).id(id))
+        .await?
+        .unwrap_or(HashMap::from([(String::from("value"), 0)]))
+        .get("value")
+        .cloned()
+        .unwrap_or(0))
 }
 
 fn parse_into_person(value: Value) -> Result<Person, DatastoreAdaptorError> {
