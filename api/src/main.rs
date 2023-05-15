@@ -12,6 +12,7 @@ use tokio::sync::Mutex;
 use tower::ServiceBuilder;
 use tower_governor::{errors::display_error, governor::GovernorConfigBuilder, GovernorLayer};
 use tower_http::{cors::CorsLayer, trace::TraceLayer};
+use tracing::Level;
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 
@@ -32,7 +33,7 @@ pub type State<A> = extract::State<Arc<Mutex<ApiState<A>>>>;
 
 #[tokio::main]
 async fn main() {
-    tracing_subscriber::fmt::init();
+    tracing_subscriber::fmt().with_max_level(Level::INFO).init();
 
     // Load env
     dotenvy::dotenv().ok();
@@ -82,7 +83,7 @@ async fn main() {
             "/event/:event_id/people/:person_name",
             patch(person::update_person),
         )
-        .route("/tasks/cleanup", patch(tasks::cleanup))
+        .route("/tasks/cleanup", get(tasks::cleanup))
         .with_state(shared_state)
         .layer(cors)
         .layer(rate_limit)

@@ -1,6 +1,8 @@
 use crate::payloads;
 use crate::routes;
 
+use utoipa::openapi::security::ApiKey;
+use utoipa::openapi::security::ApiKeyValue;
 use utoipa::{
     openapi::security::{HttpAuthScheme, HttpBuilder, SecurityScheme},
     Modify, OpenApi,
@@ -30,6 +32,7 @@ use utoipa::{
         (name = "info"),
         (name = "event"),
         (name = "person"),
+        (name = "tasks"),
     ),
     modifiers(&SecurityAddon),
 )]
@@ -48,6 +51,10 @@ impl Modify for SecurityAddon {
                     .bearer_format("base64")
                     .build(),
             ),
+        );
+        openapi.components.as_mut().unwrap().add_security_scheme(
+            "cron-key",
+            SecurityScheme::ApiKey(ApiKey::Header(ApiKeyValue::new("X-Cron-Key"))),
         );
     }
 }
