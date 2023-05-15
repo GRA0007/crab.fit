@@ -11,12 +11,12 @@ use utoipa::{
 #[openapi(
     info(title = "Crab Fit API"),
     paths(
-        routes::get_stats::get_stats,
-        routes::create_event::create_event,
-        routes::get_event::get_event,
-        routes::get_people::get_people,
-        routes::get_person::get_person,
-        routes::update_person::update_person,
+        routes::stats::get_stats,
+        routes::event::create_event,
+        routes::event::get_event,
+        routes::person::get_people,
+        routes::person::get_person,
+        routes::person::update_person,
     ),
     components(schemas(
         payloads::StatsResponse,
