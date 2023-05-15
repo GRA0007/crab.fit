@@ -91,22 +91,104 @@ impl Adaptor for DatastoreAdaptor {
 
     async fn upsert_person(&self, event_id: String, person: Person) -> Result<Person, Self::Error> {
         let mut client = self.client.lock().await;
-        todo!()
+
+        // Check if person exists
+        let existing_person = client
+            .query(
+                Query::new(PERSON_KIND)
+                    .filter(Filter::Equal(
+                        "eventId".into(),
+                        event_id.clone().into_value(),
+                    ))
+                    .filter(Filter::Equal(
+                        "name".into(),
+                        person.name.clone().into_value(),
+                    )),
+            )
+            .await?;
+
+        let mut key = Key::new(PERSON_KIND);
+        if let Some(entity) = existing_person.first() {
+            key = entity.key().clone();
+        }
+
+        let mut properties = HashMap::new();
+        properties.insert(String::from("name"), person.name.clone().into_value());
+        if let Some(password_hash) = person.password_hash.clone() {
+            properties.insert(String::from("password"), password_hash.into_value());
+        }
+        properties.insert(String::from("eventId"), event_id.into_value());
+        properties.insert(
+            String::from("created"),
+            person.created_at.clone().timestamp().into_value(),
+        );
+        properties.insert(
+            String::from("availability"),
+            person.availability.clone().into_value(),
+        );
+
+        client.put((key, properties)).await?;
+
+        Ok(person)
     }
 
     async fn get_event(&self, id: String) -> Result<Option<Event>, Self::Error> {
         let mut client = self.client.lock().await;
-        todo!()
+
+        // TODO: mark as visited
+
+        Ok(client
+            .get::<Value, _>(Key::new(EVENT_KIND).id(id.clone()))
+            .await?
+            .map(|value| parse_into_event(id, value))
+            .transpose()?)
     }
 
     async fn create_event(&self, event: Event) -> Result<Event, Self::Error> {
         let mut client = self.client.lock().await;
-        todo!()
+
+        let key = Key::new(EVENT_KIND).id(event.id.clone());
+
+        let mut properties = HashMap::new();
+        properties.insert(String::from("name"), event.name.clone().into_value());
+        properties.insert(
+            String::from("created"),
+            event.created_at.clone().timestamp().into_value(),
+        );
+        properties.insert(
+            String::from("visited"),
+            event.visited_at.clone().timestamp().into_value(),
+        );
+        properties.insert(String::from("times"), event.times.clone().into_value());
+        properties.insert(
+            String::from("timezone"),
+            event.timezone.clone().into_value(),
+        );
+
+        client.put((key, properties)).await?;
+
+        Ok(event)
     }
 
     async fn delete_event(&self, id: String) -> Result<EventDeletion, Self::Error> {
         let mut client = self.client.lock().await;
-        todo!()
+
+        let mut people_keys: Vec<Key> = client
+            .query(
+                Query::new(PERSON_KIND)
+                    .filter(Filter::Equal("eventId".into(), id.clone().into_value())),
+            )
+            .await?
+            .iter()
+            .map(|entity| entity.key().clone())
+            .collect();
+
+        let person_count = people_keys.len().try_into().unwrap();
+        people_keys.insert(0, Key::new(EVENT_KIND).id(id.clone()));
+
+        client.delete_all(people_keys).await?;
+
+        Ok(EventDeletion { id, person_count })
     }
 }
 
@@ -160,6 +242,57 @@ fn parse_into_person(value: Value) -> Result<Person, DatastoreAdaptorError> {
             person
                 .get("availability")
                 .ok_or(ConvertError::MissingProperty("availability".to_owned()))?
+                .clone(),
+        )?,
+    })
+}
+
+fn parse_into_event(id: String, value: Value) -> Result<Event, DatastoreAdaptorError> {
+    let event: HashMap<String, Value> = HashMap::from_value(value)?;
+    Ok(Event {
+        id,
+        name: String::from_value(
+            event
+                .get("name")
+                .ok_or(ConvertError::MissingProperty("name".to_owned()))?
+                .clone(),
+        )?,
+        created_at: DateTime::from_utc(
+            NaiveDateTime::from_timestamp_opt(
+                i64::from_value(
+                    event
+                        .get("created")
+                        .ok_or(ConvertError::MissingProperty("created".to_owned()))?
+                        .clone(),
+                )?,
+                0,
+            )
+            .unwrap(),
+            Utc,
+        ),
+        visited_at: DateTime::from_utc(
+            NaiveDateTime::from_timestamp_opt(
+                i64::from_value(
+                    event
+                        .get("visited")
+                        .ok_or(ConvertError::MissingProperty("visited".to_owned()))?
+                        .clone(),
+                )?,
+                0,
+            )
+            .unwrap(),
+            Utc,
+        ),
+        times: Vec::from_value(
+            event
+                .get("times")
+                .ok_or(ConvertError::MissingProperty("times".to_owned()))?
+                .clone(),
+        )?,
+        timezone: String::from_value(
+            event
+                .get("timezone")
+                .ok_or(ConvertError::MissingProperty("timezone".to_owned()))?
                 .clone(),
         )?,
     })

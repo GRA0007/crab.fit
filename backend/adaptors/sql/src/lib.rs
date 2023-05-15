@@ -91,6 +91,7 @@ impl Adaptor for SqlAdaptor {
     }
 
     async fn get_event(&self, id: String) -> Result<Option<Event>, Self::Error> {
+        // TODO: mark as visited
         Ok(event::Entity::find_by_id(id)
             .one(&self.db)
             .await?
