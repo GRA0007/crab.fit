@@ -8,7 +8,6 @@ use axum::{
     BoxError, Router, Server,
 };
 use routes::*;
-use sql_adaptor::SqlAdaptor;
 use tokio::sync::Mutex;
 use tower::ServiceBuilder;
 use tower_governor::{errors::display_error, governor::GovernorConfigBuilder, GovernorLayer};
@@ -16,8 +15,10 @@ use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 
+use crate::adaptors::create_adaptor;
 use crate::docs::ApiDoc;
 
+mod adaptors;
 mod docs;
 mod errors;
 mod payloads;
@@ -37,7 +38,7 @@ async fn main() {
     dotenv::dotenv().ok();
 
     let shared_state = Arc::new(Mutex::new(ApiState {
-        adaptor: SqlAdaptor::new().await,
+        adaptor: create_adaptor().await,
     }));
 
     // CORS configuration

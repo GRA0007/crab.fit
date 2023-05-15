@@ -1,5 +1,6 @@
 use chrono::{DateTime, Utc};
 
+#[derive(Clone)]
 pub struct Event {
     pub id: String,
     pub name: String,
@@ -9,6 +10,7 @@ pub struct Event {
     pub timezone: String,
 }
 
+#[derive(Clone)]
 /// Info about a deleted event
 pub struct EventDeletion {
     pub id: String,
