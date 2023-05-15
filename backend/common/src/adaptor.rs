@@ -15,8 +15,8 @@ pub trait Adaptor: Send + Sync {
     type Error: Error;
 
     async fn get_stats(&self) -> Result<Stats, Self::Error>;
-    async fn increment_stat_event_count(&self) -> Result<i32, Self::Error>;
-    async fn increment_stat_person_count(&self) -> Result<i32, Self::Error>;
+    async fn increment_stat_event_count(&self) -> Result<i64, Self::Error>;
+    async fn increment_stat_person_count(&self) -> Result<i64, Self::Error>;
 
     async fn get_people(&self, event_id: String) -> Result<Option<Vec<Person>>, Self::Error>;
     async fn upsert_person(&self, event_id: String, person: Person) -> Result<Person, Self::Error>;

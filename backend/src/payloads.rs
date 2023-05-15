@@ -37,8 +37,8 @@ impl From<Event> for EventResponse {
 
 #[derive(Serialize, ToSchema)]
 pub struct StatsResponse {
-    pub event_count: i32,
-    pub person_count: i32,
+    pub event_count: i64,
+    pub person_count: i64,
     pub version: String,
 }
 

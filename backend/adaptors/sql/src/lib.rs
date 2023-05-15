@@ -33,23 +33,23 @@ impl Adaptor for SqlAdaptor {
     async fn get_stats(&self) -> Result<Stats, Self::Error> {
         let stats_row = get_stats_row(&self.db).await?;
         Ok(Stats {
-            event_count: stats_row.event_count.unwrap(),
-            person_count: stats_row.person_count.unwrap(),
+            event_count: stats_row.event_count.unwrap() as i64,
+            person_count: stats_row.person_count.unwrap() as i64,
         })
     }
 
-    async fn increment_stat_event_count(&self) -> Result<i32, Self::Error> {
+    async fn increment_stat_event_count(&self) -> Result<i64, Self::Error> {
         let mut current_stats = get_stats_row(&self.db).await?;
         current_stats.event_count = Set(current_stats.event_count.unwrap() + 1);
 
-        Ok(current_stats.save(&self.db).await?.event_count.unwrap())
+        Ok(current_stats.save(&self.db).await?.event_count.unwrap() as i64)
     }
 
-    async fn increment_stat_person_count(&self) -> Result<i32, Self::Error> {
+    async fn increment_stat_person_count(&self) -> Result<i64, Self::Error> {
         let mut current_stats = get_stats_row(&self.db).await?;
         current_stats.person_count = Set(current_stats.person_count.unwrap() + 1);
 
-        Ok(current_stats.save(&self.db).await?.person_count.unwrap())
+        Ok(current_stats.save(&self.db).await?.person_count.unwrap() as i64)
     }
 
     async fn get_people(&self, event_id: String) -> Result<Option<Vec<Person>>, Self::Error> {
