@@ -13,6 +13,10 @@ If you find any bugs or have a feature request, please create an issue by <a hre
 
 If you speak a language other than English and you want to help translate Crab Fit, fill out this form: https://forms.gle/azz1yGqhpLUka45S9
 
+### Pull requests
+
+If you see an issue you want to fix, or want to implement a feature you think would be useful, please feel free to open a pull request with your changes. If you can, please open an issue about the bug or feature you want to work on before starting your PR, to prevent work duplication and give others a chance to improve your idea.
+
 ## Setup
 
 1. Clone the repo and ensure you have `node`, `yarn` and `rust` installed on your machine.
