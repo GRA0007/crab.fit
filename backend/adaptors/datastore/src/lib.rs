@@ -1,4 +1,4 @@
-use std::{collections::HashMap, env, error::Error, fmt::Display};
+use std::{env, error::Error, fmt::Display};
 
 use async_trait::async_trait;
 use chrono::{DateTime, NaiveDateTime, Utc};
@@ -10,8 +10,7 @@ use common::{
 };
 use google_cloud::{
     authorize::ApplicationCredentials,
-    datastore::{Client, Filter, FromValue, IntoValue, Key, Query, Value},
-    error::ConvertError,
+    datastore::{Client, Filter, FromValue, IntoValue, Key, Query},
 };
 use tokio::sync::Mutex;
 
@@ -31,12 +30,17 @@ impl Adaptor for DatastoreAdaptor {
     type Error = DatastoreAdaptorError;
 
     async fn get_stats(&self) -> Result<Stats, Self::Error> {
-        let event_count = get_stats_value(&self.client, STATS_EVENTS_ID).await?;
-        let person_count = get_stats_value(&self.client, STATS_PEOPLE_ID).await?;
+        let mut client = self.client.lock().await;
+
+        let event_key = Key::new(STATS_KIND).id(STATS_EVENTS_ID);
+        let event_stats: DatastoreStats = client.get(event_key).await?.unwrap_or_default();
+
+        let person_key = Key::new(STATS_KIND).id(STATS_PEOPLE_ID);
+        let person_stats: DatastoreStats = client.get(person_key).await?.unwrap_or_default();
 
         Ok(Stats {
-            event_count,
-            person_count,
+            event_count: event_stats.value,
+            person_count: person_stats.value,
         })
     }
 
@@ -44,22 +48,22 @@ impl Adaptor for DatastoreAdaptor {
         let mut client = self.client.lock().await;
 
         let key = Key::new(STATS_KIND).id(STATS_EVENTS_ID);
-        let event_count = get_stats_value(&self.client, STATS_EVENTS_ID).await? + 1;
+        let mut event_stats: DatastoreStats = client.get(key.clone()).await?.unwrap_or_default();
 
-        let updated_props = HashMap::from([(String::from("value"), event_count.into_value())]);
-        client.put((key, updated_props)).await?;
-        Ok(event_count)
+        event_stats.value += 1;
+        client.put((key, event_stats.clone())).await?;
+        Ok(event_stats.value)
     }
 
     async fn increment_stat_person_count(&self) -> Result<i64, Self::Error> {
         let mut client = self.client.lock().await;
 
         let key = Key::new(STATS_KIND).id(STATS_PEOPLE_ID);
-        let person_count = get_stats_value(&self.client, STATS_PEOPLE_ID).await? + 1;
+        let mut person_stats: DatastoreStats = client.get(key.clone()).await?.unwrap_or_default();
 
-        let updated_props = HashMap::from([(String::from("value"), person_count.into_value())]);
-        client.put((key, updated_props)).await?;
-        Ok(person_count)
+        person_stats.value += 1;
+        client.put((key, person_stats.clone())).await?;
+        Ok(person_stats.value)
     }
 
     async fn get_people(&self, event_id: String) -> Result<Option<Vec<Person>>, Self::Error> {
@@ -67,7 +71,7 @@ impl Adaptor for DatastoreAdaptor {
 
         // Check the event exists
         if client
-            .get::<Value, _>(Key::new(EVENT_KIND).id(event_id.clone()))
+            .get::<DatastoreEvent, _>(Key::new(EVENT_KIND).id(event_id.clone()))
             .await?
             .is_none()
         {
@@ -82,7 +86,11 @@ impl Adaptor for DatastoreAdaptor {
                 )
                 .await?
                 .into_iter()
-                .filter_map(|entity| parse_into_person(entity.properties().clone()).ok())
+                .filter_map(|entity| {
+                    DatastorePerson::from_value(entity.properties().clone())
+                        .ok()
+                        .map(|ds_person| ds_person.into())
+                })
                 .collect(),
         ))
     }
@@ -110,22 +118,9 @@ impl Adaptor for DatastoreAdaptor {
             key = entity.key().clone();
         }
 
-        let mut properties = HashMap::new();
-        properties.insert(String::from("name"), person.name.clone().into_value());
-        if let Some(password_hash) = person.password_hash.clone() {
-            properties.insert(String::from("password"), password_hash.into_value());
-        }
-        properties.insert(String::from("eventId"), event_id.into_value());
-        properties.insert(
-            String::from("created"),
-            person.created_at.clone().timestamp().into_value(),
-        );
-        properties.insert(
-            String::from("availability"),
-            person.availability.clone().into_value(),
-        );
-
-        client.put((key, properties)).await?;
+        client
+            .put((key, DatastorePerson::from_person(person.clone(), event_id)))
+            .await?;
 
         Ok(person)
     }
@@ -134,21 +129,15 @@ impl Adaptor for DatastoreAdaptor {
         let mut client = self.client.lock().await;
 
         let key = Key::new(EVENT_KIND).id(id.clone());
-        let existing_event = client.get::<Value, _>(key.clone()).await?;
+        let existing_event = client.get::<DatastoreEvent, _>(key.clone()).await?;
 
         // Mark as visited if it exists
-        if let Some(mut event) = existing_event
-            .clone()
-            .map(HashMap::<String, Value>::from_value)
-            .transpose()?
-        {
-            event.insert(String::from("visited"), Utc::now().timestamp().into_value());
+        if let Some(mut event) = existing_event.clone() {
+            event.visited = Utc::now().timestamp();
             client.put((key, event)).await?;
         }
 
-        Ok(existing_event
-            .map(|value| parse_into_event(id, value))
-            .transpose()?)
+        Ok(existing_event.map(|e| e.to_event(id)))
     }
 
     async fn create_event(&self, event: Event) -> Result<Event, Self::Error> {
@@ -156,23 +145,8 @@ impl Adaptor for DatastoreAdaptor {
 
         let key = Key::new(EVENT_KIND).id(event.id.clone());
 
-        let mut properties = HashMap::new();
-        properties.insert(String::from("name"), event.name.clone().into_value());
-        properties.insert(
-            String::from("created"),
-            event.created_at.clone().timestamp().into_value(),
-        );
-        properties.insert(
-            String::from("visited"),
-            event.visited_at.clone().timestamp().into_value(),
-        );
-        properties.insert(String::from("times"), event.times.clone().into_value());
-        properties.insert(
-            String::from("timezone"),
-            event.timezone.clone().into_value(),
-        );
-
-        client.put((key, properties)).await?;
+        let ds_event: DatastoreEvent = event.clone().into();
+        client.put((key, ds_event)).await?;
 
         Ok(event)
     }
@@ -180,7 +154,7 @@ impl Adaptor for DatastoreAdaptor {
     async fn delete_event(&self, id: String) -> Result<EventDeletion, Self::Error> {
         let mut client = self.client.lock().await;
 
-        let mut people_keys: Vec<Key> = client
+        let mut keys_to_delete: Vec<Key> = client
             .query(
                 Query::new(PERSON_KIND)
                     .filter(Filter::Equal("eventId".into(), id.clone().into_value())),
@@ -190,10 +164,10 @@ impl Adaptor for DatastoreAdaptor {
             .map(|entity| entity.key().clone())
             .collect();
 
-        let person_count = people_keys.len().try_into().unwrap();
-        people_keys.insert(0, Key::new(EVENT_KIND).id(id.clone()));
+        let person_count = keys_to_delete.len().try_into().unwrap();
+        keys_to_delete.insert(0, Key::new(EVENT_KIND).id(id.clone()));
 
-        client.delete_all(people_keys).await?;
+        client.delete_all(keys_to_delete).await?;
 
         Ok(EventDeletion { id, person_count })
     }
@@ -222,101 +196,80 @@ impl DatastoreAdaptor {
     }
 }
 
-async fn get_stats_value(client: &Mutex<Client>, id: &str) -> Result<i64, DatastoreAdaptorError> {
-    let mut client = client.lock().await;
-    Ok(client
-        .get(Key::new(STATS_KIND).id(id))
-        .await?
-        .unwrap_or(HashMap::from([(String::from("value"), 0)]))
-        .get("value")
-        .cloned()
-        .unwrap_or(0))
+#[derive(FromValue, IntoValue, Default, Clone)]
+struct DatastoreStats {
+    value: i64,
 }
 
-fn parse_into_person(value: Value) -> Result<Person, DatastoreAdaptorError> {
-    let person: HashMap<String, Value> = HashMap::from_value(value)?;
-    Ok(Person {
-        name: String::from_value(
-            person
-                .get("name")
-                .ok_or(ConvertError::MissingProperty("name".to_owned()))?
-                .clone(),
-        )?,
-        password_hash: person
-            .get("password")
-            .map(|p| String::from_value(p.clone()))
-            .transpose()?,
-        created_at: DateTime::from_utc(
-            NaiveDateTime::from_timestamp_opt(
-                i64::from_value(
-                    person
-                        .get("created")
-                        .ok_or(ConvertError::MissingProperty("created".to_owned()))?
-                        .clone(),
-                )?,
-                0,
-            )
-            .unwrap(),
-            Utc,
-        ),
-        availability: Vec::from_value(
-            person
-                .get("availability")
-                .ok_or(ConvertError::MissingProperty("availability".to_owned()))?
-                .clone(),
-        )?,
-    })
+#[derive(FromValue, IntoValue, Clone)]
+struct DatastoreEvent {
+    name: String,
+    created: i64,
+    visited: i64,
+    times: Vec<String>,
+    timezone: String,
 }
 
-fn parse_into_event(id: String, value: Value) -> Result<Event, DatastoreAdaptorError> {
-    let event: HashMap<String, Value> = HashMap::from_value(value)?;
-    Ok(Event {
-        id,
-        name: String::from_value(
-            event
-                .get("name")
-                .ok_or(ConvertError::MissingProperty("name".to_owned()))?
-                .clone(),
-        )?,
-        created_at: DateTime::from_utc(
-            NaiveDateTime::from_timestamp_opt(
-                i64::from_value(
-                    event
-                        .get("created")
-                        .ok_or(ConvertError::MissingProperty("created".to_owned()))?
-                        .clone(),
-                )?,
-                0,
-            )
-            .unwrap(),
-            Utc,
-        ),
-        visited_at: DateTime::from_utc(
-            NaiveDateTime::from_timestamp_opt(
-                i64::from_value(
-                    event
-                        .get("visited")
-                        .ok_or(ConvertError::MissingProperty("visited".to_owned()))?
-                        .clone(),
-                )?,
-                0,
-            )
-            .unwrap(),
-            Utc,
-        ),
-        times: Vec::from_value(
-            event
-                .get("times")
-                .ok_or(ConvertError::MissingProperty("times".to_owned()))?
-                .clone(),
-        )?,
-        timezone: String::from_value(
-            event
-                .get("timezone")
-                .ok_or(ConvertError::MissingProperty("timezone".to_owned()))?
-                .clone(),
-        )?,
-    })
+#[derive(FromValue, IntoValue)]
+#[allow(non_snake_case)]
+struct DatastorePerson {
+    name: String,
+    password: Option<String>,
+    created: i64,
+    eventId: String,
+    availability: Vec<String>,
+}
+
+impl From<DatastorePerson> for Person {
+    fn from(value: DatastorePerson) -> Self {
+        Self {
+            name: value.name,
+            password_hash: value.password,
+            created_at: unix_to_date(value.created),
+            availability: value.availability,
+        }
+    }
+}
+
+impl DatastorePerson {
+    fn from_person(person: Person, event_id: String) -> Self {
+        Self {
+            name: person.name,
+            password: person.password_hash,
+            created: person.created_at.timestamp(),
+            eventId: event_id,
+            availability: person.availability,
+        }
+    }
+}
+
+impl From<Event> for DatastoreEvent {
+    fn from(value: Event) -> Self {
+        Self {
+            name: value.name,
+            created: value.created_at.timestamp(),
+            visited: value.visited_at.timestamp(),
+            times: value.times,
+            timezone: value.timezone,
+        }
+    }
+}
+
+impl DatastoreEvent {
+    fn to_event(&self, event_id: String) -> Event {
+        Event {
+            id: event_id,
+            name: self.name.clone(),
+            created_at: unix_to_date(self.created),
+            visited_at: unix_to_date(self.visited),
+            times: self.times.clone(),
+            timezone: self.timezone.clone(),
+        }
+    }
+}
+
+fn unix_to_date(unix: i64) -> DateTime<Utc> {
+    DateTime::from_utc(NaiveDateTime::from_timestamp_opt(unix, 0).unwrap(), Utc)
 }
 
 #[derive(Debug)]
