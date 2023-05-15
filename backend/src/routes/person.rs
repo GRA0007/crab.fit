@@ -86,7 +86,7 @@ pub async fn get_person<A: Adaptor>(
     let existing_person = existing_people
         .unwrap()
         .into_iter()
-        .find(|p| p.name == person_name);
+        .find(|p| p.name.to_lowercase() == person_name.to_lowercase());
 
     match existing_person {
         // Login
@@ -168,7 +168,7 @@ pub async fn update_person<A: Adaptor>(
     let existing_person = existing_people
         .unwrap()
         .into_iter()
-        .find(|p| p.name == person_name)
+        .find(|p| p.name.to_lowercase() == person_name.to_lowercase())
         .ok_or(ApiError::NotFound)?;
 
     // Verify password (if set)
