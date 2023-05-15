@@ -24,13 +24,13 @@ pub async fn cleanup<A: Adaptor>(
     headers: HeaderMap,
 ) -> Result<(), ApiError<A>> {
     // Check cron key
-    let cron_key_header = headers.get("X-Cron-Key");
-    if let Some(cron_key) = cron_key_header {
-        if let Ok(key) = env::var("CRON_KEY") {
-            if !key.is_empty() && *cron_key != key {
-                return Err(ApiError::NotAuthorized);
-            }
-        }
+    let cron_key_header: String = headers
+        .get("X-Cron-Key")
+        .map(|k| k.to_str().unwrap_or_default().into())
+        .unwrap_or_default();
+    let env_key = env::var("CRON_KEY").unwrap_or_default();
+    if !env_key.is_empty() && cron_key_header != env_key {
+        return Err(ApiError::NotAuthorized);
     }
 
     info!("Running cleanup task");
