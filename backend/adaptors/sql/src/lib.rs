@@ -91,11 +91,16 @@ impl Adaptor for SqlAdaptor {
     }
 
     async fn get_event(&self, id: String) -> Result<Option<Event>, Self::Error> {
-        // TODO: mark as visited
-        Ok(event::Entity::find_by_id(id)
-            .one(&self.db)
-            .await?
-            .map(|model| model.into()))
+        let existing_event = event::Entity::find_by_id(id).one(&self.db).await?;
+
+        // Mark as visited
+        if let Some(event) = existing_event.clone() {
+            let mut event: event::ActiveModel = event.into();
+            event.visited_at = Set(Utc::now().naive_utc());
+            event.save(&self.db).await?;
+        }
+
+        Ok(existing_event.map(|model| model.into()))
     }
 
     async fn create_event(&self, event: Event) -> Result<Event, Self::Error> {

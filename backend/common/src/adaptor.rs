@@ -21,6 +21,7 @@ pub trait Adaptor: Send + Sync {
     async fn get_people(&self, event_id: String) -> Result<Option<Vec<Person>>, Self::Error>;
     async fn upsert_person(&self, event_id: String, person: Person) -> Result<Person, Self::Error>;
 
+    /// Get an event and update visited date to current time
     async fn get_event(&self, id: String) -> Result<Option<Event>, Self::Error>;
     async fn create_event(&self, event: Event) -> Result<Event, Self::Error>;
 

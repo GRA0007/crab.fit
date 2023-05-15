@@ -135,11 +135,20 @@ impl Adaptor for DatastoreAdaptor {
     async fn get_event(&self, id: String) -> Result<Option<Event>, Self::Error> {
         let mut client = self.client.lock().await;
 
-        // TODO: mark as visited
+        let key = Key::new(EVENT_KIND).id(id.clone());
+        let existing_event = client.get::<Value, _>(key.clone()).await?;
 
-        Ok(client
-            .get::<Value, _>(Key::new(EVENT_KIND).id(id.clone()))
-            .await?
+        // Mark as visited if it exists
+        if let Some(mut event) = existing_event
+            .clone()
+            .map(HashMap::<String, Value>::from_value)
+            .transpose()?
+        {
+            event.insert(String::from("visited"), Utc::now().timestamp().into_value());
+            client.put((key, event)).await?;
+        }
+
+        Ok(existing_event
             .map(|value| parse_into_event(id, value))
             .transpose()?)
     }
