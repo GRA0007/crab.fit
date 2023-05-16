@@ -1,6 +1,6 @@
 {
   "name": "Crab Fit",
-  "tagline": "Créez le votre",
+  "tagline": "Créez le vôtre",
   "cta": "Créez votre propre Crab Fit !",
   "created": "Créé {{date}}",
   "donate": {
@@ -45,7 +45,7 @@
     },
     "highlight": {
       "label": "Mettre en évidence les meilleures disponibilités",
-      "title": "Faites ressortir les meilleures disponibilités sur la carte thermique",
+      "title": "Faire ressortir les meilleures disponibilités sur la carte thermique",
       "options": {
         "Off": "Désactivé",
         "On": "Activé"
@@ -53,6 +53,10 @@
     },
     "language": {
       "label": "Langue"
+    },
+    "colormap": {
+      "label": "Couleurs de la carte thermique",
+      "classic": "Crab Fit (classique)"
     }
   },
   "video": {
