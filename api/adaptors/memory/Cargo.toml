@@ -1,0 +1,10 @@
+[package]
+name = "memory-adaptor"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-trait = "0.1.68"
+chrono = "0.4.24"
+common = { path = "../../common" }
+tokio = { version = "1.28.1", features = ["rt-multi-thread"] }

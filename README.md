@@ -3,8 +3,6 @@
 Align your schedules to find the perfect time that works for everyone.
 Licensed under the GNU GPLv3.
 
-<a href="https://www.producthunt.com/posts/crab-fit?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-crab-fit" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=291656&theme=light" alt="Crab Fit - Use your availability to find a time that works for everyone | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-
 ## Contributing
 
 ### ⭐️ Bugs or feature requests
@@ -15,16 +13,19 @@ If you find any bugs or have a feature request, please create an issue by <a hre
 
 If you speak a language other than English and you want to help translate Crab Fit, fill out this form: https://forms.gle/azz1yGqhpLUka45S9
 
+### Pull requests
+
+If you see an issue you want to fix, or want to implement a feature you think would be useful, please feel free to open a pull request with your changes. If you can, please open an issue about the bug or feature you want to work on before starting your PR, to prevent work duplication and give others a chance to improve your idea.
+
 ## Setup
 
-1. Clone the repo.
-2. Run `yarn` in both backend and frontend folders.
-3. Run `yarn dev` in the backend folder to start the API. **Note:** you will need a google cloud app set up with datastore enabled and set your `GOOGLE_APPLICATION_CREDENTIALS` environment variable to your service key path.
-4. Run `yarn dev` in the frontend folder to start the frontend.
+1. Clone the repo and ensure you have `node`, `yarn` and `rust` installed on your machine.
+2. Run `yarn` in `frontend` folder to install dependencies, then `yarn dev` to start the dev server.
+3. Run `cargo run` in the `api` folder to start the API.
 
 ### 🔌 Browser extension
 
-The browser extension in `crabfit-browser-extension` can be tested by first running the frontend, and changing the iframe url in the extension's `popup.html` to match the local Crab Fit. Then it can be loaded as an unpacked extension in Chrome to test.
+The browser extension in `browser-extension` can be tested by first running the frontend, and changing the iframe url in the extension's `popup.html` to match the local Crab Fit. Then it can be loaded as an unpacked extension in Chrome to test.
 
 ## Deploy
 
@@ -34,4 +35,4 @@ To deploy cron jobs (i.e. monthly cleanup of old events), run `gcloud app deploy
 
 ### 🔌 Browser extension
 
-Compress everything inside the `crabfit-browser-extension` folder and use that zip to deploy using Chrome web store and Mozilla Add-on store.
+Compress everything inside the `browser-extension` folder and use that zip to deploy using Chrome web store and Mozilla Add-on store.
