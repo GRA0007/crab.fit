@@ -2,8 +2,11 @@ name: Deploy API
 
 on:
   push:
-    branches: ['chore/setup-workflow']
-    paths: ['api/**', 'workflows/deploy_api.yml']
+    branches:
+    - chore/setup-workflow
+    paths:
+    - api/**
+    - .github/workflows/deploy_api.yml
 
 env:
   REGISTRY: ghcr.io
