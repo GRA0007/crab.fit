@@ -3,7 +3,7 @@ name: Deploy API
 on:
   push:
     branches:
-    - chore/setup-workflow
+    - main
     paths:
     - api/**
     - .github/workflows/deploy_api.yml
