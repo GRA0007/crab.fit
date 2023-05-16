@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import createPalette from 'hue-map'
+import { createPalette } from 'hue-map'
 
 import { useSettingsStore } from '/src/stores'
 
@@ -27,7 +27,7 @@ const Legend = ({
   useEffect(() => setPalette(createPalette({
     map: colormap === 'crabfit' ? [[0, [247,158,0,0]], [1, [247,158,0,255]]] : colormap,
     steps: max+1-min,
-  })), [min, max, colormap])
+  }).format()), [min, max, colormap])
 
   return (
     <Wrapper>
