@@ -2,7 +2,7 @@ name: Deploy API
 
 on:
   push:
-    branches: ['main']
+    branches: ['chore/setup-workflow']
     paths: ['api/**']
 
 env:
@@ -12,10 +12,6 @@ jobs:
   build-and-push:
     name: Build Docker image and push to GitHub Container Registry
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: api
 
     permissions:
       contents: read
@@ -34,7 +30,7 @@ jobs:
         images: ${{ env.REGISTRY }}/${{ github.repository }}/api
     - uses: docker/build-push-action@v4
       with:
-        context: .
+        context: ./api
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
@@ -52,7 +48,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           docker login ${{ env.REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-          docker pull ${{ env.REGISTRY }}/${{ github.repository }}/api:latest
+          docker pull ${{ env.REGISTRY }}/${{ github.repository }}/api:main
           docker stop crabfit-api
           docker rm crabfit-api
-          docker run -d -p 3000:3000 --name crabfit-api --env-file ./.env ${{ env.REGISTRY }}/${{ github.repository }}/api:latest
+          docker run -d -p 3000:3000 --name crabfit-api --env-file ./.env ${{ env.REGISTRY }}/${{ github.repository }}/api:main
