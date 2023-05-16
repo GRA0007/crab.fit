@@ -20,6 +20,9 @@ jobs:
       contents: read
       packages: write
 
+    outputs:
+      tag: ${{ steps.meta.outputs.tags[0] }}
+
     steps:
     - uses: actions/checkout@v3
     - uses: docker/login-action@v2
@@ -39,7 +42,7 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
-    needs: [build-and-push]
+    needs: build-and-push
     name: Deploy to EC2
     runs-on: ubuntu-latest
 
@@ -51,7 +54,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           docker login ${{ env.REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-          docker pull ${{ env.REGISTRY }}/${{ github.repository }}/api:main
+          docker pull ${{ needs.build-and-push.outputs.tag }}
           docker stop crabfit-api
           docker rm crabfit-api
-          docker run -d -p 3000:3000 --name crabfit-api --env-file ./.env ${{ env.REGISTRY }}/${{ github.repository }}/api:main
+          docker run -d -p 3000:3000 --name crabfit-api --env-file ./.env ${{ needs.build-and-push.outputs.tag }}

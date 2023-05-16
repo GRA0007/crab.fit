@@ -1,4 +1,4 @@
-# Crab Fit <img width="100" align="right" src="crabfit-frontend/src/res/logo.svg" alt="avatar">
+# Crab Fit <img width="100" align="right" src="frontend/src/res/logo.svg" alt="avatar">
 
 Align your schedules to find the perfect time that works for everyone.
 Licensed under the GNU GPLv3.
