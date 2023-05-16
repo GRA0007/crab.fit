@@ -2,15 +2,15 @@ name: Deploy API
 
 on:
   push:
-    branches: ['main']
-    paths: ['api/**']
-
-env:
-  REGISTRY: ghcr.io
+    branches:
+    - main
+    paths:
+    - api/**
+    - .github/workflows/deploy_api.yml
 
 jobs:
   build-and-push:
-    name: Build Docker image and push to GitHub Container Registry
+    name: Deploy to Fly.io
     runs-on: ubuntu-latest
 
     defaults:
@@ -19,40 +19,10 @@ jobs:
 
     permissions:
       contents: read
-      packages: write
 
     steps:
     - uses: actions/checkout@v3
-    - uses: docker/login-action@v2
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    - uses: docker/metadata-action@v4
-      id: meta
-      with:
-        images: ${{ env.REGISTRY }}/${{ github.repository }}/api
-    - uses: docker/build-push-action@v4
-      with:
-        context: .
-        push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
-
-  deploy:
-    needs: [build-and-push]
-    name: Deploy to EC2
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          docker login ${{ env.REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-          docker pull ${{ env.REGISTRY }}/${{ github.repository }}/api:latest
-          docker stop crabfit-api
-          docker rm crabfit-api
-          docker run -d -p 3000:3000 --name crabfit-api --env-file ./.env ${{ env.REGISTRY }}/${{ github.repository }}/api:latest
+    - uses: superfly/flyctl-actions/setup-flyctl@master
+    - run: flyctl deploy --remote-only
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

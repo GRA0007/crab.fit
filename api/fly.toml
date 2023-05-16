@@ -1,0 +1,15 @@
+# fly.toml app configuration file generated for crabfit-api on 2023-05-16T19:42:08+10:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+# Note: this is used to deploy the production Crab Fit API to Fly.io
+
+app = "crabfit-api"
+primary_region = "syd"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
