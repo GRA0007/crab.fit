@@ -21,7 +21,7 @@ jobs:
       packages: write
 
     outputs:
-      tag: ${{ steps.meta.outputs.tags[0] }}
+      tag: ${{ steps.meta.outputs.tags }}
 
     steps:
     - uses: actions/checkout@v3
