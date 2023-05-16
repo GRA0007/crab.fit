@@ -1122,7 +1122,7 @@ dependencies = [
 [[package]]
 name = "google-cloud"
 version = "0.2.1"
-source = "git+https://github.com/GRA0007/google-cloud-rs.git#5b2c3d6dcde9e58528c90c0a3016f123104c5fe3"
+source = "git+https://github.com/GRA0007/google-cloud-rs.git#4a2db92efd57a896e14d18877458c6ae43418aec"
 dependencies = [
  "chrono",
  "futures",
@@ -1144,7 +1144,7 @@ dependencies = [
 [[package]]
 name = "google-cloud-derive"
 version = "0.2.1"
-source = "git+https://github.com/GRA0007/google-cloud-rs.git#5b2c3d6dcde9e58528c90c0a3016f123104c5fe3"
+source = "git+https://github.com/GRA0007/google-cloud-rs.git#4a2db92efd57a896e14d18877458c6ae43418aec"
 dependencies = [
  "darling",
  "quote",

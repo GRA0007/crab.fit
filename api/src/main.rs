@@ -89,7 +89,7 @@ async fn main() {
         .layer(rate_limit)
         .layer(TraceLayer::new_for_http());
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
 
     println!(
         "🦀 Crab Fit API listening at http://{} in {} mode",
@@ -102,6 +102,11 @@ async fn main() {
     );
     Server::bind(&addr)
         .serve(app.into_make_service_with_connect_info::<SocketAddr>())
+        .with_graceful_shutdown(async {
+            tokio::signal::ctrl_c()
+                .await
+                .expect("Failed to install Ctrl+C handler")
+        })
         .await
         .unwrap();
 }
