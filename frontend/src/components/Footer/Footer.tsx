@@ -1,4 +1,4 @@
-import { Button } from '/src/components'
+import Button from '/src/components/Button/Button'
 import { useTranslation } from '/src/i18n/server'
 import { makeClass } from '/src/utils'
 

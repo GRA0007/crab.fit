@@ -15,7 +15,7 @@ export const getOptions = (lng = fallbackLng, ns: InitOptions['ns'] = defaultNS)
   ns,
   fallbackNS: defaultNS,
   defaultNS,
-  debug: process.env.NODE_ENV !== 'production',
+  // debug: true,
   interpolation: {
     escapeValue: false,
   },

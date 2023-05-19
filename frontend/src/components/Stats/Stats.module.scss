@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  & > div {
+    text-align: center;
+    padding: 0 6px;
+    min-width: 160px;
+    margin: 10px 0;
+  }
+}
+
+.number {
+  display: block;
+  font-weight: 900;
+  color: var(--secondary);
+  font-size: 2em;
+}
+
+.label {
+  display: block;
+}

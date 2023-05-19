@@ -2,6 +2,8 @@
 
 import Link from 'next/link'
 
+import Content from '/src/components/Content/Content'
+import Section from '/src/components/Section/Section'
 import dayjs from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
 import { useRecentsStore, useStore } from '/src/stores'
@@ -16,8 +18,8 @@ const Recents = ({ target }: RecentsProps) => {
   const recents = useStore(useRecentsStore, state => state.recents)
   const { t } = useTranslation(['home', 'common'])
 
-  return recents?.length ? <section id="recents">
-    <div>
+  return recents?.length ? <Section id="recents">
+    <Content>
       <h2>{t('home:recently_visited')}</h2>
       {recents.map(event => (
         <Link className={styles.recent} href={`/${event.id}`} target={target} key={event.id}>
@@ -28,8 +30,8 @@ const Recents = ({ target }: RecentsProps) => {
           >{t('common:created', { date: dayjs.unix(event.created_at).fromNow() })}</span>
         </Link>
       ))}
-    </div>
-  </section> : null
+    </Content>
+  </Section> : null
 }
 
 export default Recents
