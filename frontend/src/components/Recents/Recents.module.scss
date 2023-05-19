@@ -1,0 +1,35 @@
+.recent {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  flex-wrap: wrap;
+
+  &:hover .name {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 500px) {
+    display: block;
+  }
+}
+
+.name {
+  font-weight: 700;
+  font-size: 1.1em;
+  color: var(--secondary);
+  flex: 1;
+  display: block;
+}
+
+.date {
+  font-weight: 400;
+  opacity: .8;
+  white-space: nowrap;
+  color: var(--text);
+
+  @media (max-width: 500px) {
+    white-space: normal;
+  }
+}
