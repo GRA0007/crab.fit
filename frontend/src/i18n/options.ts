@@ -30,7 +30,7 @@ interface LanguageDetails {
   /** TODO: document */
   separator?: string
   /** Day.js locale import */
-  import: () => unknown
+  import: () => Promise<unknown>
 }
 
 export const languageDetails: Record<typeof languages[number], LanguageDetails> = {

@@ -1,136 +1,99 @@
-import { useState, useEffect, useRef } from 'react'
-import { useTranslation } from 'react-i18next'
-import dayjs from 'dayjs'
-import { Settings as SettingsIcon } from 'lucide-react'
+'use client'
+
+import { useCallback, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { maps } from 'hue-map'
+import { Settings as SettingsIcon } from 'lucide-react'
 
-import { ToggleField, SelectField } from '/src/components'
+import SelectField from '/src/components/SelectField/SelectField'
+import ToggleField from '/src/components/ToggleField/ToggleField'
+import dayjs from '/src/config/dayjs'
+import { useTranslation } from '/src/i18n/client'
+import { languageDetails } from '/src/i18n/options'
+import { useStore } from '/src/stores'
+import useSettingsStore from '/src/stores/settingsStore'
+import { makeClass, unhyphenate } from '/src/utils'
 
-import { useSettingsStore, useLocaleUpdateStore } from '/src/stores'
+import styles from './Settings.module.scss'
 
-import {
-  OpenButton,
-  Modal,
-  Heading,
-  Cover,
-} from './Settings.styles'
-
-import locales from '/src/i18n/locales'
-import { unhyphenate } from '/src/utils'
-import { useRouter } from 'next/router'
-
-// Language specific options
-const setDefaults = (lang, store) => {
-  if (locales[lang]) {
-    store.setWeekStart(locales[lang].weekStart)
-    store.setTimeFormat(locales[lang].timeFormat)
-  }
-}
+// TODO: add to giraugh tools
+const isKeyOfObject = <T extends object>(
+  key: string | number | symbol,
+  obj: T,
+): key is keyof T => key in obj
 
 const Settings = () => {
-  const { pathname } = useRouter()
-  const store = useSettingsStore()
-  const [isOpen, _setIsOpen] = useState(false)
   const { t, i18n } = useTranslation('common')
-  const setLocale = useLocaleUpdateStore(state => state.setLocale)
-  const firstControlRef = useRef()
+  const router = useRouter()
 
-  const onEsc = e => {
-    if (e.key === 'Escape') {
-      setIsOpen(false)
-    }
-  }
+  const store = useStore(useSettingsStore, state => state)
 
-  const setIsOpen = open => {
-    _setIsOpen(open)
-
-    if (open) {
-      window.setTimeout(() => firstControlRef.current?.focus(), 150)
-      document.addEventListener('keyup', onEsc, true)
+  const modalRef = useRef<HTMLDialogElement>(null)
+  const [isOpen, _setIsOpen] = useState(false)
+  const setIsOpen = useCallback((shouldOpen: boolean) => {
+    if (shouldOpen) {
+      modalRef.current?.showModal()
+      _setIsOpen(true)
     } else {
-      document.removeEventListener('keyup', onEsc)
+      modalRef.current?.close()
+      _setIsOpen(false)
     }
-  }
+  }, [])
 
-  useEffect(() => {
-    if (Object.keys(locales).includes(i18n.language)) {
-      locales[i18n.language].import().then(() => {
-        dayjs.locale(i18n.language)
-        setLocale(dayjs.locale())
-        document.documentElement.setAttribute('lang', i18n.language)
-      })
-    } else {
-      setLocale('en')
-      document.documentElement.setAttribute('lang', 'en')
-    }
-  }, [i18n.language, setLocale])
+  return <>
+    <button
+      type="button"
+      className={makeClass(styles.openButton, isOpen && styles.open)}
+      onClick={() => setIsOpen(!isOpen)}
+      title={t<string>('options.name')}
+    ><SettingsIcon /></button>
 
-  if (!i18n.options.storedLang) {
-    setDefaults(i18n.language, store)
-    i18n.options.storedLang = i18n.language
-  }
-
-  i18n.on('languageChanged', lang => {
-    setDefaults(lang, store)
-  })
-
-  // Reset scroll on navigation
-  useEffect(() => window.scrollTo(0, 0), [pathname])
-
-  return (
-    <>
-      <OpenButton
-        $isOpen={isOpen}
-        type="button"
-        onClick={() => setIsOpen(!isOpen)} title={t('options.name')}
-      ><SettingsIcon /></OpenButton>
-
-      <Cover $isOpen={isOpen} onClick={() => setIsOpen(false)} />
-      <Modal $isOpen={isOpen}>
-        <Heading>{t('options.name')}</Heading>
+    <dialog
+      className={styles.modal}
+      ref={modalRef}
+      onClose={() => _setIsOpen(false)}
+      onClick={() => modalRef.current?.close()}
+    >
+      <div onClick={e => e.stopPropagation()}>
+        <span className={styles.heading}>{t('options.name')}</span>
 
         <ToggleField
           label={t('options.weekStart.label')}
           name="weekStart"
-          id="weekStart"
           options={{
             'Sunday': t('options.weekStart.options.Sunday'),
             'Monday': t('options.weekStart.options.Monday'),
           }}
-          value={store.weekStart === 0 ? 'Sunday' : 'Monday'}
-          onChange={value => store.setWeekStart(value === 'Sunday' ? 0 : 1)}
-          inputRef={firstControlRef}
+          value={store?.weekStart === 0 ? 'Sunday' : 'Monday'}
+          onChange={value => store?.setWeekStart(value === 'Sunday' ? 0 : 1)}
         />
 
         <ToggleField
           label={t('options.timeFormat.label')}
           name="timeFormat"
-          id="timeFormat"
           options={{
             '12h': t('options.timeFormat.options.12h'),
             '24h': t('options.timeFormat.options.24h'),
           }}
-          value={store.timeFormat}
-          onChange={value => store.setTimeFormat(value)}
+          value={store?.timeFormat ?? '12h'}
+          onChange={value => store?.setTimeFormat(value)}
         />
 
         <ToggleField
           label={t('options.theme.label')}
           name="theme"
-          id="theme"
           options={{
             'System': t('options.theme.options.System'),
             'Light': t('options.theme.options.Light'),
             'Dark': t('options.theme.options.Dark'),
           }}
-          value={store.theme}
-          onChange={value => store.setTheme(value)}
+          value={store?.theme ?? 'System'}
+          onChange={value => store?.setTheme(value)}
         />
 
         <SelectField
           label={t('options.colormap.label')}
           name="colormap"
-          id="colormap"
           options={{
             'crabfit': t('options.colormap.classic'),
             ...Object.fromEntries(Object.keys(maps).sort().map(palette => [
@@ -138,22 +101,21 @@ const Settings = () => {
               unhyphenate(palette)
             ])),
           }}
-          small
-          value={store.colormap}
-          onChange={event => store.setColormap(event.target.value)}
+          isSmall
+          value={store?.colormap}
+          onChange={event => store?.setColormap(event.target.value)}
         />
 
         <ToggleField
           label={t('options.highlight.label')}
           name="highlight"
-          id="highlight"
-          title={t('options.highlight.title')}
+          description={t('options.highlight.title')}
           options={{
             'Off': t('options.highlight.options.Off'),
             'On': t('options.highlight.options.On'),
           }}
-          value={store.highlight ? 'On' : 'Off'}
-          onChange={value => store.setHighlight(value === 'On')}
+          value={store?.highlight ? 'On' : 'Off'}
+          onChange={value => store?.setHighlight(value === 'On')}
         />
 
         <SelectField
@@ -161,19 +123,26 @@ const Settings = () => {
           name="language"
           id="language"
           options={{
-            ...Object.keys(locales).reduce((ls, l) => {
-              ls[l] = locales[l].name
-              return ls
-            }, {}),
+            ...Object.fromEntries(Object.entries(languageDetails).map(([id, details]) => [id, details.name])),
             ...process.env.NODE_ENV !== 'production' && { 'cimode': 'DEV' },
           }}
-          small
+          isSmall
           value={i18n.language}
-          onChange={event => i18n.changeLanguage(event.target.value)}
+          onChange={e => {
+            if (isKeyOfObject(e.target.value, languageDetails)) {
+              store?.setWeekStart(languageDetails[e.target.value].weekStart)
+              store?.setTimeFormat(languageDetails[e.target.value].timeFormat)
+
+              languageDetails[e.target.value]?.import().then(() => {
+                dayjs.locale(e.target.value)
+              })
+            }
+            i18n.changeLanguage(e.target.value).then(() => router.refresh())
+          }}
         />
-      </Modal>
-    </>
-  )
+      </div>
+    </dialog>
+  </>
 }
 
 export default Settings

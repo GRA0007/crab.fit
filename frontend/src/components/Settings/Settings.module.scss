@@ -1,6 +1,4 @@
-import { styled } from 'goober'
-
-export const OpenButton = styled('button')`
+.openButton {
   border: 0;
   background: none;
   height: 50px;
@@ -19,58 +17,63 @@ export const OpenButton = styled('button')`
   transition: transform .15s;
   padding: 0;
 
-  ${props => props.$isOpen && `
-    transform: rotate(-60deg);
-  `}
-
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
   @media print {
     display: none;
   }
-`
+}
 
-export const Cover = styled('div')`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
-  display: none;
+.open {
+  transform: rotate(-60deg);
+}
 
-  ${props => props.$isOpen && `
-    display: block;
-  `}
-`
-
-export const Modal = styled('div')`
+.modal {
   position: absolute;
-  top: 70px;
-  right: 12px;
-  background-color: var(--background);
-  border: 1px solid var(--surface);
-  z-index: 150;
-  padding: 10px 18px;
-  border-radius: 3px;
-  width: 270px;
-  box-sizing: border-box;
-  max-width: calc(100% - 20px);
-  box-shadow: 0 3px 6px 0 rgba(0,0,0,.3);
+  inset: 0;
+  max-width: initial;
+  min-height: initial;
+  width: initial;
+  height: initial;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  overflow: visible;
 
+  display: block;
   pointer-events: none;
   opacity: 0;
   transform: translateY(-10px);
   visibility: hidden;
   transition: opacity .15s, transform .15s, visibility .15s;
 
-  ${props => props.$isOpen && `
+  & > div {
+    position: absolute;
+    top: 70px;
+    right: 12px;
+    background-color: var(--background);
+    border: 1px solid var(--surface);
+    z-index: 150;
+    padding: 10px 18px;
+    border-radius: 3px;
+    width: 270px;
+    box-sizing: border-box;
+    max-width: calc(100% - 20px);
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.3);
+  }
+
+  &[open] {
     pointer-events: all;
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
-  `}
+  }
+
+  &::backdrop {
+    background: none;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
@@ -78,11 +81,11 @@ export const Modal = styled('div')`
   @media print {
     display: none;
   }
-`
+}
 
-export const Heading = styled('span')`
+.heading {
   font-size: 1.5rem;
   display: block;
   margin: 6px 0;
   line-height: 1em;
-`
+}

@@ -3,6 +3,7 @@ import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
 import dayjs from 'dayjs'
 
 import { Description, Label, Wrapper } from '/src/components/Field/Field'
+import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
 
 import styles from './TimeRangeField.module.scss'
@@ -67,7 +68,7 @@ interface HandleProps {
 }
 
 const Handle = ({ value, onChange, labelPadding }: HandleProps) => {
-  const timeFormat = useSettingsStore(state => state.timeFormat)
+  const timeFormat = useStore(useSettingsStore, state => state.timeFormat)
 
   const isMoving = useRef(false)
   const rangeRect = useRef({ left: 0, width: 0 })

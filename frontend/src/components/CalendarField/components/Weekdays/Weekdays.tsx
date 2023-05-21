@@ -2,6 +2,7 @@ import { useCallback, useMemo, useRef, useState } from 'react'
 
 import dayjs from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
+import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
 import { makeClass } from '/src/utils'
 
@@ -21,7 +22,7 @@ interface WeekdaysProps {
 const Weekdays = ({ value, onChange }: WeekdaysProps) => {
   const { t } = useTranslation('home')
 
-  const weekStart = useSettingsStore(state => state.weekStart)
+  const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 0
 
   const weekdays = useMemo(() => rotateArray(dayjs.weekdaysShort().map((name, i) => ({
     name,

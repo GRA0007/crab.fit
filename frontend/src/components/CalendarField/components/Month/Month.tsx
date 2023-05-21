@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Button from '/src/components/Button/Button'
 import dayjs from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
-import useLocaleUpdateStore from '/src/stores/localeUpdateStore'
+import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
 import { makeClass } from '/src/utils'
 
@@ -23,8 +23,7 @@ interface MonthProps {
 const Month = ({ value, onChange }: MonthProps) => {
   const { t } = useTranslation('home')
 
-  const weekStart = useSettingsStore(state => state.weekStart)
-  const locale = useLocaleUpdateStore(state => state.locale)
+  const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 0
 
   const [page, setPage] = useState({
     month: dayjs().month(),
@@ -45,11 +44,9 @@ const Month = ({ value, onChange }: MonthProps) => {
 
   // Update month view
   useEffect(() => {
-    if (dayjs.Ls?.[locale] && weekStart !== dayjs.Ls[locale].weekStart) {
-      dayjs.updateLocale(locale, { weekStart })
-    }
+    dayjs.updateLocale(dayjs.locale(), { weekStart })
     setDates(calculateMonth(page, weekStart))
-  }, [weekStart, page, locale])
+  }, [weekStart, page])
 
   const handleFinishSelection = useCallback(() => {
     if (mode.current === 'add') {

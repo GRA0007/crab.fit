@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 
+import Settings from '/src/components/Settings/Settings'
 import { fallbackLng } from '/src/i18n/options'
 import { useTranslation } from '/src/i18n/server'
 
@@ -24,10 +25,11 @@ export const metadata: Metadata = {
 }
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  const { i18n } = await useTranslation([])
+  const { resolvedLanguage } = await useTranslation([])
 
-  return <html lang={i18n.resolvedLanguage ?? fallbackLng}>
+  return <html lang={resolvedLanguage ?? fallbackLng}>
     <body>
+      <Settings />
       {children}
     </body>
   </html>

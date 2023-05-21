@@ -48,7 +48,6 @@ const CreateForm = () => {
   const [error, setError] = useState<React.ReactNode>()
 
   const onSubmit: SubmitHandler<Fields> = async values => {
-    console.log({values}) // TODO:
     setIsLoading(true)
     setError(undefined)
 

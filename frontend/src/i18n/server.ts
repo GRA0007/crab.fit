@@ -1,10 +1,11 @@
-import { UseTranslationOptions } from 'react-i18next'
 import { cookies, headers } from 'next/headers'
 import acceptLanguage from 'accept-language'
 import { createInstance } from 'i18next'
 import resourcesToBackend from 'i18next-resources-to-backend'
 
-import { cookieName, fallbackLng, getOptions, languages } from './options'
+import dayjs from '/src/config/dayjs'
+
+import { cookieName, fallbackLng, getOptions, languageDetails, languages } from './options'
 
 type Mutable<T> = { -readonly [K in keyof T]: Mutable<T[K]> }
 
@@ -20,14 +21,20 @@ const initI18next = async (language: string, ns: string | string []) => {
   return i18nInstance
 }
 
-export const useTranslation = async (ns: string | string[], options: UseTranslationOptions = {}) => {
+export const useTranslation = async (ns: string | string[], options: { keyPrefix?: string } = {}) => {
   const language = cookies().get(cookieName)?.value
     ?? acceptLanguage.get(headers().get('Accept-Language'))
     ?? fallbackLng
 
+  // Set dayjs locale
+  languageDetails[language as keyof typeof languageDetails]?.import().then(() => {
+    dayjs.locale(language)
+  })
+
   const i18nextInstance = await initI18next(language, ns)
   return {
     t: i18nextInstance.getFixedT(language, Array.isArray(ns) ? ns[0] : ns, options.keyPrefix),
-    i18n: i18nextInstance
+    i18n: i18nextInstance,
+    resolvedLanguage: language,
   }
 }
