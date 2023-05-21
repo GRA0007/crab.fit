@@ -3,7 +3,10 @@ use std::{env, net::SocketAddr, sync::Arc};
 use axum::{
     error_handling::HandleErrorLayer,
     extract,
-    http::{HeaderValue, Method},
+    http::{
+        header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE},
+        HeaderValue, Method,
+    },
     routing::{get, patch, post},
     BoxError, Router, Server,
 };
@@ -44,6 +47,8 @@ async fn main() {
 
     // CORS configuration
     let cors = CorsLayer::new()
+        .allow_credentials(true)
+        .allow_headers([AUTHORIZATION, ACCEPT, CONTENT_TYPE])
         .allow_methods([Method::GET, Method::POST, Method::PATCH])
         .allow_origin(
             if cfg!(debug_assertions) {

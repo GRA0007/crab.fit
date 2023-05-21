@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import Button from '/src/components/Button/Button'
 import CalendarField from '/src/components/CalendarField/CalendarField'
 import { default as ErrorAlert } from '/src/components/Error/Error'
+import SelectField from '/src/components/SelectField/SelectField'
 import TextField from '/src/components/TextField/TextField'
 import TimeRangeField from '/src/components/TimeRangeField/TimeRangeField'
 import { API_BASE } from '/src/config/api'
@@ -148,13 +149,13 @@ const CreateForm = () => {
       name="time"
     />
 
-    {/* <SelectField
+    <SelectField
       label={t('form.timezone.label')}
       options={timezones}
       required
       {...register('timezone')}
       defaultOption={t('form.timezone.defaultOption')}
-    /> */}
+    />
 
     <ErrorAlert onClose={() => setError(undefined)}>{error}</ErrorAlert>
 
