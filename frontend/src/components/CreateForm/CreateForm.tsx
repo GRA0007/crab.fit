@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 
@@ -8,7 +8,7 @@ import Button from '/src/components/Button/Button'
 import CalendarField from '/src/components/CalendarField/CalendarField'
 import { default as ErrorAlert } from '/src/components/Error/Error'
 import TextField from '/src/components/TextField/TextField'
-import ToggleField from '/src/components/ToggleField/ToggleField'
+import TimeRangeField from '/src/components/TimeRangeField/TimeRangeField'
 import { API_BASE } from '/src/config/api'
 import dayjs from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
@@ -47,7 +47,7 @@ const CreateForm = () => {
   const [error, setError] = useState<React.ReactNode>()
 
   const onSubmit: SubmitHandler<Fields> = async values => {
-    console.log({values})
+    console.log({values}) // TODO:
     setIsLoading(true)
     setError(undefined)
 
@@ -57,7 +57,7 @@ const CreateForm = () => {
       if (dates.length === 0) {
         return setError(t('form.errors.no_dates'))
       }
-      const isSpecificDates = typeof dates[0] === 'string' && dates[0].length === 8
+      const isSpecificDates = dates[0].length === 8
       if (time.start === time.end) {
         return setError(t('form.errors.same_times'))
       }
@@ -73,7 +73,7 @@ const CreateForm = () => {
           } else {
             day.push(
               dayjs().tz(timezone)
-                .day(date).hour(i).minute(0).utc().format('HHmm-d')
+                .day(Number(date)).hour(i).minute(0).utc().format('HHmm-d')
             )
           }
         }
@@ -87,13 +87,13 @@ const CreateForm = () => {
             } else {
               day.push(
                 dayjs().tz(timezone)
-                  .day(date).hour(i).minute(0).utc().format('HHmm-d')
+                  .day(Number(date)).hour(i).minute(0).utc().format('HHmm-d')
               )
             }
           }
         }
         return [...times, ...day]
-      }, [])
+      }, [] as string[])
 
       if (times.length === 0) {
         return setError(t('form.errors.no_time'))
@@ -141,15 +141,14 @@ const CreateForm = () => {
       name="dates"
     />
 
-    {/* <TimeRangeField
+    <TimeRangeField
       label={t('form.times.label')}
-      subLabel={t('form.times.sublabel')}
-      required
-      setValue={setValue}
-      {...register('time')}
+      description={t('form.times.sublabel')}
+      control={control}
+      name="time"
     />
 
-    <SelectField
+    {/* <SelectField
       label={t('form.timezone.label')}
       options={timezones}
       required

@@ -11,7 +11,7 @@ import { makeClass } from '/src/utils'
 import styles from './Month.module.scss'
 
 // TODO: use from giraugh tools
-export const rotateArray = <T,>(arr: T[], amount = 1): T[] =>
+export const rotateArray = <T, >(arr: T[], amount = 1): T[] =>
   arr.map((_, i) => arr[((( -amount + i ) % arr.length) + arr.length) % arr.length])
 
 interface MonthProps {
