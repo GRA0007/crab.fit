@@ -5,7 +5,10 @@
   "rules": {
     "react/no-unescaped-entities": "off",
     "simple-import-sort/imports": "warn",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "react/display-name": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "space-infix-ops": "warn"
   },
   "overrides": [
     {

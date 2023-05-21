@@ -1,11 +1,4 @@
-import { styled } from 'goober'
-import { forwardRef } from 'react'
-
-export const Wrapper = styled('div')`
-  margin: 10px 0;
-`
-
-export const ToggleContainer = styled('div')`
+.toggleContainer {
   display: flex;
   border: 1px solid var(--primary);
   border-radius: 3px;
@@ -27,26 +20,14 @@ export const ToggleContainer = styled('div')`
   & > div:last-of-type label {
     border-end-end-radius: 2px;
   }
-`
+}
 
-export const StyledLabel = styled('label')`
-  display: block;
-  padding-bottom: 4px;
-  font-size: .9rem;
-
-  & svg {
-    height: 1em;
-    width: 1em;
-    vertical-align: middle;
-  }
-`
-
-export const Option = styled('div')`
+.option {
   flex: 1;
   position: relative;
-`
+}
 
-export const HiddenInput = styled('input', forwardRef)`
+.hiddenInput {
   height: 0;
   width: 0;
   position: absolute;
@@ -59,9 +40,9 @@ export const HiddenInput = styled('input', forwardRef)`
     color: var(--background);
     background-color: var(--focus-color);
   }
-`
+}
 
-export const LabelButton = styled('label')`
+.button {
   padding: 6px;
   display: flex;
   text-align: center;
@@ -72,4 +53,4 @@ export const LabelButton = styled('label')`
   align-items: center;
   justify-content: center;
   transition: box-shadow .15s, background-color .15s;
-`
+}

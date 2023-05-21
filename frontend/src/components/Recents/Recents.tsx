@@ -6,7 +6,8 @@ import Content from '/src/components/Content/Content'
 import Section from '/src/components/Section/Section'
 import dayjs from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
-import { useRecentsStore, useStore } from '/src/stores'
+import { useStore } from '/src/stores'
+import useRecentsStore from '/src/stores/recentsStore'
 
 import styles from './Recents.module.scss'
 

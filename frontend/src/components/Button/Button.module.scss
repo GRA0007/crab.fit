@@ -58,6 +58,16 @@
   }
 }
 
+.iconButton {
+  height: 30px;
+  width: 30px;
+  padding: 0;
+
+  & svg, & img {
+    margin: 0;
+  }
+}
+
 .small {
   padding: .4em 1.3em;
 }

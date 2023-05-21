@@ -16,8 +16,6 @@ type ButtonProps = {
   surfaceColor?: string
   /** Override the shadow color of the button */
   shadowColor?: string
-  // TODO: evaluate
-  size?: string
 } & Omit<React.ComponentProps<'button'> & React.ComponentProps<'a'>, 'ref'>
 
 const Button: React.FC<ButtonProps> = ({
@@ -30,7 +28,6 @@ const Button: React.FC<ButtonProps> = ({
   isLoading,
   surfaceColor,
   shadowColor,
-  size,
   style,
   ...props
 }) => {
@@ -40,14 +37,14 @@ const Button: React.FC<ButtonProps> = ({
       isSecondary && styles.secondary,
       isSmall && styles.small,
       isLoading && styles.loading,
+      !children && icon && styles.iconButton,
     ),
     style: {
       ...surfaceColor && { '--override-surface-color': surfaceColor, '--override-text-color': '#FFFFFF' },
       ...shadowColor && { '--override-shadow-color': shadowColor },
-      ...size && { padding: 0, height: size, width: size },
       ...style,
     },
-    children: [icon, children],
+    children: <>{icon}{children}</>,
     ...props,
   }
 

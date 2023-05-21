@@ -5,13 +5,13 @@ type TimeFormat = '12h' | '24h'
 type Theme = 'System' | 'Light' | 'Dark'
 
 interface SettingsStore {
-  weekStart: number
+  weekStart: 0 | 1
   timeFormat: TimeFormat
   theme: Theme
   highlight: boolean
   colormap: string
 
-  setWeekStart: (weekStart: number) => void
+  setWeekStart: (weekStart: 0 | 1) => void
   setTimeFormat: (timeFormat: TimeFormat) => void
   setTheme: (theme: Theme) => void
   setHighlight: (highlight: boolean) => void

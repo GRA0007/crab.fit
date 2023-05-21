@@ -1,8 +1,8 @@
 import { Trans } from 'react-i18next/TransWithoutContext'
 import Link from 'next/link'
 
-import Button from '/src/components/Button/Button'
 import Content from '/src/components/Content/Content'
+import CreateForm from '/src/components/CreateForm/CreateForm'
 import DownloadButtons from '/src/components/DownloadButtons/DownloadButtons'
 import Footer from '/src/components/Footer/Footer'
 import Header from '/src/components/Header/Header'
@@ -13,8 +13,6 @@ import Stats from '/src/components/Stats/Stats'
 import Video from '/src/components/Video/Video'
 import { useTranslation } from '/src/i18n/server'
 
-import styles from './home.module.scss'
-
 const Page = async () => {
   const { t } = await useTranslation('home')
 
@@ -22,19 +20,12 @@ const Page = async () => {
     <Content>
       {/* @ts-expect-error Async Server Component */}
       <Header isFull />
-
-      <nav className={styles.nav}>
-        <a href="#about">{t('nav.about')}</a>
-        {' / '}
-        <a href="#donate">{t('nav.donate')}</a>
-      </nav>
     </Content>
 
     <Recents />
 
     <Content>
-      <span>Form here</span>
-      <Button>Create</Button>
+      <CreateForm />
     </Content>
 
     <Section id="about">
