@@ -1,9 +1,7 @@
-import { styled } from 'goober'
-
-export const Wrapper = styled('div')`
+.popup {
   position: fixed;
-  top: 20px;
-  left: 20px;
+  bottom: 20px;
+  right: 20px;
   background-color: var(--background);
   border: 1px solid var(--surface);
   z-index: 900;
@@ -28,9 +26,9 @@ export const Wrapper = styled('div')`
   @media (max-width: 400px) {
     display: block;
   }
-`
+}
 
-export const ButtonWrapper = styled('div')`
+.buttons {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -44,4 +42,4 @@ export const ButtonWrapper = styled('div')`
     margin: 20px 0 0;
     white-space: normal;
   }
-`
+}

@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 
 import Egg from '/src/components/Egg/Egg'
 import Settings from '/src/components/Settings/Settings'
+import TranslateDialog from '/src/components/TranslateDialog/TranslateDialog'
 import { fallbackLng } from '/src/i18n/options'
 import { useTranslation } from '/src/i18n/server'
 
@@ -33,6 +34,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       <Settings />
       {children}
       <Egg />
+      <TranslateDialog />
     </body>
   </html>
 }
