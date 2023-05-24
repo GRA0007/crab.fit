@@ -1,6 +1,4 @@
-import { styled } from 'goober'
-
-export const Note = styled('p')`
+.note {
   background-color: var(--surface);
   border: 1px solid var(--primary);
   border-radius: 10px;
@@ -13,10 +11,4 @@ export const Note = styled('p')`
   & a {
     color: var(--secondary);
   }
-`
-
-export const ButtonArea = styled('div')`
-  @media print {
-    display: none;
-  }
-`
+}

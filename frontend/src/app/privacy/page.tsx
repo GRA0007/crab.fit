@@ -1,46 +1,37 @@
-import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { Metadata } from 'next'
 
-import { Button, Center, Footer, Logo } from '/src/components'
+import GoogleTranslate from '/src/app/privacy/GoogleTranslate'
+import Button from '/src/components/Button/Button'
+import Content from '/src/components/Content/Content'
+import Header from '/src/components/Header/Header'
+import { P, Ul } from '/src/components/Paragraph/Text'
+import Section from '/src/components/Section/Section'
+import { useTranslation } from '/src/i18n/server'
 
-import { StyledMain, AboutSection, P } from '../Home/Home.styles'
-import { Note, ButtonArea } from './Privacy.styles'
+import styles from './page.module.scss'
 
-const translationDisclaimer = 'While the translated document is provided for your convenience, the English version as displayed at https://crab.fit is legally binding.'
+export const generateMetadata = async (): Promise<Metadata> => {
+  const { t } = await useTranslation('privacy')
 
-const Privacy = () => {
-  const navigate = useNavigate()
-  const { t, i18n } = useTranslation(['common', 'privacy'])
-  const contentRef = useRef()
-  const [content, setContent] = useState('')
+  return {
+    title: t('name'),
+  }
+}
 
-  useEffect(() => {
-    document.title = `${t('privacy:name')} - Crab Fit`
-  }, [t])
-
-  useEffect(() => setContent(contentRef.current?.innerText || ''), [contentRef])
+const Page = async () => {
+  const { t, i18n } = await useTranslation(['common', 'privacy'])
 
   return <>
-    <StyledMain>
-      <Logo />
-    </StyledMain>
+    <Content>
+      {/* @ts-expect-error Async Server Component */}
+      <Header />
 
-    <StyledMain>
       <h1>{t('privacy:name')}</h1>
 
-      {!i18n.language.startsWith('en') && (
-        <p>
-          <a
-            href={`https://translate.google.com/?sl=en&tl=${i18n.language.substring(0, 2)}&text=${encodeURIComponent(`${translationDisclaimer}\n\n${content}`)}&op=translate`}
-            target="_blank"
-            rel="noreferrer noopener"
-          >{t('privacy:translate')}</a>
-        </p>
-      )}
+      {!i18n.language.startsWith('en') && <GoogleTranslate language={i18n.language}>{t('privacy:translate')}</GoogleTranslate>}
 
       <h3>Crab Fit</h3>
-      <div ref={contentRef}>
+      <div id="policy">
         <P>This SERVICE is provided by Benjamin Grant at no cost and is intended for use as is.</P>
         <P>This page is used to inform visitors regarding the policies of the collection, use, and disclosure of Personal Information if using the Service.</P>
         <P>If you choose to use the Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that is collected is used for providing and improving the Service. Your information will not be used or shared with anyone except as described in this Privacy Policy.</P>
@@ -48,9 +39,9 @@ const Privacy = () => {
         <h2>Information Collection and Use</h2>
         <P>The Service uses third party services that may collect information used to identify you.</P>
         <P>Links to privacy policies of the third party service providers used by the Service:</P>
-        <P as="ul">
+        <Ul>
           <li><a href="https://www.google.com/policies/privacy/" target="blank">Google Play Services</a></li>
-        </P>
+        </Ul>
 
         <h2>Log Data</h2>
         <P>When you use the Service, in the case of an error, data and information is collected to improve the Service, which may include your IP address, device name, operating system version, app configuration and the time and date of the error.</P>
@@ -61,17 +52,17 @@ const Privacy = () => {
 
         <h2>Service Providers</h2>
         <P>Third-party companies may be employed for the following reasons:</P>
-        <P as="ul">
+        <Ul>
           <li>To facilitate the Service</li>
           <li>To provide the Service on our behalf</li>
           <li>To perform Service-related services</li>
           <li>To assist in analyzing how the Service is used</li>
-        </P>
+        </Ul>
         <P>To perform these tasks, the third parties may have access to your Personal Information, but are obligated not to disclose or use this information for any purpose except the above.</P>
 
         <h2>Security</h2>
         <P>Personal Information that is shared via the Service is protected, however remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, so take care when sharing Personal Information.</P>
-        <Note>Events that are created will be automatically permanently erased from storage after <strong>3 months</strong> of inactivity.</Note>
+        <p className={styles.note}>Events that are created will be automatically permanently erased from storage after <strong>3 months</strong> of inactivity.</p>
 
         <h2>Links to Other Sites</h2>
         <P>The Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by the Service. Therefore, you are advised to review the Privacy Policy of these websites.</P>
@@ -86,18 +77,14 @@ const Privacy = () => {
         <h2>Contact Us</h2>
         <P>If you have any questions or suggestions about the Privacy Policy, do not hesitate to contact us at <a href="mailto:contact@crab.fit">contact@crab.fit</a>.</P>
       </div>
-    </StyledMain>
+    </Content>
 
-    <ButtonArea>
-      <AboutSection>
-        <StyledMain>
-          <Center><Button onClick={() => navigate('/')}>{t('common:cta')}</Button></Center>
-        </StyledMain>
-      </AboutSection>
-    </ButtonArea>
-
-    <Footer />
+    <Section>
+      <Content isCentered>
+        <Button href="/">{t('common:cta')}</Button>
+      </Content>
+    </Section>
   </>
 }
 
-export default Privacy
+export default Page

@@ -9,7 +9,8 @@
     "react/display-name": "off",
     "react-hooks/exhaustive-deps": "off",
     "space-infix-ops": "warn",
-    "comma-spacing": "warn"
+    "comma-spacing": "warn",
+    "react-hooks/rules-of-hooks": "off"
   },
   "overrides": [
     {

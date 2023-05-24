@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 import Egg from '/src/components/Egg/Egg'
+import Footer from '/src/components/Footer/Footer'
 import Settings from '/src/components/Settings/Settings'
 import TranslateDialog from '/src/components/TranslateDialog/TranslateDialog'
 import { fallbackLng } from '/src/i18n/options'
@@ -10,7 +11,10 @@ import './global.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://crab.fit'),
-  title: 'Crab Fit',
+  title: {
+    absolute: 'Crab Fit',
+    template: '%s - Crab Fit',
+  },
   keywords: ['crab', 'fit', 'crabfit', 'schedule', 'availability', 'availabilities', 'when2meet', 'doodle', 'meet', 'plan', 'time', 'timezone'],
   description: 'Enter your availability to find a time that works for everyone!',
   themeColor: '#F79E00',
@@ -32,9 +36,13 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return <html lang={resolvedLanguage ?? fallbackLng}>
     <body>
       <Settings />
-      {children}
       <Egg />
       <TranslateDialog />
+
+      {children}
+
+      {/* @ts-expect-error Async Server Component */}
+      <Footer />
     </body>
   </html>
 }

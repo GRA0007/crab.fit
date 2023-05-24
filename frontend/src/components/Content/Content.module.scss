@@ -3,3 +3,9 @@
   margin: 20px auto;
   max-width: calc(100% - 60px);
 }
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
