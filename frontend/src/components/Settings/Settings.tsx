@@ -7,7 +7,6 @@ import { Settings as SettingsIcon } from 'lucide-react'
 
 import SelectField from '/src/components/SelectField/SelectField'
 import ToggleField from '/src/components/ToggleField/ToggleField'
-import dayjs from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
 import { languageDetails } from '/src/i18n/options'
 import { useStore } from '/src/stores'
@@ -15,12 +14,6 @@ import useSettingsStore from '/src/stores/settingsStore'
 import { makeClass, unhyphenate } from '/src/utils'
 
 import styles from './Settings.module.scss'
-
-// TODO: add to giraugh tools
-const isKeyOfObject = <T extends object>(
-  key: string | number | symbol,
-  obj: T,
-): key is keyof T => key in obj
 
 const Settings = () => {
   const { t, i18n } = useTranslation('common')
@@ -128,17 +121,7 @@ const Settings = () => {
           }}
           isSmall
           value={i18n.language}
-          onChange={e => {
-            if (isKeyOfObject(e.target.value, languageDetails)) {
-              store?.setWeekStart(languageDetails[e.target.value].weekStart)
-              store?.setTimeFormat(languageDetails[e.target.value].timeFormat)
-
-              languageDetails[e.target.value]?.import().then(() => {
-                dayjs.locale(e.target.value)
-              })
-            }
-            i18n.changeLanguage(e.target.value).then(() => router.refresh())
-          }}
+          onChange={e => i18n.changeLanguage(e.target.value).then(() => router.refresh())}
         />
       </div>
     </dialog>

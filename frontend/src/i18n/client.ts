@@ -2,11 +2,10 @@
 
 import { initReactI18next, useTranslation as useTranslationHook } from 'react-i18next'
 import { cookies } from 'next/dist/client/components/headers' // risky disky (undocumented???)
+import dayjs from 'dayjs'
 import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import resourcesToBackend from 'i18next-resources-to-backend'
-
-import dayjs from '/src/config/dayjs'
 
 import { cookieName, getOptions, languageDetails } from './options'
 

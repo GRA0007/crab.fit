@@ -1,18 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { rotateArray } from '@giraugh/tools'
+import { Dayjs } from 'dayjs'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 import Button from '/src/components/Button/Button'
-import dayjs from '/src/config/dayjs'
+import { useDayjs } from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
 import { makeClass } from '/src/utils'
 
 import styles from './Month.module.scss'
-
-// TODO: use from giraugh tools
-export const rotateArray = <T, >(arr: T[], amount = 1): T[] =>
-  arr.map((_, i) => arr[((( -amount + i ) % arr.length) + arr.length) % arr.length])
 
 interface MonthProps {
   /** Array of dates in `DDMMYYYY` format */
@@ -22,6 +20,7 @@ interface MonthProps {
 
 const Month = ({ value, onChange }: MonthProps) => {
   const { t } = useTranslation('home')
+  const dayjs = useDayjs()
 
   const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 0
 
@@ -29,7 +28,7 @@ const Month = ({ value, onChange }: MonthProps) => {
     month: dayjs().month(),
     year: dayjs().year(),
   })
-  const [dates, setDates] = useState(calculateMonth(page, weekStart))
+  const [dates, setDates] = useState(calculateMonth(dayjs().month(page.month).year(page.year), weekStart))
 
   // Ref and state required to rerender but also access static version in callbacks
   const selectingRef = useRef<string[]>([])
@@ -45,7 +44,7 @@ const Month = ({ value, onChange }: MonthProps) => {
   // Update month view
   useEffect(() => {
     dayjs.updateLocale(dayjs.locale(), { weekStart })
-    setDates(calculateMonth(page, weekStart))
+    setDates(calculateMonth(dayjs().month(page.month).year(page.year), weekStart))
   }, [weekStart, page])
 
   const handleFinishSelection = useCallback(() => {
@@ -149,8 +148,7 @@ interface Date {
 }
 
 /** Calculate the dates to show for the month in a 2d array */
-const calculateMonth = ({ month, year }: { month: number, year: number }, weekStart: 0 | 1) => {
-  const date = dayjs().month(month).year(year)
+const calculateMonth = (date: Dayjs, weekStart: 0 | 1) => {
   const daysInMonth = date.daysInMonth()
   const daysBefore = date.date(1).day() - weekStart
   const daysAfter = 6 - date.date(daysInMonth).day() + weekStart

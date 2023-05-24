@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
+import { rotateArray } from '@giraugh/tools'
 
-import dayjs from '/src/config/dayjs'
+import { useDayjs } from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
@@ -8,10 +9,6 @@ import { makeClass } from '/src/utils'
 
 // Use styles from Month picker
 import styles from '../Month/Month.module.scss'
-
-// TODO: use from giraugh tools
-export const rotateArray = <T, >(arr: T[], amount = 1): T[] =>
-  arr.map((_, i) => arr[((( -amount + i ) % arr.length) + arr.length) % arr.length])
 
 interface WeekdaysProps {
   /** Array of weekdays as numbers from 0-6 (as strings) */
@@ -21,6 +18,7 @@ interface WeekdaysProps {
 
 const Weekdays = ({ value, onChange }: WeekdaysProps) => {
   const { t } = useTranslation('home')
+  const dayjs = useDayjs()
 
   const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 0
 

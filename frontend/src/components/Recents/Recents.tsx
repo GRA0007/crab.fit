@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import Content from '/src/components/Content/Content'
 import Section from '/src/components/Section/Section'
-import dayjs from '/src/config/dayjs'
+import { useDayjs } from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useRecentsStore from '/src/stores/recentsStore'
@@ -18,6 +18,7 @@ interface RecentsProps {
 const Recents = ({ target }: RecentsProps) => {
   const recents = useStore(useRecentsStore, state => state.recents)
   const { t } = useTranslation(['home', 'common'])
+  const dayjs = useDayjs()
 
   return recents?.length ? <Section id="recents">
     <Content>

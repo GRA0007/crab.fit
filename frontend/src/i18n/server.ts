@@ -1,9 +1,8 @@
 import { cookies, headers } from 'next/headers'
 import acceptLanguage from 'accept-language'
+import dayjs from 'dayjs'
 import { createInstance } from 'i18next'
 import resourcesToBackend from 'i18next-resources-to-backend'
-
-import dayjs from '/src/config/dayjs'
 
 import { cookieName, fallbackLng, getOptions, languageDetails, languages } from './options'
 

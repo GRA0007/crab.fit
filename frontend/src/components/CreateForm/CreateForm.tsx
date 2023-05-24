@@ -11,7 +11,7 @@ import SelectField from '/src/components/SelectField/SelectField'
 import TextField from '/src/components/TextField/TextField'
 import TimeRangeField from '/src/components/TimeRangeField/TimeRangeField'
 import { API_BASE } from '/src/config/api'
-import dayjs from '/src/config/dayjs'
+import { useDayjs } from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
 import timezones from '/src/res/timezones.json'
 
@@ -36,6 +36,7 @@ const defaultValues: Fields = {
 
 const CreateForm = () => {
   const { t } = useTranslation('home')
+  const dayjs = useDayjs()
   const { push } = useRouter()
 
   const {
