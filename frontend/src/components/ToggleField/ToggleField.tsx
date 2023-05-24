@@ -37,6 +37,7 @@ const ToggleField = <TValue extends string>({
           id={`${name}-${key}`}
           checked={value === key}
           onChange={() => onChange(key as TValue)}
+          onClick={() => onChange(key as TValue)}
         />
         <label className={styles.button} htmlFor={`${name}-${key}`}>{label as React.ReactNode}</label>
       </div>
