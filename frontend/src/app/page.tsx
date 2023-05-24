@@ -14,7 +14,7 @@ import Video from '/src/components/Video/Video'
 import { useTranslation } from '/src/i18n/server'
 
 const Page = async () => {
-  const { t } = await useTranslation('home')
+  const { t, i18n } = await useTranslation('home')
 
   return <>
     <Content>
@@ -35,14 +35,14 @@ const Page = async () => {
         {/* @ts-expect-error Async Server Component */}
         <Stats />
 
-        <P><Trans i18nKey="about.content.p1" t={t}>Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<br /><Link href="/how-to" rel="help">Learn more about how to Crab Fit</Link>.</Trans></P>
+        <P><Trans i18nKey="about.content.p1" t={t} i18n={i18n}>_<br /><Link href="/how-to" rel="help">_</Link>_</Trans></P>
 
         <Video />
 
         <DownloadButtons />
 
-        <P><Trans i18nKey="about.content.p3" t={t}>Created by <a href="https://bengrant.dev" target="_blank" rel="noreferrer noopener author">Ben Grant</a>, Crab Fit is the modern-day solution to your group event planning debates.</Trans></P>
-        <P><Trans i18nKey="about.content.p4" t={t}>The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer noopener">repository</a>. By using Crab Fit you agree to the <Link href="/privacy" rel="license">privacy policy</Link>.</Trans></P>
+        <P><Trans i18nKey="about.content.p3" t={t} i18n={i18n}>_<a href="https://bengrant.dev" target="_blank" rel="noreferrer noopener author">_</a>_</Trans></P>
+        <P><Trans i18nKey="about.content.p4" t={t} i18n={i18n}>_<a href="https://github.com/GRA0007/crab.fit" target="_blank" rel="noreferrer noopener">_</a>_<Link href="/privacy" rel="license">_</Link>_</Trans></P>
         <P>{t('about.content.p6')}</P>
         <P>{t('about.content.p5')}</P>
       </Content>
