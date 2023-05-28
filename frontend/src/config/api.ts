@@ -1,4 +1,4 @@
-// TODO: Write a simple rust crate that generates these from the OpenAPI spec
+// TODO: Potentially write a simple rust crate that generates these from the OpenAPI spec
 
 import { z } from 'zod'
 
@@ -6,7 +6,7 @@ if (process.env.NEXT_PUBLIC_API_URL === undefined) {
   throw new Error('Expected API url environment variable')
 }
 
-export const API_BASE = new URL(process.env.NEXT_PUBLIC_API_URL)
+const API_BASE = new URL(process.env.NEXT_PUBLIC_API_URL)
 
 export const EventInput = z.object({
   name: z.string().optional(),
@@ -42,3 +42,38 @@ export const StatsResponse = z.object({
   version: z.string(),
 })
 export type StatsResponse = z.infer<typeof StatsResponse>
+
+const get = async <S extends z.Schema>(url: string, schema: S, auth?: string): Promise<ReturnType<S['parse']>> => {
+  const res = await fetch(new URL(url, API_BASE), {
+    headers: {
+      ...auth && { Authorization: `Bearer ${auth}` },
+    }
+  })
+    .catch(console.warn)
+  if (!res?.ok) throw res
+  return schema.parse(await res.json())
+}
+
+const post = async <S extends z.Schema>(url: string, schema: S, input: unknown, auth?: string, method = 'POST'): Promise<ReturnType<S['parse']>> => {
+  const res = await fetch(new URL(url, API_BASE), {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      ...auth && { Authorization: `Bearer ${auth}` },
+    },
+    body: JSON.stringify(input),
+  })
+    .catch(console.warn)
+  if (!res?.ok) throw res
+  return schema.parse(await res.json())
+}
+
+// Get
+export const getStats = () => get('/stats', StatsResponse)
+export const getEvent = (eventId: string) => get(`/event/${eventId}`, EventResponse)
+export const getPeople = (eventId: string) => get(`/event/${eventId}/people`, PersonResponse.array())
+export const getPerson = (eventId: string, personName: string, password?: string) => get(`/event/${eventId}/people/${personName}`, PersonResponse, password && btoa(password))
+
+// Post
+export const createEvent = (input: EventInput) => post('/event', EventResponse, EventInput.parse(input))
+export const updatePerson = (eventId: string, personName: string, input: PersonInput, password?: string) => post(`/event/${eventId}/people/${personName}`, PersonResponse, PersonInput.parse(input), password && btoa(password), 'PATCH')

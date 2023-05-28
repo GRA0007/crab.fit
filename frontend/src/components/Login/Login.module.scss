@@ -1,0 +1,23 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: flex-end;
+  grid-gap: 18px;
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+
+    & div:last-child {
+      --btn-width: 100%;
+    }
+  }
+}
+
+.info {
+  margin: 18px 0;
+  opacity: .75;
+  font-size: 12px;
+}

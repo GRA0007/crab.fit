@@ -1,17 +1,10 @@
-import { API_BASE, StatsResponse } from '/src/config/api'
+import { getStats } from '/src/config/api'
 import { useTranslation } from '/src/i18n/server'
 
 import styles from './Stats.module.scss'
 
-const getStats = async () => {
-  const res = await fetch(new URL('/stats', API_BASE))
-    .catch(console.warn)
-  if (!res?.ok) return
-  return StatsResponse.parse(await res.json())
-}
-
 const Stats = async () => {
-  const stats = await getStats()
+  const stats = await getStats().catch(() => undefined)
   const { t } = await useTranslation('home')
 
   return stats ? <div className={styles.wrapper}>

@@ -12,7 +12,7 @@ import { default as ErrorAlert } from '/src/components/Error/Error'
 import SelectField from '/src/components/SelectField/SelectField'
 import TextField from '/src/components/TextField/TextField'
 import TimeRangeField from '/src/components/TimeRangeField/TimeRangeField'
-import { API_BASE, EventResponse } from '/src/config/api'
+import { createEvent, EventResponse } from '/src/config/api'
 import { useTranslation } from '/src/i18n/client'
 import timezones from '/src/res/timezones.json'
 import useRecentsStore from '/src/stores/recentsStore'
@@ -94,22 +94,10 @@ const CreateForm = ({ noRedirect }: { noRedirect?: boolean }) => {
         return setError(t('form.errors.no_time'))
       }
 
-      const res = await fetch(new URL('/event', API_BASE), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          times,
-          timezone,
-        }),
-      })
-
-      if (!res.ok) {
-        console.error(res)
+      const newEvent = await createEvent({ name, times, timezone }).catch(e => {
+        console.error(e)
         throw new Error('Failed to create event')
-      }
-
-      const newEvent = EventResponse.parse(await res.json())
+      })
 
       if (noRedirect) {
         // Show event link
