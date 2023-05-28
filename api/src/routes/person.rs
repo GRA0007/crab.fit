@@ -38,7 +38,18 @@ pub async fn get_people<A: Adaptor>(
         .map_err(ApiError::AdaptorError)?;
 
     match people {
-        Some(people) => Ok(Json(people.into_iter().map(|p| p.into()).collect())),
+        Some(people) => Ok(Json(
+            people
+                .into_iter()
+                .filter_map(|p| {
+                    if !p.availability.is_empty() {
+                        Some(p.into())
+                    } else {
+                        None
+                    }
+                })
+                .collect(),
+        )),
         None => Err(ApiError::NotFound),
     }
 }
