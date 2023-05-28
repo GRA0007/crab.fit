@@ -10,7 +10,7 @@ import { PersonResponse } from '/src/config/api'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
-import { calculateAvailability, calculateColumns, calculateRows, convertTimesToDates, makeClass } from '/src/utils'
+import { calculateAvailability, calculateColumns, calculateRows, convertTimesToDates, makeClass, relativeTimeFormat } from '/src/utils'
 
 import styles from './AvailabilityViewer.module.scss'
 
@@ -188,7 +188,7 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
               }}
               onMouseOver={() => setTempFocus(person.name)}
               onMouseOut={() => setTempFocus(undefined)}
-              title={Temporal.Instant.fromEpochSeconds(person.created_at).until(Temporal.Now.instant()).toLocaleString()}
+              title={relativeTimeFormat(Temporal.Instant.fromEpochSeconds(person.created_at), i18n.language)}
             >{person.name}</button>
           )}
         </div>
