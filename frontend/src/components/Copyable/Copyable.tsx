@@ -24,7 +24,7 @@ const Copyable = ({ children, className, ...props }: CopyableProps) => {
       })
       .catch(e => console.error('Failed to copy', e))
     }
-    title={navigator.clipboard ? t<string>('nav.title') : undefined}
+    title={'clipboard' in navigator ? t<string>('nav.title') : undefined}
     className={makeClass(className, 'clipboard' in navigator && styles.copyable)}
     {...props}
   >{copied ?? children}</p>

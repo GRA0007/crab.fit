@@ -97,6 +97,7 @@
   height: 10px;
   background-origin: border-box;
   transition: background-color .1s;
+  touch-action: none;
 
   border-top-width: 2px;
   border-top-style: solid;

@@ -1,4 +1,5 @@
 import { Trans } from 'react-i18next/TransWithoutContext'
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Temporal } from '@js-temporal/polyfill'
 
@@ -11,7 +12,21 @@ import { makeClass, relativeTimeFormat } from '/src/utils'
 import EventAvailabilities from './EventAvailabilities'
 import styles from './page.module.scss'
 
-const Page = async ({ params }: { params: { id: string } }) => {
+interface PageProps {
+  params: { id: string }
+}
+
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
+  const event = await getEvent(params.id).catch(() => undefined)
+  const { t } = await useTranslation('event')
+
+  // TODO: More metadata
+  return {
+    title: event?.name ?? t('error.title'),
+  }
+}
+
+const Page = async ({ params }: PageProps) => {
   const event = await getEvent(params.id).catch(() => undefined)
   const people = await getPeople(params.id).catch(() => undefined)
   if (!event || !people) notFound()

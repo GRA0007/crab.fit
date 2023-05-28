@@ -1,23 +1,31 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Trans } from 'react-i18next/TransWithoutContext'
 
+import AvailabilityEditor from '/src/components/AvailabilityEditor/AvailabilityEditor'
 import AvailabilityViewer from '/src/components/AvailabilityViewer/AvailabilityViewer'
 import Content from '/src/components/Content/Content'
 import Login from '/src/components/Login/Login'
 import Section from '/src/components/Section/Section'
 import SelectField from '/src/components/SelectField/SelectField'
-import { EventResponse, PersonResponse } from '/src/config/api'
+import { EventResponse, getPeople, PersonResponse, updatePerson } from '/src/config/api'
 import { useTranslation } from '/src/i18n/client'
 import timezones from '/src/res/timezones.json'
+import useRecentsStore from '/src/stores/recentsStore'
 import { expandTimes, makeClass } from '/src/utils'
 
 import styles from './page.module.scss'
 
-const EventAvailabilities = ({ event, people }: { event: EventResponse, people: PersonResponse[] }) => {
+interface EventAvailabilitiesProps {
+  event: EventResponse
+  people: PersonResponse[]
+}
+
+const EventAvailabilities = ({ event, ...data }: EventAvailabilitiesProps) => {
   const { t, i18n } = useTranslation('event')
 
+  const [people, setPeople] = useState(data.people)
   const expandedTimes = useMemo(() => expandTimes(event.times), [event.times])
 
   const [user, setUser] = useState<PersonResponse>()
@@ -26,12 +34,32 @@ const EventAvailabilities = ({ event, people }: { event: EventResponse, people: 
   const [tab, setTab] = useState<'group' | 'you'>('group')
   const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
+  // Add this event to recents
+  const addRecent = useRecentsStore(state => state.addRecent)
+  useEffect(() => {
+    addRecent({
+      id: event.id,
+      name: event.name,
+      created_at: event.created_at,
+    })
+  }, [addRecent])
+
+  // Refetch availabilities
+  useEffect(() => {
+    if (tab === 'group') {
+      getPeople(event.id)
+        .then(setPeople)
+        .catch(console.warn)
+    }
+  }, [tab])
+
   return <>
     <Section id="login">
       <Content>
         <Login eventId={event.id} user={user} onChange={(u, p) => {
           setUser(u)
           setPassword(p)
+          setTab(u ? 'you' : 'group')
         }} />
 
         <SelectField
@@ -107,10 +135,23 @@ const EventAvailabilities = ({ event, people }: { event: EventResponse, people: 
       </div>
     </Content>
 
-    {tab === 'group' && <AvailabilityViewer
+    {tab === 'group' ? <AvailabilityViewer
       times={expandedTimes}
       people={people}
       timezone={timezone}
+    /> : user && <AvailabilityEditor
+      times={expandedTimes}
+      timezone={timezone}
+      value={user.availability}
+      onChange={availability => {
+        const oldAvailability = [...user.availability]
+        setUser({ ...user, availability })
+        updatePerson(event.id, user.name, { availability }, password)
+          .catch(e => {
+            console.warn(e)
+            setUser({ ...user, availability: oldAvailability })
+          })
+      }}
     />}
   </>
 }
