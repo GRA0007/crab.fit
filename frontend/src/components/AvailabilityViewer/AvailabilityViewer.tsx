@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { Temporal } from '@js-temporal/polyfill'
 import { createPalette } from 'hue-map'
 
@@ -23,15 +23,21 @@ interface AvailabilityViewerProps {
 const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps) => {
   const { t, i18n } = useTranslation('event')
 
-  // const [tooltip, setTooltip] = useState(null)
   const timeFormat = useStore(useSettingsStore, state => state.timeFormat)
   const highlight = useStore(useSettingsStore, state => state.highlight)
   const colormap = useStore(useSettingsStore, state => state.colormap)
   const [filteredPeople, setFilteredPeople] = useState(people.map(p => p.name))
-  // const [tempFocus, setTempFocus] = useState(null)
-  // const [focusCount, setFocusCount] = useState(null)
+  const [tempFocus, setTempFocus] = useState<string>()
+  const [focusCount, setFocusCount] = useState<number>()
 
-  // const wrapper = useRef()
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const [tooltip, setTooltip] = useState<{
+    x: number
+    y: number
+    available: string
+    date: string
+    people: string[]
+  }>()
 
   // Calculate rows and columns
   const [dates, rows, columns] = useMemo(() => {
@@ -56,7 +62,7 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
   useEffect(() => {
     setPalette(createPalette({
       map: colormap !== 'crabfit' ? colormap : [[0, [247, 158, 0, 0]], [1, [247, 158, 0, 255]]],
-      steps: (max - min) + 1,
+      steps: Math.max((max - min) + 1, 2),
     }).format())
   }, [min, max, colormap])
 
@@ -94,35 +100,37 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
               }
 
               const date = column.toZonedDateTime({ timeZone: timezone, plainTime: row })
-              const peopleHere = availabilities.find(a => a.date.equals(date))?.people ?? []
+              let peopleHere = availabilities.find(a => a.date.equals(date))?.people ?? []
+              if (tempFocus) {
+                peopleHere = peopleHere.filter(p => p === tempFocus)
+              }
 
               return <div
                 key={i}
                 className={makeClass(
                   styles.time,
-                  highlight && peopleHere.length === max && peopleHere.length > 0 && styles.highlight,
+                  (focusCount === undefined || focusCount === peopleHere.length) && highlight && (peopleHere.length === max || tempFocus) && peopleHere.length > 0 && styles.highlight,
                 )}
                 style={{
-                  backgroundColor: palette[peopleHere.length],
+                  backgroundColor: (focusCount === undefined || focusCount === peopleHere.length) ? palette[tempFocus && peopleHere.length ? max : peopleHere.length] : 'transparent',
                   ...date.minute !== 0 && date.minute !== 30 && { borderTopColor: 'transparent' },
                   ...date.minute === 30 && { borderTopStyle: 'dotted' },
                 }}
                 aria-label={peopleHere.join(', ')}
-                // onMouseEnter={e => {
-                //   const cellBox = e.currentTarget.getBoundingClientRect()
-                //   const wrapperBox = wrapper?.current?.getBoundingClientRect() ?? { x: 0, y: 0 }
-                //   const timeText = timeFormat === '12h' ? `h${locales[locale]?.separator ?? ':'}mma` : `HH${locales[locale]?.separator ?? ':'}mm`
-                //   setTooltip({
-                //     x: Math.round(cellBox.x - wrapperBox.x + cellBox.width / 2),
-                //     y: Math.round(cellBox.y - wrapperBox.y + cellBox.height) + 6,
-                //     available: `${peopleHere.length} / ${filteredPeople.length} ${t('event:available')}`,
-                //     date: parsedDate.hour(time.slice(0, 2)).minute(time.slice(2, 4)).format(isSpecificDates ? `${timeText} ddd, D MMM YYYY` : `${timeText} ddd`),
-                //     people: peopleHere,
-                //   })
-                // }}
-                // onMouseLeave={() => {
-                //   setTooltip(null)
-                // }}
+                onMouseEnter={e => {
+                  const cellBox = e.currentTarget.getBoundingClientRect()
+                  const wrapperBox = wrapperRef.current?.getBoundingClientRect() ?? { x: 0, y: 0 }
+                  setTooltip({
+                    x: Math.round(cellBox.x - wrapperBox.x + cellBox.width / 2),
+                    y: Math.round(cellBox.y - wrapperBox.y + cellBox.height) + 6,
+                    available: `${peopleHere.length} / ${filteredPeople.length} ${t('available')}`,
+                    date: isSpecificDates
+                      ? date.toLocaleString(i18n.language, { dateStyle: 'long', timeStyle: 'short', hour12: timeFormat === '12h' })
+                      : `${date.toLocaleString(i18n.language, { timeStyle: 'short', hour12: timeFormat === '12h' })}, ${date.toLocaleString(i18n.language, { weekday: 'long' })}`,
+                    people: peopleHere,
+                  })
+                }}
+                onMouseLeave={() => setTooltip(undefined)}
               />
             })}
           </div>
@@ -140,6 +148,11 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
     t,
     timeFormat,
     palette,
+    tempFocus,
+    focusCount,
+    filteredPeople,
+    i18n.language,
+    timezone,
   ])
 
   return <>
@@ -149,7 +162,7 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
         max={max}
         total={filteredPeople.length}
         palette={palette}
-        onSegmentFocus={console.log}
+        onSegmentFocus={setFocusCount}
       />
 
       <span className={styles.info}>{t('group.info1')}</span>
@@ -165,21 +178,16 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
                 filteredPeople.includes(person.name) && styles.personSelected,
               )}
               key={person.name}
-              // onClick={() => {
-              //   setTempFocus(null)
-              //   if (filteredPeople.includes(person.name)) {
-              //     if (!touched) {
-              //       setTouched(true)
-              //       setFilteredPeople([person.name])
-              //     } else {
-              //       setFilteredPeople(filteredPeople.filter(n => n !== person.name))
-              //     }
-              //   } else {
-              //     setFilteredPeople([...filteredPeople, person.name])
-              //   }
-              // }}
-              // onMouseOver={() => setTempFocus(person.name)}
-              // onMouseOut={() => setTempFocus(null)}
+              onClick={() => {
+                setTempFocus(undefined)
+                if (filteredPeople.includes(person.name)) {
+                  setFilteredPeople(filteredPeople.filter(n => n !== person.name))
+                } else {
+                  setFilteredPeople([...filteredPeople, person.name])
+                }
+              }}
+              onMouseOver={() => setTempFocus(person.name)}
+              onMouseOut={() => setTempFocus(undefined)}
               title={Temporal.Instant.fromEpochSeconds(person.created_at).until(Temporal.Now.instant()).toLocaleString()}
             >{person.name}</button>
           )}
@@ -187,29 +195,23 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
       </>}
     </Content>
 
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={wrapperRef}>
       <div>
         {heatmap}
 
-        {/* {tooltip && (
-          <Tooltip
-            $x={tooltip.x}
-            $y={tooltip.y}
-          >
-            <TooltipTitle>{tooltip.available}</TooltipTitle>
-            <TooltipDate>{tooltip.date}</TooltipDate>
-            {!!filteredPeople.length && (
-              <TooltipContent>
-                {tooltip.people.map(person =>
-                  <TooltipPerson key={person}>{person}</TooltipPerson>
-                )}
-                {filteredPeople.filter(p => !tooltip.people.includes(p)).map(person =>
-                  <TooltipPerson key={person} disabled>{person}</TooltipPerson>
-                )}
-              </TooltipContent>
+        {tooltip && <div
+          className={styles.tooltip}
+          style={{ top: tooltip.y, left: tooltip.x }}
+        >
+          <h3>{tooltip.available}</h3>
+          <span>{tooltip.date}</span>
+          {!!filteredPeople.length && <div>
+            {tooltip.people.map(person => <span key={person}>{person}</span>)}
+            {filteredPeople.filter(p => !tooltip.people.includes(p)).map(person =>
+              <span key={person} data-disabled>{person}</span>
             )}
-          </Tooltip>
-        )} */}
+          </div>}
+        </div>}
       </div>
     </div>
   </>

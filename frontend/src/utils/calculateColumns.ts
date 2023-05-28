@@ -20,6 +20,6 @@ export const calculateColumns = (dates: Temporal.ZonedDateTime[]): (Temporal.Pla
   return partitionedDates.reduce((columns, partition, i) => [
     ...columns,
     ...partition,
-    ...partitionedDates.length - 1 < i ? [null] : [], // Add spacer in between partitions
+    ...i < partitionedDates.length - 1 ? [null] : [], // Add spacer in between partitions
   ], [] as (Temporal.PlainDate | null)[])
 }

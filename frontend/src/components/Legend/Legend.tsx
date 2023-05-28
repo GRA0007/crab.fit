@@ -15,7 +15,7 @@ interface LegendProps {
 const Legend = ({ min, max, total, palette, onSegmentFocus }: LegendProps) => {
   const { t } = useTranslation('event')
   const highlight = useStore(useSettingsStore, state => state.highlight)
-  const setHighlight = useStore(useSettingsStore, state => state.setHighlight)
+  const setHighlight = useSettingsStore(state => state.setHighlight)
 
   return <div className={styles.wrapper}>
     <label className={styles.label}>{min}/{total} {t('available')}</label>
