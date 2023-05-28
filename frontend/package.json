@@ -15,7 +15,6 @@
     "@js-temporal/polyfill": "^0.4.4",
     "@microsoft/microsoft-graph-client": "^3.0.5",
     "accept-language": "^3.0.18",
-    "dayjs": "^1.11.7",
     "gapi-script": "^1.2.0",
     "goober": "^2.1.13",
     "hue-map": "^1.0.0",

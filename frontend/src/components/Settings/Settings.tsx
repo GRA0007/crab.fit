@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { maps } from 'hue-map'
+import { MapKey } from 'hue-map/dist/maps'
 import { Settings as SettingsIcon } from 'lucide-react'
 
 import SelectField from '/src/components/SelectField/SelectField'
@@ -64,8 +65,8 @@ const Settings = () => {
               'Sunday': t('options.weekStart.options.Sunday'),
               'Monday': t('options.weekStart.options.Monday'),
             }}
-            value={store?.weekStart === 0 ? 'Sunday' : 'Monday'}
-            onChange={value => store?.setWeekStart(value === 'Sunday' ? 0 : 1)}
+            value={store?.weekStart === 1 ? 'Sunday' : 'Monday'}
+            onChange={value => store?.setWeekStart(value === 'Sunday' ? 1 : 0)}
           />
 
           <ToggleField
@@ -103,7 +104,7 @@ const Settings = () => {
             }}
             isSmall
             value={store?.colormap}
-            onChange={event => store?.setColormap(event.target.value)}
+            onChange={event => store?.setColormap(event.target.value as MapKey)}
           />
 
           <ToggleField

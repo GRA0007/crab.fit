@@ -1,7 +1,7 @@
 import { Temporal } from '@js-temporal/polyfill'
 
 /**
- * Take times as strings and convert to Dayjs objects
+ * Take times as strings in UTC and convert to ZonedDateTime objects in the timezone supplied
  * @param times An array of strings in `HHmm-d` or `HHmm-DDMMYYYY` format
  * @param timezone The target timezone
  */

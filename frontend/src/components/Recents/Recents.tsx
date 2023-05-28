@@ -1,13 +1,14 @@
 'use client'
 
 import Link from 'next/link'
+import { Temporal } from '@js-temporal/polyfill'
 
 import Content from '/src/components/Content/Content'
 import Section from '/src/components/Section/Section'
-import { useDayjs } from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useRecentsStore from '/src/stores/recentsStore'
+import { relativeTimeFormat } from '/src/utils'
 
 import styles from './Recents.module.scss'
 
@@ -17,8 +18,7 @@ interface RecentsProps {
 
 const Recents = ({ target }: RecentsProps) => {
   const recents = useStore(useRecentsStore, state => state.recents)
-  const { t } = useTranslation(['home', 'common'])
-  const dayjs = useDayjs()
+  const { t, i18n } = useTranslation(['home', 'common'])
 
   return recents?.length ? <Section id="recents">
     <Content>
@@ -28,8 +28,8 @@ const Recents = ({ target }: RecentsProps) => {
           <span className={styles.name}>{event.name}</span>
           <span
             className={styles.date}
-            title={dayjs.unix(event.created_at).format('D MMMM, YYYY')}
-          >{t('common:created', { date: dayjs.unix(event.created_at).fromNow() })}</span>
+            title={Temporal.Instant.fromEpochSeconds(event.created_at).toLocaleString(i18n.language, { dateStyle: 'long' })}
+          >{t('common:created', { date: relativeTimeFormat(Temporal.Instant.fromEpochSeconds(event.created_at), i18n.language) })}</span>
         </Link>
       ))}
     </Content>

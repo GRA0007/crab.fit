@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { Temporal } from '@js-temporal/polyfill'
 
 import { Description, Label, Wrapper } from '/src/components/Field/Field'
 import ToggleField from '/src/components/ToggleField/ToggleField'
@@ -27,7 +28,7 @@ const CalendarField = <TValues extends FieldValues>({
   const [innerValue, setInnerValue] = useState({
     specific: [],
     week: [],
-  } satisfies Record<typeof type, string[]>)
+  } satisfies Record<typeof type, Temporal.PlainDate[]>)
 
   useEffect(() => {
     setInnerValue({ ...innerValue, [type]: field.value })

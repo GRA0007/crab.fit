@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import { Temporal } from '@js-temporal/polyfill'
 
 import Button from '/src/components/Button/Button'
 import CalendarField from '/src/components/CalendarField/CalendarField'
@@ -11,7 +12,6 @@ import SelectField from '/src/components/SelectField/SelectField'
 import TextField from '/src/components/TextField/TextField'
 import TimeRangeField from '/src/components/TimeRangeField/TimeRangeField'
 import { API_BASE } from '/src/config/api'
-import { useDayjs } from '/src/config/dayjs'
 import { useTranslation } from '/src/i18n/client'
 import timezones from '/src/res/timezones.json'
 
@@ -36,7 +36,6 @@ const defaultValues: Fields = {
 
 const CreateForm = () => {
   const { t } = useTranslation('home')
-  const dayjs = useDayjs()
   const { push } = useRouter()
 
   const {
@@ -58,38 +57,38 @@ const CreateForm = () => {
       if (dates.length === 0) {
         return setError(t('form.errors.no_dates'))
       }
-      const isSpecificDates = dates[0].length === 8
       if (time.start === time.end) {
         return setError(t('form.errors.same_times'))
       }
 
-      const times = dates.reduce((times, date) => {
+      // If format is `YYYY-MM-DD` or `d`
+      const isSpecificDates = dates[0].length !== 1
+
+      const times = dates.reduce((times, dateStr) => {
         const day = []
+        const date = isSpecificDates
+          ? Temporal.PlainDate.from(dateStr)
+          : Temporal.Now.plainDateISO().add({ days: Number(dateStr) - Temporal.Now.plainDateISO().dayOfWeek })
+
         for (let i = time.start; i < (time.start > time.end ? 24 : time.end); i++) {
+          const dateTime = date.toZonedDateTime({ timeZone: timezone, plainTime: Temporal.PlainTime.from({ hour: i }) }).withTimeZone('UTC')
           if (isSpecificDates) {
-            day.push(
-              dayjs.tz(date, 'DDMMYYYY', timezone)
-                .hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
-            )
+            // Format as `HHmm-DDMMYYYY`
+            day.push(`${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${dateTime.day.toString().padStart(2, '0')}${dateTime.month.toString().padStart(2, '0')}${dateTime.year.toString().padStart(4, '0')}`)
           } else {
-            day.push(
-              dayjs().tz(timezone)
-                .day(Number(date)).hour(i).minute(0).utc().format('HHmm-d')
-            )
+            // Format as `HHmm-d`
+            day.push(`${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${String(dateTime.dayOfWeek === 7 ? 0 : dateTime.dayOfWeek)}`)
           }
         }
         if (time.start > time.end) {
           for (let i = 0; i < time.end; i++) {
+            const dateTime = date.toZonedDateTime({ timeZone: timezone, plainTime: Temporal.PlainTime.from({ hour: i }) }).withTimeZone('UTC')
             if (isSpecificDates) {
-              day.push(
-                dayjs.tz(date, 'DDMMYYYY', timezone)
-                  .hour(i).minute(0).utc().format('HHmm-DDMMYYYY')
-              )
+              // Format as `HHmm-DDMMYYYY`
+              day.push(`${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${dateTime.day.toString().padStart(2, '0')}${dateTime.month.toString().padStart(2, '0')}${dateTime.year.toString().padStart(4, '0')}`)
             } else {
-              day.push(
-                dayjs().tz(timezone)
-                  .day(Number(date)).hour(i).minute(0).utc().format('HHmm-d')
-              )
+              // Format as `HHmm-d`
+              day.push(`${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${String(dateTime.dayOfWeek === 7 ? 0 : dateTime.dayOfWeek)}`)
             }
           }
         }
