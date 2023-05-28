@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 
 import Egg from '/src/components/Egg/Egg'
-import Footer from '/src/components/Footer/Footer'
 import Settings from '/src/components/Settings/Settings'
 import TranslateDialog from '/src/components/TranslateDialog/TranslateDialog'
 import { fallbackLng } from '/src/i18n/options'
@@ -40,9 +39,6 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       <TranslateDialog />
 
       {children}
-
-      {/* @ts-expect-error Async Server Component */}
-      <Footer />
     </body>
   </html>
 }

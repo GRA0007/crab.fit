@@ -16,7 +16,6 @@
     "@microsoft/microsoft-graph-client": "^3.0.5",
     "accept-language": "^3.0.18",
     "gapi-script": "^1.2.0",
-    "goober": "^2.1.13",
     "hue-map": "^1.0.0",
     "i18next": "^22.5.0",
     "i18next-browser-languagedetector": "^7.0.1",

@@ -9,3 +9,8 @@
   align-items: center;
   justify-content: center;
 }
+
+.slim {
+  margin-block: 10px;
+  max-width: calc(100% - 30px);
+}

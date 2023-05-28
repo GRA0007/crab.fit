@@ -9,14 +9,15 @@ import styles from './Header.module.scss'
 interface HeaderProps {
   /** Show the full header */
   isFull?: boolean
+  isSmall?: boolean
 }
 
-const Header = async ({ isFull }: HeaderProps) => {
+const Header = async ({ isFull, isSmall }: HeaderProps) => {
   const { t } = await useTranslation(['common', 'home'])
 
-  return <header className={styles.header}>
+  return <header className={styles.header} data-small={isSmall}>
     {isFull ? <>
-      <img className={styles.bigLogo} src={logo.src} alt="" />
+      {!isSmall && <img className={styles.bigLogo} src={logo.src} alt="" />}
       <span className={makeClass(styles.subtitle, !/^[A-Za-z ]+$/.test(t('home:create')) && styles.hasAltChars)}>{t('home:create')}</span>
       <h1 className={styles.bigTitle}>CRAB FIT</h1>
     </> : <Link href="/" className={styles.link}>

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import { range } from '@giraugh/tools'
 import { Temporal } from '@js-temporal/polyfill'
 
 import Button from '/src/components/Button/Button'
@@ -11,14 +12,17 @@ import { default as ErrorAlert } from '/src/components/Error/Error'
 import SelectField from '/src/components/SelectField/SelectField'
 import TextField from '/src/components/TextField/TextField'
 import TimeRangeField from '/src/components/TimeRangeField/TimeRangeField'
-import { API_BASE } from '/src/config/api'
+import { API_BASE, EventResponse } from '/src/config/api'
 import { useTranslation } from '/src/i18n/client'
 import timezones from '/src/res/timezones.json'
+import useRecentsStore from '/src/stores/recentsStore'
 
+import EventInfo from './components/EventInfo/EventInfo'
 import styles from './CreateForm.module.scss'
 
 interface Fields {
   name: string
+  /** As `YYYY-MM-DD` or `d` */
   dates: string[]
   time: {
     start: number
@@ -34,9 +38,11 @@ const defaultValues: Fields = {
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 }
 
-const CreateForm = () => {
+const CreateForm = ({ noRedirect }: { noRedirect?: boolean }) => {
   const { t } = useTranslation('home')
   const { push } = useRouter()
+
+  const addRecent = useRecentsStore(state => state.addRecent)
 
   const {
     register,
@@ -45,6 +51,7 @@ const CreateForm = () => {
   } = useForm({ defaultValues })
 
   const [isLoading, setIsLoading] = useState(false)
+  const [createdEvent, setCreatedEvent] = useState<EventResponse>()
   const [error, setError] = useState<React.ReactNode>()
 
   const onSubmit: SubmitHandler<Fields> = async values => {
@@ -64,36 +71,24 @@ const CreateForm = () => {
       // If format is `YYYY-MM-DD` or `d`
       const isSpecificDates = dates[0].length !== 1
 
-      const times = dates.reduce((times, dateStr) => {
-        const day = []
+      const times = dates.flatMap(dateStr => {
         const date = isSpecificDates
           ? Temporal.PlainDate.from(dateStr)
           : Temporal.Now.plainDateISO().add({ days: Number(dateStr) - Temporal.Now.plainDateISO().dayOfWeek })
 
-        for (let i = time.start; i < (time.start > time.end ? 24 : time.end); i++) {
-          const dateTime = date.toZonedDateTime({ timeZone: timezone, plainTime: Temporal.PlainTime.from({ hour: i }) }).withTimeZone('UTC')
+        const hours = time.start > time.end ? [...range(0, time.end - 1), ...range(time.start, 23)] : range(time.start, time.end - 1)
+
+        return hours.map(hour => {
+          const dateTime = date.toZonedDateTime({ timeZone: timezone, plainTime: Temporal.PlainTime.from({ hour }) }).withTimeZone('UTC')
           if (isSpecificDates) {
             // Format as `HHmm-DDMMYYYY`
-            day.push(`${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${dateTime.day.toString().padStart(2, '0')}${dateTime.month.toString().padStart(2, '0')}${dateTime.year.toString().padStart(4, '0')}`)
+            return `${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${dateTime.day.toString().padStart(2, '0')}${dateTime.month.toString().padStart(2, '0')}${dateTime.year.toString().padStart(4, '0')}`
           } else {
             // Format as `HHmm-d`
-            day.push(`${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${String(dateTime.dayOfWeek === 7 ? 0 : dateTime.dayOfWeek)}`)
+            return `${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${String(dateTime.dayOfWeek === 7 ? 0 : dateTime.dayOfWeek)}`
           }
-        }
-        if (time.start > time.end) {
-          for (let i = 0; i < time.end; i++) {
-            const dateTime = date.toZonedDateTime({ timeZone: timezone, plainTime: Temporal.PlainTime.from({ hour: i }) }).withTimeZone('UTC')
-            if (isSpecificDates) {
-              // Format as `HHmm-DDMMYYYY`
-              day.push(`${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${dateTime.day.toString().padStart(2, '0')}${dateTime.month.toString().padStart(2, '0')}${dateTime.year.toString().padStart(4, '0')}`)
-            } else {
-              // Format as `HHmm-d`
-              day.push(`${dateTime.hour.toString().padStart(2, '0')}${dateTime.minute.toString().padStart(2, '0')}-${String(dateTime.dayOfWeek === 7 ? 0 : dateTime.dayOfWeek)}`)
-            }
-          }
-        }
-        return [...times, ...day]
-      }, [] as string[])
+        })
+      })
 
       if (times.length === 0) {
         return setError(t('form.errors.no_time'))
@@ -114,10 +109,20 @@ const CreateForm = () => {
         throw new Error('Failed to create event')
       }
 
-      const { id } = await res.json()
+      const newEvent = EventResponse.parse(await res.json())
 
-      // Navigate to the new event
-      push(`/${id}`)
+      if (noRedirect) {
+        // Show event link
+        setCreatedEvent(newEvent)
+        addRecent({
+          id: newEvent.id,
+          name: newEvent.name,
+          created_at: newEvent.created_at,
+        })
+      } else {
+        // Navigate to the new event
+        push(`/${newEvent.id}`)
+      }
     } catch (e) {
       setError(t('form.errors.unknown'))
       console.error(e)
@@ -126,7 +131,11 @@ const CreateForm = () => {
     }
   }
 
-  return <form className={styles.form} onSubmit={handleSubmit(onSubmit)} id="create">
+  return createdEvent ? <EventInfo event={createdEvent} /> : <form
+    style={{ marginBlockEnd: noRedirect ? 30 : 60 }}
+    onSubmit={handleSubmit(onSubmit)}
+    id="create"
+  >
     <TextField
       label={t('form.name.label')}
       description={t('form.name.sublabel')}
@@ -163,6 +172,7 @@ const CreateForm = () => {
         type="submit"
         isLoading={isLoading}
         disabled={isLoading}
+        style={noRedirect ? { width: '100%' } : undefined}
       >{t('form.button')}</Button>
     </div>
   </form>

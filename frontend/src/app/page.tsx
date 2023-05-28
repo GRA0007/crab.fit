@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Content from '/src/components/Content/Content'
 import CreateForm from '/src/components/CreateForm/CreateForm'
 import DownloadButtons from '/src/components/DownloadButtons/DownloadButtons'
+import Footer from '/src/components/Footer/Footer'
 import Header from '/src/components/Header/Header'
 import { P } from '/src/components/Paragraph/Text'
 import Recents from '/src/components/Recents/Recents'
@@ -46,6 +47,9 @@ const Page = async () => {
         <P>{t('about.content.p5')}</P>
       </Content>
     </Section>
+
+    {/* @ts-expect-error Async Server Component */}
+    <Footer />
   </>
 }
 

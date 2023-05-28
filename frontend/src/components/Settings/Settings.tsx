@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { isKeyOfObject } from '@giraugh/tools'
 import { maps } from 'hue-map'
 import { MapKey } from 'hue-map/dist/maps'
 import { Settings as SettingsIcon } from 'lucide-react'
@@ -65,8 +66,8 @@ const Settings = () => {
               'Sunday': t('options.weekStart.options.Sunday'),
               'Monday': t('options.weekStart.options.Monday'),
             }}
-            value={store?.weekStart === 1 ? 'Sunday' : 'Monday'}
-            onChange={value => store?.setWeekStart(value === 'Sunday' ? 1 : 0)}
+            value={store.weekStart === 0 ? 'Sunday' : 'Monday'}
+            onChange={value => store.setWeekStart(value === 'Sunday' ? 0 : 1)}
           />
 
           <ToggleField
@@ -76,8 +77,8 @@ const Settings = () => {
               '12h': t('options.timeFormat.options.12h'),
               '24h': t('options.timeFormat.options.24h'),
             }}
-            value={store?.timeFormat ?? '12h'}
-            onChange={value => store?.setTimeFormat(value)}
+            value={store.timeFormat ?? '12h'}
+            onChange={value => store.setTimeFormat(value)}
           />
 
           <ToggleField
@@ -88,8 +89,8 @@ const Settings = () => {
               'Light': t('options.theme.options.Light'),
               'Dark': t('options.theme.options.Dark'),
             }}
-            value={store?.theme ?? 'System'}
-            onChange={value => store?.setTheme(value)}
+            value={store.theme ?? 'System'}
+            onChange={value => store.setTheme(value)}
           />
 
           <SelectField
@@ -103,8 +104,8 @@ const Settings = () => {
               ])),
             }}
             isSmall
-            value={store?.colormap}
-            onChange={event => store?.setColormap(event.target.value as MapKey)}
+            value={store.colormap}
+            onChange={event => store.setColormap(event.target.value as MapKey)}
           />
 
           <ToggleField
@@ -115,8 +116,8 @@ const Settings = () => {
               'Off': t('options.highlight.options.Off'),
               'On': t('options.highlight.options.On'),
             }}
-            value={store?.highlight ? 'On' : 'Off'}
-            onChange={value => store?.setHighlight(value === 'On')}
+            value={store.highlight ? 'On' : 'Off'}
+            onChange={value => store.setHighlight(value === 'On')}
           />
 
           <SelectField
@@ -129,7 +130,15 @@ const Settings = () => {
             }}
             isSmall
             value={i18n.language}
-            onChange={e => i18n.changeLanguage(e.target.value).then(() => router.refresh())}
+            onChange={e => {
+              // Set language defaults
+              if (isKeyOfObject(e.target.value, languageDetails)) {
+                store.setTimeFormat(languageDetails[e.target.value].timeFormat)
+                store.setWeekStart(languageDetails[e.target.value].weekStart)
+              }
+
+              i18n.changeLanguage(e.target.value).then(() => router.refresh())
+            }}
           />
         </>}
       </div>

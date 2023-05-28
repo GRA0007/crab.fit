@@ -19,9 +19,9 @@ interface WeekdaysProps {
 const Weekdays = ({ value, onChange }: WeekdaysProps) => {
   const { t, i18n } = useTranslation('home')
 
-  const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 1
+  const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 0
 
-  const weekdays = useMemo(() => rotateArray(range(1, 7).map(i => Temporal.Now.plainDateISO().add({ days: i - Temporal.Now.plainDateISO().dayOfWeek })), weekStart), [weekStart])
+  const weekdays = useMemo(() => rotateArray(range(1, 7).map(i => Temporal.Now.plainDateISO().add({ days: i - Temporal.Now.plainDateISO().dayOfWeek })), weekStart ? 0 : 1), [weekStart])
 
   // Ref and state required to rerender but also access static version in callbacks
   const selectingRef = useRef<string[]>([])

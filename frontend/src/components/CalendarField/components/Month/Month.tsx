@@ -20,7 +20,7 @@ interface MonthProps {
 const Month = ({ value, onChange }: MonthProps) => {
   const { t, i18n } = useTranslation('home')
 
-  const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 1
+  const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 0
 
   const [page, setPage] = useState<Temporal.PlainYearMonth>(Temporal.Now.plainDateISO().toPlainYearMonth())
   const dates = useMemo(() => calculateMonth(page, weekStart), [page, weekStart])
@@ -61,7 +61,7 @@ const Month = ({ value, onChange }: MonthProps) => {
     </div>
 
     <div className={styles.dayLabels}>
-      {(rotateArray(getWeekdayNames(i18n.language, 'short'), weekStart)).map(name =>
+      {(rotateArray(getWeekdayNames(i18n.language, 'short'), weekStart ? 0 : 1)).map(name =>
         <label key={name}>{name}</label>
       )}
     </div>
@@ -119,8 +119,8 @@ export default Month
 
 /** Calculate the dates to show for the month in a 2d array */
 const calculateMonth = (month: Temporal.PlainYearMonth, weekStart: 0 | 1) => {
-  const daysBefore = month.toPlainDate({ day: 1 }).dayOfWeek - (weekStart ? 0 : 1)
-  const daysAfter = 6 - month.toPlainDate({ day: month.daysInMonth }).dayOfWeek + (weekStart ? 0 : 1)
+  const daysBefore = month.toPlainDate({ day: 1 }).dayOfWeek - weekStart
+  const daysAfter = 6 - month.toPlainDate({ day: month.daysInMonth }).dayOfWeek + weekStart
 
   const dates: Temporal.PlainDate[][] = []
   let curDate = month.toPlainDate({ day: 1 }).subtract({ days: daysBefore })

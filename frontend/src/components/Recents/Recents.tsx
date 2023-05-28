@@ -12,11 +12,7 @@ import { relativeTimeFormat } from '/src/utils'
 
 import styles from './Recents.module.scss'
 
-interface RecentsProps {
-  target?: React.ComponentProps<'a'>['target']
-}
-
-const Recents = ({ target }: RecentsProps) => {
+const Recents = () => {
   const recents = useStore(useRecentsStore, state => state.recents)
   const { t, i18n } = useTranslation(['home', 'common'])
 
@@ -24,7 +20,7 @@ const Recents = ({ target }: RecentsProps) => {
     <Content>
       <h2>{t('home:recently_visited')}</h2>
       {recents.map(event => (
-        <Link className={styles.recent} href={`/${event.id}`} target={target} key={event.id}>
+        <Link className={styles.recent} href={`/${event.id}`} key={event.id}>
           <span className={styles.name}>{event.name}</span>
           <span
             className={styles.date}

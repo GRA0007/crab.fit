@@ -77,6 +77,10 @@
   color: var(--secondary);
   line-height: 1em;
   text-transform: uppercase;
+
+  [data-small=true] & {
+    font-size: 2rem;
+  }
 }
 
 .hasAltChars {
@@ -100,6 +104,13 @@
 
   @media (max-width: 350px) {
     font-size: 3.5rem;
+  }
+
+  [data-small=true] & {
+    font-size: 2rem;
+    @media (max-width: 350px) {
+      font-size: 2rem;
+    }
   }
 }
 

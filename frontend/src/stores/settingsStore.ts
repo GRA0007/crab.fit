@@ -6,7 +6,7 @@ type TimeFormat = '12h' | '24h'
 type Theme = 'System' | 'Light' | 'Dark'
 
 interface SettingsStore {
-  /** 0: Monday, 1: Sunday */
+  /** 0: Sunday, 1: Monday */
   weekStart: 0 | 1
   timeFormat: TimeFormat
   theme: Theme
@@ -34,18 +34,7 @@ const useSettingsStore = create<SettingsStore>()(persist(
     setHighlight: highlight => set({ highlight }),
     setColormap: colormap => set({ colormap }),
   }),
-  {
-    name: 'crabfit-settings',
-    version: 1,
-    migrate: (persistedState, version) => {
-      if (version === 0) {
-        // Weekstart used to be 0 for Sunday, but now it's been swapped
-        (persistedState as SettingsStore).weekStart = (persistedState as SettingsStore).weekStart === 1 ? 0 : 1
-        return persistedState as SettingsStore
-      }
-      return persistedState as SettingsStore
-    },
-  },
+  { name: 'crabfit-settings' },
 ))
 
 export default useSettingsStore
