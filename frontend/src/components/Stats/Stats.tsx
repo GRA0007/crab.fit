@@ -14,20 +14,20 @@ const Stats = async () => {
   const stats = await getStats()
   const { t } = await useTranslation('home')
 
-  return <div className={styles.wrapper}>
+  return stats ? <div className={styles.wrapper}>
     <div>
       <span className={styles.number}>
-        {new Intl.NumberFormat().format(stats?.event_count || 17000)}{!stats?.event_count && '+'}
+        {new Intl.NumberFormat().format(stats.event_count)}
       </span>
       <span className={styles.label}>{t('about.events')}</span>
     </div>
     <div>
       <span className={styles.number}>
-        {new Intl.NumberFormat().format(stats?.person_count || 65000)}{!stats?.person_count && '+'}
+        {new Intl.NumberFormat().format(stats.person_count)}
       </span>
       <span className={styles.label}>{t('about.availabilities')}</span>
     </div>
-  </div>
+  </div> : null
 }
 
 export default Stats

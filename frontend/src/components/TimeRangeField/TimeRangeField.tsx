@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef } from 'react'
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
 import dayjs from 'dayjs'
@@ -13,14 +15,24 @@ const times = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
 interface TimeRangeFieldProps<TValues extends FieldValues> extends UseControllerProps<TValues> {
   label?: React.ReactNode
   description?: React.ReactNode
+  staticValue?: {
+    start: number
+    end: number
+  }
 }
 
 const TimeRangeField = <TValues extends FieldValues>({
   label,
   description,
+  staticValue,
   ...props
 }: TimeRangeFieldProps<TValues>) => {
-  const { field: { value, onChange } } = useController(props)
+  const { field: { value, onChange } } = !staticValue
+    ? useController(props)
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    : { field: { value: staticValue, onChange: () => {} } }
+
+  if (!('start' in value) || !('end' in value)) return null
 
   return <Wrapper>
     {label && <Label>{label}</Label>}

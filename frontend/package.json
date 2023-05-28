@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@azure/msal-browser": "^2.37.0",
-    "@giraugh/tools": "^1.5.0",
+    "@giraugh/tools": "^1.6.0",
+    "@js-temporal/polyfill": "^0.4.4",
     "@microsoft/microsoft-graph-client": "^3.0.5",
     "accept-language": "^3.0.18",
     "dayjs": "^1.11.7",

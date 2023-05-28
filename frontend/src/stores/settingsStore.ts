@@ -1,3 +1,4 @@
+import { ColorMap } from 'hue-map/dist/maps'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
@@ -9,13 +10,13 @@ interface SettingsStore {
   timeFormat: TimeFormat
   theme: Theme
   highlight: boolean
-  colormap: string
+  colormap: 'crabfit' | ColorMap
 
   setWeekStart: (weekStart: 0 | 1) => void
   setTimeFormat: (timeFormat: TimeFormat) => void
   setTheme: (theme: Theme) => void
   setHighlight: (highlight: boolean) => void
-  setColormap: (colormap: string) => void
+  setColormap: (colormap: 'crabfit' | ColorMap) => void
 }
 
 const useSettingsStore = create<SettingsStore>()(persist(

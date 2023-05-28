@@ -27,7 +27,7 @@ interface LanguageDetails {
   /** 0: Sunday, 1: Monday */
   weekStart: 0 | 1
   timeFormat: '12h' | '24h'
-  /** TODO: document */
+  /** The separator to show between hours and minutes (default `:`) */
   separator?: string
   /** Day.js locale import */
   import: () => Promise<unknown>

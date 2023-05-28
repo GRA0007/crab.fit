@@ -1,0 +1,50 @@
+.step {
+  text-decoration-color: var(--primary);
+  text-decoration-style: solid;
+  text-decoration-line: underline;
+  margin-top: 30px;
+}
+
+.fakeCalendar {
+  user-select: none;
+
+  & div {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 2px;
+  }
+  & div:first-of-type span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 0;
+    font-weight: bold;
+    user-select: none;
+    opacity: .7;
+    @media (max-width: 350px) {
+      font-size: 12px;
+    }
+  }
+  & div:last-of-type span {
+    border: 1px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    color: #FFF;
+    background-color: var(--primary);
+
+    &:first-of-type {
+      border-start-start-radius: 3px;
+      border-end-start-radius: 3px;
+      color: inherit;
+      background-color: var(--surface);
+    }
+    &:last-of-type {
+      border-end-end-radius: 3px;
+      border-start-end-radius: 3px;
+      color: inherit;
+      background-color: var(--surface);
+    }
+  }
+}
