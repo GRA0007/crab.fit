@@ -49,14 +49,11 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
   [times, filteredPeople, people])
 
   // Create the colour palette
-  const palette = usePalette(min, max)
-
-  // Is specific dates or just days of the week
-  const isSpecificDates = useMemo(() => times[0].length === 13, [times])
+  const palette = usePalette(Math.max((max - min) + 1, 2))
 
   const heatmap = useMemo(() => columns.map((column, x) => <Fragment key={x}>
     {column ? <div className={styles.dateColumn}>
-      {isSpecificDates && <label className={styles.dateLabel}>{column.header.dateLabel}</label>}
+      {column.header.dateLabel && <label className={styles.dateLabel}>{column.header.dateLabel}</label>}
       <label className={styles.dayLabel}>{column.header.weekdayLabel}</label>
 
       <div
@@ -108,7 +105,6 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
     </div> : <div className={styles.columnSpacer} />}
   </Fragment>), [
     availabilities,
-    isSpecificDates,
     columns,
     highlight,
     max,

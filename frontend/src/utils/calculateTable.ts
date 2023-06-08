@@ -28,7 +28,7 @@ export const calculateTable = (
 
     columns: columns.map(column => column ? {
       header: {
-        dateLabel: column.toLocaleString(locale, { month: 'short', day: 'numeric' }),
+        dateLabel: isSpecificDates ? column.toLocaleString(locale, { month: 'short', day: 'numeric' }) : undefined,
         weekdayLabel: column.toLocaleString(locale, { weekday: 'short' }),
         string: column.toString(),
       },

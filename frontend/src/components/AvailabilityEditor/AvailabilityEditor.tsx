@@ -1,12 +1,12 @@
 import { Fragment, useCallback, useMemo, useRef, useState } from 'react'
-import { createPalette } from 'hue-map'
 
 import Content from '/src/components/Content/Content'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
-import { calculateColumns, calculateRows, convertTimesToDates, makeClass, serializeTime } from '/src/utils'
+import { calculateTable, makeClass } from '/src/utils'
 
+import { usePalette } from '/hooks/usePalette'
 import styles from '../AvailabilityViewer/AvailabilityViewer.module.scss'
 
 interface AvailabilityEditorProps {
@@ -24,14 +24,12 @@ const AvailabilityEditor = ({
 }: AvailabilityEditorProps) => {
   const { t, i18n } = useTranslation('event')
 
-  const timeFormat = useStore(useSettingsStore, state => state.timeFormat)
-  const colormap = useStore(useSettingsStore, state => state.colormap)
+  const timeFormat = useStore(useSettingsStore, state => state.timeFormat) ?? '12h'
 
-  // Calculate rows and columns
-  const [dates, rows, columns] = useMemo(() => {
-    const dates = convertTimesToDates(times, timezone)
-    return [dates, calculateRows(dates), calculateColumns(dates)]
-  }, [times, timezone])
+  // Calculate table
+  const { rows, columns } = useMemo(() =>
+    calculateTable(times, i18n.language, timeFormat, timezone),
+  [times, i18n.language, timeFormat, timezone])
 
   // Ref and state required to rerender but also access static version in callbacks
   const selectingRef = useRef<string[]>([])
@@ -44,13 +42,8 @@ const AvailabilityEditor = ({
   const startPos = useRef({ x: 0, y: 0 })
   const mode = useRef<'add' | 'remove'>()
 
-  // Is specific dates or just days of the week
-  const isSpecificDates = useMemo(() => times[0].length === 13, [times])
-
-  const palette = useMemo(() => createPalette({
-    map: colormap !== 'crabfit' ? colormap : [[0, [247, 158, 0, 0]], [1, [247, 158, 0, 255]]],
-    steps: 2,
-  }).format(), [colormap])
+  // Create the colour palette
+  const palette = usePalette(2)
 
   return <>
     <Content isCentered>{t('you.info')}</Content>
@@ -89,8 +82,8 @@ const AvailabilityEditor = ({
           <div className={styles.timeLabels}>
             {rows.map((row, i) =>
               <div className={styles.timeSpace} key={i}>
-                {row && row.minute === 0 && <label className={styles.timeLabel}>
-                  {row.toLocaleString(i18n.language, { hour: 'numeric', hour12: timeFormat === '12h' })}
+                {row && <label className={styles.timeLabel}>
+                  {row.label}
                 </label>}
               </div>
             )}
@@ -98,43 +91,39 @@ const AvailabilityEditor = ({
 
           {columns.map((column, x) => <Fragment key={x}>
             {column ? <div className={styles.dateColumn}>
-              {isSpecificDates && <label className={styles.dateLabel}>{column.toLocaleString(i18n.language, { month: 'short', day: 'numeric' })}</label>}
-              <label className={styles.dayLabel}>{column.toLocaleString(i18n.language, { weekday: 'short' })}</label>
+              {column.header.dateLabel && <label className={styles.dateLabel}>{column.header.dateLabel}</label>}
+              <label className={styles.dayLabel}>{column.header.weekdayLabel}</label>
 
               <div
                 className={styles.times}
                 data-border-left={x === 0 || columns.at(x - 1) === null}
                 data-border-right={x === columns.length - 1 || columns.at(x + 1) === null}
               >
-                {rows.map((row, y) => {
-                  if (y === rows.length - 1) return null
+                {column.cells.map((cell, y) => {
+                  if (y === column.cells.length - 1) return null
 
-                  if (!row || rows.at(y + 1) === null || dates.every(d => !d.equals(column.toZonedDateTime({ timeZone: timezone, plainTime: row })))) {
-                    return <div
-                      className={makeClass(styles.timeSpace, styles.grey)}
-                      key={y}
-                      title={t<string>('greyed_times')}
-                    />
-                  }
-
-                  const date = column.toZonedDateTime({ timeZone: timezone, plainTime: row })
+                  if (!cell) return <div
+                    className={makeClass(styles.timeSpace, styles.grey)}
+                    key={y}
+                    title={t<string>('greyed_times')}
+                  />
 
                   return <div
                     key={y}
                     className={styles.time}
                     style={{
                       backgroundColor: (
-                        (!(mode.current === 'remove' && selecting.includes(serializeTime(date, isSpecificDates))) && value.includes(serializeTime(date, isSpecificDates)))
-                        || (mode.current === 'add' && selecting.includes(serializeTime(date, isSpecificDates)))
+                        (!(mode.current === 'remove' && selecting.includes(cell.serialized)) && value.includes(cell.serialized))
+                        || (mode.current === 'add' && selecting.includes(cell.serialized))
                       ) ? palette[1] : palette[0],
-                      ...date.minute !== 0 && date.minute !== 30 && { borderTopColor: 'transparent' },
-                      ...date.minute === 30 && { borderTopStyle: 'dotted' },
+                      ...cell.minute !== 0 && cell.minute !== 30 && { borderTopColor: 'transparent' },
+                      ...cell.minute === 30 && { borderTopStyle: 'dotted' },
                     }}
                     onPointerDown={e => {
                       e.preventDefault()
                       startPos.current = { x, y }
-                      mode.current = value.includes(serializeTime(date, isSpecificDates)) ? 'remove' : 'add'
-                      setSelecting([serializeTime(date, isSpecificDates)])
+                      mode.current = value.includes(cell.serialized) ? 'remove' : 'add'
+                      setSelecting([cell.serialized])
                       e.currentTarget.releasePointerCapture(e.pointerId)
 
                       document.addEventListener('pointerup', () => {
@@ -155,13 +144,9 @@ const AvailabilityEditor = ({
                           }
                         }
                         setSelecting(found.flatMap(d => {
-                          const [time, date] = [rows[d.y], columns[d.x]]
-                          if (time !== null && date !== null) {
-                            const str = serializeTime(date.toZonedDateTime({ timeZone: timezone, plainTime: time }), isSpecificDates)
-                            if (times.includes(str)) {
-                              return [str]
-                            }
-                            return []
+                          const serialized = columns[d.x]?.cells[d.y]?.serialized
+                          if (serialized && times.includes(serialized)) {
+                            return [serialized]
                           }
                           return []
                         }))
