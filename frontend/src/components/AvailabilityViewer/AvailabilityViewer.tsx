@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useMemo, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { Temporal } from '@js-temporal/polyfill'
 
 import Content from '/src/components/Content/Content'
@@ -50,6 +50,11 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
 
   // Create the colour palette
   const palette = usePalette(Math.max((max - min) + 1, 2))
+
+  // Reselect everyone if the amount of people changes
+  useEffect(() => {
+    setFilteredPeople(people.map(p => p.name))
+  }, [people.length])
 
   const heatmap = useMemo(() => columns.map((column, x) => <Fragment key={x}>
     {column ? <div className={styles.dateColumn}>
