@@ -24,7 +24,6 @@ const Page = async () => {
 
   return <>
     <Content>
-      {/* @ts-expect-error Async Server Component */}
       <Header />
 
       <h1>{t('privacy:name')}</h1>
@@ -86,7 +85,6 @@ const Page = async () => {
       </Content>
     </Section>
 
-    {/* @ts-expect-error Async Server Component */}
     <Footer />
   </>
 }

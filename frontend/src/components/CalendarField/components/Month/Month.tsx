@@ -23,7 +23,7 @@ const Month = ({ value, onChange }: MonthProps) => {
   const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 0
 
   const [page, setPage] = useState<Temporal.PlainYearMonth>(Temporal.Now.plainDateISO().toPlainYearMonth())
-  const dates = useMemo(() => calculateMonth(page, weekStart), [page, weekStart])
+  const dates = useMemo(() => calculateMonth(page, weekStart, i18n.language), [page, weekStart, i18n.language])
 
   // Ref and state required to rerender but also access static version in callbacks
   const selectingRef = useRef<string[]>([])
@@ -46,7 +46,7 @@ const Month = ({ value, onChange }: MonthProps) => {
   }, [value])
 
   return <>
-    <div className={styles.header}>
+    {useMemo(() => <div className={styles.header}>
       <Button
         title={t<string>('form.dates.tooltips.previous')}
         onClick={() => setPage(page.subtract({ months: 1 }))}
@@ -58,13 +58,13 @@ const Month = ({ value, onChange }: MonthProps) => {
         onClick={() => setPage(page.add({ months: 1 }))}
         icon={<ChevronRight />}
       />
-    </div>
+    </div>, [page, i18n.language])}
 
-    <div className={styles.dayLabels}>
+    {useMemo(() => <div className={styles.dayLabels}>
       {(rotateArray(getWeekdayNames(i18n.language, 'short'), weekStart ? 0 : 1)).map(name =>
         <label key={name}>{name}</label>
       )}
-    </div>
+    </div>, [i18n.language, weekStart])}
 
     <div className={styles.grid}>
       {dates.length > 0 && dates.map((dateRow, y) =>
@@ -73,27 +73,27 @@ const Month = ({ value, onChange }: MonthProps) => {
           className={makeClass(
             styles.date,
             date.month !== page.month && styles.otherMonth,
-            date.equals(Temporal.Now.plainDateISO()) && styles.today,
+            date.isToday && styles.today,
             (
-              (!(mode.current === 'remove' && selecting.includes(date.toString())) && value.includes(date.toString()))
-              || (mode.current === 'add' && selecting.includes(date.toString()))
+              (!(mode.current === 'remove' && selecting.includes(date.string)) && value.includes(date.string))
+              || (mode.current === 'add' && selecting.includes(date.string))
             ) && styles.selected,
           )}
-          key={date.toString()}
-          title={`${date.toLocaleString(i18n.language, { day: 'numeric', month: 'long' })}${date.equals(Temporal.Now.plainDateISO()) ? ` (${t('form.dates.tooltips.today')})` : ''}`}
+          key={date.string}
+          title={`${date.title}${date.isToday ? ` (${t('form.dates.tooltips.today')})` : ''}`}
           onKeyDown={e => {
             if (e.key === ' ' || e.key === 'Enter') {
-              if (value.includes(date.toString())) {
-                onChange(value.filter(d => d !== date.toString()))
+              if (value.includes(date.string)) {
+                onChange(value.filter(d => d !== date.string))
               } else {
-                onChange([...value, date.toString()])
+                onChange([...value, date.string])
               }
             }
           }}
           onPointerDown={e => {
             startPos.current = { x, y }
-            mode.current = value.includes(date.toString()) ? 'remove' : 'add'
-            setSelecting([date.toString()])
+            mode.current = value.includes(date.string) ? 'remove' : 'add'
+            setSelecting([date.string])
             e.currentTarget.releasePointerCapture(e.pointerId)
 
             document.addEventListener('pointerup', handleFinishSelection, { once: true })
@@ -106,10 +106,10 @@ const Month = ({ value, onChange }: MonthProps) => {
                   found.push({ y: cy, x: cx })
                 }
               }
-              setSelecting(found.map(d => dates[d.y][d.x].toString()))
+              setSelecting(found.map(d => dates[d.y][d.x].string))
             }
           }}
-        >{date.toLocaleString(i18n.language, { day: 'numeric' })}</button>)
+        >{date.label}</button>)
       )}
     </div>
   </>
@@ -117,18 +117,33 @@ const Month = ({ value, onChange }: MonthProps) => {
 
 export default Month
 
+interface Day {
+  month: number
+  isToday: boolean
+  string: string
+  title: string
+  label: string
+}
+
 /** Calculate the dates to show for the month in a 2d array */
-const calculateMonth = (month: Temporal.PlainYearMonth, weekStart: 0 | 1) => {
+const calculateMonth = (month: Temporal.PlainYearMonth, weekStart: 0 | 1, locale: string) => {
+  const today = Temporal.Now.plainDateISO()
   const daysBefore = month.toPlainDate({ day: 1 }).dayOfWeek - weekStart
   const daysAfter = 6 - month.toPlainDate({ day: month.daysInMonth }).dayOfWeek + weekStart
 
-  const dates: Temporal.PlainDate[][] = []
+  const dates: Day[][] = []
   let curDate = month.toPlainDate({ day: 1 }).subtract({ days: daysBefore })
   let y = 0
   let x = 0
   for (let i = 0; i < daysBefore + month.daysInMonth + daysAfter; i++) {
     if (x === 0) dates[y] = []
-    dates[y][x] = curDate
+    dates[y][x] = {
+      month: curDate.month,
+      isToday: curDate.equals(today),
+      string: curDate.toString(),
+      title: curDate.toLocaleString(locale, { day: 'numeric', month: 'long' }),
+      label: curDate.toLocaleString(locale, { day: 'numeric' }),
+    }
     curDate = curDate.add({ days: 1 })
     x++
     if (x > 6) {

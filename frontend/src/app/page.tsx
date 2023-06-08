@@ -18,7 +18,6 @@ const Page = async () => {
 
   return <>
     <Content>
-      {/* @ts-expect-error Async Server Component */}
       <Header isFull />
     </Content>
 
@@ -32,7 +31,6 @@ const Page = async () => {
       <Content>
         <h2>{t('about.name')}</h2>
 
-        {/* @ts-expect-error Async Server Component */}
         <Stats />
 
         <P><Trans i18nKey="about.content.p1" t={t} i18n={i18n}>_<br /><Link href="/how-to" rel="help">_</Link>_</Trans></P>
@@ -48,7 +46,6 @@ const Page = async () => {
       </Content>
     </Section>
 
-    {/* @ts-expect-error Async Server Component */}
     <Footer />
   </>
 }

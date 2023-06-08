@@ -4,13 +4,11 @@ import Header from '/src/components/Header/Header'
 
 const Layout = async ({ children }: { children: React.ReactNode }) => <>
   <Content>
-    {/* @ts-expect-error Async Server Component */}
     <Header />
   </Content>
 
   {children}
 
-  {/* @ts-expect-error Async Server Component */}
   <Footer />
 </>
 

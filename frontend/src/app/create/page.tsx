@@ -15,7 +15,6 @@ export const metadata: Metadata = {
  */
 const Page = async () => <>
   <Content isSlim>
-    {/* @ts-expect-error Async Server Component */}
     <Header isFull isSmall />
   </Content>
 
