@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { Karla } from 'next/font/google'
 
 import Egg from '/src/components/Egg/Egg'
 import Settings from '/src/components/Settings/Settings'
@@ -7,6 +8,8 @@ import { fallbackLng } from '/src/i18n/options'
 import { useTranslation } from '/src/i18n/server'
 
 import './global.css'
+
+const karla = Karla({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://crab.fit'),
@@ -33,7 +36,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const { resolvedLanguage } = await useTranslation([])
 
   return <html lang={resolvedLanguage ?? fallbackLng}>
-    <body>
+    <body className={karla.className}>
       <Settings />
       <Egg />
       <TranslateDialog />

@@ -1,25 +1,3 @@
-@font-face {
-  font-family: 'Karla';
-  src: url('/fonts/karla-variable.ttf') format('truetype');
-  font-weight: 200 800;
-}
-
-@font-face {
-  font-family: 'Samurai Bob';
-  src: url('/fonts/samuraibob.woff2') format('woff2'),
-    url('/fonts/samuraibob.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Molot';
-  src: url('/fonts/molot.woff2') format('woff2'),
-    url('/fonts/molot.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
 :root {
   color-scheme: light dark;
 
@@ -85,7 +63,6 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Karla', sans-serif;
   background: var(--background);
   color: var(--text);
   font-weight: var(--font-weight);
