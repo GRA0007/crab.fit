@@ -1,12 +1,10 @@
-import { Temporal } from '@js-temporal/polyfill'
-
 interface Person {
   name: string
-  availability: Temporal.ZonedDateTime[]
+  availability: string[]
 }
 
 interface Availability {
-  date: Temporal.ZonedDateTime
+  date: string
   /** Names of everyone who is available at this date */
   people: string[]
 }
@@ -24,12 +22,12 @@ interface AvailabilityInfo {
  * where each person has a name and availability array, and returns the
  * group availability for each date passed in.
  */
-export const calculateAvailability = (dates: Temporal.ZonedDateTime[], people: Person[]): AvailabilityInfo => {
+export const calculateAvailability = (dates: string[], people: Person[]): AvailabilityInfo => {
   let min = Infinity
   let max = -Infinity
 
   const availabilities: Availability[] = dates.map(date => {
-    const names = people.flatMap(p => p.availability.some(d => d.equals(date)) ? [p.name] : [])
+    const names = people.flatMap(p => p.availability.some(d => d === date) ? [p.name] : [])
     if (names.length < min) {
       min = names.length
     }

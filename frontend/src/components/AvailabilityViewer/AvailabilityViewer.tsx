@@ -1,8 +1,7 @@
 'use client'
 
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useMemo, useRef, useState } from 'react'
 import { Temporal } from '@js-temporal/polyfill'
-import { createPalette } from 'hue-map'
 
 import Content from '/src/components/Content/Content'
 import Legend from '/src/components/Legend/Legend'
@@ -10,9 +9,10 @@ import { PersonResponse } from '/src/config/api'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
-import { calculateAvailability, calculateColumns, calculateRows, convertTimesToDates, makeClass, relativeTimeFormat } from '/src/utils'
+import { calculateAvailability, calculateTable, makeClass, relativeTimeFormat } from '/src/utils'
 
 import styles from './AvailabilityViewer.module.scss'
+import { usePalette } from '/hooks/usePalette'
 
 interface AvailabilityViewerProps {
   times: string[]
@@ -23,9 +23,8 @@ interface AvailabilityViewerProps {
 const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps) => {
   const { t, i18n } = useTranslation('event')
 
-  const timeFormat = useStore(useSettingsStore, state => state.timeFormat)
+  const timeFormat = useStore(useSettingsStore, state => state.timeFormat) ?? '12h'
   const highlight = useStore(useSettingsStore, state => state.highlight)
-  const colormap = useStore(useSettingsStore, state => state.colormap)
   const [filteredPeople, setFilteredPeople] = useState(people.map(p => p.name))
   const [tempFocus, setTempFocus] = useState<string>()
   const [focusCount, setFocusCount] = useState<number>()
@@ -39,120 +38,85 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
     people: string[]
   }>()
 
-  // Calculate rows and columns
-  const [dates, rows, columns] = useMemo(() => {
-    const dates = convertTimesToDates(times, timezone)
-    return [dates, calculateRows(dates), calculateColumns(dates)]
-  }, [times, timezone])
+  // Calculate table
+  const { rows, columns } = useMemo(() =>
+    calculateTable(times, i18n.language, timeFormat, timezone),
+  [times, i18n.language, timeFormat, timezone])
 
   // Calculate availabilities
-  const { availabilities, min, max } = useMemo(() => calculateAvailability(dates, people
-    .filter(p => filteredPeople.includes(p.name))
-    .map(p => ({
-      ...p,
-      availability: convertTimesToDates(p.availability, timezone),
-    }))
-  ), [dates, filteredPeople, people, timezone])
+  const { availabilities, min, max } = useMemo(() =>
+    calculateAvailability(times, people.filter(p => filteredPeople.includes(p.name))),
+  [times, filteredPeople, people])
+
+  // Create the colour palette
+  const palette = usePalette(min, max)
 
   // Is specific dates or just days of the week
   const isSpecificDates = useMemo(() => times[0].length === 13, [times])
 
-  // Create the colour palette
-  const [palette, setPalette] = useState<string[]>([])
-  useEffect(() => {
-    setPalette(createPalette({
-      map: colormap !== 'crabfit' ? colormap : [[0, [247, 158, 0, 0]], [1, [247, 158, 0, 255]]],
-      steps: Math.max((max - min) + 1, 2),
-    }).format())
-  }, [min, max, colormap])
+  const heatmap = useMemo(() => columns.map((column, x) => <Fragment key={x}>
+    {column ? <div className={styles.dateColumn}>
+      {isSpecificDates && <label className={styles.dateLabel}>{column.header.dateLabel}</label>}
+      <label className={styles.dayLabel}>{column.header.weekdayLabel}</label>
 
-  const heatmap = useMemo(() => (
-    <div className={styles.heatmap}>
-      <div className={styles.timeLabels}>
-        {rows.map((row, i) =>
-          <div className={styles.timeSpace} key={i}>
-            {row && row.minute === 0 && <label className={styles.timeLabel}>
-              {row.toLocaleString(i18n.language, { hour: 'numeric', hour12: timeFormat === '12h' })}
-            </label>}
-          </div>
-        )}
+      <div
+        className={styles.times}
+        data-border-left={x === 0 || columns.at(x - 1) === null}
+        data-border-right={x === columns.length - 1 || columns.at(x + 1) === null}
+      >
+        {column.cells.map((cell, y) => {
+          if (y === column.cells.length - 1) return null
+
+          if (!cell) return <div
+            className={makeClass(styles.timeSpace, styles.grey)}
+            key={y}
+            title={t<string>('greyed_times')}
+          />
+
+          let peopleHere = availabilities.find(a => a.date === cell.serialized)?.people ?? []
+          if (tempFocus) {
+            peopleHere = peopleHere.filter(p => p === tempFocus)
+          }
+
+          return <div
+            key={y}
+            className={makeClass(
+              styles.time,
+              (focusCount === undefined || focusCount === peopleHere.length) && highlight && (peopleHere.length === max || tempFocus) && peopleHere.length > 0 && styles.highlight,
+            )}
+            style={{
+              backgroundColor: (focusCount === undefined || focusCount === peopleHere.length) ? palette[tempFocus && peopleHere.length ? max : peopleHere.length] : 'transparent',
+              ...cell.minute !== 0 && cell.minute !== 30 && { borderTopColor: 'transparent' },
+              ...cell.minute === 30 && { borderTopStyle: 'dotted' },
+            }}
+            aria-label={peopleHere.join(', ')}
+            onMouseEnter={e => {
+              const cellBox = e.currentTarget.getBoundingClientRect()
+              const wrapperBox = wrapperRef.current?.getBoundingClientRect() ?? { x: 0, y: 0 }
+              setTooltip({
+                x: Math.round(cellBox.x - wrapperBox.x + cellBox.width / 2),
+                y: Math.round(cellBox.y - wrapperBox.y + cellBox.height) + 6,
+                available: `${peopleHere.length} / ${filteredPeople.length} ${t('available')}`,
+                date: cell.label,
+                people: peopleHere,
+              })
+            }}
+            onMouseLeave={() => setTooltip(undefined)}
+          />
+        })}
       </div>
-
-      {columns.map((column, i) => <Fragment key={i}>
-        {column ? <div className={styles.dateColumn}>
-          {isSpecificDates && <label className={styles.dateLabel}>{column.toLocaleString(i18n.language, { month: 'short', day: 'numeric' })}</label>}
-          <label className={styles.dayLabel}>{column.toLocaleString(i18n.language, { weekday: 'short' })}</label>
-
-          <div
-            className={styles.times}
-            data-border-left={i === 0 || columns.at(i - 1) === null}
-            data-border-right={i === columns.length - 1 || columns.at(i + 1) === null}
-          >
-            {rows.map((row, i) => {
-              if (i === rows.length - 1) return null
-
-              if (!row || rows.at(i + 1) === null || dates.every(d => !d.equals(column.toZonedDateTime({ timeZone: timezone, plainTime: row })))) {
-                return <div
-                  className={makeClass(styles.timeSpace, styles.grey)}
-                  key={i}
-                  title={t<string>('greyed_times')}
-                />
-              }
-
-              const date = column.toZonedDateTime({ timeZone: timezone, plainTime: row })
-              let peopleHere = availabilities.find(a => a.date.equals(date))?.people ?? []
-              if (tempFocus) {
-                peopleHere = peopleHere.filter(p => p === tempFocus)
-              }
-
-              return <div
-                key={i}
-                className={makeClass(
-                  styles.time,
-                  (focusCount === undefined || focusCount === peopleHere.length) && highlight && (peopleHere.length === max || tempFocus) && peopleHere.length > 0 && styles.highlight,
-                )}
-                style={{
-                  backgroundColor: (focusCount === undefined || focusCount === peopleHere.length) ? palette[tempFocus && peopleHere.length ? max : peopleHere.length] : 'transparent',
-                  ...date.minute !== 0 && date.minute !== 30 && { borderTopColor: 'transparent' },
-                  ...date.minute === 30 && { borderTopStyle: 'dotted' },
-                }}
-                aria-label={peopleHere.join(', ')}
-                onMouseEnter={e => {
-                  const cellBox = e.currentTarget.getBoundingClientRect()
-                  const wrapperBox = wrapperRef.current?.getBoundingClientRect() ?? { x: 0, y: 0 }
-                  setTooltip({
-                    x: Math.round(cellBox.x - wrapperBox.x + cellBox.width / 2),
-                    y: Math.round(cellBox.y - wrapperBox.y + cellBox.height) + 6,
-                    available: `${peopleHere.length} / ${filteredPeople.length} ${t('available')}`,
-                    date: isSpecificDates
-                      ? date.toLocaleString(i18n.language, { dateStyle: 'long', timeStyle: 'short', hour12: timeFormat === '12h' })
-                      : `${date.toLocaleString(i18n.language, { timeStyle: 'short', hour12: timeFormat === '12h' })}, ${date.toLocaleString(i18n.language, { weekday: 'long' })}`,
-                    people: peopleHere,
-                  })
-                }}
-                onMouseLeave={() => setTooltip(undefined)}
-              />
-            })}
-          </div>
-        </div> : <div className={styles.columnSpacer} />}
-      </Fragment>)}
-    </div>
-  ), [
+    </div> : <div className={styles.columnSpacer} />}
+  </Fragment>), [
     availabilities,
-    dates,
     isSpecificDates,
-    rows,
     columns,
     highlight,
     max,
     t,
-    timeFormat,
     palette,
     tempFocus,
     focusCount,
     filteredPeople,
-    i18n.language,
-    timezone,
   ])
 
   return <>
@@ -197,7 +161,19 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
 
     <div className={styles.wrapper} ref={wrapperRef}>
       <div>
-        {heatmap}
+        <div className={styles.heatmap}>
+          {useMemo(() => <div className={styles.timeLabels}>
+            {rows.map((row, i) =>
+              <div className={styles.timeSpace} key={i}>
+                {row && <label className={styles.timeLabel}>
+                  {row.label}
+                </label>}
+              </div>
+            )}
+          </div>, [rows])}
+
+          {heatmap}
+        </div>
 
         {tooltip && <div
           className={styles.tooltip}

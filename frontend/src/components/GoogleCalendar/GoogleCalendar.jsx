@@ -1,20 +1,5 @@
-import { useState, useEffect } from 'react'
 import { loadGapiInsideDOM } from 'gapi-script'
-import { useTranslation } from 'react-i18next'
-
-import { Button, Center } from '/src/components'
-import { Loader } from '../Loading/Loading.styles'
-import {
-  CalendarList,
-  CheckboxInput,
-  CheckboxLabel,
-  CalendarLabel,
-  Info,
-  Options,
-  Title,
-  Icon,
-  LinkButton,
-} from './GoogleCalendar.styles'
+import { useEffect, useState } from 'react'
 
 import googleLogo from '/src/res/google.svg'
 
@@ -52,9 +37,6 @@ const GoogleCalendar = ({ timeZone, timeMin, timeMax, onImport }) => {
 
   const importAvailability = () => {
     setFreeBusyLoading(true)
-    gtag('event', 'google_cal_sync', {
-      'event_category': 'event',
-    })
     window.gapi.client.calendar.freebusy.query({
       timeMin,
       timeMax,
