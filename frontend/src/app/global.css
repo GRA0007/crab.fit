@@ -89,6 +89,7 @@ body {
   background: var(--background);
   color: var(--text);
   font-weight: var(--font-weight);
+  --focus-ring: 2px solid var(--secondary);
 }
 
 .light {
@@ -131,6 +132,11 @@ body {
 
 a {
   color: var(--primary);
+  border-radius: .2em;
+}
+a:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 *::-webkit-scrollbar {

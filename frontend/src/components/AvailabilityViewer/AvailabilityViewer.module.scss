@@ -146,6 +146,11 @@
   cursor: pointer;
   padding: 2px 8px;
   user-select: none;
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
 }
 
 .personSelected {

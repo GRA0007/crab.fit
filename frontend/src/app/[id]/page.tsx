@@ -20,7 +20,6 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
   const event = await getEvent(params.id).catch(() => undefined)
   const { t } = await useTranslation('event')
 
-  // TODO: More metadata
   return {
     title: event?.name ?? t('error.title'),
   }

@@ -52,6 +52,11 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   cursor: pointer;
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
 }
 
 .tabSelected {

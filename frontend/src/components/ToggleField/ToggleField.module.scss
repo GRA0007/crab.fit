@@ -1,23 +1,15 @@
 .toggleContainer {
   display: flex;
-  border: 1px solid var(--primary);
   border-radius: 3px;
-  overflow: hidden;
-  --focus-color: var(--primary);
-  transition: border .15s;
-
-  &:focus-within {
-    --focus-color: var(--secondary);
-    border: 1px solid var(--focus-color);
-    & label {
-      box-shadow: inset 0 -3px 0 0 var(--focus-color);
-    }
-  }
 
   & > div:first-of-type label {
+    border-inline-start: 1px solid var(--primary);
     border-end-start-radius: 2px;
+    border-start-start-radius: 2px;
   }
   & > div:last-of-type label {
+    border-inline-end: 1px solid var(--primary);
+    border-start-end-radius: 2px;
     border-end-end-radius: 2px;
   }
 }
@@ -38,7 +30,11 @@
 
   &:checked + label {
     color: var(--background);
-    background-color: var(--focus-color);
+    background-color: var(--primary);
+  }
+  &:focus-visible + label {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
   }
 }
 
@@ -52,5 +48,5 @@
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  transition: box-shadow .15s, background-color .15s;
+  border-block: 1px solid var(--primary);
 }

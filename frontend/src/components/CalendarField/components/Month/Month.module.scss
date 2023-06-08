@@ -63,6 +63,13 @@
   padding: 10px 0;
   user-select: none;
   touch-action: none;
+  position: relative;
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+    z-index: 1;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;

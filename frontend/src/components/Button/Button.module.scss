@@ -1,50 +1,57 @@
 .button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   cursor: pointer;
   border: 0;
   text-decoration: none;
   font: inherit;
-  box-sizing: border-box;
-  background: var(--override-surface-color, var(--primary));
-  color: var(--override-text-color, var(--background));
-  font-weight: 600;
-  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
+  padding: 0;
+  margin: 0;
+  background: none;
   border-radius: 3px;
-  padding: .6em 1.5em;
-  transform-style: preserve-3d;
-  margin-bottom: 5px;
 
-  & svg, & img {
-    height: 1.2em;
-    width: 1.2em;
-    margin-right: .5em;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background: var(--override-shadow-color, var(--shadow));
+  & > div {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    background: var(--override-surface-color, var(--primary));
+    color: var(--override-text-color, var(--background));
+    font-weight: 600;
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
     border-radius: inherit;
-    transform: translate3d(0, 5px, -1em);
-    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+    padding: .6em 1.5em;
+    transform-style: preserve-3d;
+    margin-bottom: 5px;
+
+    & svg, & img {
+      height: 1.2em;
+      width: 1.2em;
+      margin-right: .5em;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: var(--override-shadow-color, var(--shadow));
+      border-radius: inherit;
+      transform: translate3d(0, 5px, -1em);
+      transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+    }
   }
 
-  &:hover, &:focus {
+  &:hover > div, &:focus > div {
     transform: translate(0, 1px);
     &::before {
       transform: translate3d(0, 4px, -1em);
     }
   }
 
-  &:active {
+  &:active > div {
     transform: translate(0, 5px);
     &::before {
       transform: translate3d(0, 0, -1em);
@@ -52,13 +59,18 @@
   }
 
   @media print {
-    &::before {
+    & > div::before {
       display: none;
     }
   }
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
 }
 
-.iconButton {
+.iconButton > div {
   height: 30px;
   width: 30px;
   padding: 0;
@@ -68,13 +80,16 @@
   }
 }
 
-.small {
+.small > div {
   padding: .4em 1.3em;
 }
 
 .loading {
-  color: transparent;
   cursor: wait;
+
+  & > div {
+    color: transparent;
+  }
 
   & img {
     opacity: 0;
@@ -89,7 +104,7 @@
     }
   }
 
-  &::after {
+  & > div::after {
     content: '';
     position: absolute;
     top: calc(50% - 12px);
@@ -103,7 +118,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    &::after {
+    & > div::after {
       content: 'loading...';
       color: var(--override-text-color, var(--background));
       animation: none;
@@ -122,19 +137,21 @@
 }
 
 .secondary {
-  background: transparent;
-  border: 1px solid var(--override-surface-color, var(--secondary));
-  color: var(--override-surface-color, var(--secondary));
-  margin-bottom: 0;
+  & > div {
+    background: transparent;
+    border: 1px solid var(--override-surface-color, var(--secondary));
+    color: var(--override-surface-color, var(--secondary));
+    margin-bottom: 0;
 
-  &::before {
+    @media print {
+      box-shadow: 0 4px 0 0 var(--override-shadow-color, var(--secondary));
+    }
+  }
+
+  & > div::before {
     content: none;
   }
-  &:hover, &:active, &:focus {
+  &:hover > div, &:active > div, &:focus > div {
     transform: none;
-  }
-
-  @media print {
-    box-shadow: 0 4px 0 0 var(--override-shadow-color, var(--secondary));
   }
 }

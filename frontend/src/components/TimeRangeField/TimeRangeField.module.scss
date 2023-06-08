@@ -48,6 +48,11 @@
     white-space: nowrap;
     padding-inline: var(--extra-padding);
   }
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
 }
 
 .selected {

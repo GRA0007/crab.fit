@@ -17,6 +17,10 @@
   transition: transform .15s;
   padding: 0;
 
+  &:focus-visible {
+    outline: var(--focus-ring);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }

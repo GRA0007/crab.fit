@@ -20,6 +20,7 @@
   max-width: 400px;
   margin: 0 auto;
   transition: transform .15s;
+  border-radius: 10px;
 
   &:hover, &:focus {
     transform: translateY(-2px);
@@ -31,7 +32,7 @@
   img {
     width: 100%;
     display: block;
-    border-radius: 10px;
+    border-radius: inherit;
     background-color: #CCC;
   }
   span {

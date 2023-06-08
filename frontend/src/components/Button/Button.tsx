@@ -44,7 +44,7 @@ const Button: React.FC<ButtonProps> = ({
       ...shadowColor && { '--override-shadow-color': shadowColor },
       ...style,
     },
-    children: <>{icon}{children}</>,
+    children: <div>{icon}{children}</div>,
     ...props,
   }
 
