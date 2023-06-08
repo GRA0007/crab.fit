@@ -1,12 +1,12 @@
 import { Fragment, useCallback, useMemo, useRef, useState } from 'react'
 
 import Content from '/src/components/Content/Content'
+import { usePalette } from '/src/hooks/usePalette'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
 import { calculateTable, makeClass } from '/src/utils'
 
-import { usePalette } from '/hooks/usePalette'
 import styles from '../AvailabilityViewer/AvailabilityViewer.module.scss'
 
 interface AvailabilityEditorProps {

@@ -41,6 +41,16 @@ const Settings = () => {
     document.body.classList.toggle('dark', store?.theme === 'Dark')
   }, [store?.theme])
 
+  // TODO: This is temporary, as I've made the decision to move away
+  // from a PWA, so must remove all existing service workers
+  if (process.env.NODE_ENV !== 'development') {
+    useEffect(() => {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+      }
+    }, [])
+  }
+
   return <>
     <button
       type="button"

@@ -6,13 +6,13 @@ import { Temporal } from '@js-temporal/polyfill'
 import Content from '/src/components/Content/Content'
 import Legend from '/src/components/Legend/Legend'
 import { PersonResponse } from '/src/config/api'
+import { usePalette } from '/src/hooks/usePalette'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
 import { calculateAvailability, calculateTable, makeClass, relativeTimeFormat } from '/src/utils'
 
 import styles from './AvailabilityViewer.module.scss'
-import { usePalette } from '/hooks/usePalette'
 
 interface AvailabilityViewerProps {
   times: string[]
