@@ -108,6 +108,15 @@
   }
 }
 
+.editable {
+  @media (hover: hover) {
+    &:hover:not(:active) {
+      opacity: .8;
+      background-image: linear-gradient(var(--hover-color), var(--hover-color));
+    }
+  }
+}
+
 .highlight {
   background-image: repeating-linear-gradient(
     45deg,

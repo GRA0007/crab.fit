@@ -108,17 +108,20 @@ const AvailabilityEditor = ({
                     title={t<string>('greyed_times')}
                   />
 
+                  const isSelected = (
+                    (!(mode.current === 'remove' && selecting.includes(cell.serialized)) && value.includes(cell.serialized))
+                    || (mode.current === 'add' && selecting.includes(cell.serialized))
+                  )
+
                   return <div
                     key={y}
-                    className={styles.time}
+                    className={makeClass(styles.time, selecting.length === 0 && styles.editable)}
                     style={{
-                      backgroundColor: (
-                        (!(mode.current === 'remove' && selecting.includes(cell.serialized)) && value.includes(cell.serialized))
-                        || (mode.current === 'add' && selecting.includes(cell.serialized))
-                      ) ? palette[1].string : palette[0].string,
+                      backgroundColor: isSelected ? palette[1].string : palette[0].string,
+                      '--hover-color': isSelected ? palette[0].highlight : palette[1].highlight,
                       ...cell.minute !== 0 && cell.minute !== 30 && { borderTopColor: 'transparent' },
                       ...cell.minute === 30 && { borderTopStyle: 'dotted' },
-                    }}
+                    } as React.CSSProperties}
                     onPointerDown={e => {
                       e.preventDefault()
                       startPos.current = { x, y }
@@ -132,6 +135,7 @@ const AvailabilityEditor = ({
                         } else if (mode.current === 'remove') {
                           onChange(value.filter(t => !selectingRef.current.includes(t)))
                         }
+                        setSelecting([])
                         mode.current = undefined
                       }, { once: true })
                     }}
