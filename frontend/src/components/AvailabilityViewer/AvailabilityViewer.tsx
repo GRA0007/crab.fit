@@ -79,6 +79,7 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
           if (tempFocus) {
             peopleHere = peopleHere.filter(p => p === tempFocus)
           }
+          const color = palette[tempFocus && peopleHere.length ? max : peopleHere.length]
 
           return <div
             key={y}
@@ -87,10 +88,11 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
               (focusCount === undefined || focusCount === peopleHere.length) && highlight && (peopleHere.length === max || tempFocus) && peopleHere.length > 0 && styles.highlight,
             )}
             style={{
-              backgroundColor: (focusCount === undefined || focusCount === peopleHere.length) ? palette[tempFocus && peopleHere.length ? max : peopleHere.length] : 'transparent',
+              backgroundColor: (focusCount === undefined || focusCount === peopleHere.length) ? color.string : 'transparent',
+              '--highlight-color': color.highlight,
               ...cell.minute !== 0 && cell.minute !== 30 && { borderTopColor: 'transparent' },
               ...cell.minute === 30 && { borderTopStyle: 'dotted' },
-            }}
+            } as React.CSSProperties}
             aria-label={peopleHere.join(', ')}
             onMouseEnter={e => {
               const cellBox = e.currentTarget.getBoundingClientRect()

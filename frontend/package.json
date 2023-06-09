@@ -16,6 +16,7 @@
     "@microsoft/microsoft-graph-client": "^3.0.5",
     "@vercel/analytics": "^1.0.1",
     "accept-language": "^3.0.18",
+    "chroma.ts": "^1.0.10",
     "gapi-script": "^1.2.0",
     "hue-map": "^1.0.0",
     "i18next": "^22.5.1",

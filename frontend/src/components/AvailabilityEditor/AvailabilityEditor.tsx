@@ -115,7 +115,7 @@ const AvailabilityEditor = ({
                       backgroundColor: (
                         (!(mode.current === 'remove' && selecting.includes(cell.serialized)) && value.includes(cell.serialized))
                         || (mode.current === 'add' && selecting.includes(cell.serialized))
-                      ) ? palette[1] : palette[0],
+                      ) ? palette[1].string : palette[0].string,
                       ...cell.minute !== 0 && cell.minute !== 30 && { borderTopColor: 'transparent' },
                       ...cell.minute === 30 && { borderTopStyle: 'dotted' },
                     }}

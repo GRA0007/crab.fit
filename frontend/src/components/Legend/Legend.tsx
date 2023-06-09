@@ -8,7 +8,7 @@ interface LegendProps {
   min: number
   max: number
   total: number
-  palette: string[]
+  palette: { string: string, highlight: string }[]
   onSegmentFocus: (segment: number | undefined) => void
 }
 
@@ -29,7 +29,7 @@ const Legend = ({ min, max, total, palette, onSegmentFocus }: LegendProps) => {
       {[...Array(max + 1 - min).keys()].map(i => i + min).map(i =>
         <div
           key={i}
-          style={{ flex: 1, backgroundColor: palette[i] }}
+          style={{ flex: 1, backgroundColor: palette[i].string, '--highlight-color': palette[i].highlight } as React.CSSProperties}
           className={highlight && i === max && max > 0 ? styles.highlight : undefined}
           onMouseOver={() => onSegmentFocus(i)}
         />

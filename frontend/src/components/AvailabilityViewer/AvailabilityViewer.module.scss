@@ -113,8 +113,8 @@
     45deg,
     transparent,
     transparent 4.3px,
-    rgba(0,0,0,.5) 4.3px,
-    rgba(0,0,0,.5) 8.6px
+    var(--highlight-color, rgba(0,0,0,.5)) 4.3px,
+    var(--highlight-color, rgba(0,0,0,.5)) 8.6px
   );
 }
 
