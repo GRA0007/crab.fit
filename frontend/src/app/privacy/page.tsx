@@ -40,7 +40,8 @@ const Page = async () => {
         <P>The Service uses third party services that may collect information used to identify you.</P>
         <P>Links to privacy policies of the third party service providers used by the Service:</P>
         <Ul>
-          <li><a href="https://www.google.com/policies/privacy/" target="blank">Google Play Services</a></li>
+          <li><a href="https://www.google.com/policies/privacy/" target="blank">Google Play Services</a> (only used for Google Calendar sync)</li>
+          <li><a href="https://vercel.com/docs/concepts/analytics/privacy-policy" target="blank">Vercel Analytics</a></li>
         </Ul>
 
         <h2>Log Data</h2>
@@ -72,7 +73,7 @@ const Page = async () => {
 
         <h2>Changes to This Privacy Policy</h2>
         <P>This Privacy Policy may be updated from time to time. Thus, you are advised to review this page periodically for any changes.</P>
-        <P>Last updated: 2021-06-16</P>
+        <P>Last updated: 2023-06-10</P>
 
         <h2>Contact Us</h2>
         <P>If you have any questions or suggestions about the Privacy Policy, do not hesitate to contact us at <a href="mailto:contact@crab.fit">contact@crab.fit</a>.</P>
