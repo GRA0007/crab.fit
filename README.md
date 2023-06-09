@@ -1,5 +1,8 @@
 # Crab Fit <img width="100" align="right" src="frontend/src/res/logo.svg" alt="avatar">
 
+[![Frontend Checks](https://github.com/GRA0007/crab.fit/actions/workflows/check_frontend.yml/badge.svg)](https://github.com/GRA0007/crab.fit/actions/workflows/check_frontend.yml)
+[![API Checks](https://github.com/GRA0007/crab.fit/actions/workflows/check_api.yml/badge.svg)](https://github.com/GRA0007/crab.fit/actions/workflows/check_api.yml)
+
 Align your schedules to find the perfect time that works for everyone.
 Licensed under the GNU GPLv3.
 
@@ -29,9 +32,9 @@ The browser extension in `browser-extension` can be tested by first running the 
 
 ## Deploy
 
-Deployments are managed with GitHub Workflows.
+Deployments are managed with GitHub Workflows. The frontend is deployed using Vercel, and the API uses Fly.io.
 
-To deploy cron jobs (i.e. monthly cleanup of old events), run `gcloud app deploy cron.yaml`.
+More detailed instructions on setting up your own deployment are coming soon.
 
 ### 🔌 Browser extension
 
