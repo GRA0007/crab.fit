@@ -1,11 +1,12 @@
 import { Fragment, useCallback, useMemo, useRef, useState } from 'react'
 
 import Content from '/src/components/Content/Content'
+import GoogleCalendar from '/src/components/GoogleCalendar/GoogleCalendar'
 import { usePalette } from '/src/hooks/usePalette'
 import { useTranslation } from '/src/i18n/client'
 import { useStore } from '/src/stores'
 import useSettingsStore from '/src/stores/settingsStore'
-import { calculateTable, makeClass } from '/src/utils'
+import { calculateTable, makeClass, parseSpecificDate } from '/src/utils'
 
 import styles from '../AvailabilityViewer/AvailabilityViewer.module.scss'
 
@@ -47,34 +48,17 @@ const AvailabilityEditor = ({
 
   return <>
     <Content isCentered>{t('you.info')}</Content>
-    {/* {isSpecificDates && (
-      <StyledMain>
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
-          <Suspense fallback={<Loader />}>
-            <GoogleCalendar
-              timeMin={dayjs(times[0], 'HHmm-DDMMYYYY').toISOString()}
-              timeMax={dayjs(times[times.length - 1], 'HHmm-DDMMYYYY').add(15, 'm').toISOString()}
-              timeZone={timezone}
-              onImport={busyArray => onChange(
-                times.filter(time => !busyArray.some(busy =>
-                  dayjs(time, 'HHmm-DDMMYYYY').isBetween(busy.start, busy.end, null, '[)')
-                ))
-              )}
-            />
-            <OutlookCalendar
-              timeMin={dayjs(times[0], 'HHmm-DDMMYYYY').toISOString()}
-              timeMax={dayjs(times[times.length - 1], 'HHmm-DDMMYYYY').add(15, 'm').toISOString()}
-              timeZone={timezone}
-              onImport={busyArray => onChange(
-                times.filter(time => !busyArray.some(busy =>
-                  dayjs(time, 'HHmm-DDMMYYYY').isBetween(dayjs.tz(busy.start.dateTime, busy.start.timeZone), dayjs.tz(busy.end.dateTime, busy.end.timeZone), null, '[)')
-                ))
-              )}
-            />
-          </Suspense>
-        </div>
-      </StyledMain>
-    )} */}
+    {times[0].length === 13 && <Content>
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+        <GoogleCalendar
+          timezone={timezone}
+          timeStart={parseSpecificDate(times[0])}
+          timeEnd={parseSpecificDate(times[times.length - 1]).add({ minutes: 15 })}
+          times={times}
+          onImport={onChange}
+        />
+      </div>
+    </Content>}
 
     <div className={styles.wrapper}>
       <div>

@@ -79,7 +79,7 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
           if (tempFocus) {
             peopleHere = peopleHere.filter(p => p === tempFocus)
           }
-          const color = palette[tempFocus && peopleHere.length ? max : peopleHere.length]
+          const color = palette[tempFocus && peopleHere.length ? max : peopleHere.length - min]
 
           return <div
             key={y}
@@ -115,6 +115,7 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
     columns,
     highlight,
     max,
+    min,
     t,
     palette,
     tempFocus,

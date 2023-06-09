@@ -15,7 +15,7 @@ export const convertTimesToDates = (times: string[], timezone: string): Temporal
 }
 
 // Parse from UTC `HHmm-DDMMYYYY` format into a ZonedDateTime in UTC
-const parseSpecificDate = (str: string): Temporal.ZonedDateTime => {
+export const parseSpecificDate = (str: string): Temporal.ZonedDateTime => {
   if (str.length !== 13) {
     throw new Error('String must be in HHmm-DDMMYYYY format')
   }

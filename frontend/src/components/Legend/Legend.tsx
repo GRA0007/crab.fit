@@ -26,10 +26,10 @@ const Legend = ({ min, max, total, palette, onSegmentFocus }: LegendProps) => {
       onClick={() => setHighlight?.(!highlight)}
       title={t<string>('group.legend_tooltip')}
     >
-      {[...Array(max + 1 - min).keys()].map(i => i + min).map(i =>
+      {[...Array(max + 1 - min).keys()].map(i => i + min).map((i, j) =>
         <div
           key={i}
-          style={{ flex: 1, backgroundColor: palette[i].string, '--highlight-color': palette[i].highlight } as React.CSSProperties}
+          style={{ flex: 1, backgroundColor: palette[j].string, '--highlight-color': palette[j].highlight } as React.CSSProperties}
           className={highlight && i === max && max > 0 ? styles.highlight : undefined}
           onMouseOver={() => onSegmentFocus(i)}
         />
