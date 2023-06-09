@@ -1,5 +1,0 @@
-dispatch:
-  - url: "api.crab.fit/*"
-    service: api
-  - url: "crab.fit/*"
-    service: default
