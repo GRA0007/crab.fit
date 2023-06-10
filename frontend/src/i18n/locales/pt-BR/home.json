@@ -1,10 +1,6 @@
 {
   "create": "CRIE O SEU",
   "recently_visited": "Você olhou recentemente",
-  "nav": {
-    "about": "Sobre",
-    "donate": "Faça uma doação"
-  },
   "form": {
     "name": {
       "label": "Dê um nome ao seu evento!",
@@ -40,7 +36,6 @@
       "unknown": "Algo deu errado. Por favor tente de novo."
     }
   },
-  "offline": "Para salvar seu Crab Fit tem que ter acesso à internet. Por favor verifique sua conexão.",
 
   "about": {
     "name": "Sobre Crab Fit",
