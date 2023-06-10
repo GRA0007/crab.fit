@@ -6,18 +6,7 @@
   "donate": {
     "info": "Grazie per aver usato Crab Fit. Se ti piacesse, considera una donazione.",
     "button": "Dona",
-    "title": "Qualsiasi importo fa la differenza :)",
-    "options": {
-      "$2": "Dona $2",
-      "$5": "Dona $5",
-      "$10": "Dona $10",
-      "choose": "Scegli un importo"
-    },
-    "messages": {
-      "about": "Se ti avesse aiutato in qualche modo, considera una donazione per aiutare a mantenere attivo il servizio. 🦀",
-      "success": "Ti ringraziamo per la tua donazione! Senza di te, Crab Fit non sarebbe gratis, quindi grazie e continua ad essere super fantastico!",
-      "error": "Impossibile processare la donazione attraverso Google. Per favore, prova attraverso il sito crab.fit 🦀"
-    }
+    "title": "Qualsiasi importo fa la differenza :)"
   },
   "options": {
     "name": "Opzioni",
