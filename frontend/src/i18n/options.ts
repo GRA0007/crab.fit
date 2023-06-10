@@ -5,7 +5,7 @@ export const defaultNS = 'common'
 export const cookieName = 'i18next'
 export const languages = [
   fallbackLng,
-  'en-GB', 'de', 'es', 'fr', 'hi', 'id', 'ja', 'ko', 'pl', 'pt-BR', 'ru',
+  'en-GB', 'de', 'es', 'fr', 'hi', 'id', 'it', 'ja', 'ko', 'pl', 'pt-PT', 'pt-BR', 'ru',
 ] as const
 
 export const getOptions = (lng = fallbackLng, ns: InitOptions['ns'] = defaultNS): InitOptions => ({
@@ -65,6 +65,11 @@ export const languageDetails: Record<typeof languages[number], LanguageDetails> 
     weekStart: 1,
     timeFormat: '24h',
   },
+  'it': { // Italian
+    name: 'Italiano',
+    weekStart: 1,
+    timeFormat: '24h',
+  },
   'ja': { // Japanese
     name: '日本語',
     weekStart: 0,
@@ -79,6 +84,11 @@ export const languageDetails: Record<typeof languages[number], LanguageDetails> 
     name: 'Polskie',
     weekStart: 1,
     timeFormat: '12h',
+  },
+  'pt-PT': { // Portuguese (Portugal)
+    name: 'Português (do Portugal)',
+    weekStart: 0,
+    timeFormat: '24h',
   },
   'pt-BR': { // Portuguese (Brazil)
     name: 'Português (do Brasil)',

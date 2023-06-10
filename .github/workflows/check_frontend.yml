@@ -5,6 +5,8 @@ on:
     paths:
     - frontend/**
     - .github/workflows/check_frontend.yml
+    paths-ignore:
+    - frontend/src/i18n/locales/**
 
 jobs:
   lint:
