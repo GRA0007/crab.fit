@@ -6,18 +6,7 @@
   "donate": {
     "info": "Merci d'utiliser Crab Fit. Si vous l'aimez, pensez à faire un don.",
     "button": "Faire un don",
-    "title": "Chaque montant compte :)",
-    "options": {
-      "$2": "Faire un don de $2",
-      "$5": "Faire un don de $5",
-      "$10": "Faire un don de $10",
-      "choose": "Choisir un montant"
-    },
-    "messages": {
-      "about": "Si cela vous a aidé, pensez à faire un don pour contribuer à son fonctionnement. 🦀",
-      "success": "Merci pour votre don ! Sans vous, Crab Fit ne serait pas gratuit, alors merci et continuez à être incroyable !",
-      "error": "Impossible de faire un don via Google. Veuillez essayer de faire un don via le site Web crab.fit 🦀"
-    }
+    "title": "Chaque montant compte :)"
   },
   "options": {
     "name": "Options",
