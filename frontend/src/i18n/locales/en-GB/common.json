@@ -6,18 +6,7 @@
   "donate": {
     "info": "Thank you for using Crab Fit. If you like it, consider donating.",
     "button": "Donate",
-    "title": "Every amount counts :)",
-    "options": {
-      "$2": "Donate $2",
-      "$5": "Donate $5",
-      "$10": "Donate $10",
-      "choose": "Choose an amount"
-    },
-    "messages": {
-      "about": "If it's helped you out at all, consider donating to help keep it running. 🦀",
-      "success": "Thank you for your donation! Without you, Crab Fit wouldn't be free, so thank you and keep being super awesome!",
-      "error": "Cannot make donation through Google. Please try donating through the website crab.fit 🦀"
-    }
+    "title": "Every amount counts :)"
   },
   "options": {
     "name": "Options",
@@ -53,6 +42,14 @@
     },
     "language": {
       "label": "Language"
+    },
+    "colormap": {
+      "label": "Heatmap colours",
+      "classic": "Crab Fit (classic)"
     }
+  },
+  "video": {
+    "title": "Crab Fit Promotional Video",
+    "button": "Watch the video"
   }
 }
