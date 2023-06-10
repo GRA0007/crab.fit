@@ -1,10 +1,6 @@
 {
   "create": "CREA UN",
   "recently_visited": "Recientemente visitado",
-  "nav": {
-    "about": "Info",
-    "donate": "Donar"
-  },
   "form": {
     "name": {
       "label": "¡Dale un nombre a tu evento!",
@@ -40,7 +36,6 @@
       "unknown": "Algo salió mal. Por favor, inténtelo de nuevo más tarde."
     }
   },
-  "offline": "No puede crear un Crab Fit si no tiene conexión a Internet. Asegúrate de estar conectado.",
 
   "about": {
     "name": "Acerca de Crab Fit",
