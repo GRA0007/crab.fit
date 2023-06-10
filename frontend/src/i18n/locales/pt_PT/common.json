@@ -6,18 +6,7 @@
   "donate": {
     "info": "Obrigado por usares o Crab Fit. Se gostaste, por favor considera fazer uma doação.",
     "button": "Doar",
-    "title": "Qualquer montante ajuda :)",
-    "options": {
-      "$2": "Doar $2",
-      "$5": "Doar $5",
-      "$10": "Doar $10",
-      "choose": "Escolher um montante"
-    },
-    "messages": {
-      "about": "O Crab Fit ajudou-te? Se sim, considera fazer uma doação para que continue a funcionar. 🦀",
-      "success": "Obrigado pela tua doação! Sem ti, o Crab Fit não seria gratuito, por isso agradecemos tua ajuda. És o máximo!",
-      "error": "Não é possível doar através do Google. Por favor tenta através do site crab.fit 🦀"
-    }
+    "title": "Qualquer montante ajuda :)"
   },
   "options": {
     "name": "Opções",

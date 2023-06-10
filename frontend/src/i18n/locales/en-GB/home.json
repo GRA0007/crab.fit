@@ -1,10 +1,6 @@
 {
   "create": "CREATE A",
   "recently_visited": "Recently visited",
-  "nav": {
-    "about": "About",
-    "donate": "Donate"
-  },
   "form": {
     "name": {
       "label": "Give your event a name!",
@@ -40,7 +36,6 @@
       "unknown": "Something went wrong. Please try again later."
     }
   },
-  "offline": "You can't create a Crab Fit when you don't have an internet connection. Please make sure you're connected.",
 
   "about": {
     "name": "About Crab Fit",

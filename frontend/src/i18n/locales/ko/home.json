@@ -1,10 +1,6 @@
 {
   "create": "만들기",
   "recently_visited": "최근 방문",
-  "nav": {
-    "about": "정보",
-    "donate": "기부하다"
-  },
   "form": {
     "name": {
       "label": "이벤트 이름을 지정하세요!",
@@ -40,7 +36,6 @@
       "unknown": "문제가 발생했습니다. 나중에 다시 시도 해주십시오."
     }
   },
-  "offline": "인터넷에 연결되어 있지 않으면 Crab Fit을 만들 수 없습니다. 당신이 연결되어 있는지 확인하십시오.",
 
   "about": {
     "name": "Crab Fit 정보",

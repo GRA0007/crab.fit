@@ -1,10 +1,6 @@
 {
   "create": "BUAT",
   "recently_visited": "Baru-baru ini dikunjungi",
-  "nav": {
-    "about": "Info",
-    "donate": "Menyumbangkan"
-  },
   "form": {
     "name": {
       "label": "Beri nama acara Anda!",
@@ -40,7 +36,6 @@
       "unknown": "Ada yang salah. Silakan coba lagi nanti."
     }
   },
-  "offline": "Anda tidak dapat membuat Crab Fit saat Anda tidak memiliki koneksi internet. Harap pastikan Anda terhubung.",
 
   "about": {
     "name": "Tentang Crab Fit",
