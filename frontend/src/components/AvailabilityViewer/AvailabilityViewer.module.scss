@@ -1,0 +1,226 @@
+.heatmap {
+  display: inline-flex;
+  box-sizing: border-box;
+  min-width: 100%;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 calc(calc(100% - 600px) / 2);
+
+  @media (max-width: 660px) {
+    padding: 0 30px;
+  }
+}
+
+.timeLabels {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 40px;
+  padding-right: 6px;
+}
+
+.timeSpace {
+  height: 10px;
+  position: relative;
+  border-top: 2px solid transparent;
+
+  &.grey {
+    background-origin: border-box;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 4.3px,
+      var(--loading) 4.3px,
+      var(--loading) 8.6px
+    );
+  }
+}
+
+.timeLabel {
+  display: block;
+  position: absolute;
+  top: -.7em;
+  font-size: 12px;
+  text-align: right;
+  user-select: none;
+  width: 100%;
+}
+
+.dateColumn {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 60px;
+  min-width: 60px;
+  margin-bottom: 10px;
+}
+
+.dateLabel {
+  display: block;
+  font-size: 12px;
+  text-align: center;
+  user-select: none;
+}
+
+.dayLabel {
+  display: block;
+  font-size: 15px;
+  text-align: center;
+  user-select: none;
+}
+
+.times {
+  display: flex;
+  flex-direction: column;
+
+  border-bottom: 2px solid var(--text);
+  border-left: 1px solid var(--text);
+  border-right: 1px solid var(--text);
+
+  &[data-border-left=true] {
+    border-left: 2px solid var(--text);
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+  &[data-border-right=true] {
+    border-right: 2px solid var(--text);
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+
+  & .time + .timespace, & .timespace:first-of-type {
+    border-top: 2px solid var(--text);
+  }
+}
+
+.time {
+  height: 10px;
+  background-origin: border-box;
+  transition: background-color .1s;
+  touch-action: none;
+
+  border-top-width: 2px;
+  border-top-style: solid;
+  border-top-color: var(--text);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.editable {
+  @media (hover: hover) {
+    &:hover:not(:active) {
+      opacity: .8;
+      background-image: linear-gradient(var(--hover-color), var(--hover-color));
+    }
+  }
+}
+
+.highlight {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 4.3px,
+    var(--highlight-color, rgba(0,0,0,.5)) 4.3px,
+    var(--highlight-color, rgba(0,0,0,.5)) 8.6px
+  );
+}
+
+.info {
+  display: block;
+  text-align: center;
+
+  @media print {
+    display: none;
+  }
+}
+
+.people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin: 14px auto;
+}
+
+.person {
+  font: inherit;
+  font-size: 15px;
+  border-radius: 3px;
+  border: 1px solid var(--text);
+  color: var(--text);
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  padding: 2px 8px;
+  user-select: none;
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+.personSelected {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+}
+
+.wrapper {
+  overflow-y: visible;
+  margin: 20px 0;
+  position: relative;
+
+  & > div {
+    overflow-x: auto;
+  }
+}
+
+.columnSpacer {
+  width: 12px;
+  flex-shrink: 0;
+}
+
+.tooltip {
+  position: absolute;
+  transform: translateX(-50%);
+  border: 1px solid var(--text);
+  border-radius: 3px;
+  padding: 4px 8px;
+  background-color: var(--background);
+  max-width: 200px;
+  pointer-events: none;
+  z-index: 100;
+  user-select: none;
+
+  h3 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 700;
+  }
+  & > span {
+    font-size: 13px;
+    display: block;
+    opacity: .8;
+    font-weight: 600;
+  }
+  & > div {
+    font-size: 13px;
+    padding: 4px 0;
+
+    span {
+      display: inline-block;
+      margin: 2px;
+      padding: 1px 4px;
+      border: 1px solid var(--primary);
+      border-radius: 3px;
+
+      &[data-disabled=true] {
+        opacity: .5;
+        border-color: var(--text);
+      }
+    }
+  }
+}

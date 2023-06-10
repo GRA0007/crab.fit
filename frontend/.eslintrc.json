@@ -1,0 +1,32 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "simple-import-sort/imports": "warn",
+    "@next/next/no-img-element": "off",
+    "react/display-name": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "space-infix-ops": "warn",
+    "comma-spacing": "warn",
+    "react-hooks/rules-of-hooks": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "simple-import-sort/imports": [
+          "warn",
+          {
+            "groups": [
+              ["^react", "^next", "^@", "^[a-z]"],
+              ["^/src/"],
+              ["^./", "^.", "^../"]
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

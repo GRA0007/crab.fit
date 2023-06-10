@@ -2,36 +2,37 @@ name: Deploy Frontend
 
 on:
   push:
-    branches: ['main']
-    paths: ['frontend/**']
+    branches:
+    - main
+    paths:
+    - frontend/**
+    - .github/workflows/deploy_frontend.yml
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 jobs:
   deploy:
+    name: Deploy to Vercel
     runs-on: ubuntu-latest
 
     defaults:
       run:
         working-directory: frontend
 
-    permissions:
-      contents: read
-      id-token: write
-
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version: 17
+        node-version: 18
         cache: yarn
         cache-dependency-path: '**/yarn.lock'
-    - run: yarn install --immutable
-    - run: yarn build
-    - id: auth
-      uses: google-github-actions/auth@v0
-      with:
-        credentials_json: '${{ secrets.GCP_SA_KEY }}'
-    - id: deploy
-      uses: google-github-actions/deploy-appengine@v0
-      with:
-        working_directory: frontend
-        version: v1
+    - name: Install Vercel CLI
+      run: yarn global install vercel@latest
+    - name: Pull Vercel Environment Information
+      run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+    - name: Build Project Artifacts
+      run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+    - name: Deploy Project Artifacts to Vercel
+      run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

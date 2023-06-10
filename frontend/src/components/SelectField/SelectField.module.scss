@@ -1,0 +1,21 @@
+.select {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  background: var(--surface);
+  color: inherit;
+  padding: 10px 14px;
+  border: 1px solid var(--primary);
+  box-shadow: inset 0 0 0 0 var(--primary);
+  border-radius: 3px;
+  appearance: none;
+  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3CforeignObject%20width%3D%22100px%22%20height%3D%22100px%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22color%3A%23F79E00%3Bfont-size%3A60px%3Bdisplay%3Aflex%3Balign-items%3Acenter%3Bjustify-content%3Acenter%3Bheight%3A100%25%3Bwidth%3A100%25%3B%22%3E%E2%96%BC%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 1em;
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+}

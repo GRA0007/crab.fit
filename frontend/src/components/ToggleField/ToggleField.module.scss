@@ -1,0 +1,52 @@
+.toggleContainer {
+  display: flex;
+  border-radius: 3px;
+
+  & > div:first-of-type label {
+    border-inline-start: 1px solid var(--primary);
+    border-end-start-radius: 2px;
+    border-start-start-radius: 2px;
+  }
+  & > div:last-of-type label {
+    border-inline-end: 1px solid var(--primary);
+    border-start-end-radius: 2px;
+    border-end-end-radius: 2px;
+  }
+}
+
+.option {
+  flex: 1;
+  position: relative;
+}
+
+.hiddenInput {
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  appearance: none;
+
+  &:checked + label {
+    color: var(--background);
+    background-color: var(--primary);
+  }
+  &:focus-visible + label {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+.button {
+  padding: 6px;
+  display: flex;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  height: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  border-block: 1px solid var(--primary);
+}

@@ -1,0 +1,137 @@
+:root {
+  color-scheme: light dark;
+
+  --primary: #F79E00;
+
+  /* LIGHT */
+  --background-light: #FFFFFF;
+  --text-light: #000000;
+  --shadow-light: #F48600;
+  --highlight-light: #F4BB60;
+  --secondary-light: var(--shadow-light);
+  --tertiary-light: var(--highlight-light);
+  --surface-light: #FEF2DD;
+  --error-light: #D32F2F;
+  --loading-light: #DDDDDD;
+  --font-weight-light: 600;
+
+  /* DARK */
+  --background-dark: #111111;
+  --text-dark: #DDDDDD;
+  --shadow-dark: #CC7313;
+  --highlight-dark: #F4BB60;
+  --secondary-dark: var(--highlight-dark);
+  --tertiary-dark: var(--shadow-dark);
+  --surface-dark: #30240F;
+  --error-dark: #E53935;
+  --loading-dark: #444444;
+  --font-weight-dark: 500;
+
+  /* Define light defaults */
+  --background: var(--background-light);
+  --text: var(--text-light);
+  --shadow: var(--shadow-light);
+  --highlight: var(--highlight-light);
+  --secondary: var(--secondary-light);
+  --tertiary: var(--tertiary-light);
+  --surface: var(--surface-light);
+  --error: var(--error-light);
+  --loading: var(--loading-light);
+  --font-weight: var(--font-weight-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--background-dark);
+    --text: var(--text-dark);
+    --shadow: var(--shadow-dark);
+    --highlight: var(--highlight-dark);
+    --secondary: var(--secondary-dark);
+    --tertiary: var(--tertiary-dark);
+    --surface: var(--surface-dark);
+    --error: var(--error-dark);
+    --loading: var(--loading-dark);
+    --font-weight: var(--font-weight-dark);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-weight: var(--font-weight);
+  --focus-ring: 2px solid var(--secondary);
+}
+
+.light {
+  color-scheme: light;
+
+  --background: var(--background-light);
+  --text: var(--text-light);
+  --shadow: var(--shadow-light);
+  --highlight: var(--highlight-light);
+  --secondary: var(--secondary-light);
+  --tertiary: var(--tertiary-light);
+  --surface: var(--surface-light);
+  --error: var(--error-light);
+  --loading: var(--loading-light);
+  --font-weight: var(--font-weight-light);
+}
+
+@media not print {
+  .dark {
+    color-scheme: dark;
+
+    --background: var(--background-dark);
+    --text: var(--text-dark);
+    --shadow: var(--shadow-dark);
+    --highlight: var(--highlight-dark);
+    --secondary: var(--secondary-dark);
+    --tertiary: var(--tertiary-dark);
+    --surface: var(--surface-dark);
+    --error: var(--error-dark);
+    --loading: var(--loading-dark);
+    --font-weight: var(--font-weight-dark);
+  }
+}
+
+@media print {
+  #app, .light, .dark {
+    --background: white;
+  }
+}
+
+a {
+  color: var(--primary);
+  border-radius: .2em;
+}
+a:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+*::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 4px solid var(--surface);
+  width: 12px;
+  background: var(--tertiary);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+*::-webkit-scrollbar-thumb:active {
+  background: var(--secondary);
+}

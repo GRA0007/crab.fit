@@ -1,0 +1,17 @@
+.content {
+  width: 600px;
+  margin: 20px auto;
+  max-width: calc(100% - 60px);
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.slim {
+  margin-block: 10px;
+  max-width: calc(100% - 30px);
+}

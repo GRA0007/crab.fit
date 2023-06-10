@@ -1,0 +1,157 @@
+.button {
+  cursor: pointer;
+  border: 0;
+  text-decoration: none;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border-radius: 3px;
+
+  & > div {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    background: var(--override-surface-color, var(--primary));
+    color: var(--override-text-color, var(--background));
+    font-weight: 600;
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1);
+    border-radius: inherit;
+    padding: .6em 1.5em;
+    transform-style: preserve-3d;
+    margin-bottom: 5px;
+
+    & svg, & img {
+      height: 1.2em;
+      width: 1.2em;
+      margin-right: .5em;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: var(--override-shadow-color, var(--shadow));
+      border-radius: inherit;
+      transform: translate3d(0, 5px, -1em);
+      transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+    }
+  }
+
+  &:hover > div, &:focus > div {
+    transform: translate(0, 1px);
+    &::before {
+      transform: translate3d(0, 4px, -1em);
+    }
+  }
+
+  &:active > div {
+    transform: translate(0, 5px);
+    &::before {
+      transform: translate3d(0, 0, -1em);
+    }
+  }
+
+  @media print {
+    & > div::before {
+      display: none;
+    }
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+.iconButton > div {
+  height: 30px;
+  width: 30px;
+  padding: 0;
+
+  & svg, & img {
+    margin: 0;
+  }
+}
+
+.small > div {
+  padding: .4em 1.3em;
+}
+
+.loading {
+  cursor: wait;
+
+  & > div {
+    color: transparent;
+  }
+
+  & img {
+    opacity: 0;
+  }
+
+  @keyframes load {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  & > div::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 12px);
+    left: calc(50% - 12px);
+    height: 18px;
+    width: 18px;
+    border: 3px solid var(--override-text-color, var(--background));
+    border-left-color: transparent;
+    border-radius: 100px;
+    animation: load .5s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    & > div::after {
+      content: 'loading...';
+      color: var(--override-text-color, var(--background));
+      animation: none;
+      width: initial;
+      height: initial;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.secondary {
+  & > div {
+    background: transparent;
+    border: 1px solid var(--override-surface-color, var(--secondary));
+    color: var(--override-surface-color, var(--secondary));
+    margin-bottom: 0;
+
+    @media print {
+      box-shadow: 0 4px 0 0 var(--override-shadow-color, var(--secondary));
+    }
+  }
+
+  & > div::before {
+    content: none;
+  }
+  &:hover > div, &:active > div, &:focus > div {
+    transform: none;
+  }
+}

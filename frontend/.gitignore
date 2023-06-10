@@ -1,8 +1,10 @@
 node_modules
 dist
-build
-dev-dist
+.next
 
-npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+tsconfig.tsbuildinfo
+
+.env
+.vercel

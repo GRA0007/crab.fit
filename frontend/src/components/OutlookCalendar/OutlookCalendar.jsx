@@ -1,23 +1,23 @@
-import { useState, useEffect } from 'react'
 import { PublicClientApplication } from '@azure/msal-browser'
 import { Client } from '@microsoft/microsoft-graph-client'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Button, Center } from '/src/components'
-import { Loader } from '../Loading/Loading.styles'
+import outlookLogo from '/src/res/outlook.svg'
+
 import {
+  CalendarLabel,
   CalendarList,
   CheckboxInput,
   CheckboxLabel,
-  CalendarLabel,
+  Icon,
   Info,
+  LinkButton,
   Options,
   Title,
-  Icon,
-  LinkButton,
 } from '../GoogleCalendar/GoogleCalendar.styles'
-
-import outlookLogo from '/src/res/outlook.svg'
+import { Loader } from '../Loading/Loading.styles'
 
 const scopes = ['Calendars.Read', 'Calendars.Read.Shared']
 

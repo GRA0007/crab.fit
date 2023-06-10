@@ -3,7 +3,10 @@ use std::{env, net::SocketAddr, sync::Arc};
 use axum::{
     error_handling::HandleErrorLayer,
     extract,
-    http::{HeaderValue, Method},
+    http::{
+        header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE},
+        HeaderValue, Method,
+    },
     routing::{get, patch, post},
     BoxError, Router, Server,
 };
@@ -44,6 +47,8 @@ async fn main() {
 
     // CORS configuration
     let cors = CorsLayer::new()
+        .allow_credentials(true)
+        .allow_headers([AUTHORIZATION, ACCEPT, CONTENT_TYPE])
         .allow_methods([Method::GET, Method::POST, Method::PATCH])
         .allow_origin(
             if cfg!(debug_assertions) {
@@ -56,9 +61,14 @@ async fn main() {
         );
 
     // Rate limiting configuration (using tower_governor)
-    // From the docs: Allows bursts with up to eight requests and replenishes
+    // From the docs: Allows bursts with up to 20 requests and replenishes
     // one element after 500ms, based on peer IP.
-    let governor_config = Box::new(GovernorConfigBuilder::default().finish().unwrap());
+    let governor_config = Box::new(
+        GovernorConfigBuilder::default()
+            .burst_size(20)
+            .finish()
+            .unwrap(),
+    );
     let rate_limit = ServiceBuilder::new()
         // Handle errors from governor and convert into HTTP responses
         .layer(HandleErrorLayer::new(|e: BoxError| async move {

@@ -1,0 +1,56 @@
+{
+  "create": "CREATE A",
+  "recently_visited": "Recently visited",
+  "form": {
+    "name": {
+      "label": "Give your event a name!",
+      "sublabel": "Or leave blank to generate one"
+    },
+    "dates": {
+      "label": "What dates might work?",
+      "sublabel": "Click and drag to select",
+      "options": {
+        "specific": "Specific dates",
+        "week": "Days of the week"
+      },
+      "tooltips": {
+        "previous": "Previous month",
+        "next": "Next month",
+        "today": "today"
+      }
+    },
+    "times": {
+      "label": "What times might work?",
+      "sublabel": "Click and drag to select a time range"
+    },
+    "timezone": {
+      "label": "And the timezone",
+      "defaultOption": "Select..."
+    },
+
+    "button": "Create",
+    "errors": {
+      "no_dates": "There aren't any dates selected",
+      "same_times": "The start and end times can't be the same",
+      "no_time": "There isn't any time selected",
+      "unknown": "Something went wrong. Please try again later."
+    }
+  },
+
+  "about": {
+    "name": "About Crab Fit",
+    "events": "Events created",
+    "availabilities": "Availabilities entered",
+    "content": {
+      "p1": "Crab Fit helps you fit your event around everyone's schedules. Simply create an event above and send the link to everyone that is participating. Results update live and you will be able to see a heat-map of when everyone is free.<1/><2>Learn more about how to Crab Fit</2>.",
+      "p3": "Created by <1>Ben Grant</1>, Crab Fit is the modern-day solution to your group event planning debates.",
+      "p4": "The code for Crab Fit is open source, if you find any issues or want to contribute, you can visit the <1>repository</1>. By using Crab Fit you agree to the <3>privacy policy</3>.",
+      "p6": "To protect your privacy, events are deleted after 3 months of inactivity, and all passwords are securely hashed.",
+      "p5": "Consider donating below if it helped you out so Crab Fit can stay free for everyone. 🦀"
+    },
+    "chrome_extension": "Get the Chrome Extension",
+    "firefox_extension": "Get the Firefox Extension",
+    "safari_extension": "Get the Safari Extension",
+    "android_app": "Download the Android app"
+  }
+}

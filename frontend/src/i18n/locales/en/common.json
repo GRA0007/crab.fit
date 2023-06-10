@@ -1,0 +1,55 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Create your own",
+  "cta": "Create your own Crab Fit!",
+  "created": "Created {{date}}",
+  "donate": {
+    "info": "Thank you for using Crab Fit. If you like it, consider donating.",
+    "button": "Donate",
+    "title": "Every amount counts :)"
+  },
+  "options": {
+    "name": "Options",
+    "weekStart": {
+      "label": "Week starts on",
+      "options": {
+        "Sunday": "Sunday",
+        "Monday": "Monday"
+      }
+    },
+    "timeFormat": {
+      "label": "Time format",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Theme",
+      "options": {
+        "System": "System",
+        "Light": "Light",
+        "Dark": "Dark"
+      }
+    },
+    "highlight": {
+      "label": "Highlight highest availability",
+      "title": "Make the highest availability on the heatmap stand out",
+      "options": {
+        "Off": "Off",
+        "On": "On"
+      }
+    },
+    "language": {
+      "label": "Language"
+    },
+    "colormap": {
+      "label": "Heatmap colors",
+      "classic": "Crab Fit (classic)"
+    }
+  },
+  "video": {
+    "title": "Crab Fit Promotional Video",
+    "button": "Watch the video"
+  }
+}
