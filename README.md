@@ -6,36 +6,26 @@
 Align your schedules to find the perfect time that works for everyone.
 Licensed under the GNU GPLv3.
 
-## Contributing
-
 ### ⭐️ Bugs or feature requests
 
 If you find any bugs or have a feature request, please create an issue by <a href="https://github.com/GRA0007/crab.fit/issues/new/choose">clicking here</a>.
 
 ### 🌐 Translations
 
-If you speak a language other than English and you want to help translate Crab Fit, fill out this form: https://forms.gle/azz1yGqhpLUka45S9
+https://explore.transifex.com/crab-fit/crab-fit/
 
-### Pull requests
+If you speak a language other than English and you want to help translate Crab Fit, visit Transifex using the link above and click "Join this project".
 
-If you see an issue you want to fix, or want to implement a feature you think would be useful, please feel free to open a pull request with your changes. If you can, please open an issue about the bug or feature you want to work on before starting your PR, to prevent work duplication and give others a chance to improve your idea.
+For more information on how to translate, visit the [translating wiki page](https://github.com/GRA0007/crab.fit/wiki/Translating).
 
-## Setup
+---
 
-1. Clone the repo and ensure you have `node`, `yarn` and `rust` installed on your machine.
-2. Run `yarn` in `frontend` folder to install dependencies, then `yarn dev` to start the dev server.
-3. Run `cargo run` in the `api` folder to start the API.
+## Self-hosting
 
-### 🔌 Browser extension
+Crab Fit is fully open-source, and you can get your own version running by following the [self-hosting guide](https://github.com/GRA0007/crab.fit/wiki/Self%E2%80%90hosting).
 
-The browser extension in `browser-extension` can be tested by first running the frontend, and changing the iframe url in the extension's `popup.html` to match the local Crab Fit. Then it can be loaded as an unpacked extension in Chrome to test.
+## Contributing
 
-## Deploy
+Visit the wiki page for [local development](https://github.com/GRA0007/crab.fit/wiki/Local-Development) to get Crab Fit running locally.
 
-Deployments are managed with GitHub Workflows. The frontend is deployed using Vercel, and the API uses Fly.io.
-
-More detailed instructions on setting up your own deployment are coming soon.
-
-### 🔌 Browser extension
-
-Compress everything inside the `browser-extension` folder and use that zip to deploy using Chrome web store and Mozilla Add-on store.
+Want to contribute to a pull request? Make sure you read the wiki page on [pull requests](https://github.com/GRA0007/crab.fit/wiki/Pull-Requests) first.
