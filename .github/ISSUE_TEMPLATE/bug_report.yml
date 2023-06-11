@@ -1,0 +1,41 @@
+name: Bug report
+description: Report an issue on Crab Fit
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Check to make sure someone hasn't already opened a similar [issue](https://github.com/GRA0007/crab.fit/issues).
+
+  - type: textarea
+    attributes:
+      label: Description of the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: To reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Additional information
+      description: Add any other context including screenshots and device information where applicable here.
+    validations:
+      required: false

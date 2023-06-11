@@ -3,10 +3,10 @@ name: Deploy API
 on:
   push:
     branches:
-    - main
+      - main
     paths:
-    - api/**
-    - .github/workflows/deploy_api.yml
+      - api/**
+      - .github/workflows/deploy_api.yml
 
 jobs:
   build-and-push:
@@ -21,8 +21,8 @@ jobs:
       contents: read
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: superfly/flyctl-actions/setup-flyctl@master
-    - run: flyctl deploy --remote-only
-      env:
-        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
