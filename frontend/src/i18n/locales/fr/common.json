@@ -34,7 +34,7 @@
     },
     "highlight": {
       "label": "Mettre en évidence les meilleures disponibilités",
-      "title": "Faire ressortir les meilleures disponibilités sur la carte thermique",
+      "title": "Mettre en évidence les meilleures disponibilités sur la carte thermique",
       "options": {
         "Off": "Désactivé",
         "On": "Activé"
