@@ -3,8 +3,14 @@ name: API Checks
 on:
   pull_request:
     paths:
-    - api/**
-    - .github/workflows/check_api.yml
+      - api/**
+      - .github/workflows/check_api.yml
+  push:
+    branches:
+      - main
+    paths:
+      - api/**
+      - .github/workflows/check_api.yml
 
 # Fail on warnings
 env:
@@ -19,5 +25,5 @@ jobs:
         working-directory: api
 
     steps:
-    - uses: actions/checkout@v3
-    - run: cargo clippy
+      - uses: actions/checkout@v3
+      - run: cargo clippy
