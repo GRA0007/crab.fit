@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { rotateArray } from '@giraugh/tools'
 import { Temporal } from '@js-temporal/polyfill'
-import { AlertTriangle, AlertTriangleIcon, ChevronLeft, ChevronRight, FileWarningIcon } from 'lucide-react'
+import { AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react'
 
 import Button from '/src/components/Button/Button'
 import { useTranslation } from '/src/i18n/client'
