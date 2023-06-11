@@ -17,6 +17,9 @@
         "previous": "Previous month",
         "next": "Next month",
         "today": "today"
+      },
+      "warnings": {
+        "date_in_past": "Some of the dates you've selected are in the past"
       }
     },
     "times": {

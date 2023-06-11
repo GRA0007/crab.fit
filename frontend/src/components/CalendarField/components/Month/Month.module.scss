@@ -91,3 +91,12 @@
     color: rgba(255,255,255,.5);
   }
 }
+
+.warningLabel {
+  display: flex;
+  padding-block: 0.9em;
+  gap: 0.5em;
+  align-items: center;
+  opacity: .75;
+  font-size: .9em;
+}

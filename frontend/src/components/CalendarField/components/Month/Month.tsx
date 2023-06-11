@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { rotateArray } from '@giraugh/tools'
 import { Temporal } from '@js-temporal/polyfill'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react'
 
 import Button from '/src/components/Button/Button'
 import { useTranslation } from '/src/i18n/client'
@@ -22,7 +22,8 @@ const Month = ({ value, onChange }: MonthProps) => {
 
   const weekStart = useStore(useSettingsStore, state => state.weekStart) ?? 0
 
-  const [page, setPage] = useState<Temporal.PlainYearMonth>(Temporal.Now.plainDateISO().toPlainYearMonth())
+  const now = useMemo(() => Temporal.Now.plainDateISO(), [])
+  const [page, setPage] = useState<Temporal.PlainYearMonth>(now.toPlainYearMonth())
   const dates = useMemo(() => calculateMonth(page, weekStart, i18n.language), [page, weekStart, i18n.language])
 
   // Ref and state required to rerender but also access static version in callbacks
@@ -35,6 +36,12 @@ const Month = ({ value, onChange }: MonthProps) => {
 
   const startPos = useRef({ x: 0, y: 0 })
   const mode = useRef<'add' | 'remove'>()
+
+  // Is 1 or more of the selected dates in the past?
+  const hasPastDates = useMemo(() => value
+    .some(plainDate => Temporal.PlainDate.compare(
+      now, Temporal.PlainDate.from(plainDate)
+    ) > 0), [value])
 
   const handleFinishSelection = useCallback(() => {
     if (mode.current === 'add') {
@@ -112,6 +119,11 @@ const Month = ({ value, onChange }: MonthProps) => {
         >{date.label}</button>)
       )}
     </div>
+
+    {hasPastDates && <div className={styles.warningLabel}>
+      <AlertTriangle size='1.2em' />
+      <span>{t('form.dates.warnings.date_in_past')}</span>
+    </div>}
   </>
 }
 
