@@ -7,7 +7,7 @@
       "sublabel": "Ou deixa em branco para gerar um nome aleatório"
     },
     "dates": {
-      "label": "Que dias queres para o teu evento?",
+      "label": "Em que dias queres que o teu evento ocorra?",
       "sublabel": "Clica e arrasta para selecionar",
       "options": {
         "specific": "Datas específicas",
