@@ -18,7 +18,7 @@
     "password": "Palavra-passe (opcional)",
     "button": "Iniciar sessão",
     "logout_button": "Terminar sessão",
-    "info": "Esta informação só será utilizada para este evento. Usa uma palavra-passe para prevenir que outros alterem a tua disponibilidade.",
+    "info": "Esta informação só será utilizada para este evento. Usa uma palavra-passe para prevenir que outras pessoas alterem a tua disponibilidade.",
 
     "timezone": "O teu fuso horário",
 
