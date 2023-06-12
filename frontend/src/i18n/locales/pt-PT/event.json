@@ -47,7 +47,7 @@
   },
 
   "group": {
-    "legend_tooltip": "Clica para realçar a hora com maior disponibilidade",
+    "legend_tooltip": "Clica para realçar as horas com maior disponibilidade",
     "info1": "Passa o cursor ou clica no calendário abaixo para ver quem está disponível",
     "info2": "Clica nos nomes abaixo para ver a disponibilidade de cada pessoa"
   },
