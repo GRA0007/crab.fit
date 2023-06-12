@@ -23,7 +23,7 @@
     "timezone": "O teu fuso horário",
 
     "errors": {
-      "name_required": "É necessário um nome para guardar a tua disponibilidade.",
+      "name_required": "Tens de inserir um nome de forma a podermos guardar a tua disponibilidade.",
       "password_incorrect": "Palavra-passe incorreta. Verifica se o teu nome está correto.",
       "unknown": "Erro ao iniciar sessão. Por favor tenta novamente."
     },
