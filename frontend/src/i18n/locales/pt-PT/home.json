@@ -45,7 +45,7 @@
     "events": "Eventos criados",
     "availabilities": "Disponibilidades partilhadas",
     "content": {
-      "p1": "O Crab Fit ajuda-te a certificares-te que o teu evento se encaixa nas agendas de toda a gente. Basta criares um evento acima e enviares o link a todos os que queres convidar. Os resultados são atualizados em tempo real e poderás ver um mapa de calor com a disponibilidade de todos. <1/><2>Aprende mais sobre como usar o Crab Fit</2>.",
+      "p1": "O Crab Fit ajuda-te a certificares-te que o teu evento se encaixa nas agendas de toda a gente. Basta criares um evento acima e enviares o link a todas as pessoas que queres convidar. Os resultados são atualizados em tempo real e poderás ver um mapa de calor com a disponibilidade de toda a gente. <1/><2>Aprende mais sobre como usar o Crab Fit</2>.",
       "p3": "Criado por <1>Ben Grant</1>, o Crab Fit é a solução moderna para planeares os teus eventos em grupo.",
       "p4": "O Crab Fit é software de código aberto, se encontrares problemas ou quiseres contribuir visita o <1>repositório</1>. Ao usares o Crab Fit, estás a aceitar a <3>política de privacidade</3>.",
       "p6": "Para proteger a tua privacidade, eventos são eliminados após 3 meses de inatividade e todas as palavras-passe codificadas em hash.",
