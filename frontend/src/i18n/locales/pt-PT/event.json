@@ -18,12 +18,12 @@
     "password": "Palavra-passe (opcional)",
     "button": "Iniciar sessão",
     "logout_button": "Terminar sessão",
-    "info": "Esta informação só será utilizada para este evento. Usa uma palavra-passe para prevenir que outros alterem a tua disponibilidade.",
+    "info": "Esta informação só será utilizada para este evento. Usa uma palavra-passe para prevenir que outras pessoas alterem a tua disponibilidade.",
 
     "timezone": "O teu fuso horário",
 
     "errors": {
-      "name_required": "É necessário um nome para guardar a tua disponibilidade.",
+      "name_required": "Tens de inserir um nome de forma a podermos guardar a tua disponibilidade.",
       "password_incorrect": "Palavra-passe incorreta. Verifica se o teu nome está correto.",
       "unknown": "Erro ao iniciar sessão. Por favor tenta novamente."
     },
@@ -47,7 +47,7 @@
   },
 
   "group": {
-    "legend_tooltip": "Clica para realçar a hora com maior disponibilidade",
+    "legend_tooltip": "Clica para realçar as horas com maior disponibilidade",
     "info1": "Passa o cursor ou clica no calendário abaixo para ver quem está disponível",
     "info2": "Clica nos nomes abaixo para ver a disponibilidade de cada pessoa"
   },

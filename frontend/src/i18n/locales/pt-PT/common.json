@@ -11,7 +11,7 @@
   "options": {
     "name": "Opções",
     "weekStart": {
-      "label": "Semana começa a",
+      "label": "Início da semana",
       "options": {
         "Sunday": "Domingo",
         "Monday": "Segunda-feira"
