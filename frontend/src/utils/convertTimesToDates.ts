@@ -39,10 +39,7 @@ const parseWeekdayDate = (str: string): Temporal.ZonedDateTime => {
 
   // Extract values
   const [hour, minute] = [Number(str.substring(0, 2)), Number(str.substring(2, 4))]
-  let dayOfWeek = Number(str.substring(5))
-  if (dayOfWeek === 0) {
-    dayOfWeek = 7 // Sunday is 7 in ISO8601
-  }
+  const dayOfWeek = Number(str.substring(5))
 
   // Construct PlainDateTime from today
   const today = Temporal.Now.zonedDateTimeISO('UTC').round('day')
