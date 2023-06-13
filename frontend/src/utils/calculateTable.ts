@@ -3,16 +3,24 @@ import { calculateRows } from '/src/utils/calculateRows'
 import { convertTimesToDates } from '/src/utils/convertTimesToDates'
 import { serializeTime } from '/src/utils/serializeTime'
 
+export interface CalculateTableArgs {
+  /** As `HHmm-DDMMYYYY` or `HHmm-d` strings */
+  times: string[]
+  locale: string
+  timeFormat: '12h' | '24h'
+  timezone: string
+}
+
 /**
  * Take rows and columns and turn them into a data structure representing an availability table
  */
-export const calculateTable = (
+export const calculateTable = ({
   /** As `HHmm-DDMMYYYY` or `HHmm-d` strings */
-  times: string[],
-  locale: string,
-  timeFormat: '12h' | '24h',
-  timezone: string,
-) => {
+  times,
+  locale,
+  timeFormat,
+  timezone,
+}: CalculateTableArgs) => {
   const dates = convertTimesToDates(times, timezone)
   const rows = calculateRows(dates)
   const columns = calculateColumns(dates)
@@ -22,7 +30,7 @@ export const calculateTable = (
 
   return {
     rows: rows.map(row => row && row.minute === 0 ? {
-      label: row.toLocaleString(locale, { hour: 'numeric', hour12: timeFormat === '12h' }),
+      label: row.toLocaleString(locale, { hour: 'numeric', hourCycle: timeFormat === '12h' ? 'h12' : 'h24' }),
       string: row.toString(),
     } : null),
 
@@ -44,8 +52,8 @@ export const calculateTable = (
           serialized,
           minute: date.minute,
           label: isSpecificDates
-            ? date.toLocaleString(locale, { dateStyle: 'long', timeStyle: 'short', hour12: timeFormat === '12h' })
-            : `${date.toLocaleString(locale, { timeStyle: 'short', hour12: timeFormat === '12h' })}, ${date.toLocaleString(locale, { weekday: 'long' })}`,
+            ? date.toLocaleString(locale, { dateStyle: 'long', timeStyle: 'short', hourCycle: timeFormat === '12h' ? 'h12' : 'h24' })
+            : `${date.toLocaleString(locale, { timeStyle: 'short', hourCycle: timeFormat === '12h' ? 'h12' : 'h24' })}, ${date.toLocaleString(locale, { weekday: 'long' })}`,
         }
       })
     } : null)

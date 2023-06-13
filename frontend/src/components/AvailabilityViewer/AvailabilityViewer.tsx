@@ -13,17 +13,17 @@ import useSettingsStore from '/src/stores/settingsStore'
 import { calculateAvailability, calculateTable, makeClass, relativeTimeFormat } from '/src/utils'
 
 import styles from './AvailabilityViewer.module.scss'
+import Skeleton from './components/Skeleton/Skeleton'
 
 interface AvailabilityViewerProps {
   times: string[]
-  timezone: string
   people: PersonResponse[]
+  table?: ReturnType<typeof calculateTable>
 }
 
-const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps) => {
+const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) => {
   const { t, i18n } = useTranslation('event')
 
-  const timeFormat = useStore(useSettingsStore, state => state.timeFormat) ?? '12h'
   const highlight = useStore(useSettingsStore, state => state.highlight)
   const [filteredPeople, setFilteredPeople] = useState(people.map(p => p.name))
   const [tempFocus, setTempFocus] = useState<string>()
@@ -38,11 +38,6 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
     people: string[]
   }>()
 
-  // Calculate table
-  const { rows, columns } = useMemo(() =>
-    calculateTable(times, i18n.language, timeFormat, timezone),
-  [times, i18n.language, timeFormat, timezone])
-
   // Calculate availabilities
   const { availabilities, min, max } = useMemo(() =>
     calculateAvailability(times, people.filter(p => filteredPeople.includes(p.name))),
@@ -56,15 +51,15 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
     setFilteredPeople(people.map(p => p.name))
   }, [people.length])
 
-  const heatmap = useMemo(() => columns.map((column, x) => <Fragment key={x}>
+  const heatmap = useMemo(() => table?.columns.map((column, x) => <Fragment key={x}>
     {column ? <div className={styles.dateColumn}>
       {column.header.dateLabel && <label className={styles.dateLabel}>{column.header.dateLabel}</label>}
       <label className={styles.dayLabel}>{column.header.weekdayLabel}</label>
 
       <div
         className={styles.times}
-        data-border-left={x === 0 || columns.at(x - 1) === null}
-        data-border-right={x === columns.length - 1 || columns.at(x + 1) === null}
+        data-border-left={x === 0 || table.columns.at(x - 1) === null}
+        data-border-right={x === table.columns.length - 1 || table.columns.at(x + 1) === null}
       >
         {column.cells.map((cell, y) => {
           if (y === column.cells.length - 1) return null
@@ -110,9 +105,9 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
         })}
       </div>
     </div> : <div className={styles.columnSpacer} />}
-  </Fragment>), [
+  </Fragment>) ?? <Skeleton isSpecificDates={times[0].length === 13} />, [
     availabilities,
-    columns,
+    table?.columns,
     highlight,
     max,
     min,
@@ -167,14 +162,14 @@ const AvailabilityViewer = ({ times, timezone, people }: AvailabilityViewerProps
       <div>
         <div className={styles.heatmap}>
           {useMemo(() => <div className={styles.timeLabels}>
-            {rows.map((row, i) =>
+            {table?.rows.map((row, i) =>
               <div className={styles.timeSpace} key={i}>
                 {row && <label className={styles.timeLabel}>
                   {row.label}
                 </label>}
               </div>
-            )}
-          </div>, [rows])}
+            ) ?? null}
+          </div>, [table?.rows])}
 
           {heatmap}
         </div>
