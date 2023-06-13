@@ -108,7 +108,7 @@ const Handle = ({ value, onChange, labelPadding }: HandleProps) => {
       left: `calc(${value * 4.166}% - 11px)`,
       '--extra-padding': labelPadding,
     } as React.CSSProperties}
-    data-label={Temporal.PlainTime.from({ hour: Number(times[value] === '24' ? '00' : times[value]) }).toLocaleString(i18n.language, { hour: 'numeric', hour12: timeFormat === '12h' })}
+    data-label={Temporal.PlainTime.from({ hour: Number(times[value] === '24' ? '00' : times[value]) }).toLocaleString(i18n.language, { hour: 'numeric', hourCycle: timeFormat === '12h' ? 'h12' : 'h24' })}
     onMouseDown={() => {
       document.addEventListener('mousemove', handleMouseMove)
       isMoving.current = true

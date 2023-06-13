@@ -1,36 +1,24 @@
-import { Fragment, useCallback, useMemo, useRef, useState } from 'react'
+import { Fragment, useCallback, useRef, useState } from 'react'
 
 import Content from '/src/components/Content/Content'
 import GoogleCalendar from '/src/components/GoogleCalendar/GoogleCalendar'
 import { usePalette } from '/src/hooks/usePalette'
 import { useTranslation } from '/src/i18n/client'
-import { useStore } from '/src/stores'
-import useSettingsStore from '/src/stores/settingsStore'
 import { calculateTable, makeClass, parseSpecificDate } from '/src/utils'
 
 import styles from '../AvailabilityViewer/AvailabilityViewer.module.scss'
+import Skeleton from '../AvailabilityViewer/components/Skeleton/Skeleton'
 
 interface AvailabilityEditorProps {
   times: string[]
   timezone: string
   value: string[]
   onChange: (value: string[]) => void
+  table?: ReturnType<typeof calculateTable>
 }
 
-const AvailabilityEditor = ({
-  times,
-  timezone,
-  value = [],
-  onChange,
-}: AvailabilityEditorProps) => {
-  const { t, i18n } = useTranslation('event')
-
-  const timeFormat = useStore(useSettingsStore, state => state.timeFormat) ?? '12h'
-
-  // Calculate table
-  const { rows, columns } = useMemo(() =>
-    calculateTable(times, i18n.language, timeFormat, timezone),
-  [times, i18n.language, timeFormat, timezone])
+const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: AvailabilityEditorProps) => {
+  const { t } = useTranslation('event')
 
   // Ref and state required to rerender but also access static version in callbacks
   const selectingRef = useRef<string[]>([])
@@ -64,24 +52,24 @@ const AvailabilityEditor = ({
       <div>
         <div className={styles.heatmap}>
           <div className={styles.timeLabels}>
-            {rows.map((row, i) =>
+            {table?.rows.map((row, i) =>
               <div className={styles.timeSpace} key={i}>
                 {row && <label className={styles.timeLabel}>
                   {row.label}
                 </label>}
               </div>
-            )}
+            ) ?? null}
           </div>
 
-          {columns.map((column, x) => <Fragment key={x}>
+          {table?.columns.map((column, x) => <Fragment key={x}>
             {column ? <div className={styles.dateColumn}>
               {column.header.dateLabel && <label className={styles.dateLabel}>{column.header.dateLabel}</label>}
               <label className={styles.dayLabel}>{column.header.weekdayLabel}</label>
 
               <div
                 className={styles.times}
-                data-border-left={x === 0 || columns.at(x - 1) === null}
-                data-border-right={x === columns.length - 1 || columns.at(x + 1) === null}
+                data-border-left={x === 0 || table.columns.at(x - 1) === null}
+                data-border-right={x === table.columns.length - 1 || table.columns.at(x + 1) === null}
               >
                 {column.cells.map((cell, y) => {
                   if (y === column.cells.length - 1) return null
@@ -132,7 +120,7 @@ const AvailabilityEditor = ({
                           }
                         }
                         setSelecting(found.flatMap(d => {
-                          const serialized = columns[d.x]?.cells[d.y]?.serialized
+                          const serialized = table.columns[d.x]?.cells[d.y]?.serialized
                           if (serialized && times.includes(serialized)) {
                             return [serialized]
                           }
@@ -144,7 +132,7 @@ const AvailabilityEditor = ({
                 })}
               </div>
             </div> : <div className={styles.columnSpacer} />}
-          </Fragment>)}
+          </Fragment>) ?? <Skeleton isSpecificDates={times[0].length === 13} />}
         </div>
       </div>
     </div>

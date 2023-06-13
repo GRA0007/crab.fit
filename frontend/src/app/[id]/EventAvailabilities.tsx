@@ -12,8 +12,10 @@ import SelectField from '/src/components/SelectField/SelectField'
 import { EventResponse, getPeople, PersonResponse, updatePerson } from '/src/config/api'
 import { useTranslation } from '/src/i18n/client'
 import timezones from '/src/res/timezones.json'
+import { useStore } from '/src/stores'
 import useRecentsStore from '/src/stores/recentsStore'
-import { expandTimes, makeClass } from '/src/utils'
+import useSettingsStore from '/src/stores/settingsStore'
+import { calculateTable, expandTimes, makeClass } from '/src/utils'
 
 import styles from './page.module.scss'
 
@@ -25,6 +27,8 @@ interface EventAvailabilitiesProps {
 const EventAvailabilities = ({ event, ...data }: EventAvailabilitiesProps) => {
   const { t, i18n } = useTranslation('event')
 
+  const timeFormat = useStore(useSettingsStore, state => state.timeFormat) ?? '12h'
+
   const [people, setPeople] = useState(data.people)
   const expandedTimes = useMemo(() => expandTimes(event.times), [event.times])
 
@@ -33,6 +37,28 @@ const EventAvailabilities = ({ event, ...data }: EventAvailabilitiesProps) => {
 
   const [tab, setTab] = useState<'group' | 'you'>('group')
   const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone)
+
+  // Web worker for calculating the heatmap table
+  const tableWorker = useMemo(() => (typeof window !== undefined && window.Worker) ? new Worker(new URL('/src/workers/calculateTable', import.meta.url)) : undefined, [])
+
+  // Calculate table (using a web worker if available)
+  const [table, setTable] = useState<ReturnType<typeof calculateTable>>()
+
+  useEffect(() => {
+    const args = { times: expandedTimes, locale: i18n.language, timeFormat, timezone }
+    if (tableWorker) {
+      tableWorker.postMessage(args)
+      setTable(undefined)
+    } else {
+      setTable(calculateTable(args))
+    }
+  }, [tableWorker, expandedTimes, i18n.language, timeFormat, timezone])
+
+  useEffect(() => {
+    if (tableWorker) {
+      tableWorker.onmessage = (e: MessageEvent<ReturnType<typeof calculateTable>>) => setTable(e.data)
+    }
+  }, [tableWorker])
 
   // Add this event to recents
   const addRecent = useRecentsStore(state => state.addRecent)
@@ -138,7 +164,7 @@ const EventAvailabilities = ({ event, ...data }: EventAvailabilitiesProps) => {
     {tab === 'group' ? <AvailabilityViewer
       times={expandedTimes}
       people={people}
-      timezone={timezone}
+      table={table}
     /> : user && <AvailabilityEditor
       times={expandedTimes}
       timezone={timezone}
@@ -152,6 +178,7 @@ const EventAvailabilities = ({ event, ...data }: EventAvailabilitiesProps) => {
             setUser({ ...user, availability: oldAvailability })
           })
       }}
+      table={table}
     />}
   </>
 }
