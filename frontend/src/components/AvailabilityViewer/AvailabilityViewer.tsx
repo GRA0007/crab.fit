@@ -1,6 +1,7 @@
 'use client'
 
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
+import { flip, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Temporal } from '@js-temporal/polyfill'
 
 import Content from '/src/components/Content/Content'
@@ -29,14 +30,16 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
   const [tempFocus, setTempFocus] = useState<string>()
   const [focusCount, setFocusCount] = useState<number>()
 
-  const wrapperRef = useRef<HTMLDivElement>(null)
   const [tooltip, setTooltip] = useState<{
-    x: number
-    y: number
+    anchor: HTMLDivElement
     available: string
     date: string
     people: string[]
   }>()
+  const { refs, floatingStyles } = useFloating({
+    middleware: [offset(6), flip(), shift()],
+    elements: { reference: tooltip?.anchor },
+  })
 
   // Calculate availabilities
   const { availabilities, min, max } = useMemo(() =>
@@ -90,11 +93,8 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
             } as React.CSSProperties}
             aria-label={peopleHere.join(', ')}
             onMouseEnter={e => {
-              const cellBox = e.currentTarget.getBoundingClientRect()
-              const wrapperBox = wrapperRef.current?.getBoundingClientRect() ?? { x: 0, y: 0 }
               setTooltip({
-                x: Math.round(cellBox.x - wrapperBox.x + cellBox.width / 2),
-                y: Math.round(cellBox.y - wrapperBox.y + cellBox.height) + 6,
+                anchor: e.currentTarget,
                 available: `${peopleHere.length} / ${filteredPeople.length} ${t('available')}`,
                 date: cell.label,
                 people: peopleHere,
@@ -158,7 +158,7 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
       </>}
     </Content>
 
-    <div className={styles.wrapper} ref={wrapperRef}>
+    <div className={styles.wrapper}>
       <div>
         <div className={styles.heatmap}>
           {useMemo(() => <div className={styles.timeLabels}>
@@ -176,7 +176,8 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
 
         {tooltip && <div
           className={styles.tooltip}
-          style={{ top: tooltip.y, left: tooltip.x }}
+          ref={refs.setFloating}
+          style={floatingStyles}
         >
           <h3>{tooltip.available}</h3>
           <span>{tooltip.date}</span>
