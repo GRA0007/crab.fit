@@ -83,6 +83,7 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
             key={y}
             className={makeClass(
               styles.time,
+              styles.nonEditable,
               (focusCount === undefined || focusCount === peopleHere.length) && highlight && (peopleHere.length === max || tempFocus) && peopleHere.length > 0 && styles.highlight,
             )}
             style={{

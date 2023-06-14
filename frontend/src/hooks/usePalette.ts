@@ -15,9 +15,13 @@ export const usePalette = (steps: number) => {
     })
       .format('rgba')
       .map(([r, g, b, a]) => color(r, g, b, a / 255))
-      .map(c => ({
-        string: c.hex('rgba'),
-        highlight: c.luminance() > .5 ? c.darker().hex('rgba') : c.brighter().hex('rgba'),
-      })),
+      .map(c => {
+        let highlight = c.luminance() > .5 ? c.darker() : c.brighter()
+        highlight = highlight.alpha(highlight.alpha() + .3)
+        return {
+          string: c.hex('rgba'),
+          highlight: highlight.hex('rgba'),
+        }
+      }),
   [steps, colormap])
 }
