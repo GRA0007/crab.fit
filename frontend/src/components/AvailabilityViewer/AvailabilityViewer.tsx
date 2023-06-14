@@ -74,7 +74,7 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
           if (tempFocus) {
             peopleHere = peopleHere.filter(p => p === tempFocus)
           }
-          const color = palette[tempFocus && peopleHere.length ? max : peopleHere.length - min]
+          const color = palette[(tempFocus && peopleHere.length) ? Math.min(max, palette.length - 1) : Math.max(peopleHere.length - min, 0)]
 
           return <div
             key={y}
