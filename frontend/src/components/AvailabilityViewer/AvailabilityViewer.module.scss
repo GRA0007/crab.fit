@@ -98,6 +98,7 @@
   background-origin: border-box;
   transition: background-color .1s;
   touch-action: none;
+  position: relative;
 
   border-top-width: 2px;
   border-top-style: solid;
@@ -106,6 +107,13 @@
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
+}
+
+.nonEditable:hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--highlight-color, rgba(0,0,0,.3));
 }
 
 .editable {
@@ -185,7 +193,6 @@
 
 .tooltip {
   position: absolute;
-  transform: translateX(-50%);
   border: 1px solid var(--text);
   border-radius: 3px;
   padding: 4px 8px;
