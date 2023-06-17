@@ -89,6 +89,7 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
                     key={y}
                     className={makeClass(styles.time, selecting.length === 0 && styles.editable)}
                     style={{
+                      touchAction: 'none',
                       backgroundColor: isSelected ? palette[1].string : palette[0].string,
                       '--hover-color': isSelected ? palette[0].highlight : palette[1].highlight,
                       ...cell.minute !== 0 && cell.minute !== 30 && { borderTopColor: 'transparent' },
