@@ -54,14 +54,15 @@
 
   "you": {
     "info": "Klicke und ziehe im Kalender unten, um deine Verfügbarkeit festzulegen",
-    "google_cal": {
-      "login": "Mit Google Kalender synchronisieren",
+    "select_all": "Alle wählen",
+    "select_none": "Keine wählen",
+
+    "google_cal": "Mit Google Kalender synchronisieren",
+    "outlook_cal": "Mit Outlook Kalender synchronisieren",
+    "integration": {
       "logout": "ausloggen",
-      "select_all": "Alle wählen",
-      "select_none": "Keine wählen",
       "info": "Durch den Import wird deine aktuelle Verfügbarkeit überschrieben",
       "button": "Verfügbarkeit importieren"
-    },
-    "outlook_cal": "Mit Outlook Kalender synchronisieren"
+    }
   }
 }

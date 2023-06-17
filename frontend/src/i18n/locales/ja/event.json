@@ -54,14 +54,15 @@
 
   "you": {
     "info": "下のカレンダーをクリック・ドラッグして、いつ予定が空いているかを登録しましょう",
-    "google_cal": {
-      "login": "Google カレンダーと同期",
+    "select_all": "すべて選択",
+    "select_none": "すべて選択解除",
+
+    "google_cal": "Google カレンダーと同期",
+    "outlook_cal": "Outlook カレンダーと同期",
+    "integration": {
       "logout": "ログアウト",
-      "select_all": "すべて選択",
-      "select_none": "すべて選択解除",
       "info": "インポートすると、現在の登録状況が上書きされます",
       "button": "空き具合をインポート"
-    },
-    "outlook_cal": "Outlook カレンダーと同期"
+    }
   }
 }

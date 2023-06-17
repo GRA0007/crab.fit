@@ -54,14 +54,15 @@
 
   "you": {
     "info": "Klik dan seret kalender di bawah ini untuk mengatur ketersediaan Anda",
-    "google_cal": {
-      "login": "Sinkronkan dengan Google Kalender",
+    "select_all": "Pilih semua",
+    "select_none": "Hapus semua",
+
+    "google_cal": "Sinkronkan dengan Google Kalender",
+    "outlook_cal": "Sinkronkan dengan Kalender Outlook",
+    "integration": {
       "logout": "keluar",
-      "select_all": "Pilih semua",
-      "select_none": "Hapus semua",
       "info": "Mengimpor akan menimpa ketersediaan Anda saat ini",
       "button": "Impor ketersediaan Anda"
-    },
-    "outlook_cal": "Sinkronkan dengan Kalender Outlook"
+    }
   }
 }

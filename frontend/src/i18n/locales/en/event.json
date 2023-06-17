@@ -54,14 +54,16 @@
 
   "you": {
     "info": "Click and drag the calendar below to set your availabilities",
-    "google_cal": {
-      "login": "Sync with Google Calendar",
+    "select_all": "Select all",
+    "select_none": "Select none",
+    "select_invert": "Invert selection",
+
+    "google_cal": "Sync with Google Calendar",
+    "outlook_cal": "Sync with Outlook Calendar",
+    "integration": {
       "logout": "log out",
-      "select_all": "Select all",
-      "select_none": "Select none",
       "info": "Importing will overwrite your current availability",
       "button": "Import availability"
-    },
-    "outlook_cal": "Sync with Outlook Calendar"
+    }
   }
 }

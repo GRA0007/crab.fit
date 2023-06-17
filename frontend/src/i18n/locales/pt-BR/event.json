@@ -54,14 +54,15 @@
 
   "you": {
     "info": "Clique e arraste para assinalar seu tempo livre no calendário",
-    "google_cal": {
-      "login": "Sincronizar com sua Agenda Google",
+    "select_all": "Selecionar todos",
+    "select_none": "Selecionar nenhum",
+
+    "google_cal": "Sincronizar com sua Agenda Google",
+    "outlook_cal": "Sincronizar com sua Agenda Outlook",
+    "integration": {
       "logout": "sair",
-      "select_all": "Selecionar todos",
-      "select_none": "Selecionar nenhum",
       "info": "Ao importar você substituirá sua disponibilidade atual",
       "button": "Importar horários disponíveis"
-    },
-    "outlook_cal": "Sincronizar com sua Agenda Outlook"
+    }
   }
 }
