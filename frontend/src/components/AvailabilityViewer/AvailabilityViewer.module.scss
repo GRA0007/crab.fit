@@ -15,14 +15,20 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  width: 40px;
   padding-right: 6px;
+  position: sticky;
+  left: 6px;
+  z-index: 5;
+  overflow: hidden;
+  padding-top: 1em;
+  pointer-events: none;
 }
 
 .timeSpace {
   height: 10px;
   position: relative;
   border-top: 2px solid transparent;
+  text-align: right;
 
   &.grey {
     background-origin: border-box;
@@ -37,13 +43,14 @@
 }
 
 .timeLabel {
-  display: block;
-  position: absolute;
-  top: -.7em;
+  display: inline-block;
+  transform: translateY(calc(-50% - 2px));
   font-size: 12px;
-  text-align: right;
   user-select: none;
-  width: 100%;
+  background: var(--background);
+  border-radius: .3em;
+  padding: .1em .2em;
+  white-space: nowrap;
 }
 
 .dateColumn {
@@ -97,7 +104,6 @@
   height: 10px;
   background-origin: border-box;
   transition: background-color .1s;
-  touch-action: none;
   position: relative;
 
   border-top-width: 2px;
