@@ -2,16 +2,18 @@ import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 
 import Button from '/src/components/Button/Button'
 import Content from '/src/components/Content/Content'
-import GoogleCalendar from '/src/components/GoogleCalendar/GoogleCalendar'
 import { usePalette } from '/src/hooks/usePalette'
 import { useTranslation } from '/src/i18n/client'
 import { calculateTable, makeClass, parseSpecificDate } from '/src/utils'
 
 import styles from './AvailabilityEditor.module.scss'
+import GoogleCalendar from './components/GoogleCalendar/GoogleCalendar'
+import RecentEvents from './components/RecentEvents/RecentEvents'
 import viewerStyles from '../AvailabilityViewer/AvailabilityViewer.module.scss'
 import Skeleton from '../AvailabilityViewer/components/Skeleton/Skeleton'
 
 interface AvailabilityEditorProps {
+  eventId?: string
   times: string[]
   timezone: string
   value: string[]
@@ -19,7 +21,7 @@ interface AvailabilityEditorProps {
   table?: ReturnType<typeof calculateTable>
 }
 
-const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: AvailabilityEditorProps) => {
+const AvailabilityEditor = ({ eventId, times, timezone, value = [], onChange, table }: AvailabilityEditorProps) => {
   const { t } = useTranslation('event')
 
   // Ref and state required to rerender but also access static version in callbacks
@@ -71,6 +73,11 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
           timezone={timezone}
           timeStart={parseSpecificDate(times[0])}
           timeEnd={parseSpecificDate(times[times.length - 1]).add({ minutes: 15 })}
+          times={times}
+          onImport={onChange}
+        />
+        <RecentEvents
+          eventId={eventId}
           times={times}
           onImport={onChange}
         />

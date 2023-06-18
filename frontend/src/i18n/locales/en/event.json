@@ -60,8 +60,10 @@
 
     "google_cal": "Sync with Google Calendar",
     "outlook_cal": "Sync with Outlook Calendar",
+    "recent_event": "Sync with a recent event",
     "integration": {
       "logout": "log out",
+      "close": "close",
       "info": "Importing will overwrite your current availability",
       "button": "Import availability"
     }

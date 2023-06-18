@@ -1,10 +1,14 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-interface RecentEvent {
+export interface RecentEvent {
   id: string
   name: string
   created_at: number
+  user?: {
+    name: string
+    availability: string[]
+  }
 }
 
 interface RecentsStore {
@@ -19,16 +23,12 @@ const useRecentsStore = create<RecentsStore>()(persist(
   set => ({
     recents: [],
 
-    addRecent: event => set(state => {
-      const recents = state.recents.filter(e => e.id !== event.id)
-      recents.unshift(event)
-      recents.length = Math.min(recents.length, 5)
-      return { recents }
-    }),
-    removeRecent: id => set(state => {
-      const recents = state.recents.filter(e => e.id !== id)
-      return { recents }
-    }),
+    addRecent: event => set(state => ({
+      recents: [{ ...state.recents.find(e => e.id === event.id), ...event }, ...state.recents.filter(e => e.id !== event.id)],
+    })),
+    removeRecent: id => set(state => ({
+      recents: state.recents.filter(e => e.id !== id),
+    })),
     clearRecents: () => set({ recents: [] }),
   }),
   {

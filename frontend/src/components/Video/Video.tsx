@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 import { useTranslation } from '/src/i18n/client'
-import video_thumb from '/src/res/video_thumb.jpg'
+import video_thumb from '/src/res/video_thumb.webp'
 
 import styles from './Video.module.scss'
 
@@ -34,7 +34,7 @@ const Video = () => {
         setIsPlaying(true)
       }}
     >
-      <img src={video_thumb.src} alt={t('video.button')} />
+      <img src={video_thumb.src} width={video_thumb.width} height={video_thumb.height} alt={t('video.button')} />
       <span>{t('video.button')}</span>
     </a>
   )

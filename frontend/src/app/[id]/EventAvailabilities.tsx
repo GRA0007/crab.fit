@@ -167,6 +167,7 @@ const EventAvailabilities = ({ event }: EventAvailabilitiesProps) => {
       people={people}
       table={table}
     /> : user && <AvailabilityEditor
+      eventId={event?.id}
       times={expandedTimes}
       timezone={timezone}
       value={user.availability}
@@ -174,6 +175,15 @@ const EventAvailabilities = ({ event }: EventAvailabilitiesProps) => {
         if (!event) return
         const oldAvailability = [...user.availability]
         setUser({ ...user, availability })
+        addRecent({
+          id: event.id,
+          name: event.name,
+          created_at: event.created_at,
+          user: availability.length > 0 ? {
+            name: user.name,
+            availability,
+          } : undefined,
+        })
         updatePerson(event.id, user.name, { availability }, password)
           .catch(e => {
             console.warn(e)

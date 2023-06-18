@@ -19,7 +19,7 @@ const Recents = () => {
   return recents?.length ? <Section id="recents">
     <Content>
       <h2>{t('home:recently_visited')}</h2>
-      {recents.map(event => (
+      {recents.slice(0, 5).map(event => (
         <Link className={styles.recent} href={`/${event.id}`} key={event.id}>
           <span className={styles.name}>{event.name}</span>
           <span
