@@ -135,3 +135,11 @@ a:focus-visible {
 *::-webkit-scrollbar-thumb:active {
   background: var(--secondary);
 }
+
+input[type=checkbox], input[type=radio] {
+  accent-color: var(--primary);
+}
+input[type=checkbox]:focus-visible, input[type=radio]:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}

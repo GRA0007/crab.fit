@@ -4,7 +4,7 @@ import { Temporal } from '@js-temporal/polyfill'
 
 import Button from '/src/components/Button/Button'
 import { useTranslation } from '/src/i18n/client'
-import googleLogo from '/src/res/google.svg'
+import GoogleIcon from '/src/res/GoogleIcon'
 import { allowUrlToWrap, parseSpecificDate } from '/src/utils'
 
 import styles from './GoogleCalendar.module.scss'
@@ -119,14 +119,14 @@ const GoogleCalendar = ({ timezone, timeStart, timeEnd, times, onImport }: Googl
       isLoading={canLoad}
       surfaceColor="#4286F5"
       shadowColor="#3367BD"
-      icon={<img aria-hidden="true" src={googleLogo.src} alt="" />}
+      icon={<GoogleIcon aria-hidden="true" />}
     >
       {t('you.google_cal')}
     </Button>}
 
     {calendars && <div className={styles.wrapper}>
       <p className={styles.title}>
-        <img src={googleLogo.src} alt="" className={styles.icon} />
+        <GoogleIcon className={styles.icon} />
         <strong>{t('you.google_cal')}</strong>
         (<button
           className={styles.linkButton}
@@ -148,17 +148,15 @@ const GoogleCalendar = ({ timezone, timeStart, timeEnd, times, onImport }: Googl
         >{t('you.select_none')}</button>}
       </div>
 
-      {calendars.map(calendar => <div key={calendar.id}>
+      {calendars.map(calendar => <div key={calendar.id} className={styles.item}>
         <input
-          className={styles.checkbox}
           type="checkbox"
           id={calendar.id}
-          color={calendar.color}
+          style={{ accentColor: calendar.color }}
           checked={calendar.isChecked}
-          onChange={() => setCalendars(calendars.map(c => c.id === calendar.id ? {...c, isChecked: !c.isChecked} : c))}
+          onChange={() => setCalendars(calendars.map(c => c.id === calendar.id ? { ...c, isChecked: !c.isChecked } : c))}
         />
-        <label htmlFor={calendar.id} style={{ '--cal-color': calendar.color } as React.CSSProperties} />
-        <label className={styles.calendarName} htmlFor={calendar.id} title={calendar.description}>{allowUrlToWrap(calendar.name)}</label>
+        <label className={styles.name} htmlFor={calendar.id} title={calendar.description}>{allowUrlToWrap(calendar.name)}</label>
       </div>)}
 
       <div className={styles.info}>{t('you.integration.info')}</div>
