@@ -43,11 +43,12 @@ export const StatsResponse = z.object({
 })
 export type StatsResponse = z.infer<typeof StatsResponse>
 
-const get = async <S extends z.Schema>(url: string, schema: S, auth?: string): Promise<ReturnType<S['parse']>> => {
+const get = async <S extends z.Schema>(url: string, schema: S, auth?: string, nextOptions?: NextFetchRequestConfig): Promise<ReturnType<S['parse']>> => {
   const res = await fetch(new URL(url, API_BASE), {
     headers: {
       ...auth && { Authorization: `Bearer ${auth}` },
-    }
+    },
+    next: nextOptions,
   })
     .catch(console.warn)
   if (!res?.ok) throw res
@@ -69,7 +70,7 @@ const post = async <S extends z.Schema>(url: string, schema: S, input: unknown, 
 }
 
 // Get
-export const getStats = () => get('/stats', StatsResponse)
+export const getStats = () => get('/stats', StatsResponse, undefined, { revalidate: 60 })
 export const getEvent = (eventId: string) => get(`/event/${eventId}`, EventResponse)
 export const getPeople = (eventId: string) => get(`/event/${eventId}/people`, PersonResponse.array())
 export const getPerson = (eventId: string, personName: string, password?: string) => get(`/event/${eventId}/people/${personName}`, PersonResponse, password && btoa(password))

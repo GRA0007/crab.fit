@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Trans } from 'react-i18next/TransWithoutContext'
 import Link from 'next/link'
 
@@ -31,7 +32,9 @@ const Page = async () => {
       <Content>
         <h2>{t('about.name')}</h2>
 
-        <Stats />
+        <Suspense>
+          <Stats />
+        </Suspense>
 
         <P><Trans i18nKey="about.content.p1" t={t} i18n={i18n}>_<br /><Link href="/how-to" rel="help">_</Link>_</Trans></P>
 
