@@ -44,16 +44,18 @@ const EventAvailabilities = ({ event }: EventAvailabilitiesProps) => {
   const [table, setTable] = useState<ReturnType<typeof calculateTable>>()
 
   useEffect(() => {
-    if (!tableWorker.current) {
-      tableWorker.current = window.Worker ? new Worker(new URL('/src/workers/calculateTable', import.meta.url)) : undefined
-    }
-    const args = { times: expandedTimes, locale: i18n.language, timeFormat, timezone }
-    if (tableWorker.current) {
-      tableWorker.current.onmessage = (e: MessageEvent<ReturnType<typeof calculateTable>>) => setTable(e.data)
-      tableWorker.current.postMessage(args)
-      setTable(undefined)
-    } else {
-      setTable(calculateTable(args))
+    if (event && expandTimes.length > 0) {
+      if (!tableWorker.current) {
+        tableWorker.current = window.Worker ? new Worker(new URL('/src/workers/calculateTable', import.meta.url)) : undefined
+      }
+      const args = { times: expandedTimes, locale: i18n.language, timeFormat, timezone }
+      if (tableWorker.current) {
+        tableWorker.current.onmessage = (e: MessageEvent<ReturnType<typeof calculateTable>>) => setTable(e.data)
+        tableWorker.current.postMessage(args)
+        setTable(undefined)
+      } else {
+        setTable(calculateTable(args))
+      }
     }
   }, [expandedTimes, i18n.language, timeFormat, timezone])
 
