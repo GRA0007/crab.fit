@@ -78,6 +78,7 @@ const Login = ({ eventId, user, onChange }: LoginProps) => {
         type="text"
         isInline
         required
+        disabled={!eventId}
         {...register('username')}
       />
 
@@ -85,13 +86,14 @@ const Login = ({ eventId, user, onChange }: LoginProps) => {
         label={t('form.password')}
         type="password"
         isInline
+        disabled={!eventId}
         {...register('password')}
       />
 
       <Button
         type="submit"
         isLoading={isLoading}
-        disabled={isLoading}
+        disabled={isLoading || !eventId}
       >{t('form.button')}</Button>
     </form>
     <Error onClose={() => setError(undefined)}>{error}</Error>
