@@ -39,4 +39,10 @@
   justify-content: center;
   margin-left: 16px;
   padding: 0;
+  border-radius: .2em;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
 }

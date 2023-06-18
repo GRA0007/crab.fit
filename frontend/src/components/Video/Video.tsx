@@ -17,7 +17,7 @@ const Video = () => {
         width="560"
         height="315"
         src="https://www.youtube.com/embed/yXGd4VXZzcY?modestbranding=1&rel=0&autoplay=1"
-        title={t<string>('video.title')}
+        title={t('video.title')}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -34,7 +34,7 @@ const Video = () => {
         setIsPlaying(true)
       }}
     >
-      <img src={video_thumb.src} alt={t<string>('video.button')} />
+      <img src={video_thumb.src} alt={t('video.button')} />
       <span>{t('video.button')}</span>
     </a>
   )

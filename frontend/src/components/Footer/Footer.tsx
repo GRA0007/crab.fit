@@ -23,7 +23,7 @@ const Footer = async ({ isSmall }: FooterProps) => {
     <span>{t('donate.info')}</span>
     <Button
       isSmall
-      title={t<string>('donate.title')}
+      title={t('donate.title')}
       href="https://ko-fi.com/A06841WZ"
       target="_blank"
       rel="noreferrer noopener payment"

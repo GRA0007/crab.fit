@@ -15,7 +15,7 @@ const defaultValues = {
 }
 
 interface LoginProps {
-  eventId: string
+  eventId?: string
   user: PersonResponse | undefined
   onChange: (user: PersonResponse | undefined, password?: string) => void
 }
@@ -50,6 +50,8 @@ const Login = ({ eventId, user, onChange }: LoginProps) => {
     setError(undefined)
 
     try {
+      if (!eventId) throw 'Event ID not set'
+
       const resUser = await getPerson(eventId, username, password || undefined)
       onChange(resUser, password || undefined)
       reset()

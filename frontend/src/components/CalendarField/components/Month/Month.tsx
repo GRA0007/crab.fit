@@ -55,13 +55,13 @@ const Month = ({ value, onChange }: MonthProps) => {
   return <>
     {useMemo(() => <div className={styles.header}>
       <Button
-        title={t<string>('form.dates.tooltips.previous')}
+        title={t('form.dates.tooltips.previous')}
         onClick={() => setPage(page.subtract({ months: 1 }))}
         icon={<ChevronLeft />}
       />
       <span>{page.toPlainDate({ day: 1 }).toLocaleString(i18n.language, { month: 'long', year: 'numeric' })}</span>
       <Button
-        title={t<string>('form.dates.tooltips.next')}
+        title={t('form.dates.tooltips.next')}
         onClick={() => setPage(page.add({ months: 1 }))}
         icon={<ChevronRight />}
       />

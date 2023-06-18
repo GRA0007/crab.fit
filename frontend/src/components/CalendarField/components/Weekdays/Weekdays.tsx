@@ -56,7 +56,7 @@ const Weekdays = ({ value, onChange }: WeekdaysProps) => {
           ) && styles.selected,
         )}
         key={day.toString()}
-        title={day.equals(Temporal.Now.plainDateISO()) ? t<string>('form.dates.tooltips.today') : undefined}
+        title={day.equals(Temporal.Now.plainDateISO()) ? t('form.dates.tooltips.today') : undefined}
         onKeyDown={e => {
           if (e.key === ' ' || e.key === 'Enter') {
             if (value.includes(day.dayOfWeek.toString())) {

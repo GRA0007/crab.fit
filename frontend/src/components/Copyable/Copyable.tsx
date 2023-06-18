@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useTranslation } from '/src/i18n/client'
 import { makeClass } from '/src/utils'
@@ -16,6 +16,9 @@ const Copyable = ({ children, className, ...props }: CopyableProps) => {
 
   const [copied, setCopied] = useState<React.ReactNode>()
 
+  const [canCopy, setCanCopy] = useState(false)
+  useEffect(() => { setCanCopy('clipboard' in navigator) }, [])
+
   return <p
     onClick={() => navigator.clipboard?.writeText(children)
       .then(() => {
@@ -24,8 +27,8 @@ const Copyable = ({ children, className, ...props }: CopyableProps) => {
       })
       .catch(e => console.error('Failed to copy', e))
     }
-    title={'clipboard' in navigator ? t<string>('nav.title') : undefined}
-    className={makeClass(className, 'clipboard' in navigator && styles.copyable)}
+    title={canCopy ? t('nav.title') : undefined}
+    className={makeClass(className, canCopy && styles.copyable)}
     {...props}
   >{copied ?? children}</p>
 }
