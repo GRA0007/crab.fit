@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 
 import Button from '/src/components/Button/Button'
 import Content from '/src/components/Content/Content'
@@ -36,13 +36,33 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
   // Create the colour palette
   const palette = usePalette(2)
 
+  // Selection control
+  const selectAll = useCallback(() => onChange(times), [onChange, times])
+  const selectNone = useCallback(() => onChange([]), [onChange])
+  const selectInvert = useCallback(() => onChange(times.filter(t => !value.includes(t))), [onChange, times, value])
+
+  // Selection keyboard shortcuts
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'a' || e.key === 'i')) {
+        e.preventDefault()
+        if (e.shiftKey && e.key === 'a') selectNone()
+        else if (e.key === 'a') selectAll()
+        else selectInvert()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown)
+    return () => document.removeEventListener('keydown', handleKeydown)
+  }, [selectAll, selectNone, selectInvert])
+
   return <>
     <Content isCentered>
       <div>{t('you.info')}</div>
       <div className={styles.selectionControls}>
-        <Button isSmall onClick={() => onChange(times)}>{t('you.select_all')}</Button>
-        <Button isSmall onClick={() => onChange([])}>{t('you.select_none')}</Button>
-        <Button isSmall onClick={() => onChange(times.filter(t => !value.includes(t)))}>{t('you.select_invert')}</Button>
+        <Button isSmall onClick={selectAll} title="Ctrl + A (⌘ A)">{t('you.select_all')}</Button>
+        <Button isSmall onClick={selectNone} title="Ctrl + Shift + A (⌘ ⇧ A)">{t('you.select_none')}</Button>
+        <Button isSmall onClick={selectInvert} title="Ctrl + I (⌘ I)">{t('you.select_invert')}</Button>
       </div>
     </Content>
     {times[0].length === 13 && <Content>
