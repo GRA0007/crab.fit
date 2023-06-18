@@ -57,6 +57,7 @@
     "select_all": "Select all",
     "select_none": "Select none",
     "select_invert": "Invert selection",
+
     "google_cal": "Sync with Google Calendar",
     "outlook_cal": "Sync with Outlook Calendar",
     "integration": {
