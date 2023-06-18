@@ -54,14 +54,15 @@
 
   "you": {
     "info": "Clicca e trascina nel calendario qui sotto per impostare la tua disponibilità",
-    "google_cal": {
-      "login": "Sincronizza con il calendario Google",
+    "select_all": "Seleziona tutto",
+    "select_none": "Seleziona nessuno",
+
+    "google_cal": "Sincronizza con il calendario Google",
+    "outlook_cal": "Sincronizza con il calendario Outlook",
+    "integration": {
       "logout": "Esci",
-      "select_all": "Seleziona tutto",
-      "select_none": "Seleziona nessuno",
       "info": "L'importazione sovrascriverà la tua disponibilità attuale",
       "button": "Importa la disponibilità"
-    },
-    "outlook_cal": "Sincronizza con il calendario Outlook"
+    }
   }
 }

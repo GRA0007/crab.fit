@@ -54,14 +54,15 @@
 
   "you": {
     "info": "Haga clic y arrastre el calendario a continuación para configurar sus disponibilidades",
-    "google_cal": {
-      "login": "Sincronizar con Google Calendar",
+    "select_all": "Seleccionar todo",
+    "select_none": "Seleccionar ninguno",
+
+    "google_cal": "Sincronizar con Google Calendar",
+    "outlook_cal": "Sincronizar con el calendario de Outlook",
+    "integration": {
       "logout": "cerrar sesión",
-      "select_all": "Seleccionar todo",
-      "select_none": "Seleccionar ninguno",
       "info": "La importación sobrescribirá su disponibilidad actual",
       "button": "Disponibilidad de importación"
-    },
-    "outlook_cal": "Sincronizar con el calendario de Outlook"
+    }
   }
 }

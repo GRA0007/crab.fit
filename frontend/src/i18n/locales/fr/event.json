@@ -54,14 +54,15 @@
 
   "you": {
     "info": "Cliquez et faites glisser le calendrier ci-dessous pour définir vos disponibilités",
-    "google_cal": {
-      "login": "Synchroniser avec Google Agenda",
+    "select_all": "Tout sélectionner",
+    "select_none": "Tout déselectionner",
+
+    "google_cal": "Synchroniser avec Google Agenda",
+    "outlook_cal": "Synchroniser avec le calendrier Outlook",
+    "integration": {
       "logout": "déconnexion",
-      "select_all": "Tout sélectionner",
-      "select_none": "Tout déselectionner",
       "info": "L'importation écrasera vos disponibilités actuelles",
       "button": "Importer les disponibilités"
-    },
-    "outlook_cal": "Synchroniser avec le calendrier Outlook"
+    }
   }
 }

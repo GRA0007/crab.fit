@@ -54,14 +54,15 @@
 
   "you": {
     "info": "사용 가능 여부를 설정하려면 아래 캘린더를 클릭하고 드래그하세요",
-    "google_cal": {
-      "login": "Google 캘린더와 동기화합니다",
+    "select_all": "모두 선택",
+    "select_none": "모두 선택 해제",
+
+    "google_cal": "Google 캘린더와 동기화합니다",
+    "outlook_cal": "아웃룩 캘린더와 동기화합니다",
+    "integration": {
       "logout": "로그 아웃",
-      "select_all": "모두 선택",
-      "select_none": "모두 선택 해제",
       "info": "가져 오면 현재 사용 가능 여부를 덮어 씁니다",
       "button": "가용성 가져 오기"
-    },
-    "outlook_cal": "아웃룩 캘린더와 동기화합니다"
+    }
   }
 }

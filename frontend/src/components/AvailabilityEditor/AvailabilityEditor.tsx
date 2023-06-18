@@ -1,12 +1,14 @@
-import { Fragment, useCallback, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 
+import Button from '/src/components/Button/Button'
 import Content from '/src/components/Content/Content'
 import GoogleCalendar from '/src/components/GoogleCalendar/GoogleCalendar'
 import { usePalette } from '/src/hooks/usePalette'
 import { useTranslation } from '/src/i18n/client'
 import { calculateTable, makeClass, parseSpecificDate } from '/src/utils'
 
-import styles from '../AvailabilityViewer/AvailabilityViewer.module.scss'
+import styles from './AvailabilityEditor.module.scss'
+import viewerStyles from '../AvailabilityViewer/AvailabilityViewer.module.scss'
 import Skeleton from '../AvailabilityViewer/components/Skeleton/Skeleton'
 
 interface AvailabilityEditorProps {
@@ -34,8 +36,35 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
   // Create the colour palette
   const palette = usePalette(2)
 
+  // Selection control
+  const selectAll = useCallback(() => onChange(times), [onChange, times])
+  const selectNone = useCallback(() => onChange([]), [onChange])
+  const selectInvert = useCallback(() => onChange(times.filter(t => !value.includes(t))), [onChange, times, value])
+
+  // Selection keyboard shortcuts
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'a' || e.key === 'i')) {
+        e.preventDefault()
+        if (e.shiftKey && e.key === 'a') selectNone()
+        else if (e.key === 'a') selectAll()
+        else selectInvert()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown)
+    return () => document.removeEventListener('keydown', handleKeydown)
+  }, [selectAll, selectNone, selectInvert])
+
   return <>
-    <Content isCentered>{t('you.info')}</Content>
+    <Content isCentered>
+      <div>{t('you.info')}</div>
+      <div className={styles.selectionControls}>
+        <Button isSmall onClick={selectAll} title="Ctrl + A (⌘ A)">{t('you.select_all')}</Button>
+        <Button isSmall onClick={selectNone} title="Ctrl + Shift + A (⌘ ⇧ A)">{t('you.select_none')}</Button>
+        <Button isSmall onClick={selectInvert} title="Ctrl + I (⌘ I)">{t('you.select_invert')}</Button>
+      </div>
+    </Content>
     {times[0].length === 13 && <Content>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
         <GoogleCalendar
@@ -48,13 +77,13 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
       </div>
     </Content>}
 
-    <div className={styles.wrapper}>
+    <div className={viewerStyles.wrapper}>
       <div>
-        <div className={styles.heatmap}>
-          <div className={styles.timeLabels}>
+        <div className={viewerStyles.heatmap}>
+          <div className={viewerStyles.timeLabels}>
             {table?.rows.map((row, i) =>
-              <div className={styles.timeSpace} key={i}>
-                {row && <label className={styles.timeLabel}>
+              <div className={viewerStyles.timeSpace} key={i}>
+                {row && <label className={viewerStyles.timeLabel}>
                   {row.label}
                 </label>}
               </div>
@@ -62,12 +91,12 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
           </div>
 
           {table?.columns.map((column, x) => <Fragment key={x}>
-            {column ? <div className={styles.dateColumn}>
-              {column.header.dateLabel && <label className={styles.dateLabel}>{column.header.dateLabel}</label>}
-              <label className={styles.dayLabel}>{column.header.weekdayLabel}</label>
+            {column ? <div className={viewerStyles.dateColumn}>
+              {column.header.dateLabel && <label className={viewerStyles.dateLabel}>{column.header.dateLabel}</label>}
+              <label className={viewerStyles.dayLabel}>{column.header.weekdayLabel}</label>
 
               <div
-                className={styles.times}
+                className={viewerStyles.times}
                 data-border-left={x === 0 || table.columns.at(x - 1) === null}
                 data-border-right={x === table.columns.length - 1 || table.columns.at(x + 1) === null}
               >
@@ -75,7 +104,7 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
                   if (y === column.cells.length - 1) return null
 
                   if (!cell) return <div
-                    className={makeClass(styles.timeSpace, styles.grey)}
+                    className={makeClass(viewerStyles.timeSpace, viewerStyles.grey)}
                     key={y}
                     title={t<string>('greyed_times')}
                   />
@@ -87,7 +116,7 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
 
                   return <div
                     key={y}
-                    className={makeClass(styles.time, selecting.length === 0 && styles.editable)}
+                    className={makeClass(viewerStyles.time, selecting.length === 0 && viewerStyles.editable)}
                     style={{
                       touchAction: 'none',
                       backgroundColor: isSelected ? palette[1].string : palette[0].string,
@@ -132,7 +161,7 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
                   />
                 })}
               </div>
-            </div> : <div className={styles.columnSpacer} />}
+            </div> : <div className={viewerStyles.columnSpacer} />}
           </Fragment>) ?? <Skeleton isSpecificDates={times[0].length === 13} />}
         </div>
       </div>
