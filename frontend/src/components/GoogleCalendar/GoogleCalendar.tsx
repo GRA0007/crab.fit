@@ -121,18 +121,18 @@ const GoogleCalendar = ({ timezone, timeStart, timeEnd, times, onImport }: Googl
       shadowColor="#3367BD"
       icon={<img aria-hidden="true" src={googleLogo.src} alt="" />}
     >
-      {t('you.google_cal.login')}
+      {t('you.google_cal')}
     </Button>}
 
     {calendars && <div className={styles.wrapper}>
       <p className={styles.title}>
         <img src={googleLogo.src} alt="" className={styles.icon} />
-        <strong>{t('you.google_cal.login')}</strong>
+        <strong>{t('you.google_cal')}</strong>
         (<button
           className={styles.linkButton}
           type="button"
           onClick={() => setCanLoad(false)}
-        >{t('you.google_cal.logout')}</button>)
+        >{t('you.integration.logout')}</button>)
       </p>
 
       <div className={styles.options}>
@@ -140,12 +140,12 @@ const GoogleCalendar = ({ timezone, timeStart, timeEnd, times, onImport }: Googl
           className={styles.linkButton}
           type="button"
           onClick={() => setCalendars(calendars.map(c => ({ ...c, isChecked: true })))}
-        >{t('event:you.google_cal.select_all')}</button>}
+        >{t('you.select_all')}</button>}
         {calendars.every(c => c.isChecked) && <button
           className={styles.linkButton}
           type="button"
           onClick={() => setCalendars(calendars.map(c => ({ ...c, isChecked: false })))}
-        >{t('event:you.google_cal.select_none')}</button>}
+        >{t('you.select_none')}</button>}
       </div>
 
       {calendars.map(calendar => <div key={calendar.id}>
@@ -161,13 +161,13 @@ const GoogleCalendar = ({ timezone, timeStart, timeEnd, times, onImport }: Googl
         <label className={styles.calendarName} htmlFor={calendar.id} title={calendar.description}>{allowUrlToWrap(calendar.name)}</label>
       </div>)}
 
-      <div className={styles.info}>{t('you.google_cal.info')}</div>
+      <div className={styles.info}>{t('you.integration.info')}</div>
       <Button
         isSmall
         isLoading={isLoadingAvailability}
         disabled={isLoadingAvailability}
         onClick={() => importAvailability()}
-      >{t('you.google_cal.button')}</Button>
+      >{t('you.integration.button')}</Button>
     </div>}
 
     {/* Load google api scripts */}
