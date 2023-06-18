@@ -70,7 +70,7 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
           if (!cell) return <div
             className={makeClass(styles.timeSpace, styles.grey)}
             key={y}
-            title={t<string>('greyed_times')}
+            title={t('greyed_times')}
           />
 
           let peopleHere = availabilities.find(a => a.date === cell.serialized)?.people ?? []
@@ -106,7 +106,7 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
         })}
       </div>
     </div> : <div className={styles.columnSpacer} />}
-  </Fragment>) ?? <Skeleton isSpecificDates={times[0].length === 13} />, [
+  </Fragment>) ?? <Skeleton isSpecificDates={times[0]?.length === 13} />, [
     availabilities,
     table?.columns,
     highlight,

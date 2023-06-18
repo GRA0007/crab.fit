@@ -24,7 +24,7 @@ const Legend = ({ min, max, total, palette, onSegmentFocus }: LegendProps) => {
       className={styles.bar}
       onMouseOut={() => onSegmentFocus(undefined)}
       onClick={() => setHighlight?.(!highlight)}
-      title={t<string>('group.legend_tooltip')}
+      title={t('group.legend_tooltip')}
     >
       {[...Array(max + 1 - min).keys()].map(i => i + min).map((i, j) =>
         <div

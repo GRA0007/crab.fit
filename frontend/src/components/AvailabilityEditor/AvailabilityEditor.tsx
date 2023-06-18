@@ -65,7 +65,7 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
         <Button isSmall onClick={selectInvert} title="Ctrl + I (⌘ I)">{t('you.select_invert')}</Button>
       </div>
     </Content>
-    {times[0].length === 13 && <Content>
+    {times[0]?.length === 13 && <Content>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
         <GoogleCalendar
           timezone={timezone}
@@ -106,7 +106,7 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
                   if (!cell) return <div
                     className={makeClass(viewerStyles.timeSpace, viewerStyles.grey)}
                     key={y}
-                    title={t<string>('greyed_times')}
+                    title={t('greyed_times')}
                   />
 
                   const isSelected = (
@@ -162,7 +162,7 @@ const AvailabilityEditor = ({ times, timezone, value = [], onChange, table }: Av
                 })}
               </div>
             </div> : <div className={viewerStyles.columnSpacer} />}
-          </Fragment>) ?? <Skeleton isSpecificDates={times[0].length === 13} />}
+          </Fragment>) ?? <Skeleton isSpecificDates={times[0]?.length === 13} />}
         </div>
       </div>
     </div>

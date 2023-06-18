@@ -6,7 +6,7 @@ import { Temporal } from '@js-temporal/polyfill'
  * @param timezone The target timezone
  */
 export const convertTimesToDates = (times: string[], timezone: string): Temporal.ZonedDateTime[] => {
-  const isSpecificDates = times[0].length === 13
+  const isSpecificDates = times[0]?.length === 13
 
   return times.map(time => isSpecificDates ?
     parseSpecificDate(time).withTimeZone(timezone)

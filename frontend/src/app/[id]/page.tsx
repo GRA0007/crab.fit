@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Trans } from 'react-i18next/TransWithoutContext'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -5,7 +6,7 @@ import { Temporal } from '@js-temporal/polyfill'
 
 import Content from '/src/components/Content/Content'
 import Copyable from '/src/components/Copyable/Copyable'
-import { getEvent, getPeople } from '/src/config/api'
+import { getEvent } from '/src/config/api'
 import { useTranslation } from '/src/i18n/server'
 import { makeClass, relativeTimeFormat } from '/src/utils'
 
@@ -27,12 +28,19 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 
 const Page = async ({ params }: PageProps) => {
   const event = await getEvent(params.id).catch(() => undefined)
-  const people = await getPeople(params.id).catch(() => undefined)
-  if (!event || !people) notFound()
+  if (!event) notFound()
 
   const { t, i18n } = await useTranslation(['common', 'event'])
 
   return <>
+    <Suspense
+      fallback={<Content>
+        <h1 className={styles.name}><span className={styles.bone} /></h1>
+        <div className={styles.date}><span className={styles.bone} /></div>
+        <div className={styles.info}><span className={styles.bone} style={{ width: '20em' }} /></div>
+        <div className={styles.info}><span className={styles.bone} style={{ width: '20em' }} /></div>
+      </Content>}
+    >
     <Content>
       <h1 className={styles.name}>{event.name}</h1>
       <span
@@ -44,11 +52,12 @@ const Page = async ({ params }: PageProps) => {
         {`https://crab.fit/${event.id}`}
       </Copyable>
       <p className={makeClass(styles.info, styles.noPrint)}>
-        <Trans i18nKey="event:nav.shareinfo" t={t} i18n={i18n}>_<a href={`mailto:?subject=${encodeURIComponent(t<string>('event:nav.email_subject', { event_name: event.name }))}&body=${encodeURIComponent(`${t('event:nav.email_body')} https://crab.fit/${event.id}`)}`}>_</a>_</Trans>
+        <Trans i18nKey="event:nav.shareinfo" t={t} i18n={i18n}>_<a href={`mailto:?subject=${encodeURIComponent(t('event:nav.email_subject', { event_name: event.name }))}&body=${encodeURIComponent(`${t('event:nav.email_body')} https://crab.fit/${event.id}`)}`}>_</a>_</Trans>
       </p>
     </Content>
+    </Suspense>
 
-    <EventAvailabilities event={event} people={people} />
+    <EventAvailabilities event={event} />
   </>
 }
 

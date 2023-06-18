@@ -56,7 +56,7 @@ const Settings = () => {
       type="button"
       className={makeClass(styles.openButton, isOpen && styles.open)}
       onClick={() => setIsOpen(!isOpen)}
-      title={t<string>('options.name')}
+      title={t('options.name')}
     ><SettingsIcon /></button>
 
     <dialog

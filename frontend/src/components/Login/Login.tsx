@@ -15,7 +15,7 @@ const defaultValues = {
 }
 
 interface LoginProps {
-  eventId: string
+  eventId?: string
   user: PersonResponse | undefined
   onChange: (user: PersonResponse | undefined, password?: string) => void
 }
@@ -50,6 +50,8 @@ const Login = ({ eventId, user, onChange }: LoginProps) => {
     setError(undefined)
 
     try {
+      if (!eventId) throw 'Event ID not set'
+
       const resUser = await getPerson(eventId, username, password || undefined)
       onChange(resUser, password || undefined)
       reset()
@@ -76,6 +78,7 @@ const Login = ({ eventId, user, onChange }: LoginProps) => {
         type="text"
         isInline
         required
+        disabled={!eventId}
         {...register('username')}
       />
 
@@ -83,13 +86,14 @@ const Login = ({ eventId, user, onChange }: LoginProps) => {
         label={t('form.password')}
         type="password"
         isInline
+        disabled={!eventId}
         {...register('password')}
       />
 
       <Button
         type="submit"
         isLoading={isLoading}
-        disabled={isLoading}
+        disabled={isLoading || !eventId}
       >{t('form.button')}</Button>
     </form>
     <Error onClose={() => setError(undefined)}>{error}</Error>

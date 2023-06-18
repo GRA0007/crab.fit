@@ -69,3 +69,12 @@
   opacity: .5;
   cursor: not-allowed;
 }
+
+.bone {
+  width: 12em;
+  max-width: 100%;
+  background-color: var(--loading);
+  border-radius: 3px;
+  height: 1em;
+  display: inline-block;
+}

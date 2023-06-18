@@ -5,13 +5,10 @@
   grid-gap: 18px;
 
   @media (max-width: 500px) {
-    grid-template-columns: 1fr 1fr;
-  }
-  @media (max-width: 400px) {
     grid-template-columns: 1fr;
 
     & div:last-child {
-      --btn-width: 100%;
+      width: 100%;
     }
   }
 }
