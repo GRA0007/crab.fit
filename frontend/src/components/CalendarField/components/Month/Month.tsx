@@ -121,7 +121,7 @@ const Month = ({ value, onChange }: MonthProps) => {
     </div>
 
     {hasPastDates && <div className={styles.warningLabel}>
-      <AlertTriangle size='1.2em' />
+      <AlertTriangle size="1.2em" />
       <span>{t('form.dates.warnings.date_in_past')}</span>
     </div>}
   </>

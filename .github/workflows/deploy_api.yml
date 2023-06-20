@@ -12,6 +12,7 @@ jobs:
   build-and-push:
     name: Deploy to Fly.io
     runs-on: ubuntu-latest
+    if: github.repository == 'GRA0007/crab.fit'
 
     defaults:
       run:

@@ -16,6 +16,7 @@ jobs:
   deploy:
     name: Deploy to Vercel
     runs-on: ubuntu-latest
+    if: github.repository == 'GRA0007/crab.fit'
 
     defaults:
       run:
