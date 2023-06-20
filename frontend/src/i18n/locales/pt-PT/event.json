@@ -56,11 +56,14 @@
     "info": "Clica e arrasta no calendário abaixo para definires a tua disponibilidade.",
     "select_all": "Selecionar tudo",
     "select_none": "Selecionar nenhum",
+    "select_invert": "Inverter selecção",
 
     "google_cal": "Sincronizar com o Calendário Google",
     "outlook_cal": "Sincronizar com o Calendário do Outlook",
+    "recent_event": "Sincronizar com evento recente",
     "integration": {
       "logout": "terminar sessão",
+      "close": "Fechar",
       "info": "Importar substituirá a tua disponibilidade atual",
       "button": "Importar disponibilidade"
     }
