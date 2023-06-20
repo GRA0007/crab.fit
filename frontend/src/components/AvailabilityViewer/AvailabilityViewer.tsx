@@ -103,10 +103,9 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
             }}
             onClick={() => {
               const clipboardMessage = `${t('group.clipboard_message', { date: cell.label })}:\n${peopleHere.join(', ')}`
-              navigator.clipboard.writeText(clipboardMessage);
+              navigator.clipboard.writeText(clipboardMessage)
             }}
             onMouseLeave={() => setTooltip(undefined)}
-            
           />
         })}
       </div>
@@ -135,6 +134,7 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
       />
 
       <span className={styles.info}>{t('group.info1')}</span>
+
       {people.length > 1 && <>
         <span className={styles.info}>{t('group.info2')}</span>
         <div className={styles.people}>

@@ -49,13 +49,7 @@
   "group": {
     "legend_tooltip": "Clique para destacar o melhor tempo",
     "info1": "Passe o mouse ou toque o calendário pra ver quem está livre",
-    "info2": "Clique nos nomes pra ver a disponibilidade de cada um",
-    "info3": "Clica num slot para copiar uma lista das pessoas disponíveis nesse horário"
-  },
-  
-  "copy": {
-    "alert": "Lista de pessoas disponíveis copiada!",
-    "message": "Pessoas diponíveis a "
+    "info2": "Clique nos nomes pra ver a disponibilidade de cada um"
   },
 
   "you": {
