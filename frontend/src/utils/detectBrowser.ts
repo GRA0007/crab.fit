@@ -20,6 +20,7 @@ export const detectBrowser = () => {
   const isChrome = !!window.chrome
 
   // Edge (based on chromium) detection
+  // eslint-disable-next-line eqeqeq
   const isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1)
 
   if (isEdgeChromium) return 'edge_chromium'
