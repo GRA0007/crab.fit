@@ -49,7 +49,12 @@
   "group": {
     "legend_tooltip": "Clica para realçar as horas com maior disponibilidade",
     "info1": "Passa o cursor ou clica no calendário abaixo para ver quem está disponível",
-    "info2": "Clica nos nomes abaixo para ver a disponibilidade de cada pessoa"
+    "info2": "Clica nos nomes abaixo para ver a disponibilidade de cada pessoa",
+    "info3": "Clica num slot para copiar uma lista das pessoas disponíveis nesse horário"
+  },
+  "copy": {
+    "alert": "Lista de pessoas disponíveis copiada!",
+    "message": "Pessoas diponíveis a "
   },
 
   "you": {
