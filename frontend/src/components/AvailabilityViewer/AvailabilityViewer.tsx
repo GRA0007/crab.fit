@@ -101,15 +101,9 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
                 people: peopleHere,
               })
             }}
-            onMouseDown={e => {
-              setTooltip({
-                anchor: e.currentTarget,
-                available: `${peopleHere.length} / ${filteredPeople.length} ${t('available')}`,
-                date: cell.label,
-                people: peopleHere,
-              })
-              let text2Clipboard = t("copy.message") + cell.label + ":\n" + peopleHere.join(';\n') + ";";
-              navigator.clipboard.writeText(text2Clipboard);
+            onClick={() => {
+              const clipboardMessage = `${t('group.clipboard_message', { date: cell.label })}:\n${peopleHere.join(', ')}`
+              navigator.clipboard.writeText(clipboardMessage);
             }}
             onMouseLeave={() => setTooltip(undefined)}
             
@@ -141,7 +135,6 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
       />
 
       <span className={styles.info}>{t('group.info1')}</span>
-      <span className={styles.info}>{t('group.info3')}</span>
       {people.length > 1 && <>
         <span className={styles.info}>{t('group.info2')}</span>
         <div className={styles.people}>

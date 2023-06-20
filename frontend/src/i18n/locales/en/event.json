@@ -48,15 +48,9 @@
 
   "group": {
     "legend_tooltip": "Click to highlight highest availability",
-    "info1": "Hover or tap the calendar below to see who is available",
+    "info1": "Hover or tap the calendar below to see who is available, and click to copy details about a time slot",
     "info2": "Click the names below to view people individually",
-    "info3": "Click on a time slot to copy a list of people who are available then"
-    
-  },
-
-  "copy": {
-    "alert": "List of available people copied to clipboard!",
-    "message": "List of available people at "
+    "clipboard_message": "People available on {{date}}"
   },
 
   "you": {
