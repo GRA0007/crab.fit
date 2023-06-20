@@ -48,8 +48,9 @@
 
   "group": {
     "legend_tooltip": "Click to highlight highest availability",
-    "info1": "Hover or tap the calendar below to see who is available",
-    "info2": "Click the names below to view people individually"
+    "info1": "Hover or tap the calendar below to see who is available, and click to copy details about a time slot",
+    "info2": "Click the names below to view people individually",
+    "clipboard_message": "People available on {{date}}"
   },
 
   "you": {

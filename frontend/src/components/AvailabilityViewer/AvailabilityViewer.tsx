@@ -101,6 +101,10 @@ const AvailabilityViewer = ({ times, people, table }: AvailabilityViewerProps) =
                 people: peopleHere,
               })
             }}
+            onClick={() => {
+              const clipboardMessage = `${t('group.clipboard_message', { date: cell.label })}:\n${peopleHere.join(', ')}`
+              navigator.clipboard.writeText(clipboardMessage)
+            }}
             onMouseLeave={() => setTooltip(undefined)}
           />
         })}
