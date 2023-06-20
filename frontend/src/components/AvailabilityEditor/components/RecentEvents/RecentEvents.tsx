@@ -22,12 +22,10 @@ const RecentEvents = ({ eventId, times, onImport }: RecentEventsProps) => {
   const { t, i18n } = useTranslation('event')
 
   const allRecents = useStore(useRecentsStore, state => state.recents)
-  const recents = useMemo(() =>
-    allRecents
-      ?.filter(hasAvailability)
-      .filter(e => e.id !== eventId && e.user.availability.some(a => times.includes(a))) ?? [],
-    [allRecents]
-  )
+  const recents = useMemo(() => allRecents
+    ?.filter(hasAvailability)
+    .filter(e => e.id !== eventId && e.user.availability.some(a => times.includes(a))) ?? [],
+  [allRecents])
 
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState<string>()
