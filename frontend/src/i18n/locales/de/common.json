@@ -6,18 +6,7 @@
   "donate": {
     "info": "Danke, dass du Crab Fit verwendest. Wenn es dir gefällt, unterstütze uns doch!",
     "button": "Spenden",
-    "title": "Jeder Beitrag zählt :)",
-    "options": {
-      "$2": "$2 spenden",
-      "$5": "$5 spenden",
-      "$10": "$10 spenden",
-      "choose": "Wähle einen Betrag"
-    },
-    "messages": {
-      "about": "Wenn dir Crab Fit helfen konnte, hilf uns, Crab Fit für dich am Laufen zu halten. 🦀",
-      "success": "Vielen Dank für deine Spende! Ohne dich wäre Crab Fit nicht kostenlos.",
-      "error": "Deine Spende konnte durch Google nicht verarbeitet werden. Bitte versuche, direkt auf der Website crab.fit zu spenden 🦀"
-    }
+    "title": "Jeder Beitrag zählt :)"
   },
   "options": {
     "name": "Einstellungen",
@@ -53,6 +42,10 @@
     },
     "language": {
       "label": "Sprache"
+    },
+    "colormap": {
+      "label": "Heatmap Farben",
+      "classic": "Crab Fit (klassisch)"
     }
   },
   "video": {
