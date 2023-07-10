@@ -48,19 +48,23 @@
 
   "group": {
     "legend_tooltip": "Haga clic para resaltar la disponibilidad más alta",
-    "info1": "Pase el ratón o toque el calendario de abajo para ver quién está disponible",
-    "info2": "Haga clic en los nombres a continuación para ver a las personas individualmente"
+    "info1": "Pon el ratón encima para ver quien está disponible, y haz clic para copiar los datos de disponibilidad",
+    "info2": "Haga clic en los nombres a continuación para ver a las personas individualmente",
+    "clipboard_message": "Personas disponibles el {{date}}"
   },
 
   "you": {
     "info": "Haga clic y arrastre el calendario a continuación para configurar sus disponibilidades",
     "select_all": "Seleccionar todo",
     "select_none": "Seleccionar ninguno",
+    "select_invert": "Invertir selección",
 
     "google_cal": "Sincronizar con Google Calendar",
     "outlook_cal": "Sincronizar con el calendario de Outlook",
+    "recent_event": "Sincronizar con un evento reciente",
     "integration": {
       "logout": "cerrar sesión",
+      "close": "cerrar",
       "info": "La importación sobrescribirá su disponibilidad actual",
       "button": "Disponibilidad de importación"
     }
