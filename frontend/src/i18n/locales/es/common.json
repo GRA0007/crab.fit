@@ -6,18 +6,7 @@
   "donate": {
     "info": "Gracias por usar Crab Fit. Si te gusta, considera hacer una donación.",
     "button": "Donar",
-    "title": "Cada cantidad cuenta :)",
-    "options": {
-      "$2": "Donar $2",
-      "$5": "Donar $5",
-      "$10": "Donar $10",
-      "choose": "Elige una cantidad"
-    },
-    "messages": {
-      "about": "Si es que le ayudó en absoluto, considere donar para ayudar a mantenerlo en funcionamiento. 🦀",
-      "success": "¡Gracias por tu donación! Sin ti, cangrejo Fit no sería libre, así que gracias y seguir siendo muy impresionante!",
-      "error": "No se pudo realizar la donación a través de Google. Intente donar a través del sitio web crab.fit 🦀"
-    }
+    "title": "Cada cantidad cuenta :)"
   },
   "options": {
     "name": "Opciones",
@@ -53,6 +42,14 @@
     },
     "language": {
       "label": "Idioma"
+    },
+    "colormap": {
+      "label": "Colores del mapa de calor",
+      "classic": "Crab Fit (clásico)"
     }
+  },
+  "video": {
+    "title": "Vídeo Promocional de Crab Fit",
+    "button": "Ver el vídeo"
   }
 }
