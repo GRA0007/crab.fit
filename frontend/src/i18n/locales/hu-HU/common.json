@@ -33,7 +33,7 @@
       }
     },
     "highlight": {
-      "label": "Legmagasabb rendelkezésre állás kiemelése",
+      "label": "Legmagasabb érték kiemelése",
       "title": "A legmagassabb rendelkezésre állás kiemelése a hőtérképen",
       "options": {
         "Off": "Ki",
