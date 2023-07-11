@@ -27,7 +27,7 @@
     "theme": {
       "label": "Stílus",
       "options": {
-        "System": "Rendszer stílusa",
+        "System": "Rendszer",
         "Light": "Világos",
         "Dark": "Sötét"
       }
