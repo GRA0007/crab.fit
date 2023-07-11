@@ -20,8 +20,8 @@
     "timeFormat": {
       "label": "Idő formátum",
       "options": {
-        "12h": "12 órás",
-        "24h": "24 órás"
+        "12h": "12h",
+        "24h": "24h"
       }
     },
     "theme": {
