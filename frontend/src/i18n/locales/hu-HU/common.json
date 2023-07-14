@@ -1,0 +1,55 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Készítsd el sajátod",
+  "cta": "Készítsd el a saját Crab Fited!",
+  "created": "Készült {{date}}",
+  "donate": {
+    "info": "Köszönjük, hogy a Crab Fitet használtad. Ha teszett, kérek támogass minket.",
+    "button": "Támogatás",
+    "title": "Minden fillér számít :)"
+  },
+  "options": {
+    "name": "Beállítások",
+    "weekStart": {
+      "label": "Hét kezdete",
+      "options": {
+        "Sunday": "Vasárnap",
+        "Monday": "Hétfő"
+      }
+    },
+    "timeFormat": {
+      "label": "Idő formátum",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Stílus",
+      "options": {
+        "System": "Rendszer",
+        "Light": "Világos",
+        "Dark": "Sötét"
+      }
+    },
+    "highlight": {
+      "label": "Legjobb eggyezés kiemelése",
+      "title": "A legmagassabb rendelkezésre állás kiemelése a hőtérképen",
+      "options": {
+        "Off": "Ki",
+        "On": "Be"
+      }
+    },
+    "language": {
+      "label": "Nyelv"
+    },
+    "colormap": {
+      "label": "Hőtérkép színek",
+      "classic": "Crab Fit (klasszikus)"
+    }
+  },
+  "video": {
+    "title": "Crab Fit Promóciós Videó",
+    "button": "Videó megtekintése"
+  }
+}
