@@ -27,7 +27,7 @@
     "theme": {
       "label": "Tema",
       "options": {
-        "System": "Sistema",
+        "System": "Automático",
         "Light": "Claro",
         "Dark": "Oscuro"
       }
