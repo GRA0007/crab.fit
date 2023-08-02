@@ -8,8 +8,6 @@ import { Temporal } from '@js-temporal/polyfill'
 export const convertTimesToDates = (times: string[], timezone: string): Temporal.ZonedDateTime[] => {
   const isSpecificDates = times[0].length === 13
 
-  console.log(times)
-
   return times.map(time => isSpecificDates ?
     parseSpecificDate(time).withTimeZone(timezone)
     : parseWeekdayDate(time, timezone).withTimeZone(timezone)
@@ -43,11 +41,11 @@ const parseWeekdayDate = (str: string, timezone: string): Temporal.ZonedDateTime
   const [hour, minute] = [Number(str.substring(0, 2)), Number(str.substring(2, 4))]
   let dayOfWeek = Number(str.substring(5))
   if (dayOfWeek === 0) {
-     dayOfWeek = 7 // Sunday is 7 in ISO8601
+    dayOfWeek = 7 // Sunday is 7 in ISO8601
   }
 
   // Construct PlainDateTime from today
-  const today = Temporal.Now.zonedDateTimeISO('Utc').round('day')
+  const today = Temporal.Now.zonedDateTimeISO('UTC').round('day')
   const dayDelta = dayOfWeek - today.dayOfWeek
   const resultDay = today.add({ days: dayDelta })
 
