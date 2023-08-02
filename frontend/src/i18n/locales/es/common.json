@@ -6,7 +6,7 @@
   "donate": {
     "info": "Gracias por usar Crab Fit. Si te gusta, considera hacer una donación.",
     "button": "Donar",
-    "title": "Cada cantidad cuenta :)"
+    "title": "Cada donación cuenta :)"
   },
   "options": {
     "name": "Opciones",
@@ -18,7 +18,7 @@
       }
     },
     "timeFormat": {
-      "label": "Formato de tiempo",
+      "label": "Formato horario",
       "options": {
         "12h": "12h",
         "24h": "24h"
@@ -27,7 +27,7 @@
     "theme": {
       "label": "Tema",
       "options": {
-        "System": "Sistema",
+        "System": "Automático",
         "Light": "Claro",
         "Dark": "Oscuro"
       }
