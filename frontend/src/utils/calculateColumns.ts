@@ -7,10 +7,10 @@ import { Temporal } from '@js-temporal/polyfill'
  */
 export const calculateColumns = (dates: Temporal.ZonedDateTime[]): (Temporal.PlainDate | null)[] => {
   // Dedupe dates by date and sort
-  const sortedDates = [...new Map(dates.map(d => {
+  const sortedDates = Array.from(new Map(dates.map(d => {
     const plain = d.toPlainDate()
     return [plain.toString(), plain]
-  })).values()]
+  })).values())
     .sort(Temporal.PlainDate.compare)
 
   // Partition by distance
