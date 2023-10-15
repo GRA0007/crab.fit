@@ -1,4 +1,6 @@
 .button {
+  position: relative;
+  display: inline-flex;
   cursor: pointer;
   border: 0;
   text-decoration: none;
@@ -7,6 +9,7 @@
   margin: 0;
   background: none;
   border-radius: 3px;
+  padding-bottom: 5px;
 
   & > div {
     position: relative;
@@ -22,44 +25,40 @@
     border-radius: inherit;
     padding: .6em 1.5em;
     transform-style: preserve-3d;
-    margin-bottom: 5px;
 
     & svg, & img {
       height: 1.2em;
       width: 1.2em;
       margin-right: .5em;
     }
+  }
 
-    &::before {
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
-      background: var(--override-shadow-color, var(--shadow));
-      border-radius: inherit;
-      transform: translate3d(0, 5px, -1em);
-      transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+  &::before {
+    content: '';
+    position: absolute;
+    height: calc(100% - 5px);
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: var(--override-shadow-color, var(--shadow));
+    border-radius: inherit;
+    transform: translate3d(0, 5px, -1em);
+  }
+
+  &:hover, &:focus {
+    & > div {
+      transform: translate(0, 1px);
     }
   }
 
-  &:hover > div, &:focus > div {
-    transform: translate(0, 1px);
-    &::before {
-      transform: translate3d(0, 4px, -1em);
-    }
-  }
-
-  &:active > div {
-    transform: translate(0, 5px);
-    &::before {
-      transform: translate3d(0, 0, -1em);
+  &:active {
+    & > div {
+      transform: translate(0, 5px);
     }
   }
 
   @media print {
-    & > div::before {
+    &::before {
       display: none;
     }
   }
@@ -148,7 +147,7 @@
     }
   }
 
-  & > div::before {
+  &::before {
     content: none;
   }
   &:hover > div, &:active > div, &:focus > div {
