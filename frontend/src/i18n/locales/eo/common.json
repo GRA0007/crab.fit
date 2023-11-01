@@ -1,0 +1,55 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Kreu vian propran",
+  "cta": "Kreu vian propran Crab Fit!",
+  "created": "Kreita je {{date}}",
+  "donate": {
+    "info": "Dankon pro uzi Crab Fit. Se vi ŝatas ĝin, konsideru donaci.",
+    "button": "Donaci",
+    "title": "Ĉiu kvanto valoras :)"
+  },
+  "options": {
+    "name": "Agordoj",
+    "weekStart": {
+      "label": "Semajno komenciĝas",
+      "options": {
+        "Sunday": "Dimanĉe",
+        "Monday": "Lunde"
+      }
+    },
+    "timeFormat": {
+      "label": "Tempoformato",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Temo",
+      "options": {
+        "System": "Sistemo",
+        "Light": "Hela",
+        "Dark": "Malhela"
+      }
+    },
+    "highlight": {
+      "label": "Emfazu plej altan haveblecon",
+      "title": "Elstarigu la plej altan haveblecon sur la varmomapo",
+      "options": {
+        "Off": "Ne",
+        "On": "Jes"
+      }
+    },
+    "language": {
+      "label": "Lingvo"
+    },
+    "colormap": {
+      "label": "Koloroj de varmomapo",
+      "classic": "Crab Fit (klasika)"
+    }
+  },
+  "video": {
+    "title": "Crab Fit Reklama Filmeto",
+    "button": "Spektu la filmeton"
+  }
+}
