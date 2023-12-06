@@ -1,0 +1,59 @@
+{
+  "create": "VYTVOŘIT",
+  "recently_visited": "Nedávno navštívené",
+  "form": {
+    "name": {
+      "label": "Pojmenujte svou událost!",
+      "sublabel": "Nebo ponechte pole prázdné pro vygenerování"
+    },
+    "dates": {
+      "label": "Jaké termíny by mohly být vhodné?",
+      "sublabel": "Kliknutím a přetažením vyberte",
+      "options": {
+        "specific": "Konkrétní termíny",
+        "week": "Dny v týdnu"
+      },
+      "tooltips": {
+        "previous": "Předchozí měsíc",
+        "next": "Příští měsíc",
+        "today": "dnes"
+      },
+      "warnings": {
+        "date_in_past": "Některá z vámi vybraných termínů jsou v minulosti."
+      }
+    },
+    "times": {
+      "label": "Jaké časy by mohly být vhodné?",
+      "sublabel": "Kliknutím a přetažením vyberte časový rozsah"
+    },
+    "timezone": {
+      "label": "A časové pásmo",
+      "defaultOption": "Vyberte..."
+    },
+
+    "button": "Vytvořit",
+    "errors": {
+      "no_dates": "Nejsou vybrány žádné termíny",
+      "same_times": "Počáteční a koncový čas nesmí být stejný",
+      "no_time": "Není vybrán žádný čas",
+      "unknown": "Něco se pokazilo. Zkuste to prosím později."
+    }
+  },
+
+  "about": {
+    "name": "O službě Crab Fit",
+    "events": "Vytvořené události",
+    "availabilities": "Zadané dostupnosti",
+    "content": {
+      "p1": "Crab Fit vám pomůže přizpůsobit akci časovým možnostem účastnictva. Jednoduše vytvořte událost výše a pošlete odkaz všem, kteří*které se jí účastní. Výsledky se budou živě aktualizovat a vy budete moci zobrazit mapu, kdy mají všichni čas. <1/> <2> Zjistěte více o tom, jak na Crab Fit </2>.",
+      "p3": "Vytvořil <1> Ben Grant </1>, Crab Fit je moderním řešením vašich debat o plánování skupinových akcí.",
+      "p4": "Crab Fit je open source, pokud najdete nějaké problémy nebo chcete přispět, můžete navštívit stránku <1> repozitář </1>. Používáním Crab Fit souhlasíte se <3> zásadami ochrany osobních údajů </3>.",
+      "p6": "Z důvodu ochrany vašeho soukromí jsou události po 3 měsících nečinnosti smazány a všechna hesla jsou bezpečně hešována.",
+      "p5": "Zvažte možnost přispět níže, pokud vám služba pomohla, aby Crab Fit mohl zůstat zdarma pro všechny. 🦀"
+    },
+    "chrome_extension": "Získejte rozšíření pro Chrome",
+    "firefox_extension": "Získejte rozšíření pro Firefox",
+    "safari_extension": "Získejte rozšíření pro Safari",
+    "android_app": "Stáhněte si aplikaci pro Android"
+  }
+}
