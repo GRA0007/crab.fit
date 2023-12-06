@@ -34,7 +34,7 @@
     },
     "highlight": {
       "label": "Zvýraznit nejvyšší dostupnost",
-      "title": "Zvýraznit nejvyšší dostupnost na tepelné mapě",
+      "title": "Zvýraznit nejvyšší dostupnost na heatmapě",
       "options": {
         "Off": "Off",
         "On": "On"
@@ -44,7 +44,7 @@
       "label": "Jazyk"
     },
     "colormap": {
-      "label": "Barvy tepelné mapy",
+      "label": "Barva heatmapy",
       "classic": "Crab Fit (klasický)"
     }
   },
