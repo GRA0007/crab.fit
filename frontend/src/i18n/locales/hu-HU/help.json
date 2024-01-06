@@ -1,0 +1,23 @@
+{
+  "name": "A Crab Fitről",
+
+  "p1": "Crab Fit egy olyan eszköz, amely segít neked, amikor eseményeket tervezel barátokkal vagy munkatársakkal. Csak létrehozol egy eseményt, megadod a neked mikor alkalmas, elküldöd, és láthatod, melyik időpont amely mindenkinek szabad!",
+  "p2": "Lásd alább a részletes lépéseket arról, hogyan készítsd el a saját Crab Fit eseményedet",
+
+  "s1": "1. lépés",
+
+  "p3": "Használd a <1>crab.fit</1> űrlapot egy új esemény létrehozásához. Itt nagy vonalakban kell azt időszakot megadnod, amikor az eseményed történik, nem a neked szabad időpontokat.",
+  "p4": "Példának  \"Jolán születésnapi ebéd\"  eseményét fogjuk használni. Jolán szeretné, ha a születésnapi ebédje ugyanabban a héten történne, mint a születésnapja, április 15-én, de tudja, hogy nem minden barátjának megfelelő lenne-e 15-én. Emellett nem szeretné hétvégén ünnepelni a születésnapját.",
+  "p5": "Jolán azt is tudja, hogy mivel ez egy ebéd esemény, nem kezdődhet el délelőtt 11 óra előtt, és nem tarthat tovább délután 5 óránál.",
+
+  "s2": "2.lépés",
+
+  "p6": "Adja meg az elérhetőségét a most létrehozott eseményhez.",
+  "p7": "A példánkban most Jolán megadja az elérhetőségeit a születésnapi ebédhez. Jolán szabad az egész héten, kivéve pénteken délután 1 óra előtt valamint, kedden és szerdán délután 3 óra után.",
+
+  "s3": "3. lépés",
+
+  "p8": "Küldd el a linket mindenkinek, aki el szeretne jönni",
+  "p9": "Jolán elküldte a linket barátainak, majd megvárta, hogy ők is kitöltsék az elérhetőségeiket. Most könnyedén láthatja az összeset a lenti hőtérképen, és kiválaszthatja a legsötétebb területet, amely a mindenki számára  legmegfelelőbb időpontot jelenti!",
+  "p10": "Ebben a példában Jolán összes barátjának van szabad időpontja péntek 16-án délután 1 órától 3 óráig."
+}
