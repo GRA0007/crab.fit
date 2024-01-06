@@ -1,0 +1,59 @@
+{
+  "create": "KÉSZTS EGY",
+  "recently_visited": "Nemrég látogatott",
+  "form": {
+    "name": {
+      "label": "Adj nevet az eseményednek!",
+      "sublabel": "Vagy hagyd üresen az automatikus generáláshoz"
+    },
+    "dates": {
+      "label": "Melyik napok lehetnek jók?",
+      "sublabel": "Klikkelj és húzd a kiválasztáshoz",
+      "options": {
+        "specific": "Konkrét időpontok",
+        "week": "Hét napjai"
+      },
+      "tooltips": {
+        "previous": "Előző hónap",
+        "next": "Következő hónap",
+        "today": "ma"
+      },
+      "warnings": {
+        "date_in_past": "Van olyan dátum a kiválasztottak között, amely már elmúlt"
+      }
+    },
+    "times": {
+      "label": "Melyik időpontok lehetnek jók?",
+      "sublabel": "Klikkelj és húzd az időtartomány kiválasztáshoz"
+    },
+    "timezone": {
+      "label": "És az időzóna",
+      "defaultOption": "Válassz..."
+    },
+
+    "button": "Létrehoz",
+    "errors": {
+      "no_dates": "Egyetlen nap sincsen kiválasztva",
+      "same_times": "A kedző és vég dátumok nem lehetnek azonosak",
+      "no_time": "Nincsen időpont kiválasztva",
+      "unknown": "Valami hiba történt. Kérlek próbáld újra később."
+    }
+  },
+
+  "about": {
+    "name": "A Crab Fitről",
+    "events": "Létrehozott események",
+    "availabilities": "Beírt elérhetőségek",
+    "content": {
+      "p1": "Crab Fit segít abban, hogy egy eseményt mindenki időbeosztásához igazítsd. Egyszerűen hozz létre egy eseményt fentebb, és küldd el a linket minden résztvevőnek. Az eredmények élőben frissülnek, és láthatod majd egy hőtérképen, hogy mikor ér rá mindenki.<1/><2>Tudj meg többet a Crab Fit-ről</2>.",
+      "p3": "A <1>Ben Grant</1> által fejlesztett Crab Fit egy modern megoldás csoportesemények tervezésére.",
+      "p4": "A Crab Fit kódja nyílt forráskódú, ha bármilyen problémát találsz, vagy hozzá szeretnél járulni, látogasd meg a <1>repository-t</1> A Crab Fit használatával elfogadod az <3>adatvédelmi irányelveket</3>.",
+      "p6": "A magánéleted védelme érdekében az eseményeket 3 hónap inaktivitás után töröljük, és minden jelszót biztonságosan hashelünk.",
+      "p5": "Ha tetszett, kérlek fontold meg az adományozást, hogy a Crab Fit mindenki számára ingyenes maradhasson. 🦀"
+    },
+    "chrome_extension": "Szerezd meg a Chrome bővítményt",
+    "firefox_extension": "Szerezd meg a Firefox bővítményt",
+    "safari_extension": "Szerezd meg a Safari bővítményt",
+    "android_app": "Android app letöltése"
+  }
+}
