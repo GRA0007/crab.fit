@@ -1,0 +1,72 @@
+{
+  "available": "elérhető",
+  "greyed_times": "Ez a terület szürke, mivel nem része az események. Előfordulhat, hogy nem abból az időzónából nézed az eseményt, amelyben létre lett hozva.",
+
+  "nav": {
+    "title": "Klikk a másoláshoz",
+    "copied": "Vágólapra másolva!",
+    "shareinfo": "Másold le az oldal linkjét, vagy osszd meg <1>emailben</1>.",
+    "shareinfo_alt": "Klikkelj a fenti linkre a másoláshoz, vagy oszd meg <1>emailben</1>.",
+    "email_subject": "{{event_name}} ütemezése",
+    "email_body": "Kövesd ezt a linket, hogy megadd a válaszodat:"
+  },
+  "form": {
+    "signed_out": "Jelentkezz be az időpontok megadásához",
+    "signed_in": "Belépés mint {{name}}",
+
+    "name": "Név",
+    "password": "Jelszó (optcionális)",
+    "button": "Belépés",
+    "logout_button": "Kilépés",
+    "info": "Ezek a részletek csak erre az eseményre vonatkoznak. Adj meg egy jelszót, hogy mások ne tudják a válaszodat módosítani.",
+
+    "timezone": "Időzónád",
+
+    "errors": {
+      "name_required": "Szükség van a nevedre a válasz elmentéséhez",
+      "password_incorrect": "Rossz jelszó. Ellenőrizd, hogy jól írtad a nevedet.",
+      "unknown": "Sikertelen bejelentkezés. Próbáld újra!"
+    },
+
+    "created_in_timezone": "Ez az esemény a <strong>{{timezone}}</strong> időzónában lett létrehozva. <3>Kattints ide</3> az időzóna használatához.",
+    "local_timezone": "Úgy látjuk, hogy az időzónád: <strong>{{timezone}}</strong>. <3>Kattints ide</3> az időzóna használatához."
+  },
+  "offline": {
+    "title": "Jelenleg nem csatlakozol az internethez",
+    "body": "A Crab Fit nem működik internet nélkül.<br />Kérlek ellenőrízd az internet kapcsolatodat, és próbáld újra."
+  },
+  "error": {
+    "title": "Az esemény nem tallható",
+    "body": "Ellenőrízd, hogy a megadott URL helyes. A személyes adatok védelme érdekében minden esemény  3 hónap inaktivitás után törlésre kerül. Előfordulhat, hogy a keresett esemény is törlésre került."
+  },
+
+  "tabs": {
+    "you": "Neked jó időpontok",
+    "you_tooltip": "Jelentkezz be a válaszadáshoz",
+    "group": "Csapatnak jó időpontok"
+  },
+
+  "group": {
+    "legend_tooltip": "Klikk a legjobb eggyezés kiemeléséhez",
+    "info1": "Kattintson vagy érintse meg az alábbi naptárat, hogy lássa, ki érhető el, és kattintson a részletek másolásához egy időponttal kapcsolatban",
+    "info2": "Kattintson az alábbi nevekre az egyéni válaszok megtekintéséhez",
+    "clipboard_message": "{{date}}-n elérhető emberek"
+  },
+
+  "you": {
+    "info": "Kattintson és húzza le a naptáron az elérhetőségének beállításához",
+    "select_all": "Összes kijelölse",
+    "select_none": "Kijelölés törlése",
+    "select_invert": "Kijelölés megfordítása",
+
+    "google_cal": "Szinkronizálás Google Calendarral",
+    "outlook_cal": "Szinkronizálás Outlook Calendarral",
+    "recent_event": "Szinkronizálás egy közeli eseménnyel",
+    "integration": {
+      "logout": "kijelentkezés",
+      "close": "bezár",
+      "info": "Az importálás felül fogja írni a jelenlegi válaszaidat",
+      "button": "Szabad időpontok importálása"
+    }
+  }
+}
