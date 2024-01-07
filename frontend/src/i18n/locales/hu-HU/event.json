@@ -54,7 +54,7 @@
   },
 
   "you": {
-    "info": "Kattintson és húzza le a naptáron az elérhetőségének beállításához",
+    "info": "Kattints és húzd az egeret a naptáron az elérhetőségeid beállításához",
     "select_all": "Összes kijelölse",
     "select_none": "Kijelölés törlése",
     "select_invert": "Kijelölés megfordítása",
