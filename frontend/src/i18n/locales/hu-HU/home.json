@@ -10,8 +10,8 @@
       "label": "Melyik napok lehetnek jók?",
       "sublabel": "Kattints és húzd a kiválasztáshoz",
       "options": {
-        "specific": "Konkrét időpontok",
-        "week": "Hét napjai"
+        "specific": "Konkrét napok",
+        "week": "A hét napjai"
       },
       "tooltips": {
         "previous": "Előző hónap",
