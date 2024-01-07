@@ -16,7 +16,7 @@
 
     "name": "Név",
     "password": "Jelszó (opcionális)",
-    "button": "Belépés",
+    "button": "Bejelentkezés",
     "logout_button": "Kilépés",
     "info": "Ezek a részletek csak erre az eseményre vonatkoznak. Adj meg egy jelszót, hogy mások ne tudják a válaszodat módosítani.",
 
