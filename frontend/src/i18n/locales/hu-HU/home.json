@@ -8,7 +8,7 @@
     },
     "dates": {
       "label": "Melyik napok lehetnek jók?",
-      "sublabel": "Klikkelj és húzd a kiválasztáshoz",
+      "sublabel": "Kattints és húzd a kiválasztáshoz",
       "options": {
         "specific": "Konkrét időpontok",
         "week": "Hét napjai"
