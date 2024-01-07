@@ -31,7 +31,7 @@
       "defaultOption": "Válassz..."
     },
 
-    "button": "Létrehoz",
+    "button": "Létrehozás",
     "errors": {
       "no_dates": "Egyetlen nap sincsen kiválasztva",
       "same_times": "A kedző és vég dátumok nem lehetnek azonosak",
