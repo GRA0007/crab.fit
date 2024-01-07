@@ -8,7 +8,7 @@
     "shareinfo": "Másold le az oldal linkjét, vagy osszd meg <1>emailben</1>.",
     "shareinfo_alt": "Kattints a fenti linkre a másoláshoz, vagy oszd meg <1>emailben</1>.",
     "email_subject": "{{event_name}} ütemezése",
-    "email_body": "Kövesd ezt a linket, hogy megadd a válaszodat:"
+    "email_body": "Kövesd ezt a linket, hogy megadd, mikor érsz rá:"
   },
   "form": {
     "signed_out": "Jelentkezz be az időpontok megadásához",
