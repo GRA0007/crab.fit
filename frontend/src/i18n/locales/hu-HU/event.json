@@ -25,7 +25,7 @@
     "errors": {
       "name_required": "Szükség van a nevedre a válasz elmentéséhez",
       "password_incorrect": "Hibás jelszó. Ellenőrizd, hogy jól írtad-e a nevedet.",
-      "unknown": "Sikertelen bejelentkezés. Próbáld újra!"
+      "unknown": "Sikertelen bejelentkezés. Kérlek, próbáld újra!"
     },
 
     "created_in_timezone": "Ez az esemény a <strong>{{timezone}}</strong> időzónában lett létrehozva. <3>Kattints ide</3> az időzóna használatához.",
