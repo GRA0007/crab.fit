@@ -18,7 +18,7 @@
     "password": "Jelszó (opcionális)",
     "button": "Bejelentkezés",
     "logout_button": "Kijelentkezés",
-    "info": "Ezek a részletek csak erre az eseményre vonatkoznak. Adj meg egy jelszót, hogy mások ne tudják a válaszodat módosítani.",
+    "info": "Ezek az információk csak erre az eseményre vonatkoznak. Adj meg egy jelszót, hogy mások ne tudják a válaszodat módosítani.",
 
     "timezone": "Időzónád",
 
