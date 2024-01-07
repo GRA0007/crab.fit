@@ -37,7 +37,7 @@
   },
   "error": {
     "title": "Az esemény nem tallható",
-    "body": "Ellenőrízd, hogy a megadott URL helyes. A személyes adatok védelme érdekében minden esemény  3 hónap inaktivitás után törlésre kerül. Előfordulhat, hogy a keresett esemény is törlésre került."
+    "body": "Ellenőrízd, hogy a megadott URL helyes.-e A személyes adatok védelme érdekében minden esemény  3 hónap inaktivitás után törlésre kerül. Előfordulhat, hogy a keresett esemény is törlésre került."
   },
 
   "tabs": {
