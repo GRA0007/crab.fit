@@ -59,7 +59,7 @@
     "select_none": "Kijelölés törlése",
     "select_invert": "Kijelölés megfordítása",
 
-    "google_cal": "Szinkronizálás Google Calendarral",
+    "google_cal": "Szinkronizálás a Google Naptárral",
     "outlook_cal": "Szinkronizálás Outlook Calendarral",
     "recent_event": "Szinkronizálás egy közeli eseménnyel",
     "integration": {
