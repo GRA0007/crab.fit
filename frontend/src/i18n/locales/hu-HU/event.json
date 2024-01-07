@@ -60,7 +60,7 @@
     "select_invert": "Kijelölés megfordítása",
 
     "google_cal": "Szinkronizálás a Google Naptárral",
-    "outlook_cal": "Szinkronizálás Outlook Calendarral",
+    "outlook_cal": "Szinkronizálás az Outlook Naptárral",
     "recent_event": "Szinkronizálás egy közeli eseménnyel",
     "integration": {
       "logout": "kijelentkezés",
