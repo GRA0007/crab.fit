@@ -61,7 +61,7 @@
 
     "google_cal": "Szinkronizálás a Google Naptárral",
     "outlook_cal": "Szinkronizálás az Outlook Naptárral",
-    "recent_event": "Szinkronizálás egy közeli eseménnyel",
+    "recent_event": "Szinkronizálás egy korábbi eseménnyel",
     "integration": {
       "logout": "kijelentkezés",
       "close": "bezár",
