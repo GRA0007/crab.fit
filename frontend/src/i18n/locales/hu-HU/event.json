@@ -24,7 +24,7 @@
 
     "errors": {
       "name_required": "Szükség van a nevedre a válasz elmentéséhez",
-      "password_incorrect": "Rossz jelszó. Ellenőrizd, hogy jól írtad a nevedet.",
+      "password_incorrect": "Hibás jelszó. Ellenőrizd, hogy jól írtad-e a nevedet.",
       "unknown": "Sikertelen bejelentkezés. Próbáld újra!"
     },
 
