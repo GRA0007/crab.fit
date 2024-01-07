@@ -49,7 +49,7 @@
   "group": {
     "legend_tooltip": "Kattints a legjobb egyezés kiemeléséhez",
     "info1": "Húzd az egeret az egyes időpontok fölé, vagy érintsd meg az alábbi naptárat, hogy lásd, ki érhető el, és kattints a részletek másolásához egy időponttal kapcsolatban",
-    "info2": "Kattintson az alábbi nevekre az egyéni válaszok megtekintéséhez",
+    "info2": "Kattints az alábbi nevekre az egyéni válaszok megtekintéséhez",
     "clipboard_message": "{{date}}-n elérhető emberek"
   },
 
