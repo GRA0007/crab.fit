@@ -24,7 +24,7 @@
     },
     "times": {
       "label": "Melyik időpontok lehetnek jók?",
-      "sublabel": "Klikkelj és húzd az időtartomány kiválasztáshoz"
+      "sublabel": "Kattints és húzd az időtartomány kiválasztásához"
     },
     "timezone": {
       "label": "És az időzóna",
