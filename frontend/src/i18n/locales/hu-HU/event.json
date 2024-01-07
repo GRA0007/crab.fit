@@ -1,6 +1,6 @@
 {
   "available": "elérhető",
-  "greyed_times": "Ez a terület szürke, mivel nem része az események. Előfordulhat, hogy nem abból az időzónából nézed az eseményt, amelyben létre lett hozva.",
+  "greyed_times": "Ez a terület szürke, mivel nem része az eseménynek. Előfordulhat, hogy nem abból az időzónából nézed az eseményt, amelyben létre lett hozva.",
 
   "nav": {
     "title": "Klikk a másoláshoz",
