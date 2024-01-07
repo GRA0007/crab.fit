@@ -34,7 +34,7 @@
     },
     "highlight": {
       "label": "Legjobb egyezés kiemelése",
-      "title": "A legmagassabb rendelkezésre állás kiemelése a hőtérképen",
+      "title": "A legjobb időpont kiemelése a hőtérképen",
       "options": {
         "Off": "Ki",
         "On": "Be"
