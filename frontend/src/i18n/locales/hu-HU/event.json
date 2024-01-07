@@ -3,7 +3,7 @@
   "greyed_times": "Ez a terület szürke, mivel nem része az eseménynek. Előfordulhat, hogy nem abból az időzónából nézed az eseményt, amelyben létre lett hozva.",
 
   "nav": {
-    "title": "Klikk a másoláshoz",
+    "title": "Kattints a másoláshoz",
     "copied": "Vágólapra másolva!",
     "shareinfo": "Másold le az oldal linkjét, vagy osszd meg <1>emailben</1>.",
     "shareinfo_alt": "Klikkelj a fenti linkre a másoláshoz, vagy oszd meg <1>emailben</1>.",
