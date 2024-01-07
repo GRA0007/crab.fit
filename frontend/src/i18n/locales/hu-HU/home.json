@@ -34,7 +34,7 @@
     "button": "Létrehozás",
     "errors": {
       "no_dates": "Egyetlen nap sincsen kiválasztva",
-      "same_times": "A kedző és vég dátumok nem lehetnek azonosak",
+      "same_times": "A kezdés és befejezés időpontja nem lehet azonos",
       "no_time": "Nincsen időpont kiválasztva",
       "unknown": "Valami hiba történt. Kérlek próbáld újra később."
     }
