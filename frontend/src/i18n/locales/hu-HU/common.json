@@ -33,7 +33,7 @@
       }
     },
     "highlight": {
-      "label": "Legjobb eggyezés kiemelése",
+      "label": "Legjobb egyezés kiemelése",
       "title": "A legmagassabb rendelkezésre állás kiemelése a hőtérképen",
       "options": {
         "Off": "Ki",
