@@ -12,7 +12,7 @@
   },
   "form": {
     "signed_out": "Jelentkezz be az időpontok megadásához",
-    "signed_in": "Belépés mint {{name}}",
+    "signed_in": "Belépve, mint {{name}}",
 
     "name": "Név",
     "password": "Jelszó (optcionális)",
