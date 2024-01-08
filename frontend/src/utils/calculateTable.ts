@@ -21,12 +21,12 @@ export const calculateTable = ({
   timeFormat,
   timezone,
 }: CalculateTableArgs) => {
-  const dates = convertTimesToDates(times, timezone)
-  const rows = calculateRows(dates)
-  const columns = calculateColumns(dates)
-
   // Is specific dates or just days of the week
   const isSpecificDates = times[0]?.length === 13
+
+  const dates = convertTimesToDates(times, timezone)
+  const rows = calculateRows(dates)
+  const columns = calculateColumns(dates, isSpecificDates)
 
   return {
     rows: rows.map(row => row && row.minute === 0 ? {
