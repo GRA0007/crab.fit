@@ -1,6 +1,6 @@
 {
   "available": "disponível",
-  "greyed_times": "Esta área está desabilitada por não fazer parte do evento. Provavelmente você esta em outro fuso horário do que usado pelo evento.",
+  "greyed_times": "Esta área está desabilitada por não fazer parte do evento. Pode ser que você esteja em outro fuso horário.",
 
   "nav": {
     "title": "Clique para copiar",
@@ -48,19 +48,23 @@
 
   "group": {
     "legend_tooltip": "Clique para destacar o melhor tempo",
-    "info1": "Passe o mouse ou toque o calendário pra ver quem está livre",
-    "info2": "Clique nos nomes pra ver a disponibilidade de cada um"
+    "info1": "Passe o cursor ou toque no calendário abaixo para ver quem está disponível, e clique para copiar os detalhes de um horário",
+    "info2": "Clique nos nomes pra ver a disponibilidade de cada um",
+    "clipboard_message": "Pessoas disponíveis em {{date}}"
   },
 
   "you": {
     "info": "Clique e arraste para assinalar seu tempo livre no calendário",
     "select_all": "Selecionar todos",
     "select_none": "Selecionar nenhum",
+    "select_invert": "Inverter seleção",
 
     "google_cal": "Sincronizar com sua Agenda Google",
     "outlook_cal": "Sincronizar com sua Agenda Outlook",
+    "recent_event": "Sincronizar com evento recente",
     "integration": {
       "logout": "sair",
+      "close": "fechar",
       "info": "Ao importar você substituirá sua disponibilidade atual",
       "button": "Importar horários disponíveis"
     }
