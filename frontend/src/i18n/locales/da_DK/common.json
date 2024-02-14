@@ -1,0 +1,55 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Opret din egen",
+  "cta": "Opret din egen Crab Fit!",
+  "created": "Oprettet {{date}}",
+  "donate": {
+    "info": "Tak for at bruge Crab Fit. Hvis du synes om det, så overvej at donere.",
+    "button": "Donér",
+    "title": "Alle beløb tæller :)"
+  },
+  "options": {
+    "name": "Valg",
+    "weekStart": {
+      "label": "Uge starter på",
+      "options": {
+        "Sunday": "Søndag",
+        "Monday": "Mandag"
+      }
+    },
+    "timeFormat": {
+      "label": "Tidsformat",
+      "options": {
+        "12h": "12-timer",
+        "24h": "24-timer"
+      }
+    },
+    "theme": {
+      "label": "Tema",
+      "options": {
+        "System": "System",
+        "Light": "Lys",
+        "Dark": "Mørk"
+      }
+    },
+    "highlight": {
+      "label": "Fremhæv højeste tilgængelighed",
+      "title": "Fremhæv den højeste tilgængelighed på varmekortet",
+      "options": {
+        "Off": "Inaktiv",
+        "On": "Aktiv"
+      }
+    },
+    "language": {
+      "label": "Sprog"
+    },
+    "colormap": {
+      "label": "Varmekortfarver",
+      "classic": "Crab Fit (klassisk)"
+    }
+  },
+  "video": {
+    "title": "Crab Fit reklamevideo",
+    "button": "Se videoen"
+  }
+}
