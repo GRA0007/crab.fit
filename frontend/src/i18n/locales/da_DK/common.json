@@ -44,7 +44,7 @@
       "label": "Sprog"
     },
     "colormap": {
-      "label": "Varmekortfarver",
+      "label": "Farvediagramfarver",
       "classic": "Crab Fit (klassisk)"
     }
   },
