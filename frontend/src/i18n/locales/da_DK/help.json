@@ -1,0 +1,23 @@
+{
+  "name": "Hvordan du bruger Crab Fit",
+
+  "p1": "Crab Fit er et værktøj til at hjælpe dig, når du planlægger arrangementer med venner eller kolleger. Du opretter bare et arrangement, angiver din tilgængelighed, sender det ud og ser, hvornår alle er ledige!",
+  "p2": "Se nedenfor for detaljerede trin til, hvordan du tilpasser din begivenhed til Crab Fit.",
+
+  "s1": "Trin 1",
+
+  "p3": "Brug formularen på <1>crab.fit</1> til at oprette en ny begivenhed. Du skal kun angive det omtrentlige tidsrum for, hvornår din begivenhed finder sted her, ikke din tilgængelighed.",
+  "p4": "Som eksempel vil vi bruge \"Jennys fødselsdagsfrokost\". Jenny ønsker, at hendes fødselsdagsfrokost skal ske i den samme uge som hendes fødselsdag, den 15. april, men hun ved, at ikke alle hendes venner er tilgængelige den 15. Hun ønsker heller ikke at gøre det i weekenden.",
+  "p5": "Jenny ved også, at da det er en frokostbegivenhed, kan den ikke starte før kl. 11 eller fortsætte efter kl. 17.",
+
+  "s2": "Trin 2",
+
+  "p6": "Indtast din tilgængelighed for den begivenhed, du lige har oprettet.",
+  "p7": "I vores eksempel sætter Jenny nu sin tilgængelighed for sin fødselsdagsfrokost. Hun er ledig hele ugen, undtagen efter kl. 15 tirsdag og onsdag, og før kl. 13 fredag.",
+
+  "s3": "Trin 3",
+
+  "p8": "Send linket til alle, du vil have til at komme.",
+  "p9": "Efter Jenny har sendt linket til sine venner og ventet på, at de også har udfyldt deres tilgængelighed, kan hun nu nemt se dem alle på farvediagrammet nedenfor og vælge det mørkeste område til et tidspunkt, der passer alle!",
+  "p10": "I dette eksempel fungerer 13:00 til 15:00 fredag d. 16. for alle Jennys venner."
+}
