@@ -1,0 +1,72 @@
+{
+  "available": "disponebla",
+  "greyed_times": "Ĉi tiu areo estas grizigita ĉar ĝi ne estas parto de la evento. Vi eble rigardas ĉi tiun eventon en malsama horzono de kie ĝi estis kreita.",
+
+  "nav": {
+    "title": "Klaku por kopii",
+    "copied": "Kopiita!",
+    "shareinfo": "Kopiu la ligon de ĉi tiu paĝo, aŭ kundividu <1>retpoŝte</1>.",
+    "shareinfo_alt": "Alklaku la supran ligilon por kopii ĝin al via tondujo aŭ dividi <1> retpoŝte <2>.",
+    "email_subject": "Planado {{event_name}}",
+    "email_body": "Vizitu ĉi tiun ligon por enigi viajn disponeblecoj:"
+  },
+  "form": {
+    "signed_out": "Ensalutu por aldoni vian disponeblo",
+    "signed_in": "Ensalutita kiel {{name}}",
+
+    "name": "Via nomo",
+    "password": "Pasvorto (laŭvole)",
+    "button": "Ensaluti",
+    "logout_button": "Elsaluti",
+    "info": "Ĉi tiuj detaloj estas nur por ĉi tiu evento. Uzu pasvorton por malhelpi aliajn ŝanĝi vian disponeblo.",
+
+    "timezone": "Via horzono",
+
+    "errors": {
+      "name_required": "Via nomo estas necesa por konservi vian disponeblo.",
+      "password_incorrect": "Pasvorto estas malĝusta. Kontrolu, ke via nomo estas literumita ĝuste.",
+      "unknown": "Malsukcesis ensaluti. Bonvolu reprovi."
+    },
+
+    "created_in_timezone": "Ĉi tiu evento estis kreita en la horzono <strong>{{timezone}} </strong>. <3>Klaku ĉi tie</3> por uzi ĝin.",
+    "local_timezone": "Via loka horzono estas detektita kiel <strong>{{ timezone }}</strong>. <3>Klaku ĉi tie</3>por uzi ĝin."
+  },
+  "offline": {
+    "title": "Vi estas eksterrete",
+    "body": "Crab Fit ne funkcias eksterrete. <br />Certigu, ke vi estas konektita al la interreto kaj provu denove."
+  },
+  "error": {
+    "title": "Evento ne trovita",
+    "body": "Kontrolu, ke la url, kiun vi enigis, estas ĝusta. Notu, ke por protekti vian privatecon, eventoj estas forigitaj post 3 monatoj da neaktiveco."
+  },
+
+  "tabs": {
+    "you": "Via disponebla",
+    "you_tooltip": "Ensalutu por agordi vian disponebla",
+    "group": "Grupo disponebla"
+  },
+
+  "group": {
+    "legend_tooltip": "Klaku por reliefigi plej altan disponebla",
+    "info1": "Ŝvebu aŭ frapetu la kalendaron sube por vidi kiu disponeblas, kaj alklaku por kopii detalojn pri temponiĉo",
+    "info2": "Alklaku la nomojn sube por vidi homojn individue",
+    "clipboard_message": "Homoj disponeblaj je {{ dato }}"
+  },
+
+  "you": {
+    "info": "Alklaku kaj trenu la kalendaron sube por agordi viajn disponeblaj",
+    "select_all": "Elekti ĉion",
+    "select_none": "Elektu nenion",
+    "select_invert": "Inverti elekton",
+
+    "google_cal": "Sinkronigi kun Google Calendar",
+    "outlook_cal": "Sinkronigi kun Outlook Calendar",
+    "recent_event": "Sinkronigi kun lastatempa evento",
+    "integration": {
+      "logout": "elsaluti",
+      "close": "fermi",
+      "info": "Importado anstataŭigos vian nunan disponebla",
+      "button": "Importado disponebla"
+    }
+  }
+}

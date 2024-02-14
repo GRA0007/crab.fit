@@ -1,6 +1,6 @@
 {
   "name": "Crab Fit",
-  "tagline": "Készítsd el sajátod",
+  "tagline": "Készítsd el a sajátod",
   "cta": "Készítsd el a saját Crab Fited!",
   "created": "Készült {{date}}",
   "donate": {
@@ -33,8 +33,8 @@
       }
     },
     "highlight": {
-      "label": "Legjobb eggyezés kiemelése",
-      "title": "A legmagassabb rendelkezésre állás kiemelése a hőtérképen",
+      "label": "Legjobb egyezés kiemelése",
+      "title": "A legjobb időpont kiemelése a hőtérképen",
       "options": {
         "Off": "Ki",
         "On": "Be"
@@ -44,7 +44,7 @@
       "label": "Nyelv"
     },
     "colormap": {
-      "label": "Hőtérkép színek",
+      "label": "A hőtérkép színei",
       "classic": "Crab Fit (klasszikus)"
     }
   },

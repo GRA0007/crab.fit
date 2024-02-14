@@ -48,19 +48,23 @@
 
   "group": {
     "legend_tooltip": "Klicke hier, um die grösste Verfügbarkeit hervorzuheben",
-    "info1": "Bewege den Mauszeiger oder tippe auf den Kalender unten, um zu sehen, wer verfügbar ist",
-    "info2": "Klicke auf die Namen unten, um einzelne Personen anzuzeigen"
+    "info1": "Bewege den Mauszeiger auf den Kalender unten oder tippe darauf, um zu sehen, wer verfügbar ist, und klicke, um Details über ein Zeitfenster zu kopieren",
+    "info2": "Klicke auf die Namen unten, um einzelne Personen anzuzeigen",
+    "clipboard_message": "Personen verfügbar am {{date}}"
   },
 
   "you": {
     "info": "Klicke und ziehe im Kalender unten, um deine Verfügbarkeit festzulegen",
     "select_all": "Alle wählen",
     "select_none": "Keine wählen",
+    "select_invert": "Auswahl umkehren",
 
     "google_cal": "Mit Google Kalender synchronisieren",
     "outlook_cal": "Mit Outlook Kalender synchronisieren",
+    "recent_event": "Mit einem kürzlichen Ereignis synchronisieren",
     "integration": {
       "logout": "ausloggen",
+      "close": "Schließen",
       "info": "Durch den Import wird deine aktuelle Verfügbarkeit überschrieben",
       "button": "Verfügbarkeit importieren"
     }

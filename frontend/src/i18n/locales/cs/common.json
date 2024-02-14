@@ -1,0 +1,55 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Vytvořit vlastní",
+  "cta": "Vytvořit vlastní Crab Fit!",
+  "created": "Vytvořeno {{date}}",
+  "donate": {
+    "info": "Děkujeme, že používáte službu Crab Fit. Pokud se vám líbí, zvažte možnost přispět.",
+    "button": "Darovat",
+    "title": "Jakákoli částka se počítá :)"
+  },
+  "options": {
+    "name": "Možnosti",
+    "weekStart": {
+      "label": "Týden začíná",
+      "options": {
+        "Sunday": "Neděle",
+        "Monday": "Pondělí"
+      }
+    },
+    "timeFormat": {
+      "label": "Formát času",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Téma",
+      "options": {
+        "System": "Systém",
+        "Light": "Světlé",
+        "Dark": "Tmavé"
+      }
+    },
+    "highlight": {
+      "label": "Zvýraznit nejvyšší dostupnost",
+      "title": "Zvýraznit nejvyšší dostupnost na heatmapě",
+      "options": {
+        "Off": "Off",
+        "On": "On"
+      }
+    },
+    "language": {
+      "label": "Jazyk"
+    },
+    "colormap": {
+      "label": "Barva heatmapy",
+      "classic": "Crab Fit (klasický)"
+    }
+  },
+  "video": {
+    "title": "Crab Fit propagační video",
+    "button": "Shlédnout video"
+  }
+}
