@@ -34,7 +34,7 @@
     },
     "highlight": {
       "label": "Fremhæv højeste tilgængelighed",
-      "title": "Fremhæv den højeste tilgængelighed på varmekortet",
+      "title": "Fremhæv den højeste tilgængelighed på farvediagrammet",
       "options": {
         "Off": "Inaktiv",
         "On": "Aktiv"
