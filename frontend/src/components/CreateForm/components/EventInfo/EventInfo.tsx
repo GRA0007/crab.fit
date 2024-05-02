@@ -6,6 +6,11 @@ import { useTranslation } from '/src/i18n/client'
 
 import styles from './EventInfo.module.scss'
 
+if (process.env.NEXT_PUBLIC_DOMAIN_FRONT === undefined) {
+  throw new Error('Expected front domain name environment variable')
+}
+const DOMAIN_FRONT = process.env.NEXT_PUBLIC_DOMAIN_FRONT
+
 interface EventInfoProps {
   event: EventResponse
 }
@@ -16,10 +21,10 @@ const EventInfo = ({ event }: EventInfoProps) => {
   return <div className={styles.wrapper}>
     <h2>{event.name}</h2>
     <Copyable className={styles.info}>
-      {`https://crab.fit/${event.id}`}
+      {`https://${DOMAIN_FRONT}/${event.id}`}
     </Copyable>
     <p className={styles.info}>
-      <Trans i18nKey="event:nav.shareinfo_alt" t={t} i18n={i18n}>_<a href={`mailto:?subject=${encodeURIComponent(t('nav.email_subject', { event_name: event.name }))}&body=${encodeURIComponent(`${t('nav.email_body')} https://crab.fit/${event.id}`)}`} target="_blank">_</a>_</Trans>
+      <Trans i18nKey="event:nav.shareinfo_alt" t={t} i18n={i18n}>_<a href={`mailto:?subject=${encodeURIComponent(t('nav.email_subject', { event_name: event.name }))}&body=${encodeURIComponent(`${t('nav.email_body')} https://${DOMAIN_FRONT}/${event.id}`)}`} target="_blank">_</a>_</Trans>
     </p>
   </div>
 }

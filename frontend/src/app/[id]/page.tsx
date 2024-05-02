@@ -13,6 +13,11 @@ import { makeClass, relativeTimeFormat } from '/src/utils'
 import EventAvailabilities from './EventAvailabilities'
 import styles from './page.module.scss'
 
+if (process.env.NEXT_PUBLIC_DOMAIN_FRONT === undefined) {
+  throw new Error('Expected front domain name environment variable')
+}
+const DOMAIN_FRONT = process.env.NEXT_PUBLIC_DOMAIN_FRONT
+
 interface PageProps {
   params: { id: string }
 }
@@ -49,10 +54,10 @@ const Page = async ({ params }: PageProps) => {
         >{t('common:created', { date: relativeTimeFormat(Temporal.Instant.fromEpochSeconds(event.created_at), i18n.language) })}</span>
 
         <Copyable className={styles.info}>
-          {`https://crab.fit/${event.id}`}
+          {`https://${DOMAIN_FRONT}/${event.id}`}
         </Copyable>
         <p className={makeClass(styles.info, styles.noPrint)}>
-          <Trans i18nKey="event:nav.shareinfo" t={t} i18n={i18n}>_<a href={`mailto:?subject=${encodeURIComponent(t('event:nav.email_subject', { event_name: event.name }))}&body=${encodeURIComponent(`${t('event:nav.email_body')} https://crab.fit/${event.id}`)}`}>_</a>_</Trans>
+          <Trans i18nKey="event:nav.shareinfo" t={t} i18n={i18n}>_<a href={`mailto:?subject=${encodeURIComponent(t('event:nav.email_subject', { event_name: event.name }))}&body=${encodeURIComponent(`${t('event:nav.email_body')} https://${DOMAIN_FRONT}/${event.id}`)}`}>_</a>_</Trans>
         </p>
       </Content>
     </Suspense>
