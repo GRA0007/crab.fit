@@ -6,4 +6,4 @@ edition = "2021"
 
 [dependencies]
 async-trait = "0.1.68"
-chrono = "0.4.24"
+chrono = "^0.4"
