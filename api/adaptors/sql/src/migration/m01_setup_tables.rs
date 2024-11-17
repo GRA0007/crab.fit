@@ -55,19 +55,14 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Person::Availability).json().not_null())
                     .col(ColumnDef::new(Person::EventId).string().not_null())
                     .primary_key(Index::create().col(Person::EventId).col(Person::Name))
-                    .to_owned(),
-            )
-            .await?;
-
-        // Relation
-        manager
-            .create_foreign_key(
-                ForeignKey::create()
-                    .name("FK_person_event")
-                    .from(Person::Table, Person::EventId)
-                    .to(Event::Table, Event::Id)
-                    .on_delete(ForeignKeyAction::Cascade)
-                    .on_update(ForeignKeyAction::Cascade)
+                    .foreign_key(
+                        ForeignKey::create()
+                            .name("FK_person_event")
+                            .from(Person::Table, Person::EventId)
+                            .to(Event::Table, Event::Id)
+                            .on_delete(ForeignKeyAction::Cascade)
+                            .on_update(ForeignKeyAction::Cascade)
+                    )
                     .to_owned(),
             )
             .await?;
