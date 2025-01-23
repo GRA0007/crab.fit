@@ -301,7 +301,7 @@ dependencies = [
  "serde_urlencoded",
  "sync_wrapper",
  "tokio",
- "tower",
+ "tower 0.4.13",
  "tower-layer",
  "tower-service",
 ]
@@ -370,6 +370,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9d297deb1925b89f2ccc13d7635fa0714f12c87adce1c75356b39ca9b7178567"
 
 [[package]]
+name = "base64"
+version = "0.22.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
+
+[[package]]
 name = "base64ct"
 version = "1.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -377,11 +383,11 @@ checksum = "8c3c1a368f70d6cf7302d78f8f7093da241fb8e8807c05cc9e51a125895a6d5b"
 
 [[package]]
 name = "bcrypt"
-version = "0.14.0"
+version = "0.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9df288bec72232f78c1ec5fe4e8f1d108aa0265476e93097593c803c8c02062a"
+checksum = "2b1866ecef4f2d06a0bb77880015fdf2b89e25a1c2e5addacb87e459c86dc67e"
 dependencies = [
- "base64 0.21.7",
+ "base64 0.22.1",
  "blowfish",
  "getrandom",
  "subtle",
@@ -653,7 +659,7 @@ name = "crabfit-api"
 version = "3.0.0"
 dependencies = [
  "axum",
- "base64 0.21.7",
+ "base64 0.22.1",
  "bcrypt",
  "chrono",
  "common",
@@ -667,7 +673,7 @@ dependencies = [
  "serde_json",
  "sql-adaptor",
  "tokio",
- "tower",
+ "tower 0.5.2",
  "tower-http",
  "tower_governor",
  "tracing",
@@ -3536,7 +3542,7 @@ dependencies = [
  "tokio-rustls",
  "tokio-stream",
  "tokio-util 0.6.10",
- "tower",
+ "tower 0.4.13",
  "tower-service",
  "tracing",
  "tracing-futures",
@@ -3572,6 +3578,16 @@ dependencies = [
  "tower-layer",
  "tower-service",
  "tracing",
+]
+
+[[package]]
+name = "tower"
+version = "0.5.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d039ad9159c98b70ecfd540b2573b97f7f52c3e8d9f8ad57a24b916a536975f9"
+dependencies = [
+ "tower-layer",
+ "tower-service",
 ]
 
 [[package]]
@@ -3620,7 +3636,7 @@ dependencies = [
  "pin-project",
  "thiserror",
  "tokio",
- "tower",
+ "tower 0.4.13",
  "tower-layer",
  "tracing",
 ]
