@@ -43,7 +43,7 @@ impl Adaptor for MemoryAdaptor {
         let state = self.state.lock().await;
 
         // Event doesn't exist
-        if state.events.get(&event_id).is_none() {
+        if !state.events.contains_key(&event_id) {
             return Ok(None);
         }
 
@@ -71,7 +71,7 @@ impl Adaptor for MemoryAdaptor {
         let mut state = self.state.lock().await;
 
         // Check event exists
-        if state.events.get(&event_id).is_none() {
+        if !state.events.contains_key(&event_id) {
             return Ok(None);
         }
 

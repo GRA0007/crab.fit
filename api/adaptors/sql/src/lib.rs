@@ -214,8 +214,8 @@ impl From<event::Model> for Event {
         Self {
             id: value.id,
             name: value.name,
-            created_at: DateTime::<Utc>::from_utc(value.created_at, Utc),
-            visited_at: DateTime::<Utc>::from_utc(value.visited_at, Utc),
+            created_at: DateTime::from_naive_utc_and_offset(value.created_at, Utc),
+            visited_at: DateTime::from_naive_utc_and_offset(value.visited_at, Utc),
             times: serde_json::from_value(value.times).unwrap_or(vec![]),
             timezone: value.timezone,
         }
@@ -227,7 +227,7 @@ impl From<person::Model> for Person {
         Self {
             name: value.name,
             password_hash: value.password_hash,
-            created_at: DateTime::<Utc>::from_utc(value.created_at, Utc),
+            created_at: DateTime::from_naive_utc_and_offset(value.created_at, Utc),
             availability: serde_json::from_value(value.availability).unwrap_or(vec![]),
         }
     }
