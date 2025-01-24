@@ -1,7 +1,7 @@
 use std::{env, error::Error, fmt::Display};
 
 use async_trait::async_trait;
-use chrono::{DateTime, NaiveDateTime, Utc};
+use chrono::{DateTime, Utc};
 use common::{Adaptor, Event, Person, Stats};
 use google_cloud::{
     authorize::ApplicationCredentials,
@@ -297,7 +297,7 @@ impl DatastoreEvent {
 }
 
 fn unix_to_date(unix: i64) -> DateTime<Utc> {
-    DateTime::from_utc(NaiveDateTime::from_timestamp_opt(unix, 0).unwrap(), Utc)
+    DateTime::from_timestamp(unix, 0).unwrap()
 }
 
 #[derive(Debug)]

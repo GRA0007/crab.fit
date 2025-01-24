@@ -1,19 +1,17 @@
 use std::{env, net::SocketAddr, sync::Arc};
 
 use axum::{
-    error_handling::HandleErrorLayer,
     extract,
     http::{
         header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE},
         HeaderValue, Method,
     },
     routing::{get, patch, post},
-    BoxError, Router, Server,
+    Router,
 };
 use routes::*;
 use tokio::sync::Mutex;
-use tower::ServiceBuilder;
-use tower_governor::{errors::display_error, governor::GovernorConfigBuilder, GovernorLayer};
+use tower_governor::{governor::GovernorConfigBuilder, GovernorLayer};
 use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use tracing::Level;
 use utoipa::OpenApi;
@@ -63,40 +61,34 @@ async fn main() {
     // Rate limiting configuration (using tower_governor)
     // From the docs: Allows bursts with up to 20 requests and replenishes
     // one element after 500ms, based on peer IP.
-    let governor_config = Box::new(
+    let governor_conf = Arc::new(
         GovernorConfigBuilder::default()
             .burst_size(20)
             .finish()
             .unwrap(),
     );
-    let rate_limit = ServiceBuilder::new()
-        // Handle errors from governor and convert into HTTP responses
-        .layer(HandleErrorLayer::new(|e: BoxError| async move {
-            display_error(e)
-        }))
-        .layer(GovernorLayer {
-            config: Box::leak(governor_config),
-        });
 
     let app = Router::new()
         .merge(SwaggerUi::new("/docs").url("/docs/openapi.json", ApiDoc::openapi()))
         .route("/", get(get_root))
         .route("/stats", get(stats::get_stats))
         .route("/event", post(event::create_event))
-        .route("/event/:event_id", get(event::get_event))
-        .route("/event/:event_id/people", get(person::get_people))
+        .route("/event/{event_id}", get(event::get_event))
+        .route("/event/{event_id}/people", get(person::get_people))
         .route(
-            "/event/:event_id/people/:person_name",
+            "/event/{event_id}/people/{person_name}",
             get(person::get_person),
         )
         .route(
-            "/event/:event_id/people/:person_name",
+            "/event/{event_id}/people/{person_name}",
             patch(person::update_person),
         )
         .route("/tasks/cleanup", get(tasks::cleanup))
-        .with_state(shared_state)
         .layer(cors)
-        .layer(rate_limit)
+        .layer(GovernorLayer {
+            config: governor_conf,
+        })
+        .with_state(shared_state)
         .layer(TraceLayer::new_for_http());
 
     let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
@@ -110,15 +102,18 @@ async fn main() {
             "release"
         }
     );
-    Server::bind(&addr)
-        .serve(app.into_make_service_with_connect_info::<SocketAddr>())
-        .with_graceful_shutdown(async {
-            tokio::signal::ctrl_c()
-                .await
-                .expect("Failed to install Ctrl+C handler")
-        })
-        .await
-        .unwrap();
+    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+    axum::serve(
+        listener,
+        app.into_make_service_with_connect_info::<SocketAddr>(),
+    )
+    .with_graceful_shutdown(async {
+        tokio::signal::ctrl_c()
+            .await
+            .expect("Failed to install Ctrl+C handler")
+    })
+    .await
+    .unwrap();
 }
 
 async fn get_root() -> String {
