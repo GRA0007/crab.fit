@@ -1,8 +1,8 @@
 {
   "name": "Crab Fit",
   "tagline": "Skapa din egen",
-  "cta": "Erstelle deinen Crab Fit!",
-  "created": "Erstellt am {{date}}",
+  "cta": "Skapa din Crab Fit!",
+  "created": "Skapad {{date}}",
   "donate": {
     "info": "Danke, dass du Crab Fit verwendest. Wenn es dir gefällt, unterstütze uns doch!",
     "button": "Spenden",
