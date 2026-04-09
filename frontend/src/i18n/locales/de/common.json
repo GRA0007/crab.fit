@@ -2,7 +2,7 @@
   "name": "Crab Fit",
   "tagline": "Erstelle dein eigenes",
   "cta": "Erstelle deinen Crab Fit!",
-  "created": "Skapad {{date}}",
+  "created": "Erstellt am {{date}}",
   "donate": {
     "info": "Danke, dass du Crab Fit verwendest. Wenn es dir gefällt, unterstütze uns doch!",
     "button": "Spenden",
