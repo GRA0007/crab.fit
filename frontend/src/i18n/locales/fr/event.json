@@ -48,19 +48,23 @@
 
   "group": {
     "legend_tooltip": "Cliquez pour mettre en évidence les meilleures disponibilités",
-    "info1": "Survolez ou appuyez sur le calendrier ci-dessous pour voir qui est disponible",
-    "info2": "Cliquez sur les noms ci-dessous pour afficher les personnes individuellement"
+    "info1": "Survolez ou appuyez sur le calendrier ci-dessous pour voir qui est disponible, et cliquez pour copier les détails du créneau horaire",
+    "info2": "Cliquez sur les noms ci-dessous pour afficher les personnes individuellement",
+    "clipboard_message": "Personnes disponibles le {{date}}"
   },
 
   "you": {
     "info": "Cliquez et faites glisser le calendrier ci-dessous pour définir vos disponibilités",
     "select_all": "Tout sélectionner",
     "select_none": "Tout déselectionner",
+    "select_invert": "Inverser la sélection ",
 
     "google_cal": "Synchroniser avec Google Agenda",
     "outlook_cal": "Synchroniser avec le calendrier Outlook",
+    "recent_event": "Synchronisez avec un événement récent",
     "integration": {
       "logout": "déconnexion",
+      "close": "fermer",
       "info": "L'importation écrasera vos disponibilités actuelles",
       "button": "Importer les disponibilités"
     }

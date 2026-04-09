@@ -1,0 +1,72 @@
+{
+  "available": "有空",
+  "greyed_times": "这个时间段因为不在事件所选时间段内而被禁用。您的时区也许和创建项目的时区并不一致。",
+
+  "nav": {
+    "title": "点击复制",
+    "copied": "已复制！",
+    "shareinfo": "复制此页面的链接，或者通过<1>电子邮件</1>分享",
+    "shareinfo_alt": "点击上方的链接把它复制到你的剪贴板，或者通过<1>电子邮件</1>分享。",
+    "email_subject": "正在规划{{event_name}}",
+    "email_body": "请点击此链接填写您的可用时间。"
+  },
+  "form": {
+    "signed_out": "要填写您的可用时间，请登录",
+    "signed_in": "您已以{{name}}身份登录",
+
+    "name": "您的名称",
+    "password": "密码（可选）",
+    "button": "登录",
+    "logout_button": "退出",
+    "info": "这些信息只会被这个事件使用。设置密码可以防止您的可用时间被他人修改。",
+
+    "timezone": "您的时区",
+
+    "errors": {
+      "name_required": "我们需要您的名称来保存您的可用时间。",
+      "password_incorrect": "密码不正确。请检查您的名称是否拼写有误。",
+      "unknown": "登录失败，请重试。"
+    },
+
+    "created_in_timezone": "该事件是在<strong>{{timezone}}</strong>时区创建的。<3>点击这里</3>应用。",
+    "local_timezone": "检测到您的时区是<strong>{{timezone}}</strong>。<3>点击这里</3>应用。"
+  },
+  "offline": {
+    "title": "您已离线",
+    "body": "Crab Fit无法在离线状态下工作。<br />请确保您的设备已联网，然后重试。"
+  },
+  "error": {
+    "title": "找不到事件",
+    "body": "请检查您输入的链接是否有误。注意：为了保护您的隐私，事件会在3个月的不活跃之后被删除。"
+  },
+
+  "tabs": {
+    "you": "您的可用时间",
+    "you_tooltip": "要设置您的可用时间，请登录",
+    "group": "小组可用时间"
+  },
+
+  "group": {
+    "legend_tooltip": "点击高亮最多人选择的时间",
+    "info1": "您可以把鼠标悬浮在日历上或点击它来查看谁在这个时间有空，再次点击可以复制该时间段的详细信息。",
+    "info2": "点击下方的名称查看TA的信息",
+    "clipboard_message": "{{date}}有空的人"
+  },
+
+  "you": {
+    "info": "在下方的日历中拖动选择您的可用时间",
+    "select_all": "全选",
+    "select_none": "全不选",
+    "select_invert": "反向选择",
+
+    "google_cal": "同步到Google日历",
+    "outlook_cal": "同步到Outlook日历",
+    "recent_event": "与近期的事件同步",
+    "integration": {
+      "logout": "退出",
+      "close": "关闭",
+      "info": "导入操作会覆盖您当前的选择。",
+      "button": "导入可用时间"
+    }
+  }
+}

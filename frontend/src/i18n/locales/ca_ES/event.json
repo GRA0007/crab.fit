@@ -1,0 +1,72 @@
+{
+  "available": "disponibles",
+  "greyed_times": "Aquesta àrea està atenuada ja que no forma part dels horaris disponibles per a l'esdeveniment. És possible que estiguis accedint a aquest esdeveniment amb una zona horària diferent a la que es va usar en la creació d'aquest.",
+
+  "nav": {
+    "title": "Fes clic per copiar",
+    "copied": "Copiat!",
+    "shareinfo": "Copia l'enllaç d'aquesta pàgina, o comparteix-lo via <1>correu electrònic</1>.",
+    "shareinfo_alt": "Clica l'enllaç per copiar-lo al porta-retalls, o comparteix-lo via <1>correu electrònic</1>.",
+    "email_subject": "Programació de {{event_name}}",
+    "email_body": "Entra a aquest enllaç per a especificar la teva disponibilitat:"
+  },
+  "form": {
+    "signed_out": "Inicia sessió per a concretar la teva disponibilitat",
+    "signed_in": "Sessió iniciada com a {{name}}",
+
+    "name": "El teu nom",
+    "password": "Contrasenya (opcional)",
+    "button": "Iniciar sessió",
+    "logout_button": "Tancar sessió",
+    "info": "Aquestes credencials són úniques per a aquest esdeveniment. Utilitzeu una contrasenya si voleu evitar que altres modifiquin la vostra disponibilitat.",
+
+    "timezone": "La teva zona horària",
+
+    "errors": {
+      "name_required": "El teu nom és necessari per a enregistrar la teva disponibilitat.",
+      "password_incorrect": "La contrasenya és incorrecta. Comprova si el teu nom està escrit correctament.",
+      "unknown": "L'inici de sessió ha fallat. Si us plau, prova-ho de nou."
+    },
+
+    "created_in_timezone": "Aquest esdeveniment va ser creat amb la zona horària <strong>{{timezone}}</strong>. <3>Fes clic aquí</3> per utilitzar-la.",
+    "local_timezone": "Hem detectat que la teva zona horària és <strong>{{timezone}}</strong>. <3>Fes clic aquí</3> per utilitzar-la."
+  },
+  "offline": {
+    "title": "No tens connexió a la xarxa",
+    "body": "Crab Fit no funciona sense connexió a a xarxa.<br /> Assegura't de que estàs connectat a internet i prova-ho de nou."
+  },
+  "error": {
+    "title": "Esdeveniment no trobat",
+    "body": "Comprova que la URL és correcte. Tingues en compte que amb tal de protegir la privadesa dels nostres usuaris, els esdeveniments s'esborren automàticament després de 3 mesos d'inactivitat."
+  },
+
+  "tabs": {
+    "you": "La teva disponibilitat",
+    "you_tooltip": "Inicia sessió per establir la teva disponibilitat",
+    "group": "Disponibilitat del grup"
+  },
+
+  "group": {
+    "legend_tooltip": "Fes clic per ressaltar la disponibilitat més elevada",
+    "info1": "Posa el cursor a sobre del calendari per veure qui té disponibilitat i fes clic per a copiar els detalls de l'hora en qüestió",
+    "info2": "Fes clic sobre els noms de sota per veure'n la seva disponibilitat",
+    "clipboard_message": "Gent amb disponibilitat el {{date}}"
+  },
+
+  "you": {
+    "info": "Fes clic i arrossega el cursor pel calendari per establir la teva disponibilitat",
+    "select_all": "Seleccionar-ho tot",
+    "select_none": "Desseleccionar-ho tot",
+    "select_invert": "Invertir selecció",
+
+    "google_cal": "Sincronitzar amb Google Calendar",
+    "outlook_cal": "Sincronitzar amb el calendari d'Outlook",
+    "recent_event": "Sincronitzar amb un esdeveniment recent",
+    "integration": {
+      "logout": "tancar sessió",
+      "close": "tanca",
+      "info": "El procés d'importació sobreescriurà la teva disponibilitat actual",
+      "button": "Importar disponibilitat"
+    }
+  }
+}

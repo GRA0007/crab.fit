@@ -1,0 +1,72 @@
+{
+  "available": "tilgængelig",
+  "greyed_times": "Dette område er maskeret, fordi det ikke er en del af begivenheden. Måske ser du på denne begivenhed i en anden tidszone end hvor den blev oprettet.",
+
+  "nav": {
+    "title": "Klik for at kopiere",
+    "copied": "Kopieret!",
+    "shareinfo": "Kopier linket til denne side, eller del <1>e-mail</1>.",
+    "shareinfo_alt": "Klik på linket ovenfor for at kopiere det til din udklipsholder eller del via <1>e-mail</1>.",
+    "email_subject": "Planlægning af {{event_name}}",
+    "email_body": "Besøg dette link for at angive hvornår du er tilgængelig:"
+  },
+  "form": {
+    "signed_out": "Log ind for at tilføje din tilgængelighed",
+    "signed_in": "Logget ind som {{name}}",
+
+    "name": "Dit navn",
+    "password": "Adgangskode (valgfri)",
+    "button": "Log ind",
+    "logout_button": "Log ud",
+    "info": "Disse detaljer er kun til denne begivenhed. Brug et kodeord for at forhindre andre i at ændre din tilgængelighed.",
+
+    "timezone": "Din tidszone",
+
+    "errors": {
+      "name_required": "Dit navn er nødvendigt for at gemme din tilgængelighed.",
+      "password_incorrect": "Adgangskoden er forkert. Tjek at dit navn er stavet korrekt.",
+      "unknown": "Fejl ved login. Prøv venligst igen."
+    },
+
+    "created_in_timezone": "Denne begivenhad blev oprettet i tidsxonen <strong>{{timezone}}</strong>. <3>Klik her</3> for at bruge den.",
+    "local_timezone": "Din lokale tidszone er registreret som <strong>{{timezone}}</strong>. <3>Klik her</3> for at bruge den."
+  },
+  "offline": {
+    "title": "Du er offline",
+    "body": "En Crab Fit fungerer ikke offline.<br />Sørg for, at du er forbundet til internettet, og prøv igen."
+  },
+  "error": {
+    "title": "Begivenhed ikke fundet",
+    "body": "Kontroller, at den indtastede URL er korrekt. Bemærk, at begivenheder slettes efter 3 måneders inaktivitet for at beskytte dit privatliv."
+  },
+
+  "tabs": {
+    "you": "Din tilgængelighed",
+    "you_tooltip": "Log ind for at angive din tilgængelighed",
+    "group": "Gruppens tilgængelighed"
+  },
+
+  "group": {
+    "legend_tooltip": "Klik for at fremhæve højeste tilgængelighed",
+    "info1": "Svæv over eller tryk på kalenderen nedenfor for at se, hvem der er tilgængelig, og klik for at kopiere detaljer om et tidsinterval.",
+    "info2": "Klik på navnene nedenfor for at se personerne individuelt.",
+    "clipboard_message": "Mennesker tilgængelige den {{date}}"
+  },
+
+  "you": {
+    "info": "Klik og træk kalenderen nedenfor for at angive dine tilgængeligheder",
+    "select_all": "Vælg alle",
+    "select_none": "Vælg ingen",
+    "select_invert": "Vælg det modsatte",
+
+    "google_cal": "Synkronisér med Google-kalender",
+    "outlook_cal": "Synkronisér med Outlook-kalender",
+    "recent_event": "Synkronisér med en nylig begivenhed",
+    "integration": {
+      "logout": "log ud",
+      "close": "luk",
+      "info": "Importering vil overskrive din nuværende tilgængelighed",
+      "button": "Importér tilgængelighed"
+    }
+  }
+}

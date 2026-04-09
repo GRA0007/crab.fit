@@ -1,0 +1,59 @@
+{
+  "create": "CREA UN",
+  "recently_visited": "Accedits recentment",
+  "form": {
+    "name": {
+      "label": "Posa nom al teu esdeveniment!",
+      "sublabel": "O deixa'l en blanc per generar-ne un aleatori"
+    },
+    "dates": {
+      "label": "Quin rang de dies s'adequa a l'esdeveniment?",
+      "sublabel": "Fes clic i arrossega el cursor per seleccionar",
+      "options": {
+        "specific": "Dies específics",
+        "week": "Dies de la setmana"
+      },
+      "tooltips": {
+        "previous": "Mes anterior",
+        "next": "Mes següent",
+        "today": "avui"
+      },
+      "warnings": {
+        "date_in_past": "Alguns dels dies que has seleccionat ja han passat"
+      }
+    },
+    "times": {
+      "label": "Quines hores son apropiades per l'esdeveniment?",
+      "sublabel": "Fes clic i arrossega el cursor per seleccionar el rang de temps"
+    },
+    "timezone": {
+      "label": "Zona horària",
+      "defaultOption": "Selecciona..."
+    },
+
+    "button": "Crear",
+    "errors": {
+      "no_dates": "No hi ha cap dia seleccionat",
+      "same_times": "L'esdeveniment no pot començar i acabar a la mateixa hora",
+      "no_time": "No hi ha cap hora seleccionada",
+      "unknown": "Error intern. Si us plau, prova-ho més tard."
+    }
+  },
+
+  "about": {
+    "name": "Sobre Crab Fit",
+    "events": "Esdeveniments creats",
+    "availabilities": "Disponibilitats entrades",
+    "content": {
+      "p1": "Crab Fit t'ajuda a adaptar el teu esdeveniment als horaris dels participants. Només cal crear un esdeveniment a la part superior de la pàgina i enviar el enllaç als assistents. Podràs veure les disponibilitats actualitzar-se en viu en un mapa de calor. <1/><2>Descrobreix més sobre com usar Crab Fit</2>.",
+      "p3": "Creat per <1>Ben Grant</1>, Crab Fit és la solució moderna pels debats de coordinació d'horaris.",
+      "p4": "Crab Fit és de codi obert, si hi trobes cap problema o vols contribuir-hi, pots visitar el <1>repositori</1>. Al utilitzar Crab Fit acceptes la <3>política de privadesa</3>.",
+      "p6": "Amb tal de protegir la teva privadesa, els esdeveniments s'esborren després de 3 mesos d'inactivitat i totes les credencials s'encripten amb algorismes segurs de xifrat.",
+      "p5": "Considera fer una donació si Crab Fit t'ha estat útil, amb tal de poder mantenir el seu ús gratuït per tothom. 🦀"
+    },
+    "chrome_extension": "Adquireix l'extensió per a Chrome",
+    "firefox_extension": "Adquireix l'extensió per a Firefox",
+    "safari_extension": "Adquireix l'extensió per a Safari",
+    "android_app": "Adquireix l'aplicació per a dispositius Android"
+  }
+}

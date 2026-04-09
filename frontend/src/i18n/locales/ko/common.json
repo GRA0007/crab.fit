@@ -1,23 +1,12 @@
 {
   "name": "Crab Fit",
-  "tagline": "직접 만들어 봐",
+  "tagline": "새로운 Crab Fit 만들기",
   "cta": "나만의 Crab Fit을 만드세요!",
   "created": "{{date}} 생성됨",
   "donate": {
     "info": "Crab Fit을 이용해 주셔서 감사합니다. 마음에 들면 기부를 고려하십시오.",
     "button": "기부하다",
-    "title": "모든 금액이 차이를 만듭니다",
-    "options": {
-      "$2": "$ 2 기부",
-      "$5": "$ 5 기부",
-      "$10": "$ 10 기부",
-      "choose": "금액을 선택하세요"
-    },
-    "messages": {
-      "about": "도움이 되었으면 계속해서 운영 할 수 있도록 기부하는 것을 고려하십시오. 🦀",
-      "success": "기부 해 주셔서 감사합니다! 당신이 없었다면 Crab Fit은 무료가 될 수 없으니 감사하고 계속해서 최고가 되세요!",
-      "error": "Google을 통해 기부 할 수 없습니다. 웹 사이트 crab.fit을 통해 기부 해주세요 🦀"
-    }
+    "title": "모든 항목이 합산됩니다 :)"
   },
   "options": {
     "name": "옵션",
@@ -47,12 +36,20 @@
       "label": "고 가용성 강조",
       "title": "히트 맵에서 가장 높은 가용성을 돋보이게합니다.",
       "options": {
-        "Off": "꺼진",
-        "On": "켜진"
+        "Off": "꺼짐",
+        "On": "켜짐"
       }
     },
     "language": {
       "label": "언어"
+    },
+    "colormap": {
+      "label": "히트맵 색상",
+      "classic": "Crab Fit (classic)"
     }
+  },
+  "video": {
+    "title": "Crab Fit 홍보영상",
+    "button": "영상 시청하기"
   }
 }

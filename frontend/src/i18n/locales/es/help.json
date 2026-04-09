@@ -1,23 +1,23 @@
 {
-  "name": "Como usar Crab Fit",
+  "name": "Cómo usar Crab Fit",
 
-  "p1": "Crab Fit is a tool that helps you when planning events with friends or coworkers. You just create an event, enter your availability, send it out, and see when everyone is free!",
-  "p2": "See below for detailed steps of how to Crab Fit your event.",
+  "p1": "Crab Fit es una herramienta que te ayuda a planear eventos con amigos o compañeros. Simplemente crea un evento, elije cuando estás disponible, envíalo y comprueba la disponibilidad de los otros.",
+  "p2": "A continuación se detalla el proceso de creación de un Crab Fit.",
 
   "s1": "Paso 1",
 
-  "p3": "Use the form at <1>crab.fit</1> to make a new event. You only need to put in the rough time period for when your event occurs here, not your availability.",
-  "p4": "For example, we'll use \"Jenny's Birthday Lunch\". Jenny wants her birthday lunch to happen on the same week as her birthday, the 15th of April, but she knows that not all of her friends are available on the 15th. She also doesn't want to do it on the weekend.",
-  "p5": "Jenny also knows that since it's a lunch event, it can't start before 11am or go any later than 5pm.",
+  "p3": "Usa el formulario de <1>crab.fit</1> para crear un nuevo evento. Sólo tienes que poner la franja horaria aproximada para tu evento, no tu disponibilidad.",
+  "p4": "Vamos a usar la fiesta de aniversario de Jenny como ejemplo. Jenny quiere organizar un almuerzo para su aniversario y quiere que este se celebre durante la misma semana, la del 15 de abril, pero también sabe que el 15 no podrían asistir todos sus amigos. Ha decidido que no quiere celebrarlo durante el fin de semana.",
+  "p5": "Jenny también sabe que, dado que es un almuerzo, este no puede empezar antes de las 11AM o acabar después de las 5PM.",
 
   "s2": "Paso 2",
 
-  "p6": "Enter your availability for the event you just created.",
-  "p7": "In our example, Jenny now puts in her availability for her birthday lunch. She is free all week, except after 3pm on Tuesday and Wednesday, and before 1pm on Friday.",
+  "p6": "Elije tu disponibilidad para el evento que acabas de crear.",
+  "p7": "En nuestro ejemplo, Jenny elije su disponibilidad para el almuerzo. Está disponible durante toda la semana, exceptuando el martes y el miércoles después de las 3PM y el viernes antes de la 1PM.",
 
   "s3": "Paso 3",
 
-  "p8": "Send the link to everyone you want to come.",
-  "p9": "After Jenny has sent the link to her friends and waited for them to also fill out their availabilities, she can now easily see them all on the heatmap below and choose the darkest area for a time that suits everyone!",
-  "p10": "In this example, 1pm to 3pm on Friday the 16th works for all Jenny's friends."
+  "p8": "Envía el enlace a todos los participantes.",
+  "p9": "Una vez Jenny ha enviado el enlace a sus amigos y ha esperado a que rellenaran el Crab Fit, los puede ver fácilmente en el mapa de calor y organizar el evento durante las horas indicadas por el área más oscura, cuando todos pueden asistir.",
+  "p10": "En este ejemplo, podemos ver que todos los amigos de Jenny están disponibles de 1PM a 3PM el viernes 16."
 }

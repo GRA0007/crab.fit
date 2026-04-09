@@ -1,0 +1,23 @@
+{
+  "name": "Kiel Crab Fit",
+
+  "p1": "Crab Fit estas ilo, kiu helpas vin kiam vi planas eventojn kun amikoj aŭ kunlaborantoj. Vi nur kreas eventon, enigu vian disponeblan, sendu ĝin kaj vidu kiam ĉiuj estas liberaj!",
+  "p2": "Vidu sube por detalaj paŝoj pri kiel Crab Fit vian eventon.",
+
+  "s1": "Paŝo 1",
+
+  "p3": "Uzu la formularon ĉe <1>crab.fit</1> por fari novan eventon. Vi nur bezonas enmeti la malglatan periodon por kiam via evento okazas ĉi tie, ne vian disponeblon.",
+  "p4": "Ekzemple, ni uzos \"Naskiĝtagmanĝo de Jenny\". Jenny volas ke ŝia naskiĝtaga tagmanĝo okazu en la sama semajno kiel ŝia naskiĝtago, la 15-a de aprilo, sed ŝi scias ke ne ĉiuj ŝiaj amikoj estas disponeblaj la 15-an. Ŝi ankaŭ ne volas fari ĝin dum la semajnfino.",
+  "p5": "Jenny ankaŭ scias, ke ĉar ĝi estas tagmanĝa evento, ĝi ne povas komenci antaŭ la 11-a aŭ iri poste ol la 5-a.",
+
+  "s2": "Paŝo 2",
+
+  "p6": "Enigu vian disponeblon por la evento kiun vi ĵus kreis.",
+  "p7": "En nia ekzemplo, Jenny nun metas sian disponeblon por sia naskiĝtaga tagmanĝo. Ŝi estas libera la tutan semajnon, krom post la 15a horo marde kaj merkredo, kaj antaŭ la 13a horo vendrede.",
+
+  "s3": "Paŝo 3",
+
+  "p8": "Sendu la ligilon al ĉiuj, kiujn vi volas veni.",
+  "p9": "Post kiam Jenny sendis la ligon al siaj amikoj kaj atendis, ke ili ankaŭ plenigu iliajn disponojn, ŝi nun povas facile vidi ilin ĉiujn sur la varmomapo sube kaj elekti la plej malhelan areon por tempo, kiu konvenas al ĉiuj!",
+  "p10": "En ĉi tiu ekzemplo, 13-a ĝis 15-a vendrede la 16-a funkcias por ĉiuj amikoj de Jenny."
+}

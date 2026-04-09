@@ -1,0 +1,59 @@
+{
+  "create": "CREATE A",
+  "recently_visited": "Nyligt besøgt",
+  "form": {
+    "name": {
+      "label": "Giv din begivenhed et navn!",
+      "sublabel": "Eller lad være blank for at danne et"
+    },
+    "dates": {
+      "label": "Hvilke datoer kunne fungere?",
+      "sublabel": "Klik og træk for at vælge",
+      "options": {
+        "specific": "Specifikke datoer",
+        "week": "Ugedage"
+      },
+      "tooltips": {
+        "previous": "Forrige måned",
+        "next": "Næste måned",
+        "today": "i dag"
+      },
+      "warnings": {
+        "date_in_past": "Nogle af de datoer, du har valgt, er i fortiden."
+      }
+    },
+    "times": {
+      "label": "Hvilke tidspunkter kunne fungere?",
+      "sublabel": "Klik og træk for at vælge et tidsinterval"
+    },
+    "timezone": {
+      "label": "Og tidszonen",
+      "defaultOption": "Vælg..."
+    },
+
+    "button": "Opret",
+    "errors": {
+      "no_dates": "Der er ikke valgt nogen datoer",
+      "same_times": "Start- og sluttidspunkterne kan ikke være ens",
+      "no_time": "Der er ikke valgt nogen tid.",
+      "unknown": "Noget gik galt. Prøv venligst igen senere."
+    }
+  },
+
+  "about": {
+    "name": "Om Crab Fit",
+    "events": "Begivenheder oprettet",
+    "availabilities": "Tilgængeligheder angivet",
+    "content": {
+      "p1": "Crab Fit hjælper dig med at tilpasse dit arrangement til alles tidsplaner. Opret blot et arrangement ovenfor og send linket til alle, der deltager. Resultaterne opdateres live, og du vil kunne se et farvediagram over, hvornår alle er ledige.<1/><2>Lær mere om, hvordan du bruger Crab Fit.</2>.",
+      "p3": "Crab Fit er udviklet af <1>Ben Grant</1>, og er den moderne løsning på dine gruppebegivenhedsplanlægningsdisussioner.",
+      "p4": "Koden til Crab Fit er åben kildekode. Hvis du finder fejl eller ønsker at bidrage, kan du gå til <1>kildekodearkivet</1>. Ved at bruge Crab Fit accepterer du <3>privatlivspolitikken</3>.",
+      "p6": "For at beskytte dit privatliv slettes begivenheder efter 3 måneders inaktivitet, og alle adgangskoder er sikkert hashet.",
+      "p5": "Overvej at donere nedenfor, hvis det har hjulpet dig, så Crab Fit kan forblive gratis for alle. 🦀"
+    },
+    "chrome_extension": "Hent Chrome-udvidelsen",
+    "firefox_extension": "Hent Firefox-udvidelsen",
+    "safari_extension": "Hent Safari-udvidelsen",
+    "android_app": "Download Android-appen"
+  }
+}

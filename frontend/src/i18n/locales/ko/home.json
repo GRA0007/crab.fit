@@ -4,10 +4,10 @@
   "form": {
     "name": {
       "label": "이벤트 이름을 지정하세요!",
-      "sublabel": "또는 공백으로 두어 생성하십시오"
+      "sublabel": "또는 공백으로 두어 랜덤으로 생성"
     },
     "dates": {
-      "label": "어떤 날짜를 작동 할 수 있습니다?",
+      "label": "어떤 날자를 선택하시겠습니까?",
       "sublabel": "클릭하고 드래그하여 선택",
       "options": {
         "specific": "특정 날짜",
@@ -17,22 +17,25 @@
         "previous": "지난 달",
         "next": "다음 달",
         "today": "오늘"
+      },
+      "warnings": {
+        "date_in_past": "선택된 날짜 중 일부는 과거입니다."
       }
     },
     "times": {
-      "label": "어느 시간이 효과가 있습니까?",
-      "sublabel": "시간 범위를 선택하려면 클릭하고 드래그하세요"
+      "label": "어느 시간대가 좋을까요?",
+      "sublabel": "클릭과 드래그를 통해 시간 범위를 선택하세요"
     },
     "timezone": {
       "label": "시간대",
       "defaultOption": "고르다..."
     },
 
-    "button": "창조하다",
+    "button": "만들기",
     "errors": {
-      "no_dates": "선택한 모든 날짜가 없습니다",
+      "no_dates": "선택한 날짜가 없습니다",
       "same_times": "시작 시간과 종료 시간은 같을 수 없습니다",
-      "no_time": "선택한 시간이 없습니다",
+      "no_time": "선택된 시간이 없습니다",
       "unknown": "문제가 발생했습니다. 나중에 다시 시도 해주십시오."
     }
   },
@@ -40,7 +43,7 @@
   "about": {
     "name": "Crab Fit 정보",
     "events": "생성 된 이벤트 수",
-    "availabilities": "입력 된 가용성 수",
+    "availabilities": "입력 된 시간 수",
     "content": {
       "p1": "Crab Fit은 모든 사람의 일정에 맞춰 이벤트를 조정할 수 있도록 도와줍니다. 위에서 이벤트를 만들고 참여하는 모든 사람에게 링크를 보내십시오. 결과가 실시간으로 업데이트되고 모든 사람이 가용성의 히트 맵을 볼 수 있습니다.<1/><2>Crab Fit 방법</2>.",
       "p3": "<1>Ben Grant</1>가 만든 Crab Fit은 그룹 이벤트 계획 토론에 대한 현대적인 솔루션입니다.",
@@ -48,9 +51,9 @@
       "p6": "개인 정보를 보호하기 위해 이벤트는 3개월 동안 사용하지 않으면 삭제되고 모든 암호는 안전하게 해시됩니다.",
       "p5": "모든 사람이 무료로 사용할 수 있도록 아래 기부를 고려하세요. 🦀"
     },
-    "chrome_extension": "Chrome Extension을 가져옵니다",
-    "firefox_extension": "Firefox Extension을 가져옵니다",
-    "safari_extension": "Safari Extension을 가져옵니다",
-    "android_app": "Android 앱을 다운로드합니다"
+    "chrome_extension": "Chrome Extension 설치하기",
+    "firefox_extension": "Firefox Extension 설치하기",
+    "safari_extension": "Safari Extension 설치하기",
+    "android_app": "Android 앱 다운로드"
   }
 }

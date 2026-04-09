@@ -1,62 +1,62 @@
 {
-  "available": "disponible",
-  "greyed_times": "Esta área está atenuada porque no es parte del evento. Es posible que esté viendo este evento en una zona horaria diferente de donde se creó.",
+  "available": "disponibles",
+  "greyed_times": "Esta área está atenuada porque no forma parte del evento. Es posible que este se haya creado en una zona horaria distinta a la que has seleccionado.",
 
   "nav": {
-    "title": "Haga clic para copiar",
+    "title": "Haz clic para copiar",
     "copied": "¡Copiado!",
-    "shareinfo": "Copie el enlace a esta página o compártalo por <1>correo electrónico</1>.",
-    "shareinfo_alt": "Haga clic en el enlace de arriba para copiarlo en su portapapeles o compartirlo por <1>correo electrónico</1>.",
+    "shareinfo": "Copia el enlace a esta página o compártelo por <1>correo electrónico</1>.",
+    "shareinfo_alt": "Haz clic en el enlace de arriba para copiarlo en tu portapapeles o compártelo por <1>correo electrónico</1>.",
     "email_subject": "Programación de {{event_name}}",
-    "email_body": "Visite este enlace para ingresar sus disponibilidades:"
+    "email_body": "Abre este enlace para ingresar tu disponibilidad:"
   },
   "form": {
-    "signed_out": "Inicia sesión para añadir su disponibilidad",
+    "signed_out": "Inicia sesión para añadir tu disponibilidad",
     "signed_in": "Has iniciado sesión como {{name}}",
 
     "name": "Tu nombre",
     "password": "Contraseña (opcional)",
     "button": "Iniciar sesión",
-    "logout_button": "Desconectar",
-    "info": "Estos detalles son solo para este evento. Utilice una contraseña para evitar que otros cambien su disponibilidad.",
+    "logout_button": "Cerrar sesión",
+    "info": "Estos detalles son solo para este evento. Utiliza una contraseña para evitar que otros cambien tu disponibilidad.",
 
     "timezone": "Tu zona horaria",
 
     "errors": {
-      "name_required": "Su nombre es necesario para almacenar su disponibilidad.",
-      "password_incorrect": "La contraseña es incorrecta. Compruebe que su nombre esté bien escrito.",
+      "name_required": "Tu nombre es necesario para almacenar tu disponibilidad.",
+      "password_incorrect": "La contraseña es incorrecta. Comprueba que tu nombre esté bien escrito.",
       "unknown": "Error al iniciar sesión. Inténtalo de nuevo."
     },
 
-    "created_in_timezone": "Este evento se creó en la zona horaria <strong>{{timezone}}</strong>. <3>Haga clic aquí</3> para usarlo.",
-    "local_timezone": "Se detecta que su zona horaria local es <strong>{{timezone}}</strong>. <3>Haga clic aquí</3> para usarlo."
+    "created_in_timezone": "Este evento se creó en la zona horaria <strong>{{timezone}}</strong>. <3>Haz clic aquí</3> para usarla.",
+    "local_timezone": "Se ha detectado que tu zona horaria local es <strong>{{timezone}}</strong>. <3>Haz clic aquí</3> para usarla."
   },
   "offline": {
-    "title": "Estas desconectado",
+    "title": "Estás desconectado",
     "body": "Un Crab Fit no funciona sin conexión.<br />Asegúrate de estar conectado a Internet y vuelve a intentarlo."
   },
   "error": {
     "title": "Evento no encontrado",
-    "body": "Verifique que la URL que ingresó sea correcta. Tenga en cuenta que para proteger su privacidad, los eventos se eliminan después de 3 meses de inactividad."
+    "body": "Verifica que la URL que a la has ingresado sea correcta. Ten en cuenta que para proteger la privacidad de nuestros usuarios, los eventos se eliminan después de 3 meses de inactividad."
   },
 
   "tabs": {
     "you": "Tu disponibilidad",
-    "you_tooltip": "Inicie sesión para establecer su disponibilidad",
+    "you_tooltip": "Inicia sesión para establecer tu disponibilidad",
     "group": "Disponibilidad del grupo"
   },
 
   "group": {
-    "legend_tooltip": "Haga clic para resaltar la disponibilidad más alta",
+    "legend_tooltip": "Haz clic para resaltar la disponibilidad más elevada",
     "info1": "Pon el ratón encima para ver quien está disponible, y haz clic para copiar los datos de disponibilidad",
-    "info2": "Haga clic en los nombres a continuación para ver a las personas individualmente",
+    "info2": "Haz clic en los nombres a continuación para ver la disponibilidad de estos",
     "clipboard_message": "Personas disponibles el {{date}}"
   },
 
   "you": {
-    "info": "Haga clic y arrastre el calendario a continuación para configurar sus disponibilidades",
+    "info": "Haz clic y arrastra el calendario a continuación para configurar tu disponibilidad",
     "select_all": "Seleccionar todo",
-    "select_none": "Seleccionar ninguno",
+    "select_none": "Deseleccionar todo",
     "select_invert": "Invertir selección",
 
     "google_cal": "Sincronizar con Google Calendar",
@@ -65,8 +65,8 @@
     "integration": {
       "logout": "cerrar sesión",
       "close": "cerrar",
-      "info": "La importación sobrescribirá su disponibilidad actual",
-      "button": "Disponibilidad de importación"
+      "info": "El proceso de importación sobrescribirá tu disponibilidad actual",
+      "button": "Importar disponibilidad"
     }
   }
 }

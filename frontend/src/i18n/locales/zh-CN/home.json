@@ -1,0 +1,59 @@
+{
+  "create": "CREATE A",
+  "recently_visited": "近期访问",
+  "form": {
+    "name": {
+      "label": "为您的事件起个名字！",
+      "sublabel": "或者留空，我们为您生成一个"
+    },
+    "dates": {
+      "label": "哪些日期可行？",
+      "sublabel": "拖拽选择",
+      "options": {
+        "specific": "特定日期",
+        "week": "按星期选择"
+      },
+      "tooltips": {
+        "previous": "上个月",
+        "next": "下个月",
+        "today": "今天"
+      },
+      "warnings": {
+        "date_in_past": "您选中了一些过去的日期"
+      }
+    },
+    "times": {
+      "label": "哪个时间段可行？",
+      "sublabel": "拖动选择时间范围"
+    },
+    "timezone": {
+      "label": "以及事件时区",
+      "defaultOption": "选择…"
+    },
+
+    "button": "创建",
+    "errors": {
+      "no_dates": "您没有选择任何日期。",
+      "same_times": "开始与结束时间不能相同。",
+      "no_time": "您没有选择任何时间。",
+      "unknown": "出错了，请稍候重试。"
+    }
+  },
+
+  "about": {
+    "name": "关于Crab Fit",
+    "events": "已创建事件数",
+    "availabilities": "已填入时间数",
+    "content": {
+      "p1": "Crab Fit帮助您把事件规划到对所有人都合适的时间。只需在上面创建一个时间，然后把链接发给所有参与的人。结果会实时更新，然后您将可以看到一个可用时间的热度图。<1/><2>了解Crab Fit的详细使用方法</2>。",
+      "p3": "该网站由<1>Ben Grant</1>创建。Crab Fit是您的时间规划问题的现代处理方案。",
+      "p4": "Crab Fit是一个开源网站。如果您发现了任何问题或者想要做出贡献，您可以访问<1>源代码仓库</1>。使用Crab Fit代表您同意<3>隐私政策</3>。.",
+      "p6": "为了保护您的隐私，每个事件会在不活跃3个月之后被删除，且所有的密码都经过安全加密。",
+      "p5": "如果Crab Fit帮到了您，请考虑捐赠一下，这样我们就能保持免费。🦀"
+    },
+    "chrome_extension": "获取Chrome扩展",
+    "firefox_extension": "获取Firefox扩展",
+    "safari_extension": "获取Safari扩展",
+    "android_app": "下载Android APP"
+  }
+}

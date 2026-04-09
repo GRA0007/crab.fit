@@ -1,0 +1,23 @@
+{
+  "name": "Com usar Crab Fit",
+
+  "p1": "Crab Fit és una eina que t'ajuda a planejar esdeveniments amb amics o companys. Només necessites crear un esdeveniment, especificar la teva disponibilitat, enviar-lo i podràs veure els horaris de tothom!",
+  "p2": "A continuació es descriu el procés de creació d'un Crab Fit.",
+
+  "s1": "Pas 1",
+
+  "p3": "Utilitza el formulari disponible a <1>crab.fit</1> per crear un nou esdeveniment. Només és necessari especificar els horaris aproximats de l'esdeveniment, no la teva disponibilitat.",
+  "p4": "Utilitzarem la festa d'aniversari de la Jenny com a exemple. La Jenny vol organitzar un dinar per celebrar el seu aniversari, i vol fer-ho la mateixa setmana, la del 15 d'abril, però sap que no tots els seus amics hi poden assistir el 15. També ha decidit que no ho vol celebrar durant el cap de setmana.",
+  "p5": "La Jenny també sap que, donat que es un dinar, no pot començar abans de les 11AM o acabar després de les 5PM.",
+
+  "s2": "Pas 2",
+
+  "p6": "Concreta la teva disponibilitat per l'esdeveniment que acabes de crear.",
+  "p7": "En el nostre exemple, la Jenny especifica la seva disponibilitat pel dinar. Pot durant tota la setmana, exceptuant el dimarts i dimecres després de les 3PM i el divendres no pot abans de la 1PM.",
+
+  "s3": "Pas 3",
+
+  "p8": "Envia el enllaç a tots els assistents.",
+  "p9": "Un cop la Jenny ha enviat l'enllaç als seus amics i ha esperat a que omplissin les seves disponibilitats, les pot veure clarament al mapa de calor de sota i pot organitzar el seu esdeveniment durant la franja horària il·lustrada per l'àrea de color més fosc, quan hi pot assistir tothom.",
+  "p10": "En aquest exemple, tots els amics de la Jenny tenen disponible el divendres 16 de 1PM a 3PM."
+}

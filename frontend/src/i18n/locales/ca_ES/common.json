@@ -1,0 +1,55 @@
+{
+  "name": "Crab Fit",
+  "tagline": "Crea el teu",
+  "cta": "Crea el teu Crab Fit!",
+  "created": "Creat {{date}}",
+  "donate": {
+    "info": "Gràcies per utilitzar Crab Fit. Si t'és útil, considera fer una donació.",
+    "button": "Fer una donació",
+    "title": "Cada cèntim compta :)"
+  },
+  "options": {
+    "name": "Opcions",
+    "weekStart": {
+      "label": "La setmana comença el",
+      "options": {
+        "Sunday": "Diumenge",
+        "Monday": "Dilluns"
+      }
+    },
+    "timeFormat": {
+      "label": "Format horari",
+      "options": {
+        "12h": "12h",
+        "24h": "24h"
+      }
+    },
+    "theme": {
+      "label": "Tema",
+      "options": {
+        "System": "Automàtic",
+        "Light": "Clar",
+        "Dark": "Fosc"
+      }
+    },
+    "highlight": {
+      "label": "Ressaltar la disponibilitat més alta",
+      "title": "Fes que la disponibilitat més alta destaqui en el mapa de calor",
+      "options": {
+        "Off": "Apagat",
+        "On": "Encès"
+      }
+    },
+    "language": {
+      "label": "Idioma"
+    },
+    "colormap": {
+      "label": "Colors del mapa de calor",
+      "classic": "Crab Fit (clàssic)"
+    }
+  },
+  "video": {
+    "title": "Vídeo promocional de Crab Fit",
+    "button": "Veure el vídeo"
+  }
+}

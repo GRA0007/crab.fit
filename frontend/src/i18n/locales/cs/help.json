@@ -1,0 +1,23 @@
+{
+  "name": "Jak používat Crab Fit",
+
+  "p1": "Crab Fit je nástroj, který vám pomůže při plánování akcí s přáteli nebo spolupracovníky. Stačí vytvořit událost, zadat své volné termíny, odeslat ji a zjistit, kdy mají všichni čas!",
+  "p2": "Níže naleznete podrobný postup, jak na vaši událost.",
+
+  "s1": "Krok 1",
+
+  "p3": "Použijte formulář na adrese <1> crab.fit </1> pro vytvoření nové události. Zde je třeba zadat pouze přibližný časový úsek, kdy se událost může konat, nikoliv vaše volné termíny.",
+  "p4": "Například \"Oslava narozenin Alex\". Alex chce, aby se její narozeninový oběd konal ve stejný týden, kdy má narozeniny, tedy 15. dubna, ale ví, že ne celé její kamarádstvo je 15. dubna k dispozici. Také ho nechce uskutečnit o víkendu.",
+  "p5": "Alex také ví, že vzhledem k tomu, že se jedná o polední akci, nemůže začít před 11. hodinou dopoledne ani skončit později než v 17 hodin.",
+
+  "s2": "Krok 2",
+
+  "p6": "Zadejte svou dostupnost pro právě vytvořenou událost.",
+  "p7": "V našem příkladu nyní Alex zadá svou dostupnost pro narozeninový oběd. Má volno po celý týden, kromě úterý a středy po 15:00 a v pátek před 13:00.",
+
+  "s3": "Krok 3",
+
+  "p8": "Pošlete odkaz všem, kteří chtějí přijít.",
+  "p9": "Poté, co Alex poslala odkaz svému kamarádstvu a počkala, až také vyplní své volné termíny, může je nyní všechny snadno vidět na níže uvedené mapě a vybrat si nejtmavší oblast pro čas, který vyhovuje všem!",
+  "p10": "V tomto příkladu platí pro všechny Alex přátele čas od 13:00 do 15:00 v pátek 16. září."
+}

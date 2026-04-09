@@ -1,0 +1,72 @@
+{
+  "available": "mám čas",
+  "greyed_times": "Tato oblast je šedá, protože není součástí události. Je možné, že se na tuto událost díváte v jiném časovém pásmu, než ve kterém byla vytvořena.",
+
+  "nav": {
+    "title": "Kliknutím zkopírujete",
+    "copied": "Zkopírováno!",
+    "shareinfo": "Zkopírujte odkaz na tuto stránku nebo jej sdílejte <1> e-mailem </1>.",
+    "shareinfo_alt": "Kliknutím na výše uvedený odkaz jej zkopírujte do schránky, nebo jej sdílejte prostřednictvím <1> e-mailu </1>.",
+    "email_subject": "Plánování {{event_name}}",
+    "email_body": "Na tomto odkazu zadejte své volné termíny:"
+  },
+  "form": {
+    "signed_out": "Přihlaste se pro vyplnění svých volných termínů",
+    "signed_in": "Jste přihlášeni jako {{name}}",
+
+    "name": "Vaše jméno",
+    "password": "Heslo (nepovinné)",
+    "button": "Přihlášení",
+    "logout_button": "Odhlásit se",
+    "info": "Tyto údaje se týkají pouze této akce. Použijte heslo, abyste zabránili ostatním ve změně vašich volných termínů.",
+
+    "timezone": "Vaše časové pásmo",
+
+    "errors": {
+      "name_required": "Vaše jméno je nutné k uložení vašich volných termínů.",
+      "password_incorrect": "Heslo je nesprávné. Zkontrolujte, zda je vaše jméno napsáno správně.",
+      "unknown": "Nepodařilo se přihlásit. Zkuste to prosím znovu."
+    },
+
+    "created_in_timezone": "Tato událost byla vytvořena v časovém pásmu <strong> {{timezone}} </strong> . Chcete-li ho použít, <3> klikněte sem </3>.",
+    "local_timezone": "Vaše místní časové pásmo je detekováno jako <strong> {{timezone}} </strong>. <3> Klikněte zde <4> pro jeho použití."
+  },
+  "offline": {
+    "title": "Jste offline",
+    "body": "Crab Fit nefunguje offline. <br /> Ujistěte se, že jste připojeni k internetu, a zkuste to znovu."
+  },
+  "error": {
+    "title": "Událost nebyla nalezena",
+    "body": "Zkontrolujte, zda je zadaná adresa url správná. Vezměte na vědomí, že z důvodu ochrany vašeho soukromí jsou události po 3 měsících nečinnosti smazány."
+  },
+
+  "tabs": {
+    "you": "Vaše volné termíny",
+    "you_tooltip": "Přihlaste se pro zadání svých volných termínů",
+    "group": "Volné termíny skupiny"
+  },
+
+  "group": {
+    "legend_tooltip": "Kliknutím zvýrazníte nejčastější volný termín",
+    "info1": "Najetím na kalendář níže nebo klepnutím na něj zjistíte, kdo má čas, a kliknutím zkopírujete podrobnosti o časovém úseku.",
+    "info2": "Kliknutím na jména níže zobrazíte jednotlivé osoby",
+    "clipboard_message": "Lidé mají čas {{date}}"
+  },
+
+  "you": {
+    "info": "Kliknutím a přetažením kalendáře níže nastavíte své volné termíny",
+    "select_all": "Vybrat vše",
+    "select_none": "Nevybrat žádné",
+    "select_invert": "Invertovat výběr",
+
+    "google_cal": "Synchronizovat s Google kalendářem",
+    "outlook_cal": "Synchronizovat s Outlook kalendářem",
+    "recent_event": "Synchronizovat s nedávnou událostí",
+    "integration": {
+      "logout": "odhlásit se",
+      "close": "zavřít",
+      "info": "Importem se přepíší vaše aktuální volné termíny",
+      "button": "Importovat volné termíny"
+    }
+  }
+}

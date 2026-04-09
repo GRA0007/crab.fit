@@ -1,14 +1,14 @@
 {
   "create": "CREA UN",
-  "recently_visited": "Recientemente visitado",
+  "recently_visited": "Visitados recientemente",
   "form": {
     "name": {
       "label": "¡Dale un nombre a tu evento!",
-      "sublabel": "O dejar en blanco para generar uno"
+      "sublabel": "O déjalo en blanco para generar uno aleatorio"
     },
     "dates": {
-      "label": "¿Qué fechas podrían funcionar?",
-      "sublabel": "Haga clic y arrastre para seleccionar",
+      "label": "¿Qué rango de fechas es adecuado?",
+      "sublabel": "Haz clic y arrastra para seleccionar",
       "options": {
         "specific": "Fechas específicas",
         "week": "Días de la semana"
@@ -23,20 +23,20 @@
       }
     },
     "times": {
-      "label": "¿A qué horas podría funcionar?",
-      "sublabel": "Haga clic y arrastre para seleccionar un rango de tiempo"
+      "label": "¿Qué horas son apropiadas para el evento?",
+      "sublabel": "Haz clic y arrastra para seleccionar un rango de tiempo"
     },
     "timezone": {
-      "label": "Y la zona horaria",
-      "defaultOption": "Seleccione..."
+      "label": "Zona horaria",
+      "defaultOption": "Selecciona..."
     },
 
     "button": "Crear",
     "errors": {
       "no_dates": "No hay fechas seleccionadas",
-      "same_times": "Las horas de inicio y finalización no pueden ser las mismas",
-      "no_time": "No hay ningún tiempo seleccionado",
-      "unknown": "Algo salió mal. Por favor, inténtelo de nuevo más tarde."
+      "same_times": "La hora de inicio y finalización no puede ser la misma",
+      "no_time": "No hay horas seleccionada",
+      "unknown": "Algo salió mal. Por favor, inténtalo de nuevo más tarde."
     }
   },
 
@@ -45,15 +45,15 @@
     "events": "Eventos creados",
     "availabilities": "Disponibilidades ingresadas",
     "content": {
-      "p1": "Crab Fit te ayuda a adaptar tu evento a los horarios de todos. Simplemente cree un evento arriba y envíe el enlace a todos los participantes. Los resultados se actualizan en vivo y podrá ver un mapa de calor de cuándo todos están libres.<1/><2>Obtenga más información sobre cómo Crab Fit.</2>",
-      "p3": "Creado por <1>Ben Grant</1>, Crab Fit es la solución moderna para sus debates de planificación de eventos grupales.",
-      "p4": "Crab Fit es de código abierto, si encuentra algún problema o desea contribuir, puede visitar el <1>repositorio</1>. Al utilizar Crab Fit, acepta la <3>política de privacidad</3>.",
-      "p6": "Para proteger su privacidad, los eventos se eliminan después de 3 meses de inactividad y todas las contraseñas tienen un cifrado seguro.",
-      "p5": "Considere hacer una donación a continuación si lo ayudó para que pueda ser gratuito para todos. 🦀"
+      "p1": "Crab Fit te ayuda a adaptar tu evento a los horarios de todos los participantes. Simplemente crea un evento arriba y comparte el enlace. Los resultados se actualizan en vivo y podrás ver un mapa de calor con la disponibilidad de todos.<1/><2>Obtén más información sobre cómo usar Crab Fit.</2>",
+      "p3": "Creado por <1>Ben Grant</1>, Crab Fit es la solución moderna para tus debates de planificación de eventos grupales.",
+      "p4": "Crab Fit es de código abierto, si encuentras algún problema o deseas contribuir, puedes visitar el <1>repositorio</1>. Al utilizar Crab Fit, aceptas la <3>política de privacidad</3>.",
+      "p6": "Para proteger tu privacidad, los eventos se eliminan después de 3 meses de inactividad y todas las contraseñas tienen un cifrado seguro.",
+      "p5": "Considera hacer una donación a continuación para que Crab Fit pueda ser gratuito para todos. 🦀"
     },
-    "chrome_extension": "Obtén la extensión de Chrome",
-    "firefox_extension": "Obtén la extensión de Firefox",
-    "safari_extension": "Obtén la extensión de Safari",
-    "android_app": "Descarga la aplicación de Android"
+    "chrome_extension": "Obtén la extensión para Chrome",
+    "firefox_extension": "Obtén la extensión para Firefox",
+    "safari_extension": "Obtén la extensión para Safari",
+    "android_app": "Descarga la aplicación para Android"
   }
 }

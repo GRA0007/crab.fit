@@ -2,7 +2,7 @@
   "name": "Crab Fit",
   "tagline": "Créez le vôtre",
   "cta": "Créez votre propre Crab Fit !",
-  "created": "Créé {{date}}",
+  "created": "Créé le {{date}}",
   "donate": {
     "info": "Merci d'utiliser Crab Fit. Si vous l'aimez, pensez à faire un don.",
     "button": "Faire un don",

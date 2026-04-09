@@ -1,6 +1,6 @@
 {
   "name": "Crab Fit",
-  "tagline": "Crea tu propio",
+  "tagline": "¡Crea tu propio Crab Fit!",
   "cta": "¡Crea tu propio Crab Fit!",
   "created": "Creado {{date}}",
   "donate": {
@@ -13,8 +13,8 @@
     "weekStart": {
       "label": "La semana empieza el",
       "options": {
-        "Sunday": "domingo",
-        "Monday": "lunes"
+        "Sunday": "Domingo",
+        "Monday": "Lunes"
       }
     },
     "timeFormat": {
@@ -33,8 +33,8 @@
       }
     },
     "highlight": {
-      "label": "Resalte la mayor disponibilidad",
-      "title": "Destaque la mayor disponibilidad en el mapa de calor",
+      "label": "Resaltar la mayor disponibilidad",
+      "title": "Destaca la mayor disponibilidad en el mapa de calor",
       "options": {
         "Off": "Apagado",
         "On": "Encendido"
@@ -49,7 +49,7 @@
     }
   },
   "video": {
-    "title": "Vídeo Promocional de Crab Fit",
+    "title": "Vídeo promocional de Crab Fit",
     "button": "Ver el vídeo"
   }
 }

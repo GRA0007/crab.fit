@@ -17,6 +17,9 @@
         "previous": "Vorheriger Monat",
         "next": "Nächster Monat",
         "today": "heute"
+      },
+      "warnings": {
+        "date_in_past": "Manche der ausgewählten Daten liegen in der Vergangenheit"
       }
     },
     "times": {

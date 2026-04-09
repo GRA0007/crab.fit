@@ -1,0 +1,55 @@
+{
+  "name": "Crab Fit",
+  "tagline": "创建你的日程",
+  "cta": "在Crab Fit创建你的日程！",
+  "created": "于 {{date}} 创建",
+  "donate": {
+    "info": "感谢你使用Crab Fit。如果你喜欢，请考虑捐赠。",
+    "button": "捐赠",
+    "title": "每一点赞助都很重要 :)"
+  },
+  "options": {
+    "name": "选项",
+    "weekStart": {
+      "label": "周起始日",
+      "options": {
+        "Sunday": "星期日",
+        "Monday": "星期一"
+      }
+    },
+    "timeFormat": {
+      "label": "时间格式",
+      "options": {
+        "12h": "12小时制",
+        "24h": "24小时制"
+      }
+    },
+    "theme": {
+      "label": "主题",
+      "options": {
+        "System": "跟随系统",
+        "Light": "浅色",
+        "Dark": "深色"
+      }
+    },
+    "highlight": {
+      "label": "高亮最多人选择的时间段",
+      "title": "在热度图上突出显示最多人选择的时间段",
+      "options": {
+        "Off": "关",
+        "On": "开"
+      }
+    },
+    "language": {
+      "label": "语言"
+    },
+    "colormap": {
+      "label": "热度图颜色主题",
+      "classic": "Crab Fit（经典）"
+    }
+  },
+  "video": {
+    "title": "Crab Fit宣传视频",
+    "button": "观看视频"
+  }
+}

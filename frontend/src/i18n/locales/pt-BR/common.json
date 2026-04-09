@@ -6,30 +6,19 @@
   "donate": {
     "info": "Obrigado por usar Crab Fit! Gostou? Faça uma doação.",
     "button": "Doar",
-    "title": "Todo valor vale :)",
-    "options": {
-      "$2": "Doar $2",
-      "$5": "Doar $5",
-      "$10": "Doar $10",
-      "choose": "Escolhe um valor"
-    },
-    "messages": {
-      "about": "Achou o Crab Fit útil? Faça uma doação para para mantê-lo funcionando. 🦀",
-      "success": "Obrigado por sua doação! Sem essas contribuições Crab Fit não poderia ser gratuito e por isso te agradeço muito. Você é o máximo!",
-      "error": "Doação através do Google não pode ser feita. Por favor tente no site crab.fit 🦀"
-    }
+    "title": "Todo valor vale :)"
   },
   "options": {
     "name": "Opções",
     "weekStart": {
-      "label": "A semana começa com",
+      "label": "Início da semana",
       "options": {
-        "Sunday": "domingo",
-        "Monday": "segunda‑feira"
+        "Sunday": "Domingo",
+        "Monday": "Segunda‑feira"
       }
     },
     "timeFormat": {
-      "label": "formato de horas",
+      "label": "Formato de hora",
       "options": {
         "12h": "12h",
         "24h": "24h"
@@ -38,25 +27,29 @@
     "theme": {
       "label": "Aparência",
       "options": {
-        "System": "sistema",
-        "Light": "claro",
-        "Dark": "escuro"
+        "System": "Padrão",
+        "Light": "Clara",
+        "Dark": "Escura"
       }
     },
     "highlight": {
-      "label": "destacar disponibilidade alta",
-      "title": "realçar visualmente a maior visibilidade",
+      "label": "Destacar maior disponibilidade",
+      "title": "Realçar visualmente os horários de maior disponibilidade no mapa de calor",
       "options": {
-        "Off": "Desl.",
-        "On": "Lig."
+        "Off": "Desligado",
+        "On": "Ligado"
       }
     },
     "language": {
-      "label": "idioma"
+      "label": "Idioma"
+    },
+    "colormap": {
+      "label": "Cores do mapa de calor",
+      "classic": "Crab Fit (clássico)"
     }
   },
   "video": {
     "title": "Vídeo promocional Crab Fit",
-    "button": "veja o vídeo"
+    "button": "Assista ao vídeo"
   }
 }
