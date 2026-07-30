@@ -22,7 +22,8 @@ For more information on how to translate, visit the [translating wiki page](http
 
 ### Self-hosting
 
-Crab Fit is fully open-source, and you can get your own version running by following the [self-hosting guide](https://github.com/GRA0007/crab.fit/wiki/Self%E2%80%90hosting).
+Crab Fit is fully open-source, and you can get your own version running by following the [self-hosting guide](https://github.com/GRA0007/crab.fit/wiki/Self-hosting).  
+Also check out the official site: [https://crab.fit/](https://crab.fit).
 
 ### Contributing
 
